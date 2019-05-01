@@ -39,6 +39,9 @@
             <div class="course-list">
                 <h4 class="course-name">Android Basics: User Interface</h4>
             </div>
+            <div class="course-list">
+                <h4 class="course-name">Android Basics: User Interface</h4>
+            </div>
         </a>
 
     </section>
