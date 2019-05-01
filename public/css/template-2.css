@@ -1,0 +1,42 @@
+.login{
+    padding: 27px 0;
+    margin-right: 10px;
+}
+
+.login-btn{
+    padding: 10px 15px;
+    border: 1px solid #002347;
+    background-color: #002347;
+    border-radius: 6px;
+    /* height: 36px; */
+    cursor: pointer;
+    transition: .3s all;
+    /* margin-top: 20px; */
+    color: #fdc632;
+}
+
+
+.login-btn:hover{
+    background-color: transparent;
+}
+
+.signup{
+    padding: 27px 0;
+}
+
+.signup-btn{
+    padding: 10px 15px;
+    border: 1px solid #002347;
+    background-color: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s all;
+    margin-right: 10px;
+    color: #002347;
+}
+
+
+.signup-btn:hover{
+    background-color: #002347;
+    color: #fdc632;
+}

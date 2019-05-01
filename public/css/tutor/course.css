@@ -1,0 +1,52 @@
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.content-header{
+    padding: 25px 25px 0;
+}
+
+.content-header>h1{
+    font-size: 20px;
+    color: #02b3e4;
+    text-transform: uppercase;
+}
+
+.content{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.content .search-section{
+    width: calc((100% / 3) - 10px);
+    float: left;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.content .search-section .search-input{
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #fafafa;
+    font-size: 12px;
+}
+
+.content .course-list{
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 0 8px 0 rgba(17,22,26,.16), 0 4px 8px 0 rgba(17,22,26,.08), 0 8px 16px 0 rgba(17,22,26,.08);
+    margin-top: 20px;
+}
+
+.content .course-list .course-name{
+    font-weight: 600;
+}
+

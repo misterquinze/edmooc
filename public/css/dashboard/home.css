@@ -1,0 +1,72 @@
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.content-header{
+    padding: 25px;
+}
+
+.content-header>h1{
+    font-size: 20px;
+    color: #02b3e4;
+    text-transform: uppercase;
+}
+
+.content{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.content .title{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.content .course-list{
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 0 8px 0 rgba(17,22,26,.16), 0 4px 8px 0 rgba(17,22,26,.08), 0 8px 16px 0 rgba(17,22,26,.08);
+    margin-top: 20px;
+}
+
+.content .course-list .col-left{
+    width: calc(100% - 150px);
+    float: left;
+    height: 129px;
+}
+
+.content .course-list .col-left .label-container .label{
+    background-color: #193859;
+    color: #ffffff;
+    font-size: 11px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.content .course-list .col-left .course-name{
+    font-weight: 600;
+}
+
+.content .course-list .col-right{
+    width: 150px;
+    float: left;
+    position: relative;
+    height: 129px;
+}
+
+.content .course-list .col-right .proceed-btn{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 10px;
+    background-color: #193859;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 4px;
+}
+
