@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>MOOC</title>
+        <title>EduMOOC</title>
         
         <link rel="icon" href="{{ URL('template/2/img/favicon.png') }}" type="image/png') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/bootstrap.css') }}" />
@@ -12,36 +12,18 @@
         <link rel="stylesheet" href="{{ URL('template/2/vendors/owl-carousel/owl.carousel.min.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/vendors/nice-select/css/nice-select.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/style.css') }}" />
-        <link rel="stylesheet" href="{{ URL('css/template-visitor.css') }}" />
+        <link rel="stylesheet" href="{{ URL('css/visitor/home.css') }}" />
     </head>
 
     <body>
         
         <header class="header_area">
             <div class="main_menu">
-                <div class="search_input" id="search_input_box">
-                    <div class="container">
-                        <form class="d-flex justify-content-between" method="" action="">
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="search_input"
-                                placeholder="Search Here"
-                            />
-                            <button type="submit" class="btn"></button>
-                            <span
-                                class="ti-close"
-                                id="close_search"
-                                title="Close Search"
-                            ></span>
-                        </form>
-                    </div>
-                </div>
 
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <div class="container">
                         
-                        <a class="navbar-brand logo_h" href="index.html">
+                        <a class="navbar-brand logo_h" href="{{ URL('/') }}">
                             <img src="{{ URL('template/2/img/logo.png') }}" alt=""/>
                         </a>
                         <button
@@ -71,12 +53,18 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ URL('contact') }}">Contact</a>
                                 </li>
-                                <li class="login">
-                                    <a class="login-btn" href="{{ route('login') }}">Login</a>
-                                </li>
-                                <li class="nav-item signup">
-                                    <a class="signup-btn" href="{{ route('register') }}">Sign Up</a>
-                                </li>
+                                @if($userLogin)
+                                    <li class="login">
+                                        <a class="login-btn" href="{{ URL('dashboard') }}">My Classroom</a>
+                                    </li>
+                                @else
+                                    <li class="login">
+                                        <a class="login-btn" href="{{ route('login') }}">Login</a>
+                                    </li>
+                                    <li class="nav-item signup">
+                                        <a class="signup-btn" href="{{ route('register') }}">Sign Up</a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -112,7 +100,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5">
                         <div class="main_title">
-                        <h2 class="mb-3">Awesome Feature</h2>
+                        <h2 class="mb-4">Awesome Feature</h2>
                         <p>
                             Replenish man have thing gathering lights yielding shall you
                         </p>
@@ -163,7 +151,7 @@
             </div>
         </section>
     
-        <div class="popular_courses">
+        {{-- <div class="popular_courses">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5">
@@ -275,9 +263,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     
-        <div class="section_gap registration_area">
+        {{-- <div class="section_gap registration_area">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-7">
@@ -344,14 +332,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     
         <section class="trainer_area section_gap_top">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5">
                         <div class="main_title">
-                            <h2 class="mb-3">Our Expert Trainers</h2>
+                            <h2 class="mb-3 white-text">Our Expert Trainers</h2>
                             <p>
                                 Replenish man have thing gathering lights yielding shall you
                             </p>
@@ -366,7 +354,7 @@
                         <div class="meta-text text-sm-center">
                             <h4>Mated Nithan</h4>
                             <p class="designation">Sr. web designer</p>
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <p>
                                     If you are looking at blank cassettes on the web, you may be
                                     very confused at the.
@@ -388,7 +376,7 @@
                         <div class="meta-text text-sm-center">
                             <h4>David Cameron</h4>
                             <p class="designation">Sr. web designer</p>
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <p>
                                     If you are looking at blank cassettes on the web, you may be
                                     very confused at the.
@@ -410,7 +398,7 @@
                         <div class="meta-text text-sm-center">
                             <h4>Jain Redmel</h4>
                             <p class="designation">Sr. Faculty Data Science</p>
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <p>
                                     If you are looking at blank cassettes on the web, you may be
                                     very confused at the.
@@ -450,7 +438,7 @@
             </div>
         </section>
     
-        <div class="events_area">
+        {{-- <div class="events_area">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5">
@@ -526,7 +514,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     
         <div class="testimonial_area section_gap">
             <div class="container">
@@ -732,7 +720,7 @@
 
                 <div class="row footer-bottom d-flex justify-content-between">
                     <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Universitas Islam Indonesia</a>
                     </p>
                     <div class="col-lg-4 col-sm-12 footer-social">
                         <a href="#"><i class="ti-facebook"></i></a>

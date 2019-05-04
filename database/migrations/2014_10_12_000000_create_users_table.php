@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone');
             $table->text('address');
+            $table->string('photo')->nullable();
+            $table->enum('role',["admin","student","company","tutor"]);
             $table->rememberToken();
             $table->timestamps();
         });

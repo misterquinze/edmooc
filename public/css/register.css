@@ -12,6 +12,41 @@
     background-color: #fafafa;
 }
 
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.tab-menu{
+    margin-bottom: 30px;
+}
+
+.tab-menu ul{
+    padding: 0;
+    margin: 0;
+    border: 2px solid #002347;
+    border-radius: 4px;
+}
+
+.tab-menu ul li{
+    padding: 10px 0;
+    text-align: center;
+    margin: 0;
+    display: inline-block;
+    width: calc(100% / 3);
+    font-weight: 600;
+    cursor: pointer;
+    float: left;
+    color: #002347;
+}
+
+.tab-menu ul li.is-active,
+.tab-menu ul li:hover{
+    background-color: #002347;
+    color: #ffffff;
+}
+
 .register-box{
     width: 500px;
     height: auto;
@@ -52,5 +87,24 @@ input{
     border-radius: 4px;
     border: 1px solid #002347;
     font-weight: 550;
+    cursor: pointer;
 }
 
+@media only screen and (max-width: 1023px){
+    .register-content{
+        padding: 15px;
+    }
+
+    .tab-menu{
+        margin-bottom: 15px;
+    }
+
+    .register-box{
+        width: 100%;
+        padding: 15px;
+    }
+
+    .register-box .sub-title{
+        width: 100%;
+    }
+}

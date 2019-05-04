@@ -39,7 +39,9 @@
             <p class="sub-title">Build skills for today, tomorrow, and beyond. Education to future-proof your career.</p>
 
             <div class="form">
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ route('login') }}" method="POST">
+                    {{ csrf_field() }}
+
                     <input type="email" name="email" placeholder="Email Address">
                     <input type="password" name="password" placeholder="Password">
                     

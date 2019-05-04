@@ -39,11 +39,7 @@
             <div class="course-list">
                 <h4 class="course-name">Android Basics: User Interface</h4>
             </div>
-<<<<<<< HEAD
-            <div class="course-list hello">
-=======
-            <div class="course-list gridspan">
->>>>>>> 0c1f909e1f7fbd15f82c07ffdd9b1a6708257858
+            <div class="course-list">
                 <h4 class="course-name">Android Basics: User Interface</h4>
             </div>
         </a>

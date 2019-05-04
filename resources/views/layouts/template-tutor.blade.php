@@ -147,9 +147,8 @@
                 <b>Version</b> 2.4.0
             </div>
             <strong>
-                Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.
-            </strong> 
-            All rights reserved.
+                Copyright &copy; 2019 <a>All rights reserved | Universitas Islam Indonesia</a>.
+            </strong>
         </footer>
 
     </div>

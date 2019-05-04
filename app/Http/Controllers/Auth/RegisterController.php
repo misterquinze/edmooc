@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -50,9 +53,27 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
     }
+
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $statusValidator = $this->validator($request->all())->validate();
+        // dd($statusValidator);
+
+        $user = $this->create($request->all());
+        
+        return redirect('/login');
+    }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -62,10 +83,39 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+        $user->phone = $data['phone'];
+        $user->address = $data['address'];
+        if($data['type'] == 'student'){
+            $user->role = 'student';
+        }else if($data['type'] == 'company'){
+            $user->role = 'company';
+        }else if($data['type'] == 'tutor'){
+            $user->role = 'tutor';
+        }
+        $user->save();
+
+        if($data['type'] == 'company'){
+            $company = Company::create([
+                'user_id' => $user->id,
+                'name' => $data['name'],
+                'address' => $data['address'],
+                'phone' => $data['phone']
+            ]);
+        }
+    }
+
+    public function showRegistrationForm(){
+        $userLogin = null;
+        if(Auth::user()){
+            $userLogin = Auth::user();
+        }
+
+        return view('auth/register',[
+            'userLogin' => $userLogin
         ]);
     }
 }

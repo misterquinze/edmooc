@@ -3,27 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function getDashboard(){
-        return view('dashboard/home');
-    }
-    
-    public function getFavorite(){
-        return view('dashboard/favorite');
-    }
+        $userLogin = Auth::user();
 
-    public function getMyCourse(){
-        return view('dashboard/course');
-    }
-
-    public function getTransaction(){
-        return view('dashboard/transaction');
+        return view('dashboard/home',[
+            'userLogin' => $userLogin
+        ]);
     }
 
     public function getSettings(){
-        return view('dashboard/settings');
+        $userLogin = Auth::user();
+
+        return view('dashboard/settings',[
+            'userLogin' => $userLogin
+        ]);
     }
 
 }

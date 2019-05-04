@@ -17,7 +17,7 @@ class CreateUserCompaniesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('company_id');
-            $table->enum('role', ['admin', 'tutor', 'finance', 'student']);
+            $table->boolean('status');
             $table->timestamps();
         });
     }

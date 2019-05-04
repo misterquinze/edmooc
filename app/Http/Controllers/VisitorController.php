@@ -3,21 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
 {
     public function getHomepage(){
-        return view('visitor/home');
+        $userLogin = Auth::user();
+
+        return view('visitor/home',[
+            'userLogin' => $userLogin
+        ]);
     }
+
     public function getCourses(){
-        return view('visitor/course');
+        $userLogin = Auth::user();
+
+        return view('visitor/course',[
+            'userLogin' => $userLogin
+        ]);
     }
 
     public function getAbout(){
-        return view('visitor/about');
+        $userLogin = Auth::user();
+
+        return view('visitor/about',[
+            'userLogin' => $userLogin
+        ]);
     }
 
     public function getContact(){
-        return view('visitor/contact');
+        $userLogin = Auth::user();
+
+        return view('visitor/contact',[
+            'userLogin' => $userLogin
+        ]);
     }
 }

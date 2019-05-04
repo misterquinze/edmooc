@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>MOOC</title>
+        <title>EduMOOC</title>
         
         <link rel="icon" href="{{ URL('template/2/img/favicon.png') }}" type="image/png') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/bootstrap.css') }}" />
@@ -19,7 +19,7 @@
         
         <header class="header_area white-header">
             <div class="main_menu">
-                <div class="search_input" id="search_input_box">
+                {{-- <div class="search_input" id="search_input_box">
                     <div class="container">
                         <form class="d-flex justify-content-between" method="" action="">
                             <input
@@ -36,12 +36,12 @@
                             ></span>
                         </form>
                     </div>
-                </div>
+                </div> --}}
 
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <div class="container">
                         
-                        <a class="navbar-brand logo_h" href="index.html">
+                        <a class="navbar-brand logo_h" href="{{ URL('/') }}">
                             <img src="{{ URL('template/2/img/logo.png') }}" alt=""/>
                         </a>
                         <button
@@ -62,12 +62,18 @@
                                 
                                 @yield('menu')
                                 
-                                <li class="login">
-                                    <a class="login-btn" href="{{ route('login') }}">Login</a>
-                                </li>
-                                <li class="nav-item signup">
-                                    <a class="signup-btn" href="{{ route('register') }}">Sign Up</a>
-                                </li>
+                                @if($userLogin)
+                                    <li class="login">
+                                        <a class="login-btn" href="{{ URL('dashboard') }}">My Classroom</a>
+                                    </li>
+                                @else
+                                    <li class="login">
+                                        <a class="login-btn" href="{{ route('login') }}">Login</a>
+                                    </li>
+                                    <li class="nav-item signup">
+                                        <a class="signup-btn" href="{{ route('register') }}">Sign Up</a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -154,7 +160,7 @@
 
                 <div class="row footer-bottom d-flex justify-content-between">
                     <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Universitas Islam Indonesia</a>
                     </p>
                     <div class="col-lg-4 col-sm-12 footer-social">
                         <a href="#"><i class="ti-facebook"></i></a>

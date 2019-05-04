@@ -1,15 +1,17 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>My Favorite - EdMOOC</title>
 @endsection
 
 @section('menu')
     <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
-    <li class="active"><a href="{{ URL('dashboard/favorite') }}"><i class="fa fa-heart"></i> <span>Favorit</span></a></li>
+    <li class="active"><a href="{{ URL('dashboard/favorite') }}"><i class="fa fa-heart"></i> <span>Favorit Saya</span></a></li>
     <li><a href="{{ URL('dashboard/course/me') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
     <li><a href="{{ URL('dashboard/transaction') }}"><i class="fa fa-list"></i> <span>Riwayat Transaksi</span></a></li>
     <li><a href="{{ URL('dashboard/settings') }}"><i class="fa fa-gear"></i> <span>Pengaturan</span></a></li>
+    <li class="header">DAFTAR KURSUS</li>
+    <li><a href="{{ URL('course') }}"><i class="fa fa-book"></i> <span>Katalog</span></a></li>
 @endsection
 
 @section('content')
