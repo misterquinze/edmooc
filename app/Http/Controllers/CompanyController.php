@@ -59,7 +59,7 @@ class CompanyController extends Controller
                 'end_date' => $endDate,
             ]);
         }else{
-            dd('hello');
+            //dd('hello');
             $course = Course::create([
                 'company_id' => $company->id,
                 'category_id' => $data['category'],
