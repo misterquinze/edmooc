@@ -47,7 +47,7 @@ class CompanyController extends Controller
         $endDate = date('Y-m-d',strtotime($data['endDate']));
         // dd($data);
         if($data['type'] == 'free'){
-            dd('word');
+            //dd('word');
 
             $course = Course::create([
                 'company_id' => $company->id,
