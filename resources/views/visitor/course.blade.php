@@ -112,8 +112,27 @@
                                 <button type="submit" class="enroll-btn">Enroll</button>
                             </form>
                         </div>
-
                     </div>
+                    <div class="top-section gridspan">
+                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="course-detail">
+                            <h3 class="course-name">Introduction to Machine Learning Nanodegree Program</h3>
+                            <p class="course-company">Company name</p>
+                            <p class="category">Category: Education</p>
+                        </div>
+                    </div>
+                    <div class="bottom-section gridspan">
+                        <div class="col-left">
+                            <span class="price">Rp {{ number_format(250000) }}</span>
+                        </div>
+                        <div class="col-right">
+                            <form action="{{ URL('') }}" method="post">
+                                {{ csrf_field() }}
+                                <button type="submit" class="enroll-btn">Enroll</button>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
                
             </div>
