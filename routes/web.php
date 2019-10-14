@@ -19,6 +19,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/', 'VisitorController@getHomepage');
 Route::get('/course', 'VisitorController@getCourses');
+Route::get('/enroll', 'StudentController@enroll')->name('enroll');
 Route::get('/about', 'VisitorController@getAbout');
 Route::get('/contact', 'VisitorController@getContact');
 
@@ -29,6 +30,7 @@ Route::group(['middleware' => 'auth'],function(){
 
     // Student
     Route::get('/dashboard/favorite', 'StudentController@getFavorite');
+    Route::get('dashboard/student/course/{id}', 'StudentController@enroll')->name('enroll');
     Route::get('/dashboard/course/me', 'StudentController@getMyCourse');
     Route::get('/dashboard/transaction', 'StudentController@getTransaction');
     
@@ -40,16 +42,19 @@ Route::group(['middleware' => 'auth'],function(){
     Route::delete('/dashboard/course/{id}/delete', 'CompanyController@deleteCourse');
     Route::get('/dashboard/revenue', 'CompanyController@getRevenue');
     
-    // Company
+    // Tutor
     Route::get('/dashboard/list/course', 'TutorController@getMyCourse');
+    
+    Route::post('/dashboard/course/{id}/topic',  'TutorController@createTopic');
+    Route::get('/dashboard/course/{id}/edit', 'TutorController@getEditTopicForm');
+    Route::put('/dashboard/course/{id}/edit', 'TutorController@updateTopic');
+    Route::delete('/dashboard/course/{id}/delete', 'TutorController@deleteTopic');
 
 
 
+ 
 
-
-
-
-    Route::get('/classroom/{id}', 'ClassController@getOverview');
+    Route::get('/classroom/{id}/overview', 'ClassController@getOverview');
     Route::get('/classroom/{id}/topic/{topicId}', 'ClassController@getTopic');
     Route::get('/classroom/{id}/discussion', 'ClassController@getDiscussion');
     Route::get('/classroom/{id}/task', 'ClassController@getTask');

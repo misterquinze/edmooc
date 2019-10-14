@@ -2,10 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>EduMOOC</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        @yield('tab-title')
         
-        <link rel="icon" href="{{ URL('template/2/img/favicon.png') }}" type="image/png') }}" />
+        <link rel="icon" href="{{ URL('template/2/img/favicon.png') }}" type="image/png" />
         <link rel="stylesheet" href="{{ URL('template/2/css/bootstrap.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/flaticon.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/themify-icons.css') }}" />

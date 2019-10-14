@@ -19,7 +19,7 @@
             <template>
                 <div id="form-container" class="form-create">
                     <div class="form-header">
-                        Edit Kursus
+                        Edit Topik
                     </div>
 
                     <form action="{{ URL('dashboard/course/'.$course->id.'/edit') }}" method="POST">

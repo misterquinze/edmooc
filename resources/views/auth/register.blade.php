@@ -96,12 +96,23 @@
                             <input type="password" name="password" placeholder="Password">
                             <input type="text" name="address" placeholder="Address">
                             <input type="tel" name="phone" placeholder="Phone">
+                           
+                            
+                            <select name="proficiency" class="regular-select">
+                                <option>Pilih Keahlian</option>
+                                @foreach ($proficiencies as $proficiency)
+                                    @if ($proficiency->id == $proficiency->name)
+                                        <option value="{{ $proficiency->id }}" selected>{{ $proficiency->name }}</option>
+                                    @else
+                                        <option value="{{ $proficiency->id }}">{{ $proficiency->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                             
                             <button type="submit" class="submit-button">SIGN UP</button>
                         </form>
                     </div>
                 </div>
-                
             </template>
         </div>
     </div>

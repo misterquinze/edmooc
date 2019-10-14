@@ -24,7 +24,7 @@
     <div class="wrapper">
 
         <header class="main-header">
-            <a href="index2.html" class="logo">
+            <a href="{{ URL('/') }}" class="logo">
                 <span class="logo-mini"><b>E</b>M</span>
                 <span class="logo-lg"><b>Ed</b>MOOC</span>
             </a>
@@ -126,13 +126,13 @@
             <section class="sidebar">
 
                 <div class="user-panel">
-                    <div class="pull-left image">
+                   {{--  <div class="pull-left image">
                         <img src="{{ URL('template/1/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>{{ $userLogin->name }}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <ul class="sidebar-menu" data-widget="tree">

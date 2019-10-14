@@ -148,6 +148,14 @@
     padding: 20px;
 }
 
+.right-section .course-list .top-section .label-container .label{
+    
+    color: #193859;
+    font-size: 11px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
 .right-section .course-list .top-section .course-image{
     width: 200px;
     height: 100px;

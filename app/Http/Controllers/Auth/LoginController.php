@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -28,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -55,6 +53,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @param  string|null  $guard
+     * 
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
@@ -67,13 +66,21 @@ class LoginController extends Controller
     }
 
     public function showLoginForm(){
+        
         $userLogin = null;
+        
         if(Auth::user()){
             $userLogin = Auth::user();
+            
         }
 
         return view('auth/login',[
             'userLogin' => $userLogin
         ]);
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect(session('link'));
     }
 }

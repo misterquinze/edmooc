@@ -12,4 +12,8 @@ class Company extends Model
         'address',
         'phone'
     ];
+
+    public function course(){
+        return $this->hasMany('App\course');
+    }
 }

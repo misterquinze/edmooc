@@ -1,4 +1,4 @@
-@extends('layouts.template-student')
+@extends('layouts.template-tutor')
 
 @section('tab-title')
     <title>Dashboard - EdMOOC</title>
@@ -32,10 +32,11 @@
         <h1>
             Dashboard
         </h1>
+        <hr>
     </section>
 
     <section class="content">
-        <h3 class="title">KURSUS TERBARU</h3>
+        <h3 class="title"></h3>
 
         <div class="course-list">
             <div class="gridspan">

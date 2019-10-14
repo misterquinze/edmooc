@@ -10,8 +10,14 @@
 
 .content-header>h1{
     font-size: 20px;
-    color: #02b3e4;
+    color: #002347;
     text-transform: uppercase;
+}
+
+hr{
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0 20px;
 }
 
 .content{

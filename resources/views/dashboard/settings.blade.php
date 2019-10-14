@@ -1,4 +1,4 @@
-@extends('layouts.template-student')
+@extends('layouts.template-tutor')
 
 @section('tab-title')
     <title>Settings - EdMOOC</title>

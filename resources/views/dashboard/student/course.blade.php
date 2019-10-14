@@ -15,34 +15,41 @@
 @endsection
 
 @section('content')
-    <link rel="stylesheet" href="{{ URL('css/dashboard/home.css') }}">
+    <link rel="stylesheet" href="{{ URL('css/tutor/course.css') }}">
 
     <section class="content-header">
-        <h1>
-            Dashboard
-        </h1>
+        
     </section>
 
     <section class="content">
-        <h3 class="title">KURSUS TERBARU</h3>
-
-        <div class="course-list">
-            <div class="gridspan">
-                <div class="col-left">
-                    <div class="label-container">
-                        <span class="label">Company name</span>
-                    </div>
-                    <h4 class="course-name">Android Basics: User Interface</h4>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quibusdam quam incidunt magni ullam, assumenda eveniet a mollitia velit earum accusamus veritatis placeat natus quod. Officiis provident necessitatibus adipisci rem.</p>
+        @if ($courses->isEmpty())
+            @if (session('course'))
+                <div class="card-body">
+                    <h2 class="alert alert-info">
+                        {{ session('course') }}
+                    </h2>
                 </div>
-                <div class="col-right">
-                    <div class="proceed-btn">
-                        Lanjutkan
-                        <span class="fa fa-arrow-right"></span>
-                    </div>
+            @endif
+        @else
+        @foreach ($courses as $course)    
+            <div class="course-list ">
+                <div class="top-section gridspan">
+                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="col-left">
+                        <div class="course-detail">
+                            <h3 class="course-name">{{ $course->name }}</h3> 
+                            <h5 class="course-description">{{$course->description}}
+                            </h5>
+                        </div>
+                    </div>                     
+                    <div class="col-right">
+                        <div class="proceed-btn">
+                            <a class=" nav-link" href="{{URL ('classroom/'.$course->id.'/overview')}}">Materi</a>  
+                        </div>
+                    </div> 
                 </div>
-            </div>
-        </div>
-
+            </div> 
+        @endforeach
+        @endif
     </section>
 @endsection
