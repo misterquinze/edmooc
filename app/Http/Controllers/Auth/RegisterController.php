@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Category;
 use App\User;
 use App\Company;
 use App\Tutor;
-use App\Proficiency;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -109,7 +110,7 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'address' => $data['address'],
                 'phone' => $data['phone'],
-                'proficiency_id' => $data['proficiency']
+                'category_id' => $data['category']
             ]);
             
         }
@@ -127,7 +128,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm(){
         $userLogin = null;
-        $proficiencies = Proficiency::all();
+        $category = Category::all();
         $tutor = Tutor::all();
         if(Auth::user()){
             $userLogin = Auth::user();
@@ -136,7 +137,7 @@ class RegisterController extends Controller
 
         return view('auth/register',[
             'userLogin' => $userLogin,
-            'proficiencies' => $proficiencies,
+            'category' => $category,
             'tutor' => $tutor,
         ]);
     }

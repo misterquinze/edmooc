@@ -14,4 +14,8 @@ class Category extends Model
     public function course(){
         return $this->belongsToMany('App\course');
     }
+
+    public function tutor(){
+        return $this->belongsToMany('App\tutor');
+    }
 }

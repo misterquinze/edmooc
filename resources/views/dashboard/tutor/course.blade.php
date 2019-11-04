@@ -21,6 +21,15 @@
     </section>
 
     <section class="content">
+        @if ($courses->isEmpty())
+            @if (session('course'))
+                <div class="card-body">
+                    <h2 class="alert alert-info">
+                        {{ session('course') }}
+                    </h2>
+                </div>
+            @endif
+        @else
         @foreach ($courses as $course)    
             <div class="course-list ">
                 <div class="top-section gridspan">
@@ -40,5 +49,6 @@
                 </div>
             </div> 
         @endforeach
+        @endif
     </section>
 @endsection

@@ -16,94 +16,98 @@ class TutorController extends Controller
         $userLogin = Auth::user();
         $categories = Category::all();
         $company = Company::all();
+        $topics = Topic::all();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
         $courses = Course::where('tutor_id', $tutor->id)->get();
 
-        return view('dashboard/tutor/course',[
-            'userLogin' => $userLogin,
-            'categories' => $categories,
-            'company' => $company,
-            'courses' => $courses
-        ]);
+        //dd($courses);
+        //dd($tutor);
+
+        if ($courses->isEmpty()) {
+            \Session::flash('course', 'Dont have course to teach');
+        } else {
+            foreach ($courses as $course) {
+                $course = Course::find($course->id);
+            }
+        }
+
+        return view('dashboard/tutor/course', compact('userLogin', 'categories', 'company', 'topic', 'courses'));
     }
 
     public function getEditTopicForm($id){
         $userLogin = Auth::user();
-        $categories = Category::all();
-        $tutors = Tutor::all();
-        $course = Course::find($id);
+        
+        $topics = Course::findOrFail($id)->topics()->get();
+          
 
 
-        return view('dashboard/tutor/topic-edit',[
+        return view('classroom/topic-edit',[
             'userLogin' => $userLogin,
-            'categories' => $categories,
-            'tutors' => $tutors,
-            'course' => $course,
+            
+            'topics' => $topics,
         ]);
     }
 
-    public function createTopic(Request $request, Course $course){
+    public function createTopic(Request $request, Course $courses, $id)
+    {
+        
+        $courses = Course::where('id', $courses->id)->get();
+        $courses = Course::findOrFail($id);
         $userLogin = Auth::user();
-        $course = Course::where('id', $course->id)->first();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
+
         $data = $request->all();
          
         $startDate = date('Y-m-d,',strtotime($data['startDate']));
         $endDate = date('Y-m-d',strtotime($data['endDate']));
-
-        
+        //dd($data);
+        if ($data['week'] == '1'){
+            //dd('hello');
             $topics = Topic::create([
                 
-                'course_id' => $course->id,
+                'course_id' => $courses->id,
                 'tutor_id' => $tutor->id,
                 'name' => $data['name'],
                 'week' => $data['week'],
                 'start_date' => $startDate,
                 'end_date' => $endDate,
             ]);
-        
-        
-    
+        } else {
+            $topics = Topic::create([
+                
+                'course_id' => $courses->id,
+                'tutor_id' => $tutor->id,
+                'name' => $data['name'],
+                'week' => $data['week'],
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+            ]);
+        }
+        $topics->save();
         return back();
     }
 
     public function updateTopic(Request $request, $id){
-        $course = Course::find($id);
+        $topics = Topic::findOrFail($id);
         $data = $request->all();
 
         $startDate = date('Y-m-d',strtotime($data['startDate']));
         $endDate = date('Y-m-d',strtotime($data['endDate']));
 
-        $course->name = $data['name'];
-        $course->description = $data['description'];
-        if($data['type'] == 'paid'){
-            $course->type = $data['type'];
-            $course->price = $data['price'];
-        }else{
-            $course->type = $data['type'];
-            $course->price = null;
-        }
-        $course->category_id = $data['category'];
-        $course->tutor_id = $data['tutor'];
-        $course->start_date = $startDate;
-        $course->end_date = $endDate;
-        $course->save();
+        $topics->name = $data['name'];
+        
+        $topics->start_date = $startDate;
+        $topics->end_date = $endDate;
+        $topics->save();
 
-        return redirect('/dashboard/course/list');
+        return redirect('/classroom/overview');
     }
 
-    public function editTopic(){
-        $userLogin = Auth::user();
-
-        return view('dashboard/tutor/course',[
-            'userLogin' => $userLogin
-        ]);
-    }
 
     public function deleteTopic($id){
-        $course = Course::find($id);
-        $course->delete();
+        $topics = Topic::findOrFail($id);
+        $topics->delete();
 
-        return redirect('/dashboard/company/course');
+        return redirect('/classroom/overview');
     }
 }

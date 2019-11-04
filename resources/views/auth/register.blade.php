@@ -98,13 +98,13 @@
                             <input type="tel" name="phone" placeholder="Phone">
                            
                             
-                            <select name="proficiency" class="regular-select">
+                            <select name="category" class="regular-select">
                                 <option>Pilih Keahlian</option>
-                                @foreach ($proficiencies as $proficiency)
-                                    @if ($proficiency->id == $proficiency->name)
-                                        <option value="{{ $proficiency->id }}" selected>{{ $proficiency->name }}</option>
+                                @foreach ($category as $cat)
+                                    @if ($cat->id == $cat->name)
+                                        <option value="{{ $cat->id }}" selected>{{ $cat->name }}</option>
                                     @else
-                                        <option value="{{ $proficiency->id }}">{{ $proficiency->name }}</option>
+                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                     @endif
                                 @endforeach
                             </select>

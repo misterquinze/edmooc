@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Company;
+
 use App\Course;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
@@ -21,12 +21,25 @@ class VisitorController extends Controller
     public function getCourses(){
         $userLogin = Auth::user();
         $categories = Category::all();
-        $company =Company::all();
         $courses = Course::all();
+        $courses = Course::paginate(5);
 
         return view('visitor/course',[
             'userLogin' => $userLogin,
             'categories' => $categories,
+            'courses' => $courses,
+        ]);
+    }
+
+    public function getCoursePreview($id){
+        $userLogin = Auth::user();
+        $courses = Course::findOrFail($id);
+        $courses = Course::where('id', $courses->id)->get();
+        
+        //dd($courses);
+
+        return view('visitor/preview',[
+            'userLogin' => $userLogin,
             'courses' => $courses,
         ]);
     }
@@ -47,5 +60,15 @@ class VisitorController extends Controller
             'userLogin' => $userLogin,
             
         ]);
+    }
+
+    public function filter(Request $request){
+        $course = Course::all();
+        if($request->type){
+            $course = $course->where('type', $request->type);
+        }
+
+        return $course;
+
     }
 }

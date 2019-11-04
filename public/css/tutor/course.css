@@ -52,8 +52,22 @@ hr{
     box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
 }
 
+.content .course-list .top-section .dropdown{
+    float:right;
+    padding-right: 30px;
+}
+
+.content .course-list .top-section .dropdown .dropdown-toggle .fa .fa-ellipsis-v{
+    float:right;
+    position: absolute;
+    
+}
+
+
+
 .content .course-list .top-section{
     padding: 20px;
+    
 }
 
 .content .course-list .top-section .course-image{
@@ -69,6 +83,7 @@ hr{
     width: calc(1005 - 250px);
     float: left;
     padding-left: 20px;
+
 }
 
 .content .course-list .top-section .course-detail .course-name{
@@ -84,12 +99,14 @@ hr{
     position: relative;
     height: 129px;
 }
-.content .course-list .col-right{
+.content .course-list .top-section .col-right{
     width: 150px;
     float: right;
     position: relative;
     height: 129px;
 }
+
+
 
 .content .course-list .col-right .proceed-btn .nav-link{
     position: absolute;
@@ -104,6 +121,42 @@ hr{
 
     
 }
+
+.content .course-list .bottom-section{
+    border-top: 1px solid #cccccc;
+    padding: 10px 20px;
+}
+
+.content .course-list .bottom-section .col-left{
+    width: 50%;
+    float: left;
+    text-align: left;
+    padding: 5px 0;
+}
+
+.content .course-list .bottom-section .col-left .company{
+    color: #002347;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.content .course-list .bottom-section .col-right{
+    width: 50%;
+    float: left;
+    
+}
+
+.content .course-list .bottom-section .col-right .unenroll-btn{
+    float: right;
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #fdc632;
+    padding: 5px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
 
 
 

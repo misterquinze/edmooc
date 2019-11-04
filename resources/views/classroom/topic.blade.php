@@ -5,6 +5,7 @@
 @endsection
 
 @section('menu')
+
     <li><a href="{{ URL('/classroom/1') }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
     
     <li class="treeview active">
@@ -36,11 +37,13 @@
 @endsection
 
 @section('content')
+@foreach($topics as $topic)
     <link rel="stylesheet" href="{{ URL('css/classroom/topic.css') }}">
 
     <section class="content-header">
+        
         <h1>
-            Topik 1: Sistem Informasi
+            Topik 1: {{$topic->name}}
         </h1>
     </section>
 
@@ -59,4 +62,5 @@
         
         
     </section>
+@endforeach
 @endsection

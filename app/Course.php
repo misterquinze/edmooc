@@ -2,11 +2,16 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use App\Favorite;
+
 
 class Course extends Model
 {
     protected $fillable = [
+        
         'company_id',
         'category_id',
         'tutor_id',
@@ -30,7 +35,7 @@ class Course extends Model
         return $this->belongsTo('App\tutor');
     }
 
-    public function topic(){
+    public function topics(){
         return $this->hasMany('App\topic');
     }
 
@@ -42,6 +47,20 @@ class Course extends Model
     public function userCourse()
     {
         return $this->hasMany('App\UserCourse');
+    }
+
+    public function favorited()
+    {
+        return (bool) Favorite::where('user_id', Auth::id())
+                            ->where('course_id', $this->id)
+                            ->first();
+
+                      
+    }
+    
+    public function favorite()
+    {
+        return $this->belongsToMany(Course::class, 'favorites', 'user_id', 'course_id')->withTimeStamps();
     }
 
 }

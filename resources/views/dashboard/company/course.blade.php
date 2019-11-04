@@ -180,7 +180,7 @@
                                     <option>Pilih kategori</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
+                                    @endforeach 
                                 </select>
                             </div>
 
@@ -189,9 +189,14 @@
                                 <p class="input-sub-title">Tentukan Tutor kursus</p>
                                 <select name="tutor" class="regular-select">
                                     <option>Pilih Tutor</option>
+                                   
                                         @foreach ($tutors as $tutor)
+                                            
                                             <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
+                                           
                                         @endforeach
+                                    
+                                       
                                 </select>
                             </div>
 

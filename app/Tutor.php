@@ -11,7 +11,7 @@ class Tutor extends Model
         'name',
         'address',
         'phone',
-        'proficiency_id'
+        'category_id'
     ];
 
     public function course(){
@@ -22,7 +22,7 @@ class Tutor extends Model
         return $this->hasMany('App\topic');
     }
 
-    public function proficiency(){
-        return $this->hasOne('App\proficiency');
+    public function category(){
+        return $this->hasOne('App\category');
     }
 }

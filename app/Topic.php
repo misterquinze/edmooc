@@ -16,9 +16,14 @@ class Topic extends Model
         'end_date'
     ];
 
-    public function course(){
-        return $this->belongsTo('App\course');
+    public function course($id){
+        $topics = App\Course::find($id)->topics;
+       
+        return $this->belongsTo('App\course', 'foreign_key');
+
     }
+
+    
 
     public function tutor(){
         return $this->belongsTo('App\tutor');

@@ -15,10 +15,10 @@ class CompanyController extends Controller
         $userLogin = Auth::user();
         $categories = Category::all();
         $tutors = Tutor::all();
-        $company = Company::where('user_id',$userLogin->id)->first();
-        $courses = Course::where('company_id',$company->id)->get();
+        $company = Company::where('user_id', $userLogin->id)->first();
+        $courses = Course::where('company_id', $company->id)->get();
 
-        return view('dashboard/company/course',[
+        return view ('dashboard/company/course', [
             'userLogin' => $userLogin,
             'categories' => $categories,
             'tutors' => $tutors,
@@ -52,31 +52,85 @@ class CompanyController extends Controller
         // dd($data);
         if($data['type'] == 'free'){
             //dd('word');
-            $course = Course::create([
-                'company_id' => $company->id,
-                'category_id' => $data['category'],
-                'tutor_id' => $data['tutor'],
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'type' => $data['type'],
-                'start_date' => $startDate,
-                'end_date' => $endDate,
-            ]);
+            if($data['category'] == '1'){
+                $course = Course::create([
+                    'company_id' => $company->id,
+                    'category_id' => $data['category'],
+                    'tutor_id' => $data['tutor'],
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'type' => $data['type'],
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                ]);
+            }else if($data['category'] == '2'){
+                $course = Course::create([
+                    'company_id' => $company->id,
+                    'category_id' => $data['category'],
+                    'tutor_id' => $data['tutor'],
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'type' => $data['type'],
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                ]);
+            }else{
+                $course = Course::create([
+                    'company_id' => $company->id,
+                    'category_id' => $data['category'],
+                    'tutor_id' => $data['tutor'],
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'type' => $data['type'],
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                ]);
+            }
+            
             
             
         }else{
             //dd('hello');
-            $course = Course::create([
-                'company_id' => $company->id,
-                'category_id' => $data['category'],
-                'tutor_id' => $data['tutor'],
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'type' => $data['type'],
-                'price' => $data['price'],
-                'start_date' => $startDate,
-                'end_date' => $endDate,
-            ]);
+            if($data['category'] == '1'){
+                $course = Course::create([
+                    'company_id' => $company->id,
+                    'category_id' => $data['category'],
+                    'tutor_id' => $data['tutor'],
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'type' => $data['type'],
+                    'price' => $data['price'],
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                ]);
+            }
+            else if($data['category'] == '2'){
+                $course = Course::create([
+                    'company_id' => $company->id,
+                    'category_id' => $data['category'],
+                    'tutor_id' => $data['tutor'],
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'type' => $data['type'],
+                    'price' => $data['price'],
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                ]);
+            }
+            else{
+                $course = Course::create([
+                    'company_id' => $company->id,
+                    'category_id' => $data['category'],
+                    'tutor_id' => $data['tutor'],
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'type' => $data['type'],
+                    'price' => $data['price'],
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                ]);
+            }
+            
         }
 
         return back();

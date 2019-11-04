@@ -91,21 +91,13 @@
     float: left;
 }
 
-.add-btn{
-    float: right;
-    padding: 7px 15px;
-    background-color: #002347;
-    color: #ffffff;
-    font-size: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
 hr{
     border: none;
     border-bottom: 1px solid #cccccc;
     margin: 10px 0 20px;
 }
+
+
 
  .course-content{
     padding: 50px;
@@ -232,7 +224,7 @@ hr{
 .left-section{
     width: calc(100% - 280px);
     float: left;
-    margin-left: 30px;
+    margin-right: 20px;
 }
 
 .left-section .course-list{
@@ -249,65 +241,46 @@ hr{
     padding: 20px;
    
 }
-
-
-.left-section .course-list .top-section .course-image{
-    width: 200px;
-    height: 100px;
-    object-fit: cover;
-    object-position: center;    
+.left-section .course-list .middle-section {
     float: left;
+    width: 100%;
+}
+
+.left-section .course-list .add-topic{
+    
+    padding: 7px 15px;
+    background-color: #002347;
+    color: #ffffff;
+    font-size: 12px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
-.left-section .course-list .top-section .course-detail{
-    width: calc(1005 - 250px);
-    float: left;
-    padding-left: 20px;
+.left-section .course-list .bottom-section {
+    border-bottom: 1px solid #cccccc;
+    padding: 10px 20px;
 }
 
-.left-section .course-list .top-section .course-detail .course-name{
+
+.left-section .course-list .bottom-section .col-left{
+   width: 50%;
+   float: left;
+
+    
+}
+
+.left-section .course-list .bottom-section .col-left .course-name{
     font-size: 20px;
     font-weight: 700;
     color: #282828;
     margin: 0 0 5px;
 }
 
-.left-section .course-list .top-section .course-detail .course-company{
-    font-size: 13px;
-    font-weight: 500;
-    color: #8e8e8e;
-    margin: 0;
-}
-
-.left-section .course-list .top-section .course-detail .category{
-    font-size: 14px;
-    color: #8e8e8e;
-    margin: 0;
-}
-
-.left-section .course-list .bottom-section{
-    border-top: 1px solid #cccccc;
-    padding: 10px 20px;
-}
-
-.left-section .course-list .bottom-section .col-left{
-    width: 50%;
-    float: left;
-    text-align: left;
-    padding: 5px 0;
-}
-
-.left-section .course-list .bottom-section .col-left .price{
-    color: #002347;
-    font-weight: 600;
-    font-size: 18px;
-}
-
 .left-section .course-list .bottom-section .col-right{
     width: 50%;
     float: left;
-}
+
+ }
 
 .left-section .course-list .bottom-section .col-right .edit-btn{
     float: right;
@@ -318,7 +291,7 @@ hr{
     border-radius: 4px;
     cursor: pointer;
     margin-right: 10px;
-}
+ } 
 
 .left-section .course-list .bottom-section .col-right .delete-btn{
     float: right;

@@ -16,6 +16,7 @@
 @endsection
 
 @section('content')
+    {{--<link rel="stylesheet" href="{{ URL('css/all.css') }}">--}}
     <link rel="stylesheet" href="{{ URL('css/visitor/course.css') }}">
 
     <section class="banner_area">
@@ -43,7 +44,8 @@
                         Type
                     </div>
                     <div class="filter-body">
-                        <form action="{{ URL('') }}" method="post">
+                        
+                        <form action="{{URL('')}}" method="post">
                             {{ csrf_field() }}
                             
                             <label class="filter-container">
@@ -81,32 +83,26 @@
                         </form>
                     </div>
                 </div>
-                
-                <div class="filter-box">
-                    <div class="filter-header">
-                        Date
-                    </div>
-                    <div class="filter-body">
-                        <input type="text" name="date" id="daterangepicker" class="date-input">
-                    </div>
-                </div>
+        
             </div>
             <div class="right-section">
                 @foreach ($courses as $course)
                 <div class="course-list ">
-                    
                     <div class="top-section gridspan">
-                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="col-left">
                             <div class="course-detail">
-                                <h3 class="course-name">{{ $course->name }}</h3>
-                                
+                                <a href="{{ URL('course/' .$course->id. '/preview')}}">
+                                    <h3 class="course-name">{{ $course->name }}</h3>
+                                </a>
                                 <div class="label-container">
-                                <span class="label">{{$course->company->name}}</span>
+                                    <span class="label">{{$course->company->name}}</span>
                                 </div>
                                 <hr>
                                 <h5 class="course-description">{{$course->description}}
                                 </h5>  
                             </div>
+                        </div>  
                     </div>
                     <div class="bottom-section gridspan">
                         <div class="col-left">
@@ -123,7 +119,9 @@
                     </div>
                 </div>
                 @endforeach
+                {{$courses->links()}}
             </div>
         </div>
+        
     </div>    
 @endsection
