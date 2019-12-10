@@ -41,8 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard/transaction', 'StudentController@getTransaction');
 
-    
-    
+
     // Company
     Route::get('/dashboard/course/list', 'CompanyController@getMyCourse');
     Route::post('/dashboard/course/list', 'CompanyController@createCourse');
@@ -55,18 +54,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/list/course', 'TutorController@getMyCourse');
     
     Route::post('/classroom/{id}/topic',  'TutorController@createTopic');
-    Route::get('/classroom/topic/{id}/edit', 'TutorController@getEditTopicForm');
-    Route::put('/classroom/topic/{id}/edit', 'TutorController@updateTopic');
-    Route::delete('/classroom/topic/{id}/delete', 'TutorController@deleteTopic');
+    Route::get('/dashboard/topic/{topicId}/edit', 'TutorController@getEditTopicForm');
+    Route::put('/dashboard/topic/{topicId}/edit', 'TutorController@updateTopic')
+    ->name('topic.update');
+    Route::delete('/dashboard/topic/{topicId}/delete', 'TutorController@deleteTopic')->name('topic.delete');
 
-
-
+    
+    Route::get('content', 'ContentsController@index')->name('content.index');
+    Route::get('content/create', 'ContentsController@create')->name('content.create');
+    Route::post('content', 'ContentsController@store')->name('content.store');
+    Route::get('content/{content}', 'ContentsController@show')->name('content.show');
+    Route::get('content/{content}/edit', 'ContentsController@edit')->name('content.edit');
+    Route::patch('content/{content}', 'ContentsController@update')->name('content.update');
+    Route::delete('contents/{contents}', 'ContentsController@delete')->name('contents.delete');
+    
+    
  
     // Tutor & Student
     Route::get('/classroom/{id}/overview', 'ClassController@getOverview');
-    Route::get('/classroom/{id}/topic', 'ClassController@getTopic');
-    Route::get('/classroom/{id}/discussion', 'ClassController@getDiscussion');
-    Route::get('/classroom/{id}/task', 'ClassController@getTask');
+    Route::get('/classroom/{topicId}/topic', 'ClassController@getTopic')->name('topic');
+    Route::get('/classroom/{discId}/discussion', 'ClassController@getDiscussion');
+    Route::get('/classroom/{taskId}/task', 'ClassController@getTask');
 
     Route::get('/tutor/course', 'TutorController@getCourse');
 });

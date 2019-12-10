@@ -36,6 +36,8 @@ class Course extends Model
     }
 
     public function topics(){
+        //$courses = App\Topic::find($id)->courses;
+        
         return $this->hasMany('App\topic');
     }
 

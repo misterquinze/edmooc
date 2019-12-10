@@ -1,7 +1,7 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Forum Diskusi</title>
 @endsection
 
 @section('menu')

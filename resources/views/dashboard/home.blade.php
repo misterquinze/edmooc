@@ -34,7 +34,7 @@
         </h1>
         <hr>
     </section>
-
+    @if($userLogin->role == 'student')
     <section class="content">
         <h3 class="title"></h3>
 
@@ -42,19 +42,54 @@
             <div class="gridspan">
                 <div class="col-left">
                     <div class="label-container">
-                        <span class="label">Company name</span>
+                        
                     </div>
-                    <h4 class="course-name">Android Basics: User Interface</h4>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quibusdam quam incidunt magni ullam, assumenda eveniet a mollitia velit earum accusamus veritatis placeat natus quod. Officiis provident necessitatibus adipisci rem.</p>
+                    
                 </div>
-                <div class="col-right">
-                    <div class="proceed-btn">
-                        Lanjutkan
-                        <span class="fa fa-arrow-right"></span>
-                    </div>
-                </div>
+               
             </div>
         </div>
 
     </section>
+    @elseif($userLogin->role == 'company')
+    <section class="content">
+        <h3 class="title">company</h3>
+            
+        <div class="course-list">
+            <div class="gridspan">
+                <div class="col-left">
+                    <div class="label-container">
+
+                    </div>
+                    
+                </div>
+                <div class="col-right">
+                    <div class="proceed-btn">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @elseif($userLogin->role == 'tutor')
+    <section class="content">
+        <h3 class="title">tutor</h3>
+            
+        <div class="course-list">
+            <div class="gridspan">
+                <div class="col-left">
+                    <div class="label-container">
+
+                    </div>
+                    
+                </div>
+                <div class="col-right">
+                    <div class="proceed-btn">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
 @endsection

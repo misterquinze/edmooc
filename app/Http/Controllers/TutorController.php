@@ -12,7 +12,8 @@ use App\Topic;
 
 class TutorController extends Controller
 {
-    public function getMyCourse(){
+    public function getMyCourse()
+    {
         $userLogin = Auth::user();
         $categories = Category::all();
         $company = Company::all();
@@ -31,20 +32,27 @@ class TutorController extends Controller
             }
         }
 
-        return view('dashboard/tutor/course', compact('userLogin', 'categories', 'company', 'topic', 'courses'));
+        return view('dashboard/tutor/course', compact(
+            'userLogin', 
+            'categories', 
+            'company', 
+            'topic', 
+            'courses', 
+            'contents'));
     }
 
-    public function getEditTopicForm($id){
+    public function getEditTopicForm($topicId){
         $userLogin = Auth::user();
+        $courses = Course::all();
+        $topics = Topic::findOrFail($topicId)->first();
+        $topics = Topic::where('id', $topics->id)->get();
         
-        $topics = Course::findOrFail($id)->topics()->get();
-          
-
-
-        return view('classroom/topic-edit',[
+        
+        //dd($topics);
+        return view ('dashboard/tutor/topic-edit', [
             'userLogin' => $userLogin,
-            
-            'topics' => $topics,
+            'courses' => $courses,
+            'topics' => $topics
         ]);
     }
 
@@ -87,8 +95,8 @@ class TutorController extends Controller
         return back();
     }
 
-    public function updateTopic(Request $request, $id){
-        $topics = Topic::findOrFail($id);
+    public function updateTopic(Request $request, $topicId){
+        $topics = Topic::findOrFail($topicId);
         $data = $request->all();
 
         $startDate = date('Y-m-d',strtotime($data['startDate']));
@@ -100,7 +108,7 @@ class TutorController extends Controller
         $topics->end_date = $endDate;
         $topics->save();
 
-        return redirect('/classroom/overview');
+        return redirect('/dashboard/topic/topic-edit');
     }
 
 
@@ -108,6 +116,6 @@ class TutorController extends Controller
         $topics = Topic::findOrFail($id);
         $topics->delete();
 
-        return redirect('/classroom/overview');
+        return redirect('/classroom/{id}/overview');
     }
 }

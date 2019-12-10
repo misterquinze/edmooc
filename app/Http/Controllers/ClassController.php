@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Content;
 use App\Topic;
 use App\Course;
 use App\Tutor;
@@ -30,17 +32,31 @@ class ClassController extends Controller
           compact('userLogin', 'courses', 'topics') );
      }
    
-   public function getTopic($id){
-        $userLogin = Auth::user();
-        //$topics = Topic::all();
-        $topics = Topic::findOrFail($id);
-        $topics = Topic::where('id', $topics->id)->get();
+   public function getTopic($topicId){
+          $userLogin = Auth::user();
+          //$courses = Course::findOrFail($id)->topics()->get();
+          $topics = Topic::findOrFail($topicId);
+          $topics = Topic::where('id', $topics->id)->get();
+          //$courses = Topic::findOrFail($id)->courses()->get();
+          //$topics = Topic::findOrFail($topicId)->get();
+          $contents = Content::all();
+          //dd($courses);
+          //dd($contents);
 
+          if ($contents->isEmpty()) {
+               \Session::flash('content', 'Dont have content');
+          }else {
+               foreach($contents as $content){
+                    $content = Content::find($content->id);
+               }
+          }
 
        return view('classroom/topic', [
             'userLogin' => $userLogin,
-            
-            'topics' => $topics
+            'topics' => $topics,
+            'contents' => $contents
+            //'courses' => $courses
+            //'topicId' => $topicId
        ]);
        
    }

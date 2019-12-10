@@ -77,6 +77,7 @@ class StudentController extends Controller
                 'status' => 0,
             ]);
             $enrollment->save();
+            return redirect('/dashboard');
         }
         //add enroll request to admin dashboard
         

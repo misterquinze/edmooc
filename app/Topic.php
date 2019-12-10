@@ -23,9 +23,11 @@ class Topic extends Model
 
     }
 
-    
-
     public function tutor(){
         return $this->belongsTo('App\tutor');
+    }
+
+    public function content(){
+        return $this->hasMany('App\content');
     }
 }

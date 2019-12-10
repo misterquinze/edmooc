@@ -99,12 +99,6 @@ hr{
 
 
 
- .course-content{
-    padding: 50px;
-    background-color: #fafafa;
-    border: 1px solid #cccccc;
-   
-} 
 
 .gridspan::after{
     content: "";
@@ -258,7 +252,7 @@ hr{
 
 .left-section .course-list .bottom-section {
     border-bottom: 1px solid #cccccc;
-    padding: 10px 20px;
+    padding: 20px 20px 5px 20px;
 }
 
 
