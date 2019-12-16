@@ -19,28 +19,25 @@
         </a>
         <ul class="treeview-menu">
             
-           @foreach($topics as $topic)
-            <li><a href="{{ URL('classroom/'.$topic->id.'/topic') }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
-            
+            @foreach($topics as $topic)
+            <li><a href="{{ route('topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
+            @endforeach
             {{--<li><a href="{{ URL('classroom/'.$course->topics->id.'/topic') }}"><i class="fa fa-circle-o"></i> Minggu Ke-2</a></li>
             <li><a href="{{ URL('classroom/'.$course->topics->id.'/topic') }}"><i class="fa fa-circle-o"></i> Minggu Ke-3</a></li>
             <li><a href="{{ URL('classroom/'.$course->topics->id.'/topic') }}"><i class="fa fa-circle-o"></i> Minggu Ke-4</a></li>--}}
-           @endforeach
+           
         </ul>
     </li>
-
     <li>
-        <a href="{{ URL('classroom/1/discussion') }}">
+        <a href="{{ URL('classroom/'.$course->id.'/forum') }}">
             <i class="fa fa-th"></i> <span>Forum Diskusi</span>
             {{-- <span class="pull-right-container">
                 <small class="label pull-right bg-green">1</small>
             </span> --}}
         </a>
     </li>
-
     <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
 @endsection
-
 @section('content')
     <link rel="stylesheet" href="{{ URL('css/classroom/overview.css') }}"> 
 
@@ -117,7 +114,7 @@
                                         <div class="bottom-section gridspan">
                                             <div class="col-left">
                                                 
-                                                <a href="{{ route('topic', [$topic->id]) }}" class="">
+                                                <a href="{{ route('topic.index', [$topic->id]) }}" class="">
                                                 <h5 class="topic-title">
                                                     {{$topic->name}}
                                                 </h5>
@@ -127,7 +124,7 @@
                                                     <span class="delete-btn" onclick="deleteTopic({{ $topic->id }})">
                                                         <i class="fa fa-trash"></i>
                                                     </span>
-                                                    <a href="{{ URL('/dashboard/topic/' .$topic->id.'/edit') }}" class="edit-btn">
+                                                    <a href="{{ URL('/classroom/topic/' .$topic->id.'/edit') }}" class="edit-btn">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 </div>
@@ -161,7 +158,7 @@
                         <div class="form-header">
                             Buat Topik Baru
                         </div>
-                        <form action="{{ URL('classroom/' .$course->id. '/overview') }}" method="POST">
+                        <form action="{{ URL('classroom/' .$course->id. '/topic') }}" method="POST">
                             <div class="form-body">
                                 {{ csrf_field() }}
                                 <div class="input-container">

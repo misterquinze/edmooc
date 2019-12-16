@@ -37,5 +37,9 @@ class User extends Authenticatable
         return $this->hasMany('App\UserCourse');
     }
 
-    
+    public function discussion()
+    {
+        return $this->hasMany('App\discussion');
+    }
+
 }

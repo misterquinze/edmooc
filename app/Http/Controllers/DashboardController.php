@@ -19,7 +19,6 @@ class DashboardController extends Controller
     {
         $userLogin = Auth::user();
         
-        
         $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
         
         //dd($enrollment);

@@ -53,6 +53,7 @@
         <div id="topic">
             <template>
                 <div id="display-container">
+                @if(auth()->user()->role == 'tutor')
                     <div class="gridpan">
                         <span class="add-content" @click.prevent="changeType('create')">Tambah Konten
                         </span>
@@ -89,13 +90,47 @@
                         </div>
                         @endif
                     </div>
+                @else
+                <div class="topic-content">
+                        @if ($contents->isEmpty())
+                            @if (session('content'))
+                                <div class="card-body">
+                                    <h2 class="alert alert-info">
+                                        {{ session('content') }}
+                                    </h2>
+                                </div>
+                            @endif
+                        @else    
+                        <div class="topic-title">
+                            <h2>
+                                {{$topic->name}}
+                            </h2>
+                        </div>
+                        <div class="topic-video">
+                            @foreach($contents as $content)
+                            <iframe 
+                                class="topic-video"
+                                src="{{$content->src}}" 
+                                frameborder="1" 
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" a
+                                llowfullscreen>
+                            </iframe>
+                            @endforeach
+                        </div>
+                        <div class="explanation">
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corrupti asperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
+                            </p>
+                        </div>
+                        @endif
+                    </div>
+                @endif
                 </div>
                 <div id="form-container" class="form-create">
                     <div class="form-header">
                         konten
                     </div>
                     
-                    <form action="{{ URL('classroom/' .$topic->id.'/topic') }}" method="POST">
+                    <form action="{{ route('content.store')}}" method="POST">
                         <div class="form-body">
                             {{ csrf_field() }}
                             <div class="input-container">

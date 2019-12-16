@@ -49,7 +49,7 @@ class TutorController extends Controller
         
         
         //dd($topics);
-        return view ('dashboard/tutor/topic-edit', [
+        return view ('classroom/topic/topic-edit', [
             'userLogin' => $userLogin,
             'courses' => $courses,
             'topics' => $topics
@@ -108,7 +108,7 @@ class TutorController extends Controller
         $topics->end_date = $endDate;
         $topics->save();
 
-        return redirect('/dashboard/topic/topic-edit');
+        return redirect('/classroom/overview');
     }
 
 
@@ -116,6 +116,6 @@ class TutorController extends Controller
         $topics = Topic::findOrFail($id);
         $topics->delete();
 
-        return redirect('/classroom/{id}/overview');
+        return redirect('/classroom/overview');
     }
 }

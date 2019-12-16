@@ -51,7 +51,7 @@
                         Edit Topik
                     </div>
 
-                    <form action="{{ URL('classroom/'.$topic->id.'/overview') }}" method="POST">
+                    <form action="{{ URL('classroom/'.$topic->id.'/edit') }}" method="POST">
                         <div class="form-body">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">

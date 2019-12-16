@@ -6,6 +6,7 @@ use App\Content;
 use App\Topic;
 use App\Course;
 use App\Tutor;
+use App\Discussion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,10 @@ class ClassController extends Controller
           
           $userLogin = Auth::user();
           $courses = Course::where('id', $id)->get();
+          //$courses = Course::where('id', $name)->get();
+          //$courses = Course::select('id')->where('name', $name)->first();
           $topics = Course::findOrFail($id)->topics()->get();
+          $discussions = Course::findOrFail($id)->discussions()->get();
           
 
           //$topics = Topic::where('course_id', $courses->id)->first();
@@ -29,7 +33,7 @@ class ClassController extends Controller
           //dd($courses->topics->id);
 
           return view('classroom/overview', 
-          compact('userLogin', 'courses', 'topics') );
+          compact('userLogin', 'courses', 'topics', 'discussions') );
      }
    
    public function getTopic($topicId){
@@ -61,12 +65,25 @@ class ClassController extends Controller
        
    }
    
-   public function getDiscussion($id){
-       $userLogin = Auth::user();
+   public function getForum(Course $courses, $id)
+   {
+     $userLogin = Auth::user();
+     $courses = Course::where('id', $id)->get();
+     $discussions  = Course::findOrFail($id)->discussions()->get();
 
+     //dd( $discussions);
 
-       return view('classroom/discussion',[
+     if ($discussions->isEmpty()){
+          \Session::flash('discussion', 'Dont have discussion');
+      }else{
+          foreach($discussions as $disc){
+              $disc = Discussion::find($disc->id);
+          }
+      }
+       return view('classroom/forum', [
             'userLogin' => $userLogin,
+            'courses' => $courses,
+            'discussions' => $discussions
        ]);
    }
   
