@@ -120,14 +120,14 @@
                                                 </h5>
                                                 </a>
                                             </div>
-                                                <div class="col-right">
-                                                    <span class="delete-btn" onclick="deleteTopic({{ $topic->id }})">
-                                                        <i class="fa fa-trash"></i>
-                                                    </span>
-                                                    <a href="{{ URL('/classroom/topic/' .$topic->id.'/edit') }}" class="edit-btn">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                </div>
+                                            <div class="col-right">
+                                                <span class="delete-btn" onclick="deleteTopic({{ $topic->id }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </span>
+                                                <a href="{{ URL('/classroom/topic/' .$topic->id.'/edit') }}" class="edit-btn">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                         <form class="form-delete" id="delete-{{ $topic->id }}" action="{{route ('topic.delete', [$topic->id])}} "  method="POST" style="display: none;">
                                                     {{ csrf_field() }}
@@ -166,35 +166,12 @@
                                     <p class="input-sub-title">Beri Judul Materi</p>
                                     <input type="text" name="name" class="regular-input" required>
                                 </div>
-                            {{--<div class="input-container">
+                                <div class="input-container">
                                     <h4 class="input-title">Deskripsi Topik</h4>
                                     <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
                                     <textarea name="description" class="regular-textarea" required></textarea>
-                                </div>--}}
-                                <div class="input-container">
-                                    <h4 class="input-title">Waktu </h4>
-                                    <p class="input-sub-title">Tentukan tipe kursus</p>
-                                    <label class="radio-container">
-                                                    Week 1
-                                        <input type="radio" name="week" value="1" v-model="courseType">
-                                            <span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">
-                                                    Week 2
-                                        <input type="radio" name="week" value="2" v-model="courseType">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div> 
-                                <div class="input-container">
-                                    <h4 class="input-title">Tanggal Mulai</h4>
-                                    <p class="input-sub-title">Tentukan tanggal mulai kursus</p>
-                                    <input type="text" name="startDate" class="regular-input" id="startDate" placeholder="Choose Date" required>
                                 </div>
-                                <div class="input-container">
-                                    <h4 class="input-title">Tanggal Selesai</h4>
-                                    <p class="input-sub-title">Tentukan tanggal selesai kursus</p>
-                                    <input type="text" name="endDate" class="regular-input" id="endDate" placeholder="Choose Date" required>
-                                </div>
+                                
                             </div>
                             <div class="form-footer gridspan">
                                 <span class="cancel-btn" @click.prevent="changeType('display')">Batal</span>

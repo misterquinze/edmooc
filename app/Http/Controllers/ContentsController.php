@@ -14,14 +14,14 @@ class ContentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($topicId)
-    {   
+    public function index($contentId)
+    {
         $userLogin = Auth::user();
-        $tutor = Tutor::where('user_id', $userLogin->id)->first();
-        $topics = Topic::findOrFail($topicId);
-        $topics = Topic::where('id', $topics->id)->get();
+       
+        $contents = Content::findOrFail($contentId);
+        $contents = Content::where('id', $contents->id)->get();
         
-        return view ('content.index', compact('userLogin', 'tutor', 'topics'));
+        return view('content.index', compact('userLogin', 'contents'));
     }
 
     /**
@@ -29,14 +29,13 @@ class ContentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($topicId)
     {   
         $userLogin = Auth::user();
-        $topics = Topic::all();
-        $tutors = Tutor::all();
-        $contents = Topic::findOrFail($id)->contents()->get();
+       
+        $topics = Topic::where('id', $topicId)->get();
         
-        return view('content/create', compact('userLogin', 'contents'));
+        return view('classroom/topic/content/create', compact('userLogin', 'topics'));
     }
 
     /**
@@ -45,15 +44,17 @@ class ContentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Topic $topics, $id)
+    public function store(Request $request, Topic $topics, $topicId)
     {   
-        $topics = Topic::findOrFail($id);
-        $topics = Topic::where('id', $topics->id)->get();
+        $topics = Topic::where('id', $topicId)->get();
+        $topics = Topic::findOrFail($topicId);
         $userLogin = Auth::user();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
         
+        
+        
         $data = $request->all();
-        dd($data);
+        //dd($data);
 
         if($data['type'] == 'video'){
             $contents = Content::create([

@@ -55,7 +55,7 @@ class ClassController extends Controller
                }
           }
 
-       return view('classroom/topic', [
+       return view('classroom/topic/topic', [
             'userLogin' => $userLogin,
             'topics' => $topics,
             'contents' => $contents
@@ -70,6 +70,7 @@ class ClassController extends Controller
      $userLogin = Auth::user();
      $courses = Course::where('id', $id)->get();
      $discussions  = Course::findOrFail($id)->discussions()->get();
+     $topics = Course::findOrFail($id)->topics()->get();
 
      //dd( $discussions);
 
@@ -80,11 +81,8 @@ class ClassController extends Controller
               $disc = Discussion::find($disc->id);
           }
       }
-       return view('classroom/forum', [
-            'userLogin' => $userLogin,
-            'courses' => $courses,
-            'discussions' => $discussions
-       ]);
+       return view('classroom/forum', 
+       compact('userLogin', 'courses', 'discussions', 'topics') );
    }
   
    public function getTask($id){

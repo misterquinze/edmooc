@@ -46,17 +46,22 @@
     <link rel="stylesheet" href="{{ URL('css/classroom/topic.css') }}">
 
     <section class="content-header">
-    
+       
     </section>
 
     <section class="content">
+        <h5>
+            Materi Topik {{$topic->name}}
+        </h5>
+        <hr>
         <div id="topic">
             <template>
                 <div id="display-container">
                 @if(auth()->user()->role == 'tutor')
                     <div class="gridpan">
-                        <span class="add-content" @click.prevent="changeType('create')">Tambah Konten
-                        </span>
+                        <a href="{{route('content.create', [$topic->id])}}">
+                            <span class="add-btn">Tambah Konten</span>
+                        </a>
                     </div>
                     <div class="topic-content">
                         @if ($contents->isEmpty())
@@ -125,55 +130,7 @@
                     </div>
                 @endif
                 </div>
-                <div id="form-container" class="form-create">
-                    <div class="form-header">
-                        konten
-                    </div>
-                    
-                    <form action="{{ route('content.store')}}" method="POST">
-                        <div class="form-body">
-                            {{ csrf_field() }}
-                            <div class="input-container">
-                                    <h4 class="input-title">Nama Konten</h4>
-                                    <p class="input-sub-title">Beri nama kursus anda sejelas mungkin</p>
-                                    <input type="text" name="title" class="regular-input" value="" required>
-                                </div>
-                                <div class="input-container">
-                                    <h4 class="input-title">Deskripsi Kursus</h4>
-                                    <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
-                                        <textarea name="description" class="regular-textarea" required>
-                                        </textarea>
-                                </div>
-                                <div class="input-container">
-                                    <h4 class="input-title">Tipe Konten</h4>
-                                    <p class="input-sub-title">Tentukan tipe konten</p>
-                                    <label class="radio-container">
-                                            Video
-                                        <input type="radio" name="type" value="video"><span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">
-                                            Artikel
-                                            <input type="radio" name="type" value="video"><span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">
-                                            Audio
-                                            <input type="radio" name="type" value="video"><span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="input-container">
-                                    <h4 class="input-title">Upload Materi</h4>
-                                    <p class="input-sub-title">Silahkan unggah materi disini</p>
-                                    <input type="text" name="source"
-                                            class="regular-input" value="">
-                                </div>
-                                
-                            </div>
-                        <div class="form-footer gridspan">
-                            <span class="cancel-btn" @click.prevent="changeType('display')">Batal</span>
-                            <button type="submit" class="submit-btn">Kirim</button>
-                        </div>
-                    </form>
-                </div>
+                
             </template>
         </div>
         

@@ -17,19 +17,18 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="{{ URL('classroom/1/topic/1') }}"><i class="fa fa-circle-o"></i> Minggu Ke-1</a></li>
-            <li><a href="{{ URL('classroom/1/topic/2') }}"><i class="fa fa-circle-o"></i> Minggu Ke-2</a></li>
-            <li><a href="{{ URL('classroom/1/topic/3') }}"><i class="fa fa-circle-o"></i> Minggu Ke-3</a></li>
-            <li><a href="{{ URL('classroom/1/topic/4') }}"><i class="fa fa-circle-o"></i> Minggu Ke-4</a></li>
+            @foreach($topics as $topic)
+            <li><a href="{{ route('topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
+            @endforeach
         </ul>
     </li>
     <li>
-            <a href="{{ URL('classroom/'.$c->id.'/forum') }}">
-                <i class="fa fa-th"></i> <span>Forum Diskusi</span>
+        <a href="{{ URL('classroom/'.$c->id.'/forum') }}">
+            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
                 {{-- <span class="pull-right-container">
                     <small class="label pull-right bg-green">1</small>
                 </span> --}}
-            </a>
+        </a>
     </li>
     
 

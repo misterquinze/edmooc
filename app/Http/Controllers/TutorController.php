@@ -65,32 +65,16 @@ class TutorController extends Controller
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
 
         $data = $request->all();
-         
-        $startDate = date('Y-m-d,',strtotime($data['startDate']));
-        $endDate = date('Y-m-d',strtotime($data['endDate']));
+        $topics = Topic::create([
+                
+            'course_id' => $courses->id,
+            'tutor_id' => $tutor->id,
+            'name' => $data['name'],
+            'description' => $data['description'],
+            
+        ]);
         //dd($data);
-        if ($data['week'] == '1'){
-            //dd('hello');
-            $topics = Topic::create([
-                
-                'course_id' => $courses->id,
-                'tutor_id' => $tutor->id,
-                'name' => $data['name'],
-                'week' => $data['week'],
-                'start_date' => $startDate,
-                'end_date' => $endDate,
-            ]);
-        } else {
-            $topics = Topic::create([
-                
-                'course_id' => $courses->id,
-                'tutor_id' => $tutor->id,
-                'name' => $data['name'],
-                'week' => $data['week'],
-                'start_date' => $startDate,
-                'end_date' => $endDate,
-            ]);
-        }
+       
         $topics->save();
         return back();
     }
@@ -99,13 +83,8 @@ class TutorController extends Controller
         $topics = Topic::findOrFail($topicId);
         $data = $request->all();
 
-        $startDate = date('Y-m-d',strtotime($data['startDate']));
-        $endDate = date('Y-m-d',strtotime($data['endDate']));
-
         $topics->name = $data['name'];
-        
-        $topics->start_date = $startDate;
-        $topics->end_date = $endDate;
+        $topics->description = $data['description'];
         $topics->save();
 
         return redirect('/classroom/overview');

@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -79,8 +79,8 @@ class LoginController extends Controller
         ]);
     }
 
-    protected function authenticated(Request $request, $user)
+    /*protected function authenticated(Request $request, $user)
     {
         return redirect(session('link'));
-    }
+    }*/
 }

@@ -55,6 +55,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/dashboard/topic/{topicId}/edit', 'TutorController@updateTopic')->name('topic.update');
     Route::delete('/classroom/{topicId}/delete', 'TutorController@deleteTopic')->name('topic.delete');
 
+    // Content
+    Route::get('classroom/topic/content/{contentId}', 'ContentsController@index')->name('content.index');
+    Route::get('classroom/topic/{topicId}/content/create', 'ContentsController@create')->name('content.create');
+    Route::post('classroom/topic/{topicId}/content', 'ContentsController@store')->name('content.store');
+    Route::get('classroom/topic/content/{content}', 'ContentsController@show')->name('content.show');
+    Route::get('classroom/topic/content/{content}/edit', 'ContentsController@edit')->name('content.edit');
+    Route::patch('classroom/topic/content/{content}', 'ContentsController@update')->name('content.update');
+    Route::delete('classroom/topic/contents/{contents}', 'ContentsController@delete')->name('content.delete');
     
     // Tutor & Student (Classroom)
     Route::get('/classroom/{id}/overview', 'ClassController@getOverview');
@@ -73,12 +81,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tutor/course', 'TutorController@getCourse');
 
 
-    // Content
-    Route::get('content', 'ContentsController@index')->name('content.index');
-    Route::get('content/create', 'ContentsController@create')->name('content.create');
-    Route::post('content', 'ContentsController@store')->name('content.store');
-    Route::get('content/{content}', 'ContentsController@show')->name('content.show');
-    Route::get('content/{content}/edit', 'ContentsController@edit')->name('content.edit');
-    Route::patch('content/{content}', 'ContentsController@update')->name('content.update');
-    Route::delete('contents/{contents}', 'ContentsController@delete')->name('content.delete');
+    
 });

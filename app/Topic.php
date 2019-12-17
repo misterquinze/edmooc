@@ -11,9 +11,8 @@ class Topic extends Model
         'course_id',
         'tutor_id',
         'name',
-        'week',
-        'start_date',
-        'end_date'
+        'description',
+        
     ];
 
     public function course($id){
