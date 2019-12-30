@@ -84,11 +84,14 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header">
-                                    <img src="{{URL('template/1/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                                    @if ($userLogin->photo)
+                                        <img src={{ URL($userLogin->url) }} class="img-circle" alt="User Image">
+                                    @else
+                                        <img src="{{URL('template/1/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                                    @endif
 
                                     <p>
                                         {{ $userLogin->name }}
-                                        {{-- <small>Member since Nov. 2012</small> --}}
                                     </p>
                                 </li>
                                 {{-- <li class="user-body">
@@ -106,7 +109,7 @@
                                 </li> --}}
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="{{ URL('dashboard/settings') }}" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a onclick="logout(event)" class="btn btn-default btn-flat">Sign out</a>
@@ -159,7 +162,7 @@
 
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.4.0
+                <b>Version</b> 1.0.0
             </div>
             <strong>
                 Copyright &copy; 2019 <a>All rights reserved | Universitas Islam Indonesia</a>.

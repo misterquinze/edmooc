@@ -60,7 +60,7 @@
                     <div class="info_item">
                         <i class="ti-headphone"></i>
                         <h6><a href="#"> +62 274 898444 </a></h6>
-                        <p>Mon to Fri 9am to 6 pm</p>
+                        <p>Mon to Fri 7am to 6 pm</p>
                     </div>
                     <div class="info_item">
                         <i class="ti-email"></i>

@@ -25,13 +25,17 @@ Route::get('/contact', 'VisitorController@getContact');
 Route::group(['middleware' => 'auth'],function(){
 
     Route::get('/dashboard', 'DashboardController@getDashboard');
+    // Settings
     Route::get('/dashboard/settings', 'DashboardController@getSettings');
+    Route::put('/dashboard/settings', 'DashboardController@updateProfile');
+
 
     // Student
     Route::get('/dashboard/favorite', 'StudentController@getFavorite');
     Route::get('/dashboard/course/me', 'StudentController@getMyCourse');
     Route::get('/dashboard/transaction', 'StudentController@getTransaction');
     
+
     // Company
     Route::get('/dashboard/course/list', 'CompanyController@getMyCourse');
     Route::post('/dashboard/course/list', 'CompanyController@createCourse');
@@ -40,6 +44,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::delete('/dashboard/course/{id}/delete', 'CompanyController@deleteCourse');
     Route::get('/dashboard/revenue', 'CompanyController@getRevenue');
     
+
     // Company
     Route::get('/dashboard/list/course', 'TutorController@getMyCourse');
 
