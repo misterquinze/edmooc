@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProficienciesTable extends Migration
+class AddUserIdColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateProficienciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('proficiencies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('tutors', function (Blueprint $table) {
+            $table->unsignedInteger('user_id')->after('id');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateProficienciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proficiencies');
+        Schema::table('tutors', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 }

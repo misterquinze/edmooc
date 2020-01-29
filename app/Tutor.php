@@ -8,10 +8,11 @@ class Tutor extends Model
 {
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
         'address',
         'phone',
-        'category_id'
+        'description'
     ];
 
     public function course(){

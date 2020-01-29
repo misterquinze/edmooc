@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeTypeProficiencyIdColumn extends Migration
+class DeleteProficiencyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class ChangeTypeProficiencyIdColumn extends Migration
      */
     public function up()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->integer('proficiency_id')->change();
-        });
+        Schema::dropIfExists('proficiencies');
     }
 
     /**
@@ -25,8 +23,6 @@ class ChangeTypeProficiencyIdColumn extends Migration
      */
     public function down()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->integer('proficiency_id')->nullable()->change();
-        });
+        //
     }
 }

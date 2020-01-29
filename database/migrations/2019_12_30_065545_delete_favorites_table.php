@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameProficiencyColumn extends Migration
+class DeleteFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class RenameProficiencyColumn extends Migration
      */
     public function up()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->renameColumn('proficiency', 'proficiency_id');
-        });
+        Schema::dropIfExists('favorites');
     }
 
     /**
@@ -25,8 +23,6 @@ class RenameProficiencyColumn extends Migration
      */
     public function down()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->renameColumn('proficiency_id', 'proficiency' );
-        });
+        //
     }
 }

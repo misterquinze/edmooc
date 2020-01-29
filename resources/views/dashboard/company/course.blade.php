@@ -203,13 +203,13 @@
                                 @foreach ($tutors as $tutor)
                                     <label class="radio-container">
                                         {{$tutor->name}}
-                                        <input type="radio" name="category" value="{{$tutor->id}}" >
+                                        <input type="radio" name="tutor" value="{{$tutor->id}}" >
                                         <span class="checkmark"></span>
                                     </label>
                                 @endforeach
                             </div>
 
-                            <div class="input-container">
+                            {{--<div class="input-container">
                                 <h4 class="input-title">Tanggal Mulai</h4>
                                 <p class="input-sub-title">Tentukan tanggal mulai kursus</p>
                                 <input type="text" name="startDate" class="regular-input" id="startDate" placeholder="Choose Date" required>
@@ -219,7 +219,7 @@
                                 <h4 class="input-title">Tanggal Selesai</h4>
                                 <p class="input-sub-title">Tentukan tanggal selesai kursus</p>
                                 <input type="text" name="endDate" class="regular-input" id="endDate" placeholder="Choose Date" required>
-                            </div>
+                            </div>--}}
     
                         </div>
                         <div class="form-footer gridspan">

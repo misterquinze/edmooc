@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameUserIdColumn extends Migration
+class DeleteUserTutorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class RenameUserIdColumn extends Migration
      */
     public function up()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->renameColumn('user_id', 'id');
-        });
+        Schema::dropIfExists('user_tutors');
     }
 
     /**
@@ -25,8 +23,6 @@ class RenameUserIdColumn extends Migration
      */
     public function down()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->renameColumn('id', 'user_id');
-        });
+        //
     }
 }

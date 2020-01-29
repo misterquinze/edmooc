@@ -21,6 +21,7 @@ class DiscussionController extends Controller
         $userLogin = Auth::user();
         $discussions = Discussion::findOrFail($discId);
         $discussions  = Discussion::where('id', $discussions->id)->get();
+        
 
         //dd($discussions);
 

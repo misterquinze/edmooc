@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIdColumn extends Migration
+class DeleteJadwalWisudaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class CreateIdColumn extends Migration
      */
     public function up()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->increments('id');
-        });
+        Schema::dropIfExists('jadwal_wisuda');
     }
 
     /**
@@ -25,8 +23,6 @@ class CreateIdColumn extends Migration
      */
     public function down()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->dropColumn('id');
-        });
+        //
     }
 }

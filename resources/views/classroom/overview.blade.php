@@ -85,20 +85,20 @@
                                     </div>
                                     <div class="filter-box">
                                         <div class="filter-header">
-                                            Kursus Dimulai
+                                            Update Terakhir
                                         </div>
                                         <div class="filter-body">
-                                            <h5>{{$course->start_date}}</h5> 
+                                            <h5>{{$course->updated_at}}</h5> 
                                         </div>    
                                     </div>
-                                    <div class="filter-box">
+                                    {{--<div class="filter-box">
                                         <div class="filter-header">
                                             Kursus Berakhir
                                         </div>
                                         <div class="filter-body">
                                             <h5>{{$course->end_date}}</h5> 
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
                                 <div class="left-section">
                                     <div class="course-list ">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserIdColumn extends Migration
+class DeleteColumnInCourseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateUserIdColumn extends Migration
      */
     public function up()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->unsignedInteger('user_id');
+        Schema::table('courses', function (Blueprint $table) {
+            $table->dropColumn(['start_date', 'end_date']);
         });
     }
 
@@ -25,8 +25,8 @@ class CreateUserIdColumn extends Migration
      */
     public function down()
     {
-        Schema::table('tutors', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+        Schema::table('courses', function (Blueprint $table) {
+            //
         });
     }
 }

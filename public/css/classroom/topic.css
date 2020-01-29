@@ -4,11 +4,50 @@
     float: left;
 }
 
+.add-btn{
+    float: right;
+    padding: 7px 15px;
+    background-color: #002347;
+    color: #ffffff;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
 hr{
     border: none;
     border-bottom: 1px solid #cccccc;
     margin: 10px 0 20px;
 }
+
+.course-list{
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+}
+
+.course-list .top-section{
+    padding: 5px;
+}
+
+.course-list .top-section .course-detail{
+    width: calc(1005 - 250px);
+    float: left;
+    padding-left: 20px;
+}
+
+.course-list .top-section .course-detail .course-name{
+    font-size: 18px;
+    font-weight: 500;
+    color: #282828;
+    margin: 0 0 0px;
+}
+
+
 .topic-content{
     padding-left: 40px;
     padding-right: 40px;
