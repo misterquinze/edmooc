@@ -163,6 +163,8 @@
     padding-left: 20px;
 }
 
+
+
 .right-section .course-list .top-section .course-detail .course-name{
     font-size: 20px;
     font-weight: 700;
@@ -170,7 +172,24 @@
     margin: 0 0 5px;
 }
 
-.right-section .course-list .top-section .course-detail .course-company{
+.right-section .course-list .top-section .col-left{
+    width: 50%;
+    float: left;
+    position: relative;
+    height: 129px;
+}
+
+.right-section .course-list .top-section .col-left .course-detail .label-container .label{
+    
+    background-color: #002347;
+    border: 1px solid #002347;
+    color: #fafafa;
+    font-size: 11px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.right-section .course-list .top-section .col-left .course-detail .course-company{
     font-size: 13px;
     font-weight: 500;
     color: #8e8e8e;
@@ -209,7 +228,7 @@
 .right-section .course-list .bottom-section .col-right .enroll-btn{
     float: right;
     border: 1px solid #002347;
-    background-color: #002347;;
+    background-color: #002347;
     color: #fdc632;
     padding: 5px 20px;
     border-radius: 4px;

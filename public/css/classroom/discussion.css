@@ -1,0 +1,222 @@
+.content{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.title{
+    margin: 5px 0 0;
+    font-weight: 600;
+    float: left;
+}
+
+.add-btn{
+    float: right;
+    padding: 7px 15px;
+    background-color: #002347;
+    color: #ffffff;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+hr{
+    border:none;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0 20px;
+}
+
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.content .course-list{
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+    padding: 20px;
+}
+
+.form-create{
+    border: 1px solid #cccccc;
+    display: none;
+}
+
+.form-create .form-header{
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    padding: 30px 0;
+    font-size: 22px;
+    font-weight: 700;
+    background-color: #002347;
+}
+
+.form-create .form-body{
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.form-create .form-body .input-container{
+    margin-bottom: 40px;
+}
+
+.form-create .form-body .input-container .input-title{
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.form-create .form-body .input-container .input-sub-title{
+    font-size: 14px;
+    font-weight: 600;
+    color: #8e8e8e;
+    margin: 0 0 10px;
+}
+
+.form-create .form-body .input-container .regular-input{
+    width: 500px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.form-create .form-body .input-container .regular-input#startDate,
+.form-create .form-body .input-container .regular-input#endDate{
+    cursor: pointer;
+}
+
+.form-create .form-body .input-container .regular-textarea{
+    width: 500px;
+    min-height: 150px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.form-create .form-body .input-container .regular-select{
+    width: 300px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* The container */
+.form-create .form-body .input-container .radio-container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default radio button */
+.form-create .form-body .input-container .radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+/* Create a custom radio button */
+.form-create .form-body .input-container .checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #b7b7b7;
+    border-radius: 50%;
+}
+  
+/* On mouse-over, add a grey background color */
+.form-create .form-body .input-container .radio-container:hover input ~ .checkmark {
+    background-color: #a3a3a3;
+}
+  
+/* When the radio button is checked, add a blue background */
+.form-create .form-body .input-container .radio-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+  
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.form-create .form-body .input-container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the indicator (dot/circle) when checked */
+.form-create .form-body .input-container .radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the indicator (dot/circle) */
+.form-create .form-body .input-container .radio-container .checkmark:after {
+    top: 6px;
+    left: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+.form-create .form-footer{
+    background-color: #e5e5e5;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.form-create .form-footer .cancel-btn{
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #002347;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.form-create .form-footer .submit-btn{
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #002347;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1023px){
+    .form-create .form-body .input-container .regular-input{
+        width: 100%;
+    }
+    
+    .form-create .form-body .input-container .regular-textarea{
+        width: 100%;
+    }
+    
+    .form-create .form-body .input-container .regular-select{
+        width: 100%;
+    }
+
+    .form-create .form-footer .cancel-btn{
+        width: calc(50% - 5px);
+        float: left;
+        margin-right: 10px;
+        text-align: center;
+    }
+    
+    .form-create .form-footer .submit-btn{
+        width: calc(50% - 5px);
+        float: left;
+        text-align: center;
+    }
+}

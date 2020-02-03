@@ -1,4 +1,4 @@
-@extends('layouts.template-student')
+@extends('layouts.template-tutor')
 
 @section('tab-title')
     <title>My Course - EdMOOC</title>
@@ -90,34 +90,36 @@
                                 </div>
                             </div>
                             <div class="right-section">
-                                @foreach ($courses as $course)    
-                                    <div class="course-list ">
-                                        <div class="top-section gridspan">
-                                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
-                                            <div class="course-detail">
-                                                <h3 class="course-name">{{ $course->name }}</h3>
-                                                <p class="category">Category: Education</p>
+                                    @foreach ($courses as $course)    
+                                        <div class="course-list ">
+                                            <div class="top-section gridspan">
+                                                    
+                                                <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                                                <div class="course-detail">
+                                                    <h3 class="course-name">{{ $course->name }}</h3> 
+                                                    <h5 class="course-description">{{$course->description}}
+                                                    </h5> 
+                                                </div>
+                                            </div>
+                                            <div class="bottom-section gridspan">
+                                                <div class="col-left">
+                                                    @if ($course->type == 'paid')
+                                                        <span class="price">Rp {{ number_format($course->price) }}</span>
+                                                    @else
+                                                        <span class="price">Gratis</span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-right">
+                                                    <span class="delete-btn" onclick="deleteCourse({{ $course->id }})">
+                                                        <i class="fa fa-trash"></i>
+                                                    </span>
+                                                    <a href="{{ URL('dashboard/course/'.$course->id.'/edit') }}" class="edit-btn">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                </div>
+                        
                                             </div>
                                         </div>
-                                        <div class="bottom-section gridspan">
-                                            <div class="col-left">
-                                                @if ($course->type == 'paid')
-                                                    <span class="price">Rp {{ number_format($course->price) }}</span>
-                                                @else
-                                                    <span class="price">Gratis</span>
-                                                @endif
-                                            </div>
-                                            <div class="col-right">
-                                                <span class="delete-btn" onclick="deleteCourse({{ $course->id }})">
-                                                    <i class="fa fa-trash"></i>
-                                                </span>
-                                                <a href="{{ URL('dashboard/course/'.$course->id.'/edit') }}" class="edit-btn">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                            </div>
-                    
-                                        </div>
-                                    </div>
                                     <form class="form-delete" id="delete-{{ $course->id }}" action="{{ URL('dashboard/course/'.$course->id.'/delete') }}"  method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete">
@@ -171,15 +173,40 @@
                                 <input type="number" name="price" class="regular-input" required>
                             </div>
                             
-                            <div class="input-container">
+                            <div id="category" class="input-container">
                                 <h4 class="input-title">Kategori Kursus</h4>
                                 <p class="input-sub-title">Tentukan kategori kursus</p>
-                                <select name="category" class="regular-select">
+                                {{--<select name="category" class="regular-select">
                                     <option>Pilih kategori</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
+                                    @endforeach 
+                                </select>--}}
+                                @foreach ($categories as $category)
+                                <label class="radio-container">
+                                        {{$category->name}}
+                                <input type="radio" name="category" value="{{$category->id}}" >
+                                        <span class="checkmark"></span>
+                                </label>
+                                @endforeach
+                            </div>
+
+                            <div class="input-container">
+                                <h4 class="input-title">Tutor Kursus</h4>
+                                <p class="input-sub-title">Tentukan Tutor kursus</p>
+                                {{--<select name="tutor" class="regular-select">
+                                    <option>Pilih Tutor</option>
+                                        @foreach ($tutors as $tutor)
+                                            <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
+                                        @endforeach   
+                                </select>--}}
+                                @foreach ($tutors as $tutor)
+                                    <label class="radio-container">
+                                        {{$tutor->name}}
+                                        <input type="radio" name="category" value="{{$tutor->id}}" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                @endforeach
                             </div>
 
                             <div class="input-container">
@@ -229,9 +256,11 @@
                     }
                 }
             }
-        });
-    </script>
 
+        });
+      
+
+    </script>
     <script>
         $("#filterDate").daterangepicker()
         $("#startDate").datepicker()

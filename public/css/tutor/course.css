@@ -10,8 +10,14 @@
 
 .content-header>h1{
     font-size: 20px;
-    color: #02b3e4;
+    color: #002347;
     text-transform: uppercase;
+}
+
+hr{
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0 20px;
 }
 
 .content{
@@ -39,14 +45,120 @@
 
 .content .course-list{
     width: 100%;
-    padding: 20px;
     background-color: #ffffff;
-    border-radius: 6px;
-    box-shadow: 0 0 8px 0 rgba(17,22,26,.16), 0 4px 8px 0 rgba(17,22,26,.08), 0 8px 16px 0 rgba(17,22,26,.08);
-    margin-top: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
 }
 
-.content .course-list .course-name{
-    font-weight: 600;
+.content .course-list .top-section .dropdown{
+    float:right;
+    padding-right: 30px;
 }
+
+.content .course-list .top-section .dropdown .dropdown-toggle .fa .fa-ellipsis-v{
+    float:right;
+    position: absolute;
+    
+}
+
+
+
+.content .course-list .top-section{
+    padding: 20px;
+    
+}
+
+.content .course-list .top-section .course-image{
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;    
+    float: left;
+    border-radius: 4px;
+}
+
+.content .course-list .top-section .course-detail{
+    width: calc(1005 - 250px);
+    float: left;
+    padding-left: 20px;
+
+}
+
+.content .course-list .top-section .course-detail .course-name{
+    font-size: 20px;
+    font-weight: 700;
+    color: #282828;
+    margin: 0 0 5px;
+}
+
+.content .course-list .top-section .col-left{
+    width: 400px;
+    float: left;
+    position: relative;
+    height: 129px;
+}
+.content .course-list .top-section .col-right{
+    width: 150px;
+    float: right;
+    position: relative;
+    height: 129px;
+}
+
+
+
+.content .course-list .col-right .proceed-btn .nav-link{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 10px;
+    background-color: #193859;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 4px;
+
+    
+}
+
+.content .course-list .bottom-section{
+    border-top: 1px solid #cccccc;
+    padding: 10px 20px;
+}
+
+.content .course-list .bottom-section .col-left{
+    width: 50%;
+    float: left;
+    text-align: left;
+    padding: 5px 0;
+}
+
+.content .course-list .bottom-section .col-left .company{
+    color: #002347;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.content .course-list .bottom-section .col-right{
+    width: 50%;
+    float: left;
+    
+}
+
+.content .course-list .bottom-section .col-right .unenroll-btn{
+    float: right;
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #fdc632;
+    padding: 5px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+
+
+
+
 

@@ -38,7 +38,7 @@
             <template>
                 <div class="tab-menu">
                     <ul class="gridspan">
-                        <li @click.prevent="changeType('company')" :class="{'is-active': type=='company'}">Company</li>
+                        <li @click.prevent="changeType('company')" :class="{'is-active': type=='company'}">Institution</li>
                         <li @click.prevent="changeType('student')" :class="{'is-active': type=='student'}">Student</li>
                         <li @click.prevent="changeType('tutor')" :class="{'is-active': type=='tutor'}">Tutor</li>
                     </ul>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div v-if="type == 'company'" class="register-box">
-                    <h2 class="title">Company</h2>
+                    <h2 class="title">Institution</h2>
                     <p class="sub-title">You can make more than one course</p>
         
                     <div class="form">
@@ -84,7 +84,7 @@
                 </div>
                 <div v-if="type == 'tutor'" class="register-box">
                     <h2 class="title">Tutor</h2>
-                    <p class="sub-title">You can become a teacher in more than one company</p>
+                    <p class="sub-title">You can become a teacher in more than one institution</p>
         
                     <div class="form">
                         <form action="{{ route('register') }}" method="POST">
@@ -96,12 +96,23 @@
                             <input type="password" name="password" placeholder="Password">
                             <input type="text" name="address" placeholder="Address">
                             <input type="tel" name="phone" placeholder="Phone">
+                           
+                            
+                            <select name="category" class="regular-select">
+                                <option>Pilih Keahlian</option>
+                                @foreach ($category as $cat)
+                                    @if ($cat->id == $cat->name)
+                                        <option value="{{ $cat->id }}" selected>{{ $cat->name }}</option>
+                                    @else
+                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                             
                             <button type="submit" class="submit-button">SIGN UP</button>
                         </form>
                     </div>
                 </div>
-                
             </template>
         </div>
     </div>

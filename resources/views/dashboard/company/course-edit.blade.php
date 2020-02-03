@@ -1,4 +1,4 @@
-@extends('layouts.template-student')
+@extends('layouts.template-tutor')
 
 @section('tab-title')
     <title>My Course - EdMOOC</title>
@@ -73,6 +73,17 @@
                                         @endif
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div class="input-container">
+                                    <h4 class="input-title">Tutor Kursus</h4>
+                                    <p class="input-sub-title">Tentukan Tutor kursus</p>
+                                    <select name="tutor" class="regular-select">
+                                        <option>Pilih Tutor</option>
+                                        @foreach ($tutors as $tutor)
+                                            <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
+                                        @endforeach
+                                    </select>
                             </div>
 
                             <div class="input-container">

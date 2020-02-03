@@ -1,0 +1,437 @@
+.swal-button--confirm{
+	background-color: #83305a;
+}
+
+.swal-footer,
+.swal-text{
+	text-align: center;
+}
+
+
+
+
+.title{
+    margin: 5px 0 0;
+    font-weight: 600;
+    float: left;
+}
+
+.add-btn{
+    float: right;
+    padding: 7px 15px;
+    background-color: #002347;
+    color: #ffffff;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+hr{
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0 20px;
+}
+
+ .course-content{
+    padding: 50px;
+    background-color: #fafafa;
+    border: 1px solid #cccccc;
+   
+} 
+
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.right-section{
+    width: 250px;
+    float: right;
+}
+
+.right-section .filter-title{
+    font-size: 14px;
+    color: #7d97ad;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.right-section .filter-box{
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 10px 0 rgba(46,61,73,.05);
+}
+
+.right-section .filter-box .filter-header{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cccccc;
+    border-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.right-section .filter-box .filter-body{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #cccccc;
+}
+
+.filter-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default checkbox */
+.filter-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+}
+  
+/* On mouse-over, add a grey background color */
+.filter-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the checkbox is checked, add a blue background */
+.filter-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the checkmark when checked */
+.filter-container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.filter-container .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.input{
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: hsla(240,2%,57%,.1);
+}
+
+.left-section{
+    width: calc(100% - 280px);
+    float: left;
+    margin-left: 30px;
+}
+
+.left-section .course-list{
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+}
+
+.left-section .course-list .top-section{
+    width: 100%;
+    padding: 20px;
+   
+}
+
+
+.left-section .course-list .top-section .course-image{
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;    
+    float: left;
+    border-radius: 4px;
+}
+
+.left-section .course-list .top-section .course-detail{
+    width: calc(1005 - 250px);
+    float: left;
+    padding-left: 20px;
+}
+
+.left-section .course-list .top-section .course-detail .course-name{
+    font-size: 20px;
+    font-weight: 700;
+    color: #282828;
+    margin: 0 0 5px;
+}
+
+.left-section .course-list .top-section .course-detail .course-company{
+    font-size: 13px;
+    font-weight: 500;
+    color: #8e8e8e;
+    margin: 0;
+}
+
+.left-section .course-list .top-section .course-detail .category{
+    font-size: 14px;
+    color: #8e8e8e;
+    margin: 0;
+}
+
+.left-section .course-list .bottom-section{
+    border-top: 1px solid #cccccc;
+    padding: 10px 20px;
+}
+
+.left-section .course-list .bottom-section .col-left{
+    width: 50%;
+    float: left;
+    text-align: left;
+    padding: 5px 0;
+}
+
+.left-section .course-list .bottom-section .col-left .price{
+    color: #002347;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.left-section .course-list .bottom-section .col-right{
+    width: 50%;
+    float: left;
+}
+
+.left-section .course-list .bottom-section .col-right .edit-btn{
+    float: right;
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.left-section .course-list .bottom-section .col-right .delete-btn{
+    float: right;
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-create{
+    border: 1px solid #cccccc;
+    display: none;
+}
+
+.form-create .form-header{
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    padding: 30px 0;
+    font-size: 22px;
+    font-weight: 700;
+    background-color: #002347;
+}
+
+.form-create .form-body{
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.form-create .form-body .input-container{
+    margin-bottom: 40px;
+}
+
+.form-create .form-body .input-container .input-title{
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.form-create .form-body .input-container .input-sub-title{
+    font-size: 14px;
+    font-weight: 600;
+    color: #8e8e8e;
+    margin: 0 0 10px;
+}
+
+.form-create .form-body .input-container .regular-input{
+    width: 500px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.form-create .form-body .input-container .regular-input#startDate,
+.form-create .form-body .input-container .regular-input#endDate{
+    cursor: pointer;
+}
+
+.form-create .form-body .input-container .regular-textarea{
+    width: 500px;
+    min-height: 150px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.form-create .form-body .input-container .regular-select{
+    width: 300px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* The container */
+.form-create .form-body .input-container .radio-container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default radio button */
+.form-create .form-body .input-container .radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+/* Create a custom radio button */
+.form-create .form-body .input-container .checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #b7b7b7;
+    border-radius: 50%;
+}
+  
+/* On mouse-over, add a grey background color */
+.form-create .form-body .input-container .radio-container:hover input ~ .checkmark {
+    background-color: #a3a3a3;
+}
+  
+/* When the radio button is checked, add a blue background */
+.form-create .form-body .input-container .radio-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+  
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.form-create .form-body .input-container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the indicator (dot/circle) when checked */
+.form-create .form-body .input-container .radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the indicator (dot/circle) */
+.form-create .form-body .input-container .radio-container .checkmark:after {
+    top: 6px;
+    left: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+.form-create .form-footer{
+    background-color: #e5e5e5;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.form-create .form-footer .cancel-btn{
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #002347;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.form-create .form-footer .submit-btn{
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #002347;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1023px){
+    .form-create .form-body .input-container .regular-input{
+        width: 100%;
+    }
+    
+    .form-create .form-body .input-container .regular-textarea{
+        width: 100%;
+    }
+    
+    .form-create .form-body .input-container .regular-select{
+        width: 100%;
+    }
+
+    .form-create .form-footer .cancel-btn{
+        width: calc(50% - 5px);
+        float: left;
+        margin-right: 10px;
+        text-align: center;
+    }
+    
+    .form-create .form-footer .submit-btn{
+        width: calc(50% - 5px);
+        float: left;
+        text-align: center;
+    }
+}
+

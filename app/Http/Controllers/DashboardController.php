@@ -2,26 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Enrollment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
-{
-    public function getDashboard(){
+{   
+    /**  
+     * Get dashboard page.
+     *
+     * @return mixed
+     * 
+     * 
+    */
+    public function getDashboard()
+    {
         $userLogin = Auth::user();
-
-        return view('dashboard/home',[
-            'userLogin' => $userLogin
+        
+        $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
+        
+        //dd($enrollment);
+        return view('dashboard/home', [
+            'userLogin'=>$userLogin,
+            'enrollment'=>$enrollment
         ]);
     }
 
-    public function getSettings(){
+    /* to get setting page
+    */
+    public function getSettings() 
+    {
         $userLogin = Auth::user();
 
-        return view('dashboard/settings',[
-            'userLogin' => $userLogin
-        ]);
+        return view('dashboard/settings', ['userLogin'=>$userLogin]);
     }
 
     public function updateProfile(Request $request){

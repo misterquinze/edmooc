@@ -28,8 +28,23 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getUrlAttribute()
+    // public function getUrlAttribute()
+    // {
+    //     return Storage::url("profile-photo}/{$this->photo}");
+    // }
+
+    public function enrollement()
     {
-        return Storage::url("profile-photo}/{$this->photo}");
+        return $this->hasMany('App\Enrollment');
     }
+    public function userCourse()
+    {
+        return $this->hasMany('App\UserCourse');
+    }
+
+    public function discussion()
+    {
+        return $this->hasMany('App\discussion');
+    }
+
 }

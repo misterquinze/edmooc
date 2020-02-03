@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Category;
 use App\User;
 use App\Company;
+use App\Tutor;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -67,7 +70,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $statusValidator = $this->validator($request->all())->validate();
-        // dd($statusValidator);
+        //dd($statusValidator);
 
         $user = $this->create($request->all());
         
@@ -91,31 +94,51 @@ class RegisterController extends Controller
         $user->address = $data['address'];
         if($data['type'] == 'student'){
             $user->role = 'student';
+
         }else if($data['type'] == 'company'){
             $user->role = 'company';
+            
         }else if($data['type'] == 'tutor'){
             $user->role = 'tutor';
         }
         $user->save();
 
-        if($data['type'] == 'company'){
+        
+        if($data['type'] == 'tutor'){
+            $tutor = Tutor::create([
+                'user_id' => $user->id,
+                'name' => $data['name'],
+                'address' => $data['address'],
+                'phone' => $data['phone'],
+                'category_id' => $data['category']
+            ]);
+            
+        }
+        else{
             $company = Company::create([
                 'user_id' => $user->id,
                 'name' => $data['name'],
                 'address' => $data['address'],
                 'phone' => $data['phone']
             ]);
+            
         }
+    
     }
 
     public function showRegistrationForm(){
         $userLogin = null;
+        $category = Category::all();
+        $tutor = Tutor::all();
         if(Auth::user()){
             $userLogin = Auth::user();
+          
         }
 
         return view('auth/register',[
-            'userLogin' => $userLogin
+            'userLogin' => $userLogin,
+            'category' => $category,
+            'tutor' => $tutor,
         ]);
     }
 }

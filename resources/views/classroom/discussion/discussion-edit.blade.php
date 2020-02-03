@@ -1,10 +1,11 @@
-@extends('layouts.template-student')
+extends('layouts.template-student')
 
 @section('tab-title')
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Edit Diskusi</title>
 @endsection
 
 @section('menu')
+
     <li><a href="{{ URL('/classroom/1') }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
     <li class="treeview">
@@ -34,20 +35,33 @@
 
     <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
 @endsection
-
 @section('content')
-    <section class="content-header">
-        <h1>
-            Dashboard
-            <small>Control panel</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
-        </ol>
-    </section>
+<div id="form-container" class="form-create">
+        <div class="form-header">Buat Diskusi</div>
+      
+        <form action="{{action('DiscussionController@store', ['discId' => $discussions->id])}}" method="POST">
+        
+            <div class="form-body">
+                {{ csrf_field() }}
 
-    <section class="content">
+                <div class="input-container">
+                    <h4 class="input-title">Judul Disukusi</h4>
+                    <p class="input-sub-title">Beri judul diskusi anda sejelas mungkin</p>
+                    <input type="text" name="title" class="regular-input" required>
+                </div>
 
-    </section>
+                <div class="input-container">
+                    <h4 class="input-title">Isi Diskusi</h4>
+                    <p class="input-sub-title">Jelaskan diskusi yang ingin anda bahas sejelas mungkin</p>
+                    <textarea name="content" class="regular-textarea" required></textarea>
+                </div>
+
+
+            </div>
+            <div class="form-footer gridspan">
+                <span class="cancel-btn" @click.prevent="changeType('display')">Batal</span>
+                <button type="submit" class="submit-btn">Kirim</button>
+            </div>
+        </form>
+</div>
 @endsection

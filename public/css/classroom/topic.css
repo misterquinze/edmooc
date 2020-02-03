@@ -1,12 +1,353 @@
-.topic-video{
+.title{
+    margin: 5px 0 0;
+    font-weight: 600;
+    float: left;
+}
+
+hr{
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0 20px;
+}
+.topic-content{
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #fafafa;
+    border: 1px solid #cccccc;
+   
+} 
+
+.topic-content .topic-title{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.topic-content .topic-video{
     width: 100%;
-    height: 500px;
+    height: 300px;
 }
 
-.content{
-    margin-top: 30px;
-}
-
-.explanation{
+.topic-content .explanation{
     margin-top: 20px;
 }
+
+.register-content{
+    padding: 50px;
+    background-color: #fafafa;
+    
+}
+
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.tab-menu{
+    margin-bottom: 30px;
+}
+
+.tab-menu ul{
+    padding: 0;
+    margin: 0;
+    border-radius: 4px;
+
+}
+
+.tab-menu ul li{
+    padding: 10px 0;
+    text-align: left;
+    margin: 0;
+    display: inline-block;
+    width: calc(60% / 3);
+    font-weight: 600;
+    cursor: pointer;
+    float: left;
+    color: #002347;
+  
+    
+}
+
+.tab-menu ul li::after{
+    border-bottom: solid 3px  #002347;
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+   
+}
+
+.tab-menu ul li.is-active,
+.tab-menu ul li:hover::after{
+    
+    /*background-color: #002347; */
+    transform: scaleX(1);
+    border-bottom: solid 3px  #002347;
+    color: #002347;
+}
+
+.register-box{
+    width: 1000px;
+    height: auto;
+    padding: 50px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin: 0 auto;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.register-box .title{
+    text-align: center;
+}
+
+.register-box .sub-title{
+    margin-top: 20px;
+    text-align: center;
+    width: 350px;
+    margin: 0 auto 50px;
+}
+
+.swal-button--confirm{
+	background-color: #83305a;
+}
+
+.swal-footer,
+.swal-text{
+	text-align: center;
+}
+
+hr{
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0 20px;
+}
+
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.input{
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: hsla(240,2%,57%,.1);
+}
+
+.left-section{
+    width: calc(100% - 280px);
+    float: left;
+    margin-right: 20px;
+}
+
+.left-section .course-list{
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+}
+
+.left-section .course-list .top-section{
+    width: 100%;
+    padding: 20px;
+   
+}
+.left-section .course-list .middle-section {
+    float: left;
+    width: 100%;
+}
+
+ .add-content{
+    
+    padding: 7px 15px;
+    background-color: #002347;
+    color: #ffffff;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-create{
+    border: 1px solid #cccccc;
+    display: none;
+}
+
+.form-create .form-header{
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    padding: 30px 0;
+    font-size: 22px;
+    font-weight: 700;
+    background-color: #002347;
+}
+
+.form-create .form-body{
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.form-create .form-body .input-container{
+    margin-bottom: 40px;
+}
+
+.form-create .form-body .input-container .input-title{
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.form-create .form-body .input-container .input-sub-title{
+    font-size: 14px;
+    font-weight: 600;
+    color: #8e8e8e;
+    margin: 0 0 10px;
+}
+
+.form-create .form-body .input-container .regular-input{
+    width: 500px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.form-create .form-body .input-container .regular-input#startDate,
+.form-create .form-body .input-container .regular-input#endDate{
+    cursor: pointer;
+}
+
+.form-create .form-body .input-container .regular-textarea{
+    width: 500px;
+    min-height: 150px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.form-create .form-body .input-container .regular-select{
+    width: 300px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* The container */
+.form-create .form-body .input-container .radio-container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default radio button */
+.form-create .form-body .input-container .radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+/* Create a custom radio button */
+.form-create .form-body .input-container .checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #b7b7b7;
+    border-radius: 50%;
+}
+  
+/* On mouse-over, add a grey background color */
+.form-create .form-body .input-container .radio-container:hover input ~ .checkmark {
+    background-color: #a3a3a3;
+}
+  
+/* When the radio button is checked, add a blue background */
+.form-create .form-body .input-container .radio-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+  
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.form-create .form-body .input-container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the indicator (dot/circle) when checked */
+.form-create .form-body .input-container .radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the indicator (dot/circle) */
+.form-create .form-body .input-container .radio-container .checkmark:after {
+    top: 6px;
+    left: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+.form-create .form-footer{
+    background-color: #e5e5e5;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.form-create .form-footer .cancel-btn{
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #002347;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.form-create .form-footer .submit-btn{
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #002347;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1023px){
+    .form-create .form-body .input-container .regular-input{
+        width: 100%;
+    }
+    
+    .form-create .form-body .input-container .regular-textarea{
+        width: 100%;
+    }
+    
+    .form-create .form-body .input-container .regular-select{
+        width: 100%;
+    }
+
+    .form-create .form-footer .cancel-btn{
+        width: calc(50% - 5px);
+        float: left;
+        margin-right: 10px;
+        text-align: center;
+    }
+    
+    .form-create .form-footer .submit-btn{
+        width: calc(50% - 5px);
+        float: left;
+        text-align: center;
+    }
+}
+

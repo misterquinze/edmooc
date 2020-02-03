@@ -2,10 +2,11 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>EduMOOC</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        @yield('tab-title')
         
-        <link rel="icon" href="{{ URL('template/2/img/favicon.png') }}" type="image/png') }}" />
+        <link rel="icon" href="{{ URL('template/2/img/favicon.png') }}" type="image/png" />
+        {{--<link rel="stylesheet" href="{{ mix('css/all.css') }}" />--}}
         <link rel="stylesheet" href="{{ URL('template/2/css/bootstrap.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/flaticon.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/themify-icons.css') }}" />
@@ -13,6 +14,8 @@
         <link rel="stylesheet" href="{{ URL('template/2/vendors/nice-select/css/nice-select.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/style.css') }}" />
         <link rel="stylesheet" href="{{ URL('css/template-2.css') }}" />
+
+       
     </head>
 
     <body>
@@ -171,7 +174,7 @@
                 </div>
             </div>
         </footer>
-
+        
         <script src="{{ URL('template/2/js/jquery-3.2.1.min.js') }}"></script>
         <script src="{{ URL('template/2/js/popper.js') }}"></script>
         <script src="{{ URL('template/2/js/bootstrap.min.js') }}"></script>
@@ -183,5 +186,6 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
         <script src="{{ URL('template/2/js/gmaps.min.js') }}"></script>
         <script src="{{ URL('template/2/js/theme.js') }}"></script>
+        {{--<script src="{{ mix ('js/all.js')}}"></script>--}}
     </body>
 </html>

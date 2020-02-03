@@ -19,30 +19,52 @@
 
     <section class="content-header">
         <h1>
-            Dashboard
+            Favorit Saya
         </h1>
     </section>
 
     <section class="content">
-        <h3 class="title">KURSUS TERBARU</h3>
-
+        @if ($favorite->isEmpty())
+            @if (session('course'))
+                <div class="card-body">
+                    <h2 class="alert alert-info">
+                        {{ session('course') }}
+                    </h2>
+                </div>
+            @endif
+        @else
+        @foreach ($courses as $course)
         <div class="course-list">
-            <div class="gridspan">
+            <div class="top-section gridspan">
+                <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                 <div class="col-left">
-                    <div class="label-container">
-                        <span class="label">Company name</span>
+                    <div class="course-detail">
+                        <h3 class="course-name">{{ $course->name }}</h3> 
+                        <h5 class="course-description">{{$course->description}}
+                        </h5>
                     </div>
-                    <h4 class="course-name">Android Basics: User Interface</h4>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quibusdam quam incidunt magni ullam, assumenda eveniet a mollitia velit earum accusamus veritatis placeat natus quod. Officiis provident necessitatibus adipisci rem.</p>
-                </div>
+                </div>                     
                 <div class="col-right">
+                    @if (Auth::check())
+                        <div class="love-btn">
+                            <favorite
+                                :post={{ $course->id }}
+                                :favorited={{ $course->favorited() ? 'true' : 'false' }}
+                                ></favorite>
+                        </div>
+                    @endif
                     <div class="proceed-btn">
-                        Lanjutkan
-                        <span class="fa fa-arrow-right"></span>
+                        <a class="nav-link" href="{{URL ('classroom/'.$course->id.'/overview')}}">Materi</a>
                     </div>
-                </div>
+                    <div class="unenroll-btn">
+                        <a class="enroll-btn" type="button" href="{{route('unenroll' ,[$course->id] )}}">Unenroll
+                        </a> 
+                    </div>    
+                </div> 
             </div>
         </div>
+        @endforeach
+        @endif
 
     </section>
 @endsection
