@@ -1,13 +1,13 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    @foreach($topics as $topic)
-    <title>{{$topic->name}}</title>
+    @foreach($contents as $cont)
+    <title>{{$cont->title}}</title>
     @endforeach
 @endsection
 
 @section('menu')
-@foreach($topics as $topic)
+
     {{--<li class="active"><a href="{{ URL('classroom/'.$topic->course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>--}}
     
     <li class="treeview active">
@@ -22,10 +22,10 @@
             {{--<li class="active"><a href="{{ URL('classroom/1/topic/1') }}"><i class="fa fa-circle-o"></i> 1: Sistem Informasi</a></li>
             <li><a href="{{ URL('classroom/1/topic/2') }}"><i class="fa fa-circle-o"></i> 2: Rekayasa Perangkat Lunak</a></li>
             <li><a href="{{ URL('classroom/1/topic/3') }}"><i class="fa fa-circle-o"></i> 3: Web Development</a></li>
-            <li><a href="{{ URL('classroom/1/topic/4') }}"><i class="fa fa-circle-o"></i> 4: Basisdata</a></li>--}}
+            <li><a href="{{ URL('classroom/1/topic/4') }}"><i class="fa fa-circle-o"></i> 4: Basisdata</a></li>-
             @foreach($topics as $topic)
             <li><a href="{{ URL('classroom/'.$topic->id.'/topic') }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
-            @endforeach
+            @endforeach --}}
         </ul>
     </li>
 
@@ -44,7 +44,7 @@
 @section('content')
 
     <link rel="stylesheet" href="{{ URL('css/classroom/topic.css') }}">
-@foreach($topics as $topic)
+@foreach($contents as $cont)
     <section class="content-header">
     
     </section>
@@ -62,13 +62,13 @@
             @else    
             <div class="topic-title">
                 <h2>
-                {{$topic->name}}
+                {{$cont->title}}
                 </h2>
             </div>
             <div class="topic-video">
                     <iframe 
                     class="topic-video"
-                    src="https://www.youtube.com/embed/9xwazD5SyVg" 
+                    src="{{$cont->source}}" 
                     frameborder="1" 
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" a
                     llowfullscreen>
@@ -82,8 +82,7 @@
             @endif
         </div>
         <div>
-        <a href="{{URL ('classroom/'.$topic->id.'/topic/content')}}">
-        tambah konten</a>
+      
         </div>
         
 
@@ -92,5 +91,5 @@
         
     </section>
 @endforeach
-@endforeach
+
 @endsection

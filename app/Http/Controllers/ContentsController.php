@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Tutor;
 use App\Content;
 use App\Topic;
+use App\Course;
 use Illuminate\Http\Request;
 
 class ContentsController extends Controller
@@ -20,8 +21,8 @@ class ContentsController extends Controller
        
         $contents = Content::findOrFail($contentId);
         $contents = Content::where('id', $contents->id)->get();
-        
-        return view('content.index', compact('userLogin', 'contents'));
+        //$topics = Course::findOrFail($topicId)->topics()->get();
+        return view('classroom/topic/content/index', compact('userLogin', 'contents'));
     }
 
     /**

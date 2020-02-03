@@ -96,15 +96,15 @@
                             <input type="password" name="password" placeholder="Password">
                             <input type="text" name="address" placeholder="Address">
                             <input type="tel" name="phone" placeholder="Phone">
-                           
+                            <input type="text" name="description" placeholder="Explained your expertise">
                             
                             <select name="category" class="regular-select">
-                                <option>Pilih Keahlian</option>
-                                @foreach ($category as $cat)
-                                    @if ($cat->id == $cat->name)
-                                        <option value="{{ $cat->id }}" selected>{{ $cat->name }}</option>
+                                <option>Pilih Institusi</option>
+                                @foreach ($company as $comp)
+                                    @if ($comp->id == $comp->name)
+                                        <option value="{{ $comp->id }}" selected>{{ $comp->name }}</option>
                                     @else
-                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                        <option value="{{ $comp->id }}">{{ $comp->name }}</option>
                                     @endif
                                 @endforeach
                             </select>

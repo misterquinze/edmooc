@@ -1,13 +1,13 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    @foreach($topics as $topic)
-    <title>{{$topic->name}}</title>
-    @endforeach
+    
+    <title>{{$topics->name}}</title>
+    
 @endsection
 
 @section('menu')
-@foreach($topics as $topic)
+
     {{--<li class="active"><a href="{{ URL('classroom/'.$topic->course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>--}}
     
     <li class="treeview active">
@@ -22,10 +22,10 @@
             {{--<li class="active"><a href="{{ URL('classroom/1/topic/1') }}"><i class="fa fa-circle-o"></i> 1: Sistem Informasi</a></li>
             <li><a href="{{ URL('classroom/1/topic/2') }}"><i class="fa fa-circle-o"></i> 2: Rekayasa Perangkat Lunak</a></li>
             <li><a href="{{ URL('classroom/1/topic/3') }}"><i class="fa fa-circle-o"></i> 3: Web Development</a></li>
-            <li><a href="{{ URL('classroom/1/topic/4') }}"><i class="fa fa-circle-o"></i> 4: Basisdata</a></li>--}}
-            @foreach($topics as $topic)
-            <li><a href="{{ URL('classroom/'.$topic->id.'/topic') }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
-            @endforeach
+            <li><a href="{{ URL('classroom/1/topic/4') }}"><i class="fa fa-circle-o"></i> 4: Basisdata</a></li>
+            @foreach($tops as $top)
+            <li><a href="{{ URL('classroom/'.$top->id.'/topic') }}"><i class="fa fa-circle-o"></i>{{$top->name}}</a></li>
+            @endforeach--}}
         </ul>
     </li>
 
@@ -51,92 +51,65 @@
 
     <section class="content">
         <h5>
-            Materi Topik {{$topic->name}}
+            Materi Topik {{$topics->name}}
         </h5>
-        <hr>
-        <div id="topic">
-            <template>
-                <div id="display-container">
-                @if(auth()->user()->role == 'tutor')
-                    <div class="gridpan">
-                        <a href="{{route('content.create', [$topic->id])}}">
-                            <span class="add-btn">Tambah Konten</span>
-                        </a>
-                    </div>
-                    <div class="topic-content">
-                        @if ($contents->isEmpty())
-                            @if (session('content'))
-                                <div class="card-body">
-                                    <h2 class="alert alert-info">
-                                        {{ session('content') }}
-                                    </h2>
-                                </div>
-                            @endif
-                        @else    
-                        <div class="topic-title">
-                            <h2>
-                                {{$topic->name}}
-                            </h2>
-                        </div>
-                        <div class="topic-video">
-                            @foreach($contents as $content)
-                            <iframe 
-                                class="topic-video"
-                                src="{{$content->src}}" 
-                                frameborder="1" 
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" a
-                                llowfullscreen>
-                            </iframe>
-                            @endforeach
-                        </div>
-                        <div class="explanation">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corrupti asperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
-                            </p>
-                        </div>
-                        @endif
-                    </div>
-                @else
-                <div class="topic-content">
-                        @if ($contents->isEmpty())
-                            @if (session('content'))
-                                <div class="card-body">
-                                    <h2 class="alert alert-info">
-                                        {{ session('content') }}
-                                    </h2>
-                                </div>
-                            @endif
-                        @else    
-                        <div class="topic-title">
-                            <h2>
-                                {{$topic->name}}
-                            </h2>
-                        </div>
-                        <div class="topic-video">
-                            @foreach($contents as $content)
-                            <iframe 
-                                class="topic-video"
-                                src="{{$content->src}}" 
-                                frameborder="1" 
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" a
-                                llowfullscreen>
-                            </iframe>
-                            @endforeach
-                        </div>
-                        <div class="explanation">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corrupti asperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
-                            </p>
-                        </div>
-                        @endif
-                    </div>
-                @endif
-                </div>
-                
-            </template>
-        </div>
+    @if(auth()->user()->role == 'tutor')
+
+            <a href="{{route('content.create', [$topics->id])}}">
+                <span class="add-btn">Tambah Konten</span>
+            </a>
         
+        <hr>
+        @if ($contents->isEmpty())
+            @if (session('content'))
+                <div class="card-body">
+                    <h2 class="alert alert-info">
+                        {{ session('content') }}
+                    </h2>
+                </div>
+            @endif
+        @else 
+        @foreach($contents as $cont)     
+        <div class="course-list">
+            <div class="top-section gridspan">
+                <div class="col-left">
+                    <div class="course-detail">
+                    <a href="{{route('content.index', [$cont->id])}}">
+                        <h3 class="course-name">{{$cont->title}}</h3>
+                    </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach 
+        @endif   
+    @else
+        @if ($contents->isEmpty())
+            @if (session('content'))
+                <div class="card-body">
+                    <h2 class="alert alert-info">
+                        {{ session('content') }}
+                    </h2>
+                </div>
+            @endif
+        @else   
+        @foreach($contents as $cont)
+        <div class="course-list">
+            <div class="top-section gridspan">
+                <div class="col-left">
+                    <div class="course-detail">
+                        <h3 class="course-name">{{$cont->title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        @endif
+    @endif
     </section>
 
-@endforeach
+
     <script src="{{ URL('js/vue.js') }}"></script>
     <script>
         new Vue({

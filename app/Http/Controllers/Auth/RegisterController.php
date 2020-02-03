@@ -107,10 +107,11 @@ class RegisterController extends Controller
         if($data['type'] == 'tutor'){
             $tutor = Tutor::create([
                 'user_id' => $user->id,
+                'company_id'=> $company->id,
                 'name' => $data['name'],
                 'address' => $data['address'],
                 'phone' => $data['phone'],
-                'category_id' => $data['category']
+                'description' => $data['description']
             ]);
             
         }
@@ -128,7 +129,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm(){
         $userLogin = null;
-        $category = Category::all();
+        $company = Company::all();
         $tutor = Tutor::all();
         if(Auth::user()){
             $userLogin = Auth::user();
@@ -137,7 +138,7 @@ class RegisterController extends Controller
 
         return view('auth/register',[
             'userLogin' => $userLogin,
-            'category' => $category,
+            'company' => $company,
             'tutor' => $tutor,
         ]);
     }

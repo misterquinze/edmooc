@@ -86,7 +86,7 @@
                                     </select>
                             </div>
 
-                            <div class="input-container">
+                            {{--<div class="input-container">
                                 <h4 class="input-title">Tanggal Mulai</h4>
                                 <p class="input-sub-title">Tentukan tanggal mulai kursus</p>
                                 <input type="text" name="startDate" class="regular-input" id="startDate" value="{{ $course->start_date }}" placeholder="Choose Date" required>
@@ -96,7 +96,7 @@
                                 <h4 class="input-title">Tanggal Selesai</h4>
                                 <p class="input-sub-title">Tentukan tanggal selesai kursus</p>
                                 <input type="text" name="endDate" class="regular-input" id="endDate" value="{{ $course->end_date }}" placeholder="Choose Date" required>
-                            </div>
+                            </div>--}}
     
                         </div>
                         <div class="form-footer gridspan">

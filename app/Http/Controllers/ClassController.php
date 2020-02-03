@@ -6,6 +6,7 @@ use App\Content;
 use App\Topic;
 use App\Course;
 use App\Tutor;
+;
 use App\Discussion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -36,16 +37,20 @@ class ClassController extends Controller
           compact('userLogin', 'courses', 'topics', 'discussions') );
      }
    
-   public function getTopic($topicId){
+   public function getTopic(Topic $topics,  $topicId){
           $userLogin = Auth::user();
           //$courses = Course::findOrFail($id)->topics()->get();
+         
+          //$tops = Topic::findOrFail($topicId);
+          //$tops = Topic::where('id', $tops->id)->get();
           $topics = Topic::findOrFail($topicId);
-          $topics = Topic::where('id', $topics->id)->get();
-          //$courses = Topic::findOrFail($id)->courses()->get();
-          //$topics = Topic::findOrFail($topicId)->get();
-          $contents = Content::all();
+          $topics = Topic::where('id', $topics->id)->first();
+          //$contents = Topic::findOrFail($topicId)->contents()->get();
+          //$contents = Content::all();
+          $contents = Content::where('topic_id', $topics->id)->get();
           //dd($courses);
           //dd($contents);
+          //dd($topics);
 
           if ($contents->isEmpty()) {
                \Session::flash('content', 'Dont have content');
