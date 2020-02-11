@@ -32,6 +32,7 @@ class ContentsController extends Controller
      */
     public function create($topicId)
     {   
+        // dd($topicId);
         $userLogin = Auth::user();
        
         $topics = Topic::where('id', $topicId)->get();
@@ -90,8 +91,23 @@ class ContentsController extends Controller
         }
         
         $contents->save();
+        $topics = Topic::where('id', $topicId)->first();
+        $contentsData = Content::where('topic_id', $topics->id)->get();
 
-        return back();
+        if ($contentsData->isEmpty()) {
+            \Session::flash('content', 'Dont have content');
+        }else {
+            foreach($contentsData as $content){
+                $content = Content::find($content->id);
+            }
+        }
+
+        return view('classroom/topic/topic', [
+            'userLogin' => $userLogin,
+            'topics' => $topics,
+            'contents' => $contentsData
+        ]);
+        // return back();
     }
 
     /**

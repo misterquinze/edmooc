@@ -1,5 +1,8 @@
 @extends('layouts.template-visitor')
 
+@section('tab-title')
+    <title>Register</title>
+@endsection
 @section('menu')
     <li class="nav-item">
         <a class="nav-link" href="{{ URL('/') }}">Home</a>
@@ -98,7 +101,7 @@
                             <input type="tel" name="phone" placeholder="Phone">
                             <input type="text" name="description" placeholder="Explained your expertise">
                             
-                            <select name="category" class="regular-select">
+                            <select name="company" class="regular-select">
                                 <option>Pilih Institusi</option>
                                 @foreach ($company as $comp)
                                     @if ($comp->id == $comp->name)

@@ -17,6 +17,7 @@ class CompanyController extends Controller
         $tutors = Tutor::all();
         $company = Company::where('user_id', $userLogin->id)->first();
         $courses = Course::where('company_id', $company->id)->get();
+        // $courses = Company::all();
 
         return view ('dashboard/company/course', [
             'userLogin' => $userLogin,
@@ -44,13 +45,13 @@ class CompanyController extends Controller
     public function createCourse(Request $request){
         $userLogin = Auth::user();
         $company = Company::where('user_id',$userLogin->id)->first();
-
+        // dd($userLogin);
+        // dd($company);
         $data = $request->all();
         
+        // dd($data['tutor']);
         
-        // dd($data);
         if($data['type'] == 'free'){
-            //dd('word');
             if($data['category'] == '1'){
                 $course = Course::create([
                     'company_id' => $company->id,
@@ -82,9 +83,6 @@ class CompanyController extends Controller
                     
                 ]);
             }
-            
-            
-            
         }else{
             //dd('hello');
             if($data['category'] == '1'){
@@ -123,7 +121,6 @@ class CompanyController extends Controller
                     
                 ]);
             }
-            
         }
 
         return back();

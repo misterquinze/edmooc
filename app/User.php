@@ -33,10 +33,16 @@ class User extends Authenticatable
     //     return Storage::url("profile-photo}/{$this->photo}");
     // }
 
+    public function tutor()
+    {
+        return $this->hasOne('App\Tutor');
+    }
+
     public function enrollement()
     {
         return $this->hasMany('App\Enrollment');
     }
+
     public function userCourse()
     {
         return $this->hasMany('App\UserCourse');

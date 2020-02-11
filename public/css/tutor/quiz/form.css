@@ -1,0 +1,19 @@
+.input-container{
+    
+}
+
+.input-text{
+    border: none;
+    outline: none;
+    text-decoration: none;
+    box-shadow: none;
+    border-bottom: 1px solid #cccccc;
+    width: 100%;
+    transition: .4s all;
+    background-color: transparent;
+}
+
+.input-text:focus{
+    border: none;
+    border-bottom: 1px solid blue;
+}

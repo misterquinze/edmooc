@@ -19,25 +19,19 @@ class ClassController extends Controller
    public function getOverview(Course $courses, $id){
           
           $userLogin = Auth::user();
-          $courses = Course::where('id', $id)->get();
-          //$courses = Course::where('id', $name)->get();
-          //$courses = Course::select('id')->where('name', $name)->first();
+          $course = Course::where('id', $id)->first();
           $topics = Course::findOrFail($id)->topics()->get();
           $discussions = Course::findOrFail($id)->discussions()->get();
-          
 
-          //$topics = Topic::where('course_id', $courses->id)->first();
-          //$topics = Course::find($id)->topics;
-          //dd($courses);
-          //dd($topics);
-          
-          //dd($courses->topics->id);
-
-          return view('classroom/overview', 
-          compact('userLogin', 'courses', 'topics', 'discussions') );
+          return view('classroom/overview', [
+               'userLogin' => $userLogin, 
+               'course' => $course, 
+               'topics' => $topics, 
+               'discussions' => $discussions
+          ]);
      }
    
-   public function getTopic(Topic $topics,  $topicId){
+     public function getTopic(Topic $topics, $topicId){
           $userLogin = Auth::user();
           //$courses = Course::findOrFail($id)->topics()->get();
          
@@ -60,15 +54,15 @@ class ClassController extends Controller
                }
           }
 
-       return view('classroom/topic/topic', [
-            'userLogin' => $userLogin,
-            'topics' => $topics,
-            'contents' => $contents
-            //'courses' => $courses
-            //'topicId' => $topicId
-       ]);
+          return view('classroom/topic/topic', [
+               'userLogin' => $userLogin,
+               'topics' => $topics,
+               'contents' => $contents
+               //'courses' => $courses
+               //'topicId' => $topicId
+          ]);
        
-   }
+     }
    
    public function getForum(Course $courses, $id)
    {

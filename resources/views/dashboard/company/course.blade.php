@@ -183,11 +183,11 @@
                                     @endforeach 
                                 </select>--}}
                                 @foreach ($categories as $category)
-                                <label class="radio-container">
+                                    <label class="radio-container">
                                         {{$category->name}}
-                                <input type="radio" name="category" value="{{$category->id}}" >
+                                        <input type="radio" name="category" value="{{$category->id}}" >
                                         <span class="checkmark"></span>
-                                </label>
+                                    </label>
                                 @endforeach
                             </div>
 
@@ -202,7 +202,7 @@
                                 </select>--}}
                                 @foreach ($tutors as $tutor)
                                     <label class="radio-container">
-                                        {{$tutor->name}}
+                                        {{$tutor->user->name}}
                                         <input type="radio" name="tutor" value="{{$tutor->id}}" >
                                         <span class="checkmark"></span>
                                     </label>

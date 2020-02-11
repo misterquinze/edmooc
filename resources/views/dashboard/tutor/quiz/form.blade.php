@@ -5,9 +5,6 @@
 @endsection
 
 @section('menu')
-@foreach($topics as $topic)
-    {{--<li class="active"><a href="{{ URL('classroom/'.$topic->course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>--}}
-    
     <li class="treeview active">
         <a href="#">
             <i class="fa fa-pie-chart"></i>
@@ -36,23 +33,23 @@
 @endsection
 
 @section('content')
-    <link rel="stylesheet" href="{{ URL('css/classroom/discussion/create.css') }}">
+    {{-- <link rel="stylesheet" href="{{ URL('css/classroom/discussion/create.css') }}"> --}}
+    <link rel="stylesheet" href="{{ URL('css/tutor/quiz/form.css') }}">
 
     <section class="content">
         <div id="forum">
             <template>
                 <div id="form-container" class="form-create">
                     <div class="form-header">
-                        Konten
+                        Kuis
                     </div>
                 
                     <form action="{{route('content.store', [$topic->id])}}" method="POST">
                         <div class="form-body">
                             {{ csrf_field() }}
+
                             <div class="input-container">
-                                <h4 class="input-title">Nama Konten</h4>
-                                <p class="input-sub-title">Beri nama kursus anda sejelas mungkin</p>
-                                <input type="text" name="title" class="regular-input" value="" required>
+                                <input type="text" name="title" class="input-text" value="" autocomplete="off" placeholder="Pertanyaan" required>
                             </div>
     
                             <div class="input-container">
@@ -96,7 +93,7 @@
         </div>
 
     </section>
-@endforeach
+
     <script src="{{ URL('js/vue.js') }}"></script>
     <script>
         new Vue({

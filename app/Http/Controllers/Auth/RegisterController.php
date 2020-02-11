@@ -107,7 +107,7 @@ class RegisterController extends Controller
         if($data['type'] == 'tutor'){
             $tutor = Tutor::create([
                 'user_id' => $user->id,
-                'company_id'=> $company->id,
+                'company_id'=> $data['company'],
                 'name' => $data['name'],
                 'address' => $data['address'],
                 'phone' => $data['phone'],

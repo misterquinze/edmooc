@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/classroom/topic/{topicId}/edit', 'TutorController@getEditTopicForm')->name('topic.edit');
     Route::put('/dashboard/topic/{topicId}/edit', 'TutorController@updateTopic')->name('topic.update');
     Route::delete('/classroom/{topicId}/delete', 'TutorController@deleteTopic')->name('topic.delete');
+    // Topic Quiz
+    Route::get('/classroom/{courseId}/topic/{topicId}/quiz/create', 'QuizController@getQuizForm')->name('quiz.create');
 
     // Content
     Route::get('classroom/topic/content/{contentId}', 'ContentsController@index')->name('content.index');
