@@ -50,14 +50,36 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/revenue', 'CompanyController@getRevenue');
     
     // Tutor
-    Route::get('/dashboard/list/course', 'TutorController@getMyCourse');
-    Route::get('/classroom/topic/{topicId}', 'ClassController@getTopic')->name('topic.index');
-    Route::post('/classroom/{id}/topic',  'TutorController@createTopic')->name('topic.create');
-    Route::get('/classroom/topic/{topicId}/edit', 'TutorController@getEditTopicForm')->name('topic.edit');
-    Route::put('/dashboard/topic/{topicId}/edit', 'TutorController@updateTopic')->name('topic.update');
-    Route::delete('/classroom/{topicId}/delete', 'TutorController@deleteTopic')->name('topic.delete');
-    // Topic Quiz
-    Route::get('/classroom/{courseId}/topic/{topicId}/quiz/create', 'QuizController@getQuizForm')->name('quiz.create');
+    Route::get('/dashboard/tutor/course/list', 'TutorController@getMyCourse');
+    // Tutor - Topic
+    Route::get('/dashboard/tutor/course/{id}/overview', 'TutorController@getTopicList')->name('tutor.topic.index');
+    Route::post('/dashboard/tutor/topic/{topicId}',  'TutorController@storeTopic')->name('tutor.topic.store');
+    Route::put('/dashboard/tutor/topic/{topicId}/edit', 'TutorController@updateTopic')->name('tutor.topic.update');
+    Route::delete('/dashboard/tutor/topic/{topicId}/delete', 'TutorController@deleteTopic')->name('tutor.topic.delete');
+    // Tutor - Topic Content
+    Route::get('/dashboard/tutor/topic/{topicId}', 'TutorController@getContentList')->name('tutor.content.index');
+    Route::get('/dashboard/tutor/content/{contentId}', 'TutorController@getContentDetail')->name('tutor.content.detail');
+    Route::get('/dashboard/tutor/topic/{topicId}/content/create', 'TutorController@createContentForm')->name('tutor.content.create');
+    Route::post('/dashboard/tutor/topic/{topicId}/content/create', 'TutorController@storeContent')->name('tutor.content.store');
+    Route::get('/dashboard/tutor/content/{contentId}/edit', 'TutorController@editContentForm')->name('tutor.content.edit');
+    Route::patch('/dashboard/tutor/content/{contentId}/edit', 'TutorController@updateContent')->name('tutor.content.update');
+    Route::delete('/dashboard/tutor/content/{contentId}', 'TutorController@deleteContent')->name('tutor.content.delete');
+    // Tutor - Topic Quiz
+    Route::get('/dashboard/tutor/quiz/{quizId}', 'TutorController@getQuizDetail')->name('tutor.quiz.index');
+    Route::get('/dashboard/tutor/topic/{topicId}/quiz/create', 'TutorController@getQuizForm')->name('tutor.quiz.create');
+    Route::post('/dashboard/tutor/{topicId}/quiz/create', 'TutorController@store')->name('tutor.quiz.store');
+    Route::get('/dashboard/tutor/{topicId}/quiz/edit', 'TutorController@getEditQuizForm')->name('tutor.quiz.dit');
+    Route::put('/dashboard/tutor/{topicId}/quiz/edit', 'TutorController@update')->name('tutor.quiz.update');
+    Route::get('/dashboard/tutor/quiz/{quizId}/result', 'TutorController@getAnswerList')->name('tutor.quiz.answer.list');
+    Route::get('/dashboard/tutor/quiz/result/{resultId}', 'TutorController@getAnswerDetail')->name('tutor.quiz.answer.index');
+    Route::put('/dashboard/tutor/quiz/result/{resultId}/score', 'TutorController@updateScore')->name('tutor.quiz.score');
+
+
+    // Route::get('/classroom/topic/{topicId}', 'ClassController@getTopic')->name('topic.index');
+    // Route::post('/classroom/{id}/topic',  'TutorController@createTopic')->name('topic.create');
+    // Route::get('/classroom/topic/{topicId}/edit', 'TutorController@getEditTopicForm')->name('topic.edit');
+    // Route::put('/dashboard/topic/{topicId}/edit', 'TutorController@updateTopic')->name('topic.update');
+    // Route::delete('/classroom/{topicId}/delete', 'TutorController@deleteTopic')->name('topic.delete');
 
     // Content
     Route::get('classroom/topic/content/{contentId}', 'ContentsController@index')->name('content.index');

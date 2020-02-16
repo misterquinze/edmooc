@@ -25,11 +25,6 @@ class ContentsController extends Controller
         return view('classroom/topic/content/index', compact('userLogin', 'contents'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($topicId)
     {   
         // dd($topicId);
@@ -40,20 +35,12 @@ class ContentsController extends Controller
         return view('classroom/topic/content/create', compact('userLogin', 'topics'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, Topic $topics, $topicId)
     {   
         $topics = Topic::where('id', $topicId)->get();
         $topics = Topic::findOrFail($topicId);
         $userLogin = Auth::user();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
-        
-        
         
         $data = $request->all();
         //dd($data);

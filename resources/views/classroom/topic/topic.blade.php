@@ -45,68 +45,85 @@
 
     <link rel="stylesheet" href="{{ URL('css/classroom/topic.css') }}">
 
-    <section class="content-header">
-       
-    </section>
-
     <section class="content">
-        <h5>
+        {{-- <h5>
             Materi Topik {{$topics->name}}
-        </h5>
-    @if(auth()->user()->role == 'tutor')
+        </h5> --}}
 
-            <a href="{{route('content.create', [$topics->id])}}">
-                <span class="add-btn">Tambah Konten</span>
+        {{-- @if(auth()->user()->role == 'tutor')
+
+                <a href="{{route('content.create', [$topics->id])}}">
+                    <span class="add-btn">Tambah Konten</span>
+                </a>
+            
+            <hr>
+            @if ($contents->isEmpty())
+                @if (session('content'))
+                    <div class="card-body">
+                        <h2 class="alert alert-info">
+                            {{ session('content') }}
+                        </h2>
+                    </div>
+                @endif
+            @else 
+            @foreach($contents as $cont)     
+            <div class="course-list">
+                <div class="top-section gridspan">
+                    <div class="col-left">
+                        <div class="course-detail">
+                        <a href="{{route('content.index', [$cont->id])}}">
+                            <h3 class="course-name">{{$cont->title}}</h3>
+                        </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach 
+            @endif   
+        @else
+            @if ($contents->isEmpty())
+                @if (session('content'))
+                    <div class="card-body">
+                        <h2 class="alert alert-info">
+                            {{ session('content') }}
+                        </h2>
+                    </div>
+                @endif
+            @else   
+            @foreach($contents as $cont)
+            <div class="course-list">
+                <div class="top-section gridspan">
+                    <div class="col-left">
+                        <div class="course-detail">
+                            <h3 class="course-name">{{$cont->title}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            @endif
+        @endif --}}
+
+        <div class="topic-detail-header">
+            <div class="top-section">
+                <h2 class="topic-name">{{ $topics->name }}</h2>
+                <a href="{{route('content.create', [$topics->id])}}" class="add-content-button">
+                    Tambah Materi
+                </a>
+            </div>
+            <div class="bottom-section">
+                {{ $topics->course->name }}
+            </div>
+        </div>
+
+        @foreach($contents as $index => $content)     
+            <a href="{{route('content.index', [$content->id])}}" class="topic-content">
+                <div class="topic-content-index">Materi {{ $index+1 }}</div>
+                <div class="topic-content-name">{{ $content->title }}</div>
+                <span class="fa fa-angle-right"></span>
             </a>
-        
-        <hr>
-        @if ($contents->isEmpty())
-            @if (session('content'))
-                <div class="card-body">
-                    <h2 class="alert alert-info">
-                        {{ session('content') }}
-                    </h2>
-                </div>
-            @endif
-        @else 
-        @foreach($contents as $cont)     
-        <div class="course-list">
-            <div class="top-section gridspan">
-                <div class="col-left">
-                    <div class="course-detail">
-                    <a href="{{route('content.index', [$cont->id])}}">
-                        <h3 class="course-name">{{$cont->title}}</h3>
-                    </a>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach 
-        @endif   
-    @else
-        @if ($contents->isEmpty())
-            @if (session('content'))
-                <div class="card-body">
-                    <h2 class="alert alert-info">
-                        {{ session('content') }}
-                    </h2>
-                </div>
-            @endif
-        @else   
-        @foreach($contents as $cont)
-        <div class="course-list">
-            <div class="top-section gridspan">
-                <div class="col-left">
-                    <div class="course-detail">
-                        <h3 class="course-name">{{$cont->title}}</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
         @endforeach
-        @endif
-    @endif
     </section>
 
 

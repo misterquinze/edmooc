@@ -140,5 +140,12 @@
         });
     </script>
 
+    <script>
+        $('#add-available-item').click(function(){
+			$('#add-available-item-container').before('<div class="box box-shadow" id="barangAda-'+c+'"><div class="box-header"><strong>Data Barang</strong><a class="removeItem" onclick="removeAvailableItem(event,'+c+')"><span class="pull-right">&times<span></a></div><hr><div class="box-body"><div class="row"><div class="col-md-6"><div class="form-group"><label>Nama Barang</label><input type="hidden" name="idBarang['+(c-1)+']" id="idBarang-'+(c)+'"><input type="text" name="nama['+(c-1)+']" id="namaBarang-'+c+'" onkeypress="getNamaBarang('+(c)+')"class="form-control" placeholder="Masukkan Nama Barang" required></div></div><div class="col-md-6"><div class="form-group"><label>Harga Beli</label><input type="number" name="harga_beli['+(c-1)+']" class="form-control" placeholder="Masukkan Harga Beli per Barang" required></div></div></div><div class="row"><div class="col-md-12"><h3>Rincian Barang</h3></div><div class="row"><div class="col-md-12"><div class="col-md-4"><div class="form-group"><label>Warna</label><input type="text" name="warna['+(c-1)+'][]" class="form-control" placeholder="Cth: Merah, Biru" required></div></div><div class="col-md-4"><div class="form-group"><label>Ukuran</label><input type="text" name="ukuran['+(c-1)+'][]" class="form-control" placeholder="Cth: XL, L, M" required></div></div><div class="col-md-3"><div class="form-group"><label>Jumlah</label><input type="number" name="jumlah['+(c-1)+'][]" class="form-control" placeholder="Cth: 1, 2, 3" required></div></div></div></div><div class="col-md-12" id="add-available-item-detail-container-'+c+'"><div class="form-group"><a class="btn-add" id=add-available-item-detail" onclick="addAvailableItemDetail('+(c)+','+(c-1)+')">Tambah Rincian</a></div></div></div></div></div>');
+        });
+
+    </script>
+
   
 @endsection

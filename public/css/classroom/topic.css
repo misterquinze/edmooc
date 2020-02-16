@@ -1,152 +1,83 @@
-.title{
-    margin: 5px 0 0;
-    font-weight: 600;
-    float: left;
+.topic-detail-header{
+    transform: translate(-15px,-15px);
+    width: calc(100% + 30px);
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
 }
-
-.add-btn{
-    float: right;
-    padding: 7px 15px;
-    background-color: #002347;
-    color: #ffffff;
-    font-size: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-
-hr{
-    border: none;
-    border-bottom: 1px solid #cccccc;
-    margin: 10px 0 20px;
-}
-
-.course-list{
-    width: 100%;
+.topic-detail-header .top-section{
     background-color: #ffffff;
-    border: 1px solid #cccccc;
+    padding: 40px 15px;
+    border-bottom: 1px solid #cccccc;
+    position: relative;
+}
+
+.topic-detail-header .top-section .topic-name{
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.topic-detail-header .bottom-section{
+    background-color: #efefef;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.topic-detail-header .add-content-button{
+    border: none;
+    appearance: none;
+    text-decoration: none;
+    text-transform: none;
+    background: none;
+    outline: none;
+    background-color: #002347;
+    color: #fff;
+    padding: 5px 10px;
     border-radius: 4px;
-    margin-bottom: 10px;
-    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+    font-size: 14px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
 }
-
-.course-list .top-section{
-    padding: 5px;
-}
-
-.course-list .top-section .course-detail{
-    width: calc(1005 - 250px);
-    float: left;
-    padding-left: 20px;
-}
-
-.course-list .top-section .course-detail .course-name{
-    font-size: 18px;
-    font-weight: 500;
-    color: #282828;
-    margin: 0 0 0px;
-}
-
 
 .topic-content{
-    padding-left: 40px;
-    padding-right: 40px;
-    background-color: #fafafa;
-    border: 1px solid #cccccc;
-   
-} 
-
-.topic-content .topic-title{
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.topic-content .topic-video{
     width: 100%;
-    height: 300px;
-}
-
-.topic-content .explanation{
-    margin-top: 20px;
-}
-
-.register-content{
-    padding: 50px;
-    background-color: #fafafa;
-    
-}
-
-.gridspan::after{
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.tab-menu{
-    margin-bottom: 30px;
-}
-
-.tab-menu ul{
-    padding: 0;
-    margin: 0;
-    border-radius: 4px;
-
-}
-
-.tab-menu ul li{
-    padding: 10px 0;
-    text-align: left;
-    margin: 0;
-    display: inline-block;
-    width: calc(60% / 3);
-    font-weight: 600;
-    cursor: pointer;
-    float: left;
-    color: #002347;
-  
-    
-}
-
-.tab-menu ul li::after{
-    border-bottom: solid 3px  #002347;
-    transform: scaleX(0);  
-    transition: transform 250ms ease-in-out;
-   
-}
-
-.tab-menu ul li.is-active,
-.tab-menu ul li:hover::after{
-    
-    /*background-color: #002347; */
-    transform: scaleX(1);
-    border-bottom: solid 3px  #002347;
-    color: #002347;
-}
-
-.register-box{
-    width: 1000px;
-    height: auto;
-    padding: 50px;
+    border-radius: 6px;
+    padding: 15px;
     background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    margin: 0 auto;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+    display: block;
+}
+
+.topic-content:hover{
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
-.register-box .title{
-    text-align: center;
+.topic-content .topic-content-index{
+    font-size: 12px;
+    color: #666666;
 }
 
-.register-box .sub-title{
-    margin-top: 20px;
-    text-align: center;
-    width: 350px;
-    margin: 0 auto 50px;
+.topic-content .topic-content-name{
+    font-size: 14px;
+    font-weight: bold;
+    color: #282828;
+}
+
+.topic-content .fa{
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #282828;
 }
 
 .swal-button--confirm{
-	background-color: #83305a;
+    background-color: #83305a;
 }
 
 .swal-footer,
@@ -165,7 +96,7 @@ hr{
     display: table;
     clear: both;
 }
-
+/* 
 
 .input{
     width: 100%;
@@ -198,10 +129,9 @@ hr{
 .left-section .course-list .middle-section {
     float: left;
     width: 100%;
-}
+} */
 
- .add-content{
-    
+.add-content{    
     padding: 7px 15px;
     background-color: #002347;
     color: #ffffff;

@@ -1,7 +1,6 @@
 .register-content{
     padding: 50px;
     background-color: #fafafa;
-    
 }
 
 .gridspan::after{
@@ -18,7 +17,6 @@
     padding: 0;
     margin: 0;
     border-radius: 4px;
-
 }
 
 .tab-menu ul li{
@@ -31,8 +29,6 @@
     cursor: pointer;
     float: left;
     color: #002347;
-  
-    
 }
 
 .tab-menu ul li::after{
@@ -82,9 +78,6 @@
 	text-align: center;
 }
 
-
-
-
 .title{
     margin: 5px 0 0;
     font-weight: 600;
@@ -97,205 +90,134 @@ hr{
     margin: 10px 0 20px;
 }
 
-
-
-
 .gridspan::after{
     content: "";
     display: table;
     clear: both;
 }
 
-.right-section{
+.course-content{
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 20px 20px 0;
+}
+
+.course-content .left-section{
     width: 250px;
-    float: right;
-}
-
-.right-section .filter-title{
-    font-size: 14px;
-    color: #7d97ad;
-    font-weight: 600;
-    margin-top: 0;
-}
-
-.right-section .filter-box{
-    margin-bottom: 20px;
-    box-shadow: 5px 5px 10px 0 rgba(46,61,73,.05);
-}
-
-.right-section .filter-box .filter-header{
-    background-color: #ffffff;
-    padding: 10px 15px;
-    border-radius: 4px 4px 0 0;
-    border: 1px solid #cccccc;
-    border-bottom: 0;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.right-section .filter-box .filter-body{
-    background-color: #ffffff;
-    padding: 10px 15px;
-    border-radius: 0 0 4px 4px;
-    border: 1px solid #cccccc;
-}
-
-.filter-container {
-    display: block;
-    position: relative;
-    padding-left: 25px;
-    margin-bottom: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-  
-/* Hide the browser's default checkbox */
-.filter-container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-  
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 4px;
-    left: 0;
-    height: 15px;
-    width: 15px;
-    background-color: #eee;
-}
-  
-/* On mouse-over, add a grey background color */
-.filter-container:hover input ~ .checkmark {
-    background-color: #ccc;
-}
-  
-/* When the checkbox is checked, add a blue background */
-.filter-container input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-  
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-  
-/* Show the checkmark when checked */
-.filter-container input:checked ~ .checkmark:after {
-    display: block;
-}
-  
-/* Style the checkmark/indicator */
-.filter-container .checkmark:after {
-    left: 5px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
-.input{
-    width: 100%;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    padding: 5px;
-    background-color: hsla(240,2%,57%,.1);
-}
-
-.left-section{
-    width: calc(100% - 280px);
     float: left;
-    margin-right: 20px;
 }
 
-.left-section .course-list{
+.course-content .left-section .course-image{
     width: 100%;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
+    height: 180px;
+    object-fit: cover;
     border-radius: 4px;
-    margin-bottom: 30px;
-    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
 }
 
-.left-section .course-list .top-section{
-    width: 100%;
-    padding: 20px;
-   
-}
-.left-section .course-list .middle-section {
+.course-content .right-section{
+    width: calc(100% - 250px);
     float: left;
-    width: 100%;
+    padding-left: 20px;
 }
 
-.left-section .course-list .add-topic{
-    
-    padding: 7px 15px;
-    background-color: #002347;
-    color: #ffffff;
-    font-size: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.left-section .course-list .bottom-section {
-    border-top: 1px solid #cccccc;
-    padding: 10px 20px 10px 20px;
-}
-
-
-.left-section .course-list .bottom-section .col-left{
-   width: 50%;
-   float: left;
-
-    
-}
-
-.left-section .course-list .bottom-section .col-left .course-name{
+.course-content .right-section .course-name{
     font-size: 20px;
-    font-weight: 700;
-    color: #282828;
-    margin: 0 0 5px;
+    font-weight: bold;
+    margin: 0 0 20px;
 }
 
-.left-section .course-list .bottom-section .col-right{
-    width: 50%;
+.course-content .right-section .course-detail-title{
+    font-size: 14px;
+    font-weight: bold;
+    color: #282828;
+}
+
+.course-content .right-section .course-detail-value{
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+.topic-content{
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 25px;
+}
+
+.topic-content .topic-content-header{
+    margin-bottom: 15px;
+}
+
+.topic-content .topic-title{
+    font-size: 18px;
+    font-weight: bold;
     float: left;
+    margin: 3px 0 0;
+}
 
- }
-
-.left-section .course-list .bottom-section .col-right .edit-btn{
+.topic-content .add-topic-button{
+    border: none;
+    appearance: none;
+    text-decoration: none;
+    text-transform: none;
+    background: none;
+    outline: none;
+    background-color: #002347;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
     float: right;
+}
+
+.topic-content .topic-list{
+    font-size: 14px;
+}
+
+.topic-content .topic-list .header{
+    font-weight: bold;
+    background-color: #e0e0e0;
+}
+
+.topic-content .topic-list .left-section{
+    width: calc(100% - 150px);
+    float: left;
+    padding: 10px;
+}
+
+.topic-content .topic-list .left-section .topic-name{
+    color: #002347;
+}
+
+.topic-content .topic-list .right-section{
+    width: 150px;
+    float: left;
+    padding: 10px;
+}
+
+.topic-content .topic-list .right-section .edit-btn{
+    float: left;
     border: 1px solid #002347;
     background-color: #002347;;
     color: #ffffff;
-    padding: 5px 10px;
+    padding: 3px 5px;
     border-radius: 4px;
     cursor: pointer;
     margin-right: 10px;
  } 
 
-.left-section .course-list .bottom-section .col-right .delete-btn{
-    float: right;
+ .topic-content .topic-list .right-section .delete-btn{
+    float: left;
     border: 1px solid #002347;
-    background-color: #002347;;
+    background-color: #002347;
     color: #ffffff;
-    padding: 5px 10px;
+    padding: 3px 5px;
     border-radius: 4px;
     cursor: pointer;
 }
+
+
 
 .form-create{
     border: 1px solid #cccccc;
@@ -352,78 +274,6 @@ hr{
     border: 1px solid #cccccc;
     border-radius: 4px;
     padding: 10px 15px;
-}
-
-.form-create .form-body .input-container .regular-select{
-    width: 300px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-/* The container */
-.form-create .form-body .input-container .radio-container {
-    display: block;
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-  
-/* Hide the browser's default radio button */
-.form-create .form-body .input-container .radio-container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-  
-/* Create a custom radio button */
-.form-create .form-body .input-container .checkmark {
-    position: absolute;
-    top: 2px;
-    left: 0;
-    height: 18px;
-    width: 18px;
-    background-color: #b7b7b7;
-    border-radius: 50%;
-}
-  
-/* On mouse-over, add a grey background color */
-.form-create .form-body .input-container .radio-container:hover input ~ .checkmark {
-    background-color: #a3a3a3;
-}
-  
-/* When the radio button is checked, add a blue background */
-.form-create .form-body .input-container .radio-container input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-  
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.form-create .form-body .input-container .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-  
-/* Show the indicator (dot/circle) when checked */
-.form-create .form-body .input-container .radio-container input:checked ~ .checkmark:after {
-    display: block;
-}
-  
-/* Style the indicator (dot/circle) */
-.form-create .form-body .input-container .radio-container .checkmark:after {
-    top: 6px;
-    left: 6px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;
 }
 
 .form-create .form-footer{

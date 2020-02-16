@@ -6,9 +6,8 @@
 
 @section('menu')
     <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
-    <li><a href="{{ URL('dashboard/list/course') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
+    <li><a href="{{ URL('dashboard/tutor/course/list') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
 
-{{-- @foreach ($courses as $course) --}}
     <li class="active"><a href="{{ URL('classroom/'.$course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
     <li class="treeview">
@@ -21,7 +20,7 @@
         </a>
         <ul class="treeview-menu">        
             @foreach($topics as $topic)
-                <li><a href="{{ route('topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
+                <li><a href="{{ route('tutor.topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
             @endforeach
         </ul>
     </li>
@@ -35,10 +34,6 @@
         <div id="course">
             <template>
                 <div id="display-container">
-                    {{-- <div class="gridspan">
-                        <h3 class="title">{{$course->name}}</h3>  
-                    </div> --}}
-                    {{-- <hr> --}}
                     <div class="course-content">    
                         <div class="gridspan">
                             <div class="left-section">
@@ -75,99 +70,60 @@
                         @foreach($topics as $topic)
                             <div class="topic-list gridspan">
                                 <div class="left-section">
-                                    <a href="{{ route('topic.index', [$topic->id]) }}" class="topic-name">
+                                    <a href="{{ route('tutor.content.index', [$topic->id]) }}" class="topic-name">
                                         {{$topic->name}}
                                     </a>
                                 </div>
                                 <div class="right-section">
-                                    <a href="{{ URL('/classroom/topic/' .$topic->id.'/edit') }}" class="edit-btn">
+                                    <span @click.prevent="changeType('edit',{{ $topic->id }})" class="edit-btn">
                                         <i class="fa fa-edit"></i>
-                                    </a>
+                                    </span>
                                     <span class="delete-btn" onclick="deleteTopic({{ $topic->id }})">
                                         <i class="fa fa-trash"></i>
                                     </span>
                                 </div>
                             </div>
+                            <form class="form-delete" id="delete-{{ $topic->id }}" action="{{ route('tutor.topic.delete', [$topic->id]) }} "  method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="delete">
+                            </form>
                         @endforeach
                     </div>
-                             {{-- <div class="course-list ">
-                                <div class="top-section gridspan">
-                                    <h2 class="course-title">Welcome to {{$course->name}}</h2>
-                                    <h5 class="course-description">{{$course->description}}</h5>
-                                    <hr>
-                                    @if (auth()->user()->role == 'tutor')
-                                        <span class="add-topic" @click.prevent="changeType('create')">Tambah Topik
-                                        </span>    
+                </div>
+
+                @foreach($topics as $topic)
+                    <div id="form-edit-{{ $topic->id }}" class="form-create form-edit">
+                        <div class="form-header">Edit Topik</div>
+                        <form action="{{ route('tutor.topic.update', [$topic->id]) }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="put">
+
+                            <div class="form-body">
+                                <div class="input-container">
+                                    <h4 class="input-title">Judul Materi</h4>
+                                    <p class="input-sub-title">Beri Judul Materi</p>
+                                    <input type="text" name="name" class="regular-input" value="{{ $topic->name }}" required>
                                 </div>
-
-                                @foreach($topics as $topic)
-                                    <div class="bottom-section gridspan">
-                                        <div class="col-left">
-                                            <a href="{{ route('topic.index', [$topic->id]) }}" class="">
-                                                <h5 class="topic-title">
-                                                    {{$topic->name}}
-                                                </h5>
-                                            </a>
-                                        </div>
-                                        <div class="col-right">
-                                            <span class="delete-btn" onclick="deleteTopic({{ $topic->id }})">
-                                                <i class="fa fa-trash"></i>
-                                            </span>
-                                            <a href="{{ URL('/classroom/topic/' .$topic->id.'/edit') }}" class="edit-btn">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="{{ URL('/classroom/'.$course->id.'/topic/' .$topic->id.'/quiz/create') }}" class="edit-btn">
-                                                Quiz
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <form class="form-delete" id="delete-{{ $topic->id }}" action="{{route ('topic.delete', [$topic->id])}} "  method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="_method" value="delete">
-                                    </form>
-                                @endforeach
-
-                                @else
-                                    @foreach($topics as $topic)
-                                        <div class="bottom-section"> 
-                                            <a href="{{ URL('classroom/'.$topic->id.'/topic') }}">
-                                                
-                                                <h5 class="topic-title">
-                                                    <span class="play-btn" onclick="">
-                                                        <i class="fa fa-play-circle"></i>
-                                                    </span>
-                                                    {{$topic->name}}
-                                                </h5>
-                                            </a> 
-                                        </div>
-                                    @endforeach     
-                                @endif    
-                            </div>         --}}
-
-                            {{-- <div class="filter-box">
-                                <div class="filter-header">
-                                        Tipe Kursus
-                                </div>
-                                <div class="filter-body">
-                                    <h5>{{$course->type}}</h5> 
+                                <div class="input-container">
+                                    <h4 class="input-title">Deskripsi Topik</h4>
+                                    <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
+                                    <textarea name="description" class="regular-textarea" required>{{ $topic->description }}</textarea>
                                 </div>
                             </div>
-                            <div class="filter-box">
-                                <div class="filter-header">
-                                    Update Terakhir
-                                </div>
-                                <div class="filter-body">
-                                    <h5>{{$course->updated_at}}</h5> 
-                                </div>    
-                            </div> --}}
-                        
-                </div>
-                
+                            <div class="form-footer gridspan">
+                                <span class="cancel-btn" @click.prevent="changeType('display')">Batal</span>
+                                <button type="submit" class="submit-btn">Kirim</button>
+                            </div>
+                        </form>
+                    </div>
+                @endforeach
+
                 <div id="form-container" class="form-create">
                     <div class="form-header">
                         Buat Topik Baru
                     </div>
-                    <form action="{{ URL('classroom/' .$course->id. '/topic') }}" method="POST">
+                    
+                    <form action="{{ route('tutor.topic.store', [$course->id]) }}" method="POST">
                         <div class="form-body">
                             {{ csrf_field() }}
                             <div class="input-container">
@@ -199,17 +155,25 @@
             el: '#course',
             data() {
                 return {
-                courseType: 'free',
-                    }
-                },
+                    courseType: 'free',
+                }
+            },
             methods: {
-                changeType(type){
+                changeType(type,id){
+                    console.log(type)
+                    console.log(id)
                     if(type == 'display'){
                         $("#display-container").show()
                         $("#form-container").hide()
-                    }else{
+                        $(".form-edit").hide()
+                    }else if(type == 'create'){
                         $("#display-container").hide()
                         $("#form-container").show()
+                        $(".form-edit").hide()
+                    }else{
+                        $("#display-container").hide()
+                        $("#form-container").hide()
+                        $("#form-edit-"+id).show()
                     }
                 }
             }

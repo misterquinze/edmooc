@@ -15,11 +15,8 @@ class Topic extends Model
         
     ];
 
-    public function course($id){
-        $topics = App\Course::find($id)->topics;
-       
-        return $this->belongsTo('App\course', 'foreign_key');
-
+    public function course(){
+        return $this->belongsTo('App\course', 'course_id');
     }
 
     public function tutor(){
