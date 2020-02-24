@@ -11,6 +11,8 @@ use App\Company;
 use App\Category;
 use App\Topic;
 use App\Content;
+use App\QuizQuestion;
+use App\QuizOption;
 
 class TutorController extends Controller
 {
@@ -197,6 +199,7 @@ class TutorController extends Controller
         $topic = Topic::find($topicId);
 
         $topics = Topic::where('course_id', $topic->course->id)->get();
+        
 
         return view('dashboard/tutor/quiz/form-create',[
             'userLogin' => $userLogin,
@@ -205,11 +208,107 @@ class TutorController extends Controller
         ]);
     }
 
-    public function getAnswerList($quizId){
+    public function getPreviewQuizForm($topicId){
         $userLogin = Auth::user();
+        $topic = Topic::findOrFail($topicId);
+        $topic = Topic::where('id', $topic->id)->first();
+       // $topic = Topic::find($topicId);
+
+        $topics = Topic::where('course_id', $topic->course->id)->get();
+        $questions = QuizQuestion::where('topic_id',$topic->id)->get();
+        // dd($questions);
+        //dd($topic);
+        return view('dashboard/tutor/quiz/preview',[
+            'userLogin' => $userLogin,
+            'topic' => $topic,
+            'topics' => $topics,
+            
+            'questions' => $questions
+        ]);
+    }
+
+    public function storeQuiz(Request $request, $topicId){
+        $userLogin = Auth::user();
+        $topic = Topic::find($topicId);
+        $data = $request->all();
+        $question = $data['question'];
+        $opsi = $data['opsi'];
+
+        foreach($data['type'] as $index => $type){
+            // dd($index);
+            $questionData = QuizQuestion::create([
+                'topic_id' => $topic->id,
+                'questions' => $question[$index],
+                'type' => $type
+            ]);
+
+            if($type == 'Multiple Choice'){
+                foreach($opsi[$index] as $option){
+                    $optionData = QuizOption::create([
+                        'quiz_question_id' => $questionData->id,
+                        'option' => $option
+                    ]);
+                }
+            }
+        }
+        return view('dashboard/tutor/quiz/detail', [
+            'userLogin' => $userLogin,
+            'topic' => $topic
+        ]);
+    }
+
+    public function getQuizAnswerList($topicId){
+        $userLogin = Auth::user();
+        $topic = Topic::find($topicId);
+        $topics = Topic::where('course_id', $topic->course->id)->get();
         
         return view('dashboard/tutor/quiz/answer-list',[
-            'userLogin' => $userLogin
+            'userLogin' => $userLogin,
+            'topics' => $topics,
+            'topic' => $topic
+        ]);
+    }
+
+    public function getQuizAnswerDetail($topicId,$resultId){
+        $userLogin = Auth::user();
+        $topic = Topic::find($topicId);
+
+        $topics = Topic::where('course_id', $topic->course->id)->get();
+
+        return view('dashboard/tutor/quiz/answer-detail',[
+            'userLogin' => $userLogin,
+            'topics' => $topics,
+            'topic' => $topic
+        ]);
+    }
+
+
+    // Score / Nilai
+    public function getScoreList($courseId){
+        $userLogin = Auth::user();
+        $course = Course::where('id', $courseId)->first();
+        $topics = Course::findOrFail($courseId)->topics()->get();
+        $discussions = Course::findOrFail($courseId)->discussions()->get();
+
+        return view('dashboard/tutor/score/list', [
+             'userLogin' => $userLogin, 
+             'course' => $course, 
+             'topics' => $topics, 
+             'discussions' => $discussions
+        ]);
+    }
+
+    public function getScoreDetail($courseId,$scoreId){
+        $userLogin = Auth::user();
+        $course = Course::where('id', $courseId)->first();
+        $topics = Course::findOrFail($courseId)->topics()->get();
+        $discussions = Course::findOrFail($courseId)->discussions()->get();
+
+        return view('dashboard/tutor/score/detail', [
+             'userLogin' => $userLogin, 
+             'course' => $course, 
+             'topics' => $topics, 
+             'discussions' => $discussions
         ]);
     }
 }

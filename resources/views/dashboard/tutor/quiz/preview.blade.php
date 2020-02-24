@@ -1,7 +1,7 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    <title>Create Kuis - EdMOOC</title>
+    <title>Preview Kuis - EdMOOC</title>
 @endsection
 
 @section('menu')
@@ -33,7 +33,7 @@
 @endsection
 
 @section('content')
-    <link rel="stylesheet" href="{{ URL('css/tutor/quiz/form.css') }}">
+    <link rel="stylesheet" href="{{ URL('css/dashboard/tutor/quiz/preview.css') }}">
 
     <section class="content">
         <div id="forum">
@@ -42,11 +42,39 @@
                     
                     <form action="{{route('tutor.quiz.store', [$topic->id])}}" method="POST">
                         {{ csrf_field() }}
+
                         <div class="form-input-header">
-                            <h3>Buat Kuis Baru</h3>
-                            <input type="text" class="input-long-text" name="description" autocomplete="off" placeholder="Deskripsi Kuis" required>    
+                            <h3>Kuis -  {{ $topic->name }}  </h3>
+                            <div class="description">Ini deskripsi kuis heheh Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate tenetur repudiandae perspiciatis! Et odit ut, atque eius quaerat excepturi fugit eos consectetur quis sequi recusandae? In quibusdam repellat accusantium praesentium.</div>
                         </div>
 
+                        @foreach ($questions as $index => $question)
+                            {{-- {{ dd($question) }} --}}
+                            @if($question->type == 'Paragraph')
+                                <div id="essay-'+question+'" class="form-input">
+                                    <div class="input-container">
+                                        <input type="hidden" name="type[{{ $index - 1 }}]" value="Paragraph">
+                                        <h4 class="form-label">{{ $question->questions }}</h4>
+                                        <input type="text" class="input-long-text" name="question[{{ $index - 1 }}]" autocomplete="off" placeholder="Teks jawaban essay" required>
+                                    </div>
+                                </div>
+                            @elseif($question->type == 'Multiple Choice')
+                                <div id="multiple-{{ $index }}" class="form-input">
+                                    <div class="input-container">
+                                        <input type="hidden" name="type[{{ $index - 1 }}]" value="Multiple Choice">
+                                        <h4 class="form-label">{{ $question->questions }}</h4>
+                                        
+                                        @foreach ($question->options as $option)
+                                            <label class="radio-container">
+                                                {{ $option->option }}
+                                                <input type="radio" name="week" value="1">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                         <div id="add-question-container"></div>
 
                         <div class="form-input-footer gridspan">
@@ -54,19 +82,6 @@
                             <span class="cancel-button" @click.prevent="changeType('display')">Batal</span>
                         </div>
                     </form>
-
-                    
-                    <nav class="float-action-button">
-                        <div id="add-essay" class="buttons" title="Essay" data-toggle="tooltip" data-placement="left">
-                            <i class="fa fa-paragraph"></i>
-                        </div>
-                        <div id="add-multiple-choice" class="buttons" title="Pilihan Ganda" data-toggle="tooltip" data-placement="left">
-                            <i class="fa fa-list-ul"></i>
-                        </div>
-                        <div href="#" class="buttons main-button">
-                            <i class="fa fa-plus"></i>
-                        </div>
-                    </nav>
                 </div>
             </template>
         </div>

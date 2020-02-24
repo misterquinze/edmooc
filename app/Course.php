@@ -11,7 +11,6 @@ use App\Favorite;
 class Course extends Model
 {
     protected $fillable = [
-        
         'company_id',
         'category_id',
         'tutor_id',

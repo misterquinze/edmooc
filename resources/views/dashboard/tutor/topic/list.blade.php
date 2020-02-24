@@ -25,6 +25,7 @@
         </ul>
     </li>
     <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
+    <li><a href="{{ route('tutor.score.list', [$course->id]) }}"><i class="fa fa-list"></i> <span>Nilai</span></a></li>
 @endsection
 
 @section('content')
@@ -123,7 +124,7 @@
                         Buat Topik Baru
                     </div>
                     
-                    <form action="{{ route('tutor.topic.store', [$course->id]) }}" method="POST">
+                    <form action="{{ route('tutor.topic.create', [$course->id]) }}" method="POST">
                         <div class="form-body">
                             {{ csrf_field() }}
                             <div class="input-container">

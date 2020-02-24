@@ -1,7 +1,7 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    <title>Create Course - EdMOOC</title>
+    <title>Create Kuis - EdMOOC</title>
 @endsection
 
 @section('menu')
@@ -29,7 +29,7 @@
         </a>
     </li>
 
-    <li><a href="{{ URL('classroom/1/topic/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
+    <li><a href="{{ URL('classroom/1/topic/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li> --}}
 @endsection
 
 @section('content')

@@ -15,7 +15,7 @@ class CreateQuizOptionsTable extends Migration
     {
         Schema::create('quiz_options', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('quis_question_id');
+            $table->unsignedInteger('quiz_question_id');
             $table->string('option');
             $table->timestamps();
         });

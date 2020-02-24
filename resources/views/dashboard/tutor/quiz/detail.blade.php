@@ -45,13 +45,13 @@
                 </div>
             </div>
 
-            <div class="quiz-detail__clickable">
+            <a href="{{ route('tutor.quiz.preview', [$topic->id]) }}" class="quiz-detail__clickable">
                 <div class="quiz-detail__clickable-index">Preview</div>
                 <div class="quiz-detail__clickable-name">Lihat Preview Kuis</div>
                 <span class="fa fa-angle-right"></span>
-            </div>
+            </a>
 
-            <a href="{{ route('tutor.quiz.answer.list', [1]) }}" class="answer-header">
+            <a href="{{ route('tutor.quiz.answer.list', [$topic->id]) }}" class="answer-header">
                 <div class="answer-header-name">Jawaban Kuis</div>
                 <span class="fa fa-angle-right"></span>
             </a>
@@ -61,28 +61,8 @@
                     <div class="submit-time header">Submit Time</div>
                     <div class="score header">Nilai</div>
                 </div>
-                <div class="answer-list gridspan">
-                    <a href="{{ route('tutor.quiz.answer.index', [1]) }}" class="student-name">Budi</a>
-                    <div class="submit-time">2020-02-15, 12:50</div>
-                    <div class="score">100</div>
-                </div>
-                <div class="answer-list gridspan">
-                    <a href="{{ route('tutor.quiz.answer.index', [1]) }}" class="student-name">Budi</a>
-                    <div class="submit-time">2020-02-15, 12:50</div>
-                    <div class="score">100</div>
-                </div>
-                <div class="answer-list gridspan">
-                    <a href="{{ route('tutor.quiz.answer.index', [1]) }}" class="student-name">Budi</a>
-                    <div class="submit-time">2020-02-15, 12:50</div>
-                    <div class="score">100</div>
-                </div>
-                <div class="answer-list gridspan">
-                    <a href="{{ route('tutor.quiz.answer.index', [1]) }}" class="student-name">Budi</a>
-                    <div class="submit-time">2020-02-15, 12:50</div>
-                    <div class="score">100</div>
-                </div>
-                <div class="answer-list gridspan">
-                    <a href="{{ route('tutor.quiz.answer.index', [1]) }}" class="student-name">Budi</a>
+                <div v-for="n in 5" class="answer-list gridspan">
+                    <a href="{{ route('tutor.quiz.answer.index', [$topic->id,1]) }}" class="student-name">Budi</a>
                     <div class="submit-time">2020-02-15, 12:50</div>
                     <div class="score">100</div>
                 </div>

@@ -5,7 +5,7 @@
 @endsection
 
 @section('menu')
-    <li ><a href="{{ URL('/classroom/1') }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+    <li ><a href="{{ URL('dashboard/tutor/course/1/overview') }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
     <li class="treeview">
         <a href="#">
@@ -33,6 +33,7 @@
     </li>
 
     <li class="active"><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
+    <li ><a href="{{ URl('dashboard/tutor/course/1/score') }}"><i class="fa fa-list"></i> <span>Nilai</span></a></li>
 @endsection
 
 @section('content')

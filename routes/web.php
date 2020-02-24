@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/tutor/course/list', 'TutorController@getMyCourse');
     // Tutor - Topic
     Route::get('/dashboard/tutor/course/{id}/overview', 'TutorController@getTopicList')->name('tutor.topic.index');
-    Route::post('/dashboard/tutor/topic/{topicId}',  'TutorController@storeTopic')->name('tutor.topic.store');
+    Route::post('/dashboard/tutor/topic/{topicId}',  'TutorController@createTopic')->name('tutor.topic.create');
     Route::put('/dashboard/tutor/topic/{topicId}/edit', 'TutorController@updateTopic')->name('tutor.topic.update');
     Route::delete('/dashboard/tutor/topic/{topicId}/delete', 'TutorController@deleteTopic')->name('tutor.topic.delete');
     // Tutor - Topic Content
@@ -65,14 +65,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/dashboard/tutor/content/{contentId}/edit', 'TutorController@updateContent')->name('tutor.content.update');
     Route::delete('/dashboard/tutor/content/{contentId}', 'TutorController@deleteContent')->name('tutor.content.delete');
     // Tutor - Topic Quiz
-    Route::get('/dashboard/tutor/quiz/{quizId}', 'TutorController@getQuizDetail')->name('tutor.quiz.index');
+    Route::get('/dashboard/tutor/topic/{topicId}/quiz', 'TutorController@getQuizDetail')->name('tutor.quiz.index');
+    Route::get('/dashboard/tutor/topic/{topicId}/quiz/preview', 'TutorController@getPreviewQuizForm')->name('tutor.quiz.preview');
     Route::get('/dashboard/tutor/topic/{topicId}/quiz/create', 'TutorController@getQuizForm')->name('tutor.quiz.create');
-    Route::post('/dashboard/tutor/{topicId}/quiz/create', 'TutorController@store')->name('tutor.quiz.store');
+    Route::post('/dashboard/tutor/{topicId}/quiz/create', 'TutorController@storeQuiz')->name('tutor.quiz.store');
     Route::get('/dashboard/tutor/{topicId}/quiz/edit', 'TutorController@getEditQuizForm')->name('tutor.quiz.dit');
     Route::put('/dashboard/tutor/{topicId}/quiz/edit', 'TutorController@update')->name('tutor.quiz.update');
-    Route::get('/dashboard/tutor/quiz/{quizId}/result', 'TutorController@getAnswerList')->name('tutor.quiz.answer.list');
-    Route::get('/dashboard/tutor/quiz/result/{resultId}', 'TutorController@getAnswerDetail')->name('tutor.quiz.answer.index');
+    Route::get('/dashboard/tutor/topic/{topicId}/quiz/result', 'TutorController@getQuizAnswerList')->name('tutor.quiz.answer.list');
+    Route::get('/dashboard/tutor/topic/{topicId}/quiz/result/{resultId}', 'TutorController@getQuizAnswerDetail')->name('tutor.quiz.answer.index');
     Route::put('/dashboard/tutor/quiz/result/{resultId}/score', 'TutorController@updateScore')->name('tutor.quiz.score');
+    // Tutor - Score
+    Route::get('/dashboard/tutor/course/{courseId}/score', 'TutorController@getScoreList')->name('tutor.score.list');
+    Route::get('/dashboard/tutor/course/{courseId}/score/{scoreId}', 'TutorController@getScoreDetail')->name('tutor.score.detail');
+
 
 
     // Route::get('/classroom/topic/{topicId}', 'ClassController@getTopic')->name('topic.index');
