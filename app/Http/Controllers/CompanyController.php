@@ -48,6 +48,8 @@ class CompanyController extends Controller
         // dd($userLogin);
         // dd($company);
         $data = $request->all();
+        $startDate = date('Y-m-d',strtotime($data['startDate']));
+        $endDate = date('Y-m-d',strtotime($data['endDate']));
         
         // dd($data['tutor']);
         
@@ -60,6 +62,8 @@ class CompanyController extends Controller
                     'name' => $data['name'],
                     'description' => $data['description'],
                     'type' => $data['type'],
+                    'start_date' => $startDate,
+                    'end_date' => $endDate
                     
                 ]);
             }else if($data['category'] == '2'){
@@ -70,7 +74,8 @@ class CompanyController extends Controller
                     'name' => $data['name'],
                     'description' => $data['description'],
                     'type' => $data['type'],
-                    
+                    'start_date' => $startDate,
+                    'end_date' => $endDate
                 ]);
             }else{
                 $course = Course::create([
@@ -80,7 +85,8 @@ class CompanyController extends Controller
                     'name' => $data['name'],
                     'description' => $data['description'],
                     'type' => $data['type'],
-                    
+                    'start_date' => $startDate,
+                    'end_date' => $endDate
                 ]);
             }
         }else{
@@ -94,7 +100,8 @@ class CompanyController extends Controller
                     'description' => $data['description'],
                     'type' => $data['type'],
                     'price' => $data['price'],
-                    
+                    'start_date' => $startDate,
+                    'end_date' => $endDate
                 ]);
             }
             else if($data['category'] == '2'){
@@ -106,7 +113,8 @@ class CompanyController extends Controller
                     'description' => $data['description'],
                     'type' => $data['type'],
                     'price' => $data['price'],
-                    
+                    'start_date' => $startDate,
+                    'end_date' => $endDate
                 ]);
             }
             else{
@@ -118,7 +126,8 @@ class CompanyController extends Controller
                     'description' => $data['description'],
                     'type' => $data['type'],
                     'price' => $data['price'],
-                    
+                    'start_date' => $startDate,
+                    'end_date' => $endDate
                 ]);
             }
         }

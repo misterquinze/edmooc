@@ -212,7 +212,7 @@ class TutorController extends Controller
         $userLogin = Auth::user();
         $topic = Topic::findOrFail($topicId);
         $topic = Topic::where('id', $topic->id)->first();
-       // $topic = Topic::find($topicId);
+       //$topic = Topic::find($topicId);
 
         $topics = Topic::where('course_id', $topic->course->id)->get();
         $questions = QuizQuestion::where('topic_id',$topic->id)->get();
