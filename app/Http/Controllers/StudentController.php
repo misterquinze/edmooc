@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Course;
+use App\Topic;
+use App\Content;
 use App\Enrollment;
 use App\Favorite;
 use App\UserCourse;
@@ -47,11 +49,34 @@ class StudentController extends Controller
         $topics = Course::findOrFail($id)->topics()->get();
         $discussions = Course::findOrFail($id)->discussions()->get();
 
-        return view('classroom/overview', [
+        return view('dashboard/student/overview', [
              'userLogin' => $userLogin, 
              'course' => $course, 
              'topics' => $topics, 
              'discussions' => $discussions
+        ]);
+   }
+
+   public function getTopic($topicId){
+        $userLogin = Auth::user();
+        $topic = Topic::findOrFail($topicId);
+        $topic = Topic::where('id', $topic->id)->first();
+        //$topics = Course::where('')->topics()->get();
+        $contents = Content::where('topic_id', $topic->id)->get();
+
+        if ($contents->isEmpty()) {
+            \Session::flash('content', 'Dont have content');
+        }else {
+            foreach($contents as $content){
+                $content = Content::find($content->id);
+            }
+        }
+
+        return view('dashboard/student/content/list', [
+            'userLogin' => $userLogin,
+            'topic' => $topic,
+            
+            'contents' => $contents
         ]);
    }
 

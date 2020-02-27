@@ -55,7 +55,7 @@
                     <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                     <div class="col-left">
                         <div class="course-detail">
-                            <a href="{{URL ('classroom/'.$course->id.'/overview')}}">
+                            <a href="{{URL ('dashboard/student/course/'.$course->id.'/overview')}}">
                                 <h3 class="course-name">{{ $course->name }}
                                 </h3> 
                             </a>
@@ -66,7 +66,7 @@
                     <div class="col-right">
                            
                         <div class="proceed-btn">
-                            <a class="nav-link" href="{{URL ('classroom/'.$course->id.'/overview')}}">Materi</a>
+                            <a class="nav-link" href="{{route ('student.overview', [$course->id])}}">Materi</a>
                         </div>
                        
                     </div>  

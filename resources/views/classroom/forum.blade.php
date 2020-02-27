@@ -5,34 +5,51 @@
 @endsection
 
 @section('menu')
-@foreach($courses as $c)
-    <li><a href="{{ URL('/classroom/1') }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+    @if(auth()->user()->role == 'tutor')
+        <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+        <li><a href="{{ URL('dashboard/tutor/course/list') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
+        <li class="active"><a href="{{ URL('classroom/'.$courses->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-pie-chart"></i>
+                <span>Topik</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">        
+                @foreach($topics as $topic)
+                    <li><a href="{{ route('tutor.topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
+                @endforeach
+            </ul>
+        </li>
+    @else
+        <li><a href="{{  route('student.overview', [$courses->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
-    <li class="treeview">
+        <li class="treeview">
         <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Materi</span>
+            <span>Topik</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
         <ul class="treeview-menu">
             @foreach($topics as $topic)
-            <li><a href="{{ route('topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
+            <li><a href="{{ route('student.topic.index',  [ $topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
             @endforeach
         </ul>
-    </li>
-    <li>
-        <a href="{{ URL('classroom/'.$c->id.'/forum') }}">
+        </li>
+        <li class="active">
+            <a href="{{ URL('classroom/'.$courses->id.'/forum') }}">
             <i class="fa fa-th"></i> <span>Forum Diskusi</span>
                 {{-- <span class="pull-right-container">
                     <small class="label pull-right bg-green">1</small>
                 </span> --}}
-        </a>
-    </li>
-    
-
-    <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
+            </a>
+        </li>
+        <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
+    @endif
 @endsection
 
 @section('content')
@@ -45,40 +62,54 @@
                     <div class="gridspan">
                     <h3 class="title">Fourm Diskusi </h3>
                     
-                        <a href="{{route('discussion.create', [$c->id])}}">
+                        <a href="{{route('discussion.create', [$courses->id])}}">
                             <span class="add-btn">Buat Diskusi</span>
                         </a>
                     
                     </div>
                     <hr>
+                    @if ($discussions->isEmpty())
                     <div class="course-list">
                         <div class="top-section gridspan">
                             <div class="col-left">
                                 <div class="course-detail">
-                                    @if ($discussions->isEmpty())
-                                        @if (session('discussion'))
-                                            <div class="card-body">
-                                                <h2 class="alert alert-info">
-                                                    {{ session('discussion') }}
-                                                </h2>
-                                            </div>
-                                        @endif
-                                    @else
-                                        @foreach($discussions as $disc)
-                                        <div class="course-detail">
-                                            <a href="{{route('discussion.index', [$disc->id])}}">
-                                            <h3 class="course-name"> {{$disc->title}}</h3> 
-                                            </a>
+                                    @if (session('discussion'))
+                                        <div class="card-body">
+                                            <h2 class="alert alert-info">
+                                                {{ session('discussion') }}
+                                            </h2>
                                         </div>
-                                        @endforeach
                                     @endif
+                                </div>     
+                            </div>
+                            </div>                      
+                        </div>
+                        <div class="bottom-section gridspan">  
+                        </div>     
+                    </div>
+                    @else
+                    @foreach($discussions as $disc)
+                    <div class="course-list">
+                        <div class="top-section gridspan">
+                            <div class="col-left">
+                                <div class="course-title" style="margin-bottom: 20px;">
+                                    <a href="{{route('discussion.index', [$disc->id])}}">
+                                        <h3 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$disc->title}}</h3> 
+                                    </a>
+                                </div>
+                                <div class="course-detail">
+                                    <div class="course-detail">
+                                        <span>{{$disc->content}}</span>
+                                    </div>
                                 </div>
                             </div>                      
                         </div>
                         <div class="bottom-section gridspan">  
-                        
+                           
                         </div>     
                     </div>
+                    @endforeach
+                    @endif
                 </div>
                 {{--<div id="form-container" class="form-create">
                     <div class="form-header">Buat Diskusi</div>
@@ -111,7 +142,7 @@
             </template>
 
         </div>
-@endforeach    
+    
     </section>
     <script src="{{ URL('js/vue.js') }}"></script>
     {{-- <script src="{{ URL('js/sweetalert.min.js') }}"></script> --}}

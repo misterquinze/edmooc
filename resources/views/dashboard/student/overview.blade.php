@@ -21,7 +21,7 @@
         </a>
         <ul class="treeview-menu">        
             @foreach($topics as $topic)
-                <li><a href="{{ route('student.overview', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
+                <li><a href="{{ route('student.topic.index',  [ $topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
             @endforeach
         </ul>
     </li>
@@ -84,7 +84,7 @@
                         @foreach($topics as $topic)
                             <div class="topic-list gridspan">
                                 <div class="left-section">
-                                    <a href="{{ route('student.content.index', [$topic->id]) }}" class="topic-name">
+                                    <a href="{{ route('student.topic.index', [$topic->id]) }}" class="topic-name">
                                         {{$topic->name}}
                                     </a>
                                 </div>

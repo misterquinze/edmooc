@@ -7,7 +7,6 @@
 @section('menu')
     <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
     <li><a href="{{ URL('dashboard/list/course') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
-
     <li class="active"><a href="{{ URL('classroom/'.$topic->course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
     <li class="treeview">
@@ -18,13 +17,13 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
-        {{-- <ul class="treeview-menu">        
-            @foreach($topics as $topic)
+        <ul class="treeview-menu">        
+            {{--@foreach($topics as $topic)
                 <li><a href="{{ route('tutor.topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
-            @endforeach
-        </ul> --}}
+            @endforeach--}}
+        </ul> 
     </li>
-    <li><a href="{{ route('tutor.quiz.index', [$topic->id]) }}"><i class="fa fa-book"></i> <span>Kuis</span></a></li>
+    {{--<li><a href="{{ route('student.quiz.index', [$topic->id]) }}"><i class="fa fa-book"></i> <span>Kuis</span></a></li>--}}
 @endsection
 
 @section('content')
@@ -35,9 +34,7 @@
         <div class="topic-detail-header">
             <div class="top-section">
                 <h2 class="topic-name">{{ $topic->name }}</h2>
-                <a href="{{route('tutor.content.create', [$topic->id])}}" class="add-content-button">
-                    Tambah Materi
-                </a>
+                
             </div>
             <div class="bottom-section">
                 {{ $topic->course->name }}
@@ -45,7 +42,7 @@
         </div>
 
         @foreach($contents as $index => $content)     
-            <a href="{{route('tutor.content.detail', [$content->id])}}" class="topic-content">
+            <a href="{{route('student.content.index', [$content->id])}}" class="topic-content">
                 <div class="topic-content-index">Materi {{ $index+1 }}</div>
                 <div class="topic-content-name">{{ $content->title }}</div>
                 <span class="fa fa-angle-right"></span>

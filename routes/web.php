@@ -32,13 +32,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/dashboard/settings', 'DashboardController@updateProfile');
 
 
-    // Student
+    // Student - MyCourse
     Route::get('/dashboard/course/me', 'StudentController@getMyCourse');
-    Route::get('/dashboard/favorite', 'StudentController@getFavorite');
-
+    // Student - ClassOverview & TopicList
+    Route::get('/dashboard/student/course/{id}/overview', 'StudentController@getOverview')->name('student.overview');
+    // Student - TopicDetail & ContentList
+    Route::get('/dashboard/student/topic/{topicId}', 'StudentController@getTopic')->name('student.topic.index');
+    // Student - ContentDetail
+    Route::get('classroom/topic/content/{contentId}', 'ContentsController@index')->name('student.content.index');
+    // Student - Enroll & Unenroll
     Route::get('/enroll/{id}', 'StudentController@enroll')->name('enroll');
     Route::get('/unenroll/{id}', 'StudentController@unenroll')->name('unenroll');
-
+    // Student - Transaction
     Route::get('/dashboard/transaction', 'StudentController@getTransaction');
 
     // Company
@@ -87,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::delete('/classroom/{topicId}/delete', 'TutorController@deleteTopic')->name('topic.delete');
 
     // Content
-    Route::get('classroom/topic/content/{contentId}', 'ContentsController@index')->name('content.index');
+    
     Route::get('classroom/topic/{topicId}/content/create', 'ContentsController@create')->name('content.create');
     Route::post('classroom/topic/{topicId}/content', 'ContentsController@store')->name('content.store');
     Route::get('classroom/topic/content/{content}', 'ContentsController@show')->name('content.show');
@@ -97,10 +102,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Tutor & Student (Classroom)
     Route::get('/classroom/{id}/overview', 'ClassController@getOverview');
-    
-    
+    //Classroom - ForumPage
     Route::get('/classroom/{id}/forum', 'ClassController@getForum')->name('forum');
-    
+    //Classroom - Discussion
     Route::get('/classroom/discussion/{discId}', 'DiscussionController@index')->name('discussion.index');
     Route::get('/classroom/{id}/discussion', 'DiscussionController@create')->name('discussion.create');
     Route::post('/classroom/{id}/discussion', 'DiscussionController@store')->name('discussion.store');

@@ -41,6 +41,12 @@ hr{
     padding: 20px;
 }
 
+.content .course-list .top-section .col-left .course-title .course-name{
+    margin-top: 5;
+}
+
+
+
 .form-create{
     border: 1px solid #cccccc;
     display: none;

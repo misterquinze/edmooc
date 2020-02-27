@@ -100,6 +100,7 @@ class TutorController extends Controller
         $userLogin = Auth::user();
         $topic = Topic::findOrFail($topicId);
         $topic = Topic::where('id', $topic->id)->first();
+        //$topics = Course::findOrFail($id)->topics()->get();
         $contents = Content::where('topic_id', $topic->id)->get();
 
         if ($contents->isEmpty()) {
@@ -113,6 +114,7 @@ class TutorController extends Controller
         return view('dashboard/tutor/content/list', [
             'userLogin' => $userLogin,
             'topic' => $topic,
+            
             'contents' => $contents
         ]);
     }
