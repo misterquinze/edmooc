@@ -47,6 +47,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/transaction', 'StudentController@getTransaction');
 
     // Company
+    Route::get('/dashboard/company/program', 'ProgramController@index')->name('program.index');
+    Route::get('/dashboard/company/program', 'ProgramController@create')->name('program.create');
+    Route::post('/dashboard/company/program', 'ProgramController@store')->name('program.store');
+    Route::delete('/dashboard/program/{id}/delete', 'ProgramController@deleteProgram');
+    
     Route::get('/dashboard/course/list', 'CompanyController@getMyCourse');
     Route::post('/dashboard/course/list', 'CompanyController@createCourse');
     Route::get('/dashboard/course/{id}/edit', 'CompanyController@getEditCourseForm');

@@ -24,4 +24,11 @@ class Discussion extends Model
 
         return $this->belongsTo('App\user', 'foreign_key');
     }
+
+    public function comment(){
+        //$courses = App\Topic::find($id)->courses;
+        
+        return $this->hasMany('App\Comment');
+    }
+
 }

@@ -8,7 +8,7 @@
     @if(auth()->user()->role == 'tutor')
         <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
         <li><a href="{{ URL('dashboard/tutor/course/list') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
-        <li class="active"><a href="{{ URL('classroom/'.$courses->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+        <li><a href="{{ URL('classroom/'.$courses->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-pie-chart"></i>
@@ -23,6 +23,7 @@
                 @endforeach
             </ul>
         </li>
+        <li class="active"><a href="{{ URL('classroom/'.$courses->id.'/forum') }}"><i class="fa fa-th"></i> <span>Forum Diskusi</span></a></li>
     @else
         <li><a href="{{  route('student.overview', [$courses->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
@@ -61,11 +62,11 @@
                 <div id="display-container">
                     <div class="gridspan">
                     <h3 class="title">Fourm Diskusi </h3>
-                    
+                        {{-- 
                         <a href="{{route('discussion.create', [$courses->id])}}">
                             <span class="add-btn">Buat Diskusi</span>
-                        </a>
-                    
+                        </a>--}}
+                        <button type="button" class="add-btn" id="add-item" data-item-id="1">Buat Diskusi</button>
                     </div>
                     <hr>
                     @if ($discussions->isEmpty())
@@ -111,6 +112,45 @@
                     @endforeach
                     @endif
                 </div>
+                <!-- modal Tambah Diskusi -->
+                <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="edit-modal-label">Tambah Topik</h5>
+                        
+                            </div>
+                            <div class="modal-body" id="attachment-body-content">
+                                <form id="form-container" class="form-horizontal" method="POST" action="{{route('discussion.store', [$courses->id])}}">
+                                    {{ csrf_field() }}
+                                    <div class="card-body">
+                                    <!-- name -->
+                                        <div class="input-container">
+                                            <h4 class="input-title">Judul Diskusi</h4>
+                                            <p class="input-sub-title">Beri Judul Diskusi</p>
+                                            
+                                            <input type="text" name="title" class="regular-input" id="modal-input-title" required autofocus>
+                                        </div>
+                                    
+                                    <!-- description -->
+                                        <div class="input-container">
+                                            <h4 class="input-title">Isi Diskusi</h4>
+                                            <p class="input-sub-title">tuliskan isi diskusi sejelas mungkin</p>
+                                           
+                                            <textarea name="content" class="regular-textarea" id="modal-input-content"required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer gridspan">
+                                        <button type="submit" class="submit-btn" >Kirim</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{--<div id="form-container" class="form-create">
                     <div class="form-header">Buat Diskusi</div>
                     
@@ -168,7 +208,45 @@
             }
 
         });
-      
-
     </script>
+    <script>
+        $(document).ready(function() 
+    {
+        /**
+        * for showing add item popup
+        */
+        $(document).on('click', "#add-item", function() {
+            $(this).addClass('add-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
+            var options = {
+            'backdrop': 'static'
+            };
+            $('#add-modal').modal(options)
+        })
+       
+        // on modal show
+            //add topik
+        $('#add-modal').on('show.bs.modal', function() {
+            var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
+            var row = el.closest(".data-row");
+            // get the data
+            
+            var title = row.children(".title").text();
+            var content = row.children(".content").text();
+            // fill the data in the input fields
+           
+            $("#modal-input-title").val(title);
+            $("#modal-input-content").val(content);
+
+        })
+       
+        // on modal hide
+        $('#add-modal').on('hide.bs.modal', function() {
+            $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
+            $("#edit-form").trigger("reset");
+        })
+
+        
+    })
+    </script>
+
 @endsection

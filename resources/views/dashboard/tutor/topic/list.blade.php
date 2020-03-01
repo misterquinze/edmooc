@@ -43,26 +43,40 @@
         <div id="course">
             <template>
                 <div id="display-container">
+                    <div class="course-title">
+                        <h2 class="course-name">{{ $course->name }}</h2>
+                    </div>
+                    <hr>
                     <div class="course-content">    
                         <div class="gridspan">
                             <div class="left-section">
                                 <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                             </div>
 
-                            <div class="right-section">
-                                <h2 class="course-name">{{ $course->name }}</h2>
+                            <div class="middle-section">
+                                
 
                                 <div class="course-detail-title">Deskripsi</div>
                                 <div class="course-detail-value">{{ $course->description }}</div>
 
-                                <div class="course-detail-title">Type</div>
+                                <div class="course-detail-title">Tipe</div>
                                 <div class="course-detail-value">{{ $course->type }}</div>
 
                                 <div class="course-detail-title">Price</div>
                                 <div class="course-detail-value">Rp {{ number_format($course->price) }}</div>
 
-                                <div class="course-detail-title">Last Update</div>
-                                <div class="course-detail-value">{{ $course->updated_at }}</div>
+                            </div>
+                            <div class="right-section">
+                                <div class="course-detail-title">Institusi</div>
+                                <div class="course-detail-value">{{ $course->company->name }}</div>
+
+                                <div class="course-detail-title">Mulai Kursus</div>
+                                <div class="course-detail-value">{{ $course->start_date }}</div>
+
+                                <div class="course-detail-title">Kursus Berakhir</div>
+                                <div class="course-detail-value">{{ $course->end_date }}</div>
+
+                                
                             </div>
                         </div>    
                     </div>
@@ -70,7 +84,8 @@
                     <div class="topic-content">
                         <div class="topic-content-header gridspan">
                             <h3 class="topic-title">Topik</h3>
-                            <button class="add-topic-button" @click.prevent="changeType('create')">Tambah Topik</button>
+                            {{--<button class="add-topic-button" @click.prevent="changeType('create')">Tambah Topik</button>--}}
+                            <button type="button" class="add-topic-button" id="add-item" data-item-id="1">Tambah Topik</button>
                         </div>
                         <div class="topic-list gridspan">
                             <div class="left-section header">Nama Topik</div>
@@ -87,6 +102,7 @@
                                     <span @click.prevent="changeType('edit',{{ $topic->id }})" class="edit-btn">
                                         <i class="fa fa-edit"></i>
                                     </span>
+                                    {{--<button type="button" class="edit-topic-button" id="{{ $topic->id }}" data-item-id="{{ $topic->id }}"><i class="fa fa-edit"></i></button>--}}
                                     <span class="delete-btn" onclick="deleteTopic({{ $topic->id }})">
                                         <i class="fa fa-trash"></i>
                                     </span>
@@ -127,7 +143,7 @@
                     </div>
                 @endforeach
 
-                <div id="form-container" class="form-create">
+                {{--<div id="form-container" class="form-create">
                     <div class="form-header">
                         Buat Topik Baru
                     </div>
@@ -152,6 +168,87 @@
                             <button type="submit" class="submit-btn">Kirim</button>
                         </div>
                     </form>
+                </div>--}}
+                <!-- modal Edit Topik -->
+                @foreach($topics as $topic)
+                <div class="modal fade" id="{{ $topic->id }}" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="edit-modal-label">Edit Topik</h5>
+                            </div>
+                            <div class="modal-body" id="attachment-body-content">
+                                <form id="form-container" class="form-horizontal" method="POST" action="{{ route('tutor.topic.update', [$topic->id]) }}">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="put">
+                                    <div class="card-body">
+                                    <!-- name -->
+                                        <div class="input-container">
+                                            <h4 class="input-title">Judul Materi</h4>
+                                            <p class="input-sub-title">Beri Judul Materi</p>
+                                            
+                                            <input type="text" name="name" class="regular-input" id="modal-input-name" required autofocus>
+                                        </div>
+                                    
+                                    <!-- description -->
+                                        <div class="input-container">
+                                            <h4 class="input-title">Deskripsi Topik</h4>
+                                            <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
+                                           
+                                            <textarea name="description" class="regular-textarea" id="modal-input-description"required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer gridspan">
+                                        <button type="submit" class="submit-btn" >Kirim</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                           
+                        </div>
+                       
+                    </div>
+                </div>
+                @endforeach
+                <!-- modal Tambah Topik -->
+                <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="edit-modal-label">Tambah Topik</h5>
+                        
+                            </div>
+                            <div class="modal-body" id="attachment-body-content">
+                                <form id="form-container" class="form-horizontal" method="POST" action="{{ route('tutor.topic.create', [$course->id]) }}">
+                                    {{ csrf_field() }}
+                                    <div class="card-body">
+                                    <!-- name -->
+                                        <div class="input-container">
+                                            <h4 class="input-title">Judul Materi</h4>
+                                            <p class="input-sub-title">Beri Judul Materi</p>
+                                            
+                                            <input type="text" name="name" class="regular-input" id="modal-input-name" required autofocus>
+                                        </div>
+                                    
+                                    <!-- description -->
+                                        <div class="input-container">
+                                            <h4 class="input-title">Deskripsi Topik</h4>
+                                            <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
+                                           
+                                            <textarea name="description" class="regular-textarea" id="modal-input-description"required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer gridspan">
+                                        <button type="submit" class="submit-btn" >Kirim</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </template>
         </div>  
@@ -208,5 +305,71 @@
             });
         }
     </script>
+    <script>
+        $(document).ready(function() 
+    {
+        /**
+        * for showing add item popup
+        */
+        $(document).on('click', "#add-item", function() {
+            $(this).addClass('add-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
+            var options = {
+            'backdrop': 'static'
+            };
+            $('#add-modal').modal(options)
+        })
+        /**
+        * for showing edit item popup
+        */
+        $(document).on('click', .id, function() {
+            $(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
+            var options = {
+            'backdrop': 'static'
+            };
+            $('#id').modal(options)
+        })
+
+        // on modal show
+            //add topik
+        $('#add-modal').on('show.bs.modal', function() {
+            var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
+            var row = el.closest(".data-row");
+            // get the data
+            
+            var name = row.children(".name").text();
+            var description = row.children(".description").text();
+            // fill the data in the input fields
+           
+            $("#modal-input-name").val(name);
+            $("#modal-input-description").val(description);
+
+        })
+            //edit topik
+        $('#edit-modal').on('show.bs.modal', function() {
+            var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
+            var row = el.closest(".data-row");
+            // get the data
+            
+            var name = row.children(".name").text();
+            var description = row.children(".description").text();
+            // fill the data in the input fields
+           
+            $("#modal-input-name").val(name);
+            $("#modal-input-description").val(description);
+
+        })
+        // on modal hide
+        $('#add-modal').on('hide.bs.modal', function() {
+            $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
+            $("#edit-form").trigger("reset");
+        })
+
+        $('#edit-modal').on('hide.bs.modal', function() {
+            $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
+            $("#edit-form").trigger("reset");
+        })
+    })
+    </script>
+
     
 @endsection

@@ -16,4 +16,7 @@ class Company extends Model
     public function course(){
         return $this->hasMany('App\course');
     }
+    public function program(){
+        return $this->hasMany('App\program');
+    }
 }

@@ -36,7 +36,7 @@
 @endsection
 
 @section('content')
-    
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL('css/classroom/discussion/create.css') }}">
 
     <section class="content">
@@ -91,7 +91,9 @@
                             <div  v-if="contentType == 'artikel'" class="input-container">
                                 <h4 class="input-title">Tambahkan Artikel</h4>
                                 <p class="input-sub-title">Tulis isi artikel </p>
-                               <textarea id="artikel"></textarea>
+                                <div id="editor">
+                                    <p>tes</p>
+                                </div>
                             </div>
                         </div>
                         
@@ -112,7 +114,7 @@
             el: '#forum',
             data() {
                 return {
-                    contentType: 'artikel',   
+                    contentType: 'video',   
                 }
             },
             
@@ -129,7 +131,12 @@
             }
         });
     </script>
-    
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quill = new Quill('#editor', {
+          theme: 'snow'
+        });
+      </script>
     
   
 @endsection
