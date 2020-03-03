@@ -54,13 +54,15 @@
     </section>
     @elseif($userLogin->role == 'company')
     <section class="content">
-        <h3 class="title">company</h3>
-            
+        
         <div class="course-list">
             <div class="gridspan">
                 <div class="col-left">
                     <div class="label-container">
-
+                        <p> Selamat datang di halaman dasbor Institusi</p>
+                        <p> Untuk membuat kursus professional silahan membuka menu Professioanl</p>
+                        <p> Untuk membuat kursus akademik silahan membuka menu Akaedmik</p>
+                        
                     </div>
                     
                 </div>

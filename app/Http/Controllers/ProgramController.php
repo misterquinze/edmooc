@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Company;
-use App\Course;
+use App\Ac_course;
 use App\User;
 use App\Category;
 use App\Tutor;
@@ -29,6 +29,26 @@ class ProgramController extends Controller
             'userLogin' => $userLogin,
             'company' => $company,
             'program' => $program,
+        ]);
+    }
+
+    /**
+     * Display a detail of program.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function programDetail($id)
+    {
+        $userLogin = Auth::user();
+        $categories = Category::all();
+        $program = Program::where('id', $id)->first();
+        $accourse = Ac_course::where('program_id', $program->id)->get();
+
+        return view('dashboard/company/program-detail', [
+            'userLogin' => $userLogin, 
+            'categories' => $categories,
+            'program' => $program,
+            'accourse'=> $accourse
         ]);
     }
 
@@ -97,7 +117,14 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
-        //
+        $userLogin = Auth::user();
+        $program = Program::find($id);
+        //dd($program);
+
+        return view ('dashboard/company/program-edit', [
+            'userLogin' =>$userLogin,
+            'program' => $program,
+        ]);
     }
 
     /**
@@ -132,5 +159,39 @@ class ProgramController extends Controller
         $program = Program::find($id);
         $program->delete();
         return redirect('/dashboard/company/program');
+    }
+
+    /**
+     * Create academic course.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function createAcCourse(Request $request, Program $program, $id)
+    {
+        $userLogin = Auth::user();
+        $company = Company::where('user_id', $userLogin->id)->first();
+        $program = Program::where('id', $program->id)->get();
+        $program = Program::findOrFail($id);
+        $data = $request->all();
+        $startDate = date('Y-m-d', strtotime($data['startDate']));
+        $endDate = date('Y-m-d', strtotime($data['endDate']));
+
+        $accourse = Ac_course::create([
+            'company_id' => $company->id,
+            'category_id' => $data['category'],
+            'program_id' => $program->id,
+            //'tutor_id' => $data['tutor'],
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'price' => $data['price'],
+            'passing_grade' => $data['passing_grade'],
+            'start_date' => $startDate,
+            'end_date' => $endDate
+            
+        ]);
+        //dd($accourse);
+        return back();
     }
 }

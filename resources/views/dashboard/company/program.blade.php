@@ -7,16 +7,17 @@
 @section('menu')
     <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
     <li><a href="{{ URL('dashboard/course/list') }}"><i class="fa fa-book"></i> <span>Professional</span></a></li>
+    
     <li class="active"><a href="{{ URL('dashboard/company/program') }}"><i class="fa fa-book"></i> <span>Akademik</span></a></li>
     <li><a href="{{ URL('dashboard/revenue') }}"><i class="fa fa-list"></i> <span>Pendapatan</span></a></li>
     {{-- <li><a href="{{ URL('dashboard/settings') }}"><i class="fa fa-gear"></i> <span>Pengaturan</span></a></li> --}}
 @endsection
 
 @section('content')
-    <link rel="stylesheet" href="{{ URL('css/dashboard/company/course.css') }}">
+    <link rel="stylesheet" href="{{ URL('css/dashboard/company/program.css') }}">
 
     <section class="content">
-        <div id="course">
+        <div id="program">
             <template>
                 <div id="display-container">
                     <div class="gridspan">
@@ -90,33 +91,35 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="right-section">
-                                    @foreach ($program as $p)    
-                                        <div class="course-list ">
-                                            <div class="top-section gridspan">
-                                                    
-                                                <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
-                                                <div class="course-detail">
-                                                    <h3 class="course-name">{{ $p->name }}</h3> 
-                                                    <h5 class="course-description">{{$p->description}}
-                                                    </h5> 
-                                                </div>
-                                            </div>
-                                            <div class="bottom-section gridspan">
-                                                <div class="col-left">
-                                                    tes
-                                                </div>
-                                                <div class="col-right">
-                                                    <span class="delete-btn" onclick="deleteProgram({{ $p->id }})">
-                                                        <i class="fa fa-trash"></i>
-                                                    </span>
-                                                    <a href="{{ URL('dashboard/program/'.$p->id.'/edit') }}" class="edit-btn">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                </div>
-                        
+                                @foreach ($program as $p)
+                                    <a href="{{ route ('program.detail', [$p->id])}} ">  
+                                    <div class="course-list ">
+                                        <div class="top-section gridspan">
+                                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                                            <div class="course-detail">
+                                                <h3 class="course-name">{{ $p->name }}</h3> 
+                                                <h5 class="course-description">{{$p->description}}
+                                                </h5> 
                                             </div>
                                         </div>
+                                        <div class="bottom-section gridspan">
+                                            <div class="col-left">
+                                                tes
+                                            </div>
+                                            <div class="col-right">
+                                                <span class="delete-btn" onclick="deleteProgram({{ $p->id }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </span>
+                                                <a href="{{ URL('dashboard/program/'.$p->id.'/edit') }}" class="edit-btn">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </div>
+                        
+                                        </div>
+                                    </div>
+                                    </a>
                                     <form class="form-delete" id="delete-{{ $p->id }}" action="{{ URL('dashboard/program/'.$p->id.'/delete') }}"  method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete">
@@ -172,12 +175,8 @@
 
     <script>
         new Vue({
-            el: '#course',
-            data() {
-                return {
-                    courseType: 'free',
-                }
-            },
+            el: '#program',
+            
             methods: {
                 changeType(type){
                     if(type == 'display'){

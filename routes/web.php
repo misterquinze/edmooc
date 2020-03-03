@@ -46,17 +46,24 @@ Route::group(['middleware' => 'auth'], function () {
     // Student - Transaction
     Route::get('/dashboard/transaction', 'StudentController@getTransaction');
 
-    // Company
+    // Company - Program
     Route::get('/dashboard/company/program', 'ProgramController@index')->name('program.index');
     Route::get('/dashboard/company/program', 'ProgramController@create')->name('program.create');
     Route::post('/dashboard/company/program', 'ProgramController@store')->name('program.store');
-    Route::delete('/dashboard/program/{id}/delete', 'ProgramController@deleteProgram');
-    
+    Route::get('/dashboard/program/{id}/edit', 'ProgramController@edit')->name('program.edit');
+    Route::put('/dashboard/program/{id}/edit', 'ProgramController@update')->name('program.update');
+    Route::delete('/dashboard/program/{id}/delete', 'ProgramController@deleteProgram')->name('program.delete');
+    Route::get('/dashboard/program/{id}/detail', 'ProgramController@programDetail')->name('program.detail');
+
+    //Company - AcademicCourse
+    Route::post('dashboard/program/{id}/detail', 'ProgramController@createAcCourse')->name('company.academic.create');
+    // Company - ProCourse
     Route::get('/dashboard/course/list', 'CompanyController@getMyCourse');
     Route::post('/dashboard/course/list', 'CompanyController@createCourse');
     Route::get('/dashboard/course/{id}/edit', 'CompanyController@getEditCourseForm');
     Route::put('/dashboard/course/{id}/edit', 'CompanyController@updateCourse');
     Route::delete('/dashboard/course/{id}/delete', 'CompanyController@deleteCourse');
+    // Company - payment
     Route::get('/dashboard/revenue', 'CompanyController@getRevenue');
     
     // Tutor
