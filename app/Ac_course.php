@@ -10,6 +10,7 @@ class Ac_course extends Model
         'company_id',
         'category_id',
         'program_id',
+        'tutor_id',
         'name',
         'description',
         'passing_grade',

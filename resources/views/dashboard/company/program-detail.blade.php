@@ -144,6 +144,23 @@
                                 @endforeach
                             </div>
                             <div class="input-container">
+                                <h4 class="input-title">Tutor Kursus</h4>
+                                <p class="input-sub-title">Tentukan Tutor kursus</p>
+                                {{--<select name="tutor" class="regular-select">
+                                    <option>Pilih Tutor</option>
+                                        @foreach ($tutors as $tutor)
+                                            <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
+                                        @endforeach   
+                                </select>--}}
+                                @foreach ($tutors as $tutor)
+                                    <label class="radio-container">
+                                        {{$tutor->user->name}}
+                                        <input type="radio" name="tutor" value="{{$tutor->id}}" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            <div class="input-container">
                                 <h4 class="input-title">Tanggal Mulai</h4>
                                 <p class="input-sub-title">Tentukan tanggal mulai kursus</p>
                                 <input type="text" name="startDate" class="regular-input" id="startDate" placeholder="Choose Date" required>

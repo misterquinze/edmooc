@@ -41,12 +41,14 @@ class ProgramController extends Controller
     {
         $userLogin = Auth::user();
         $categories = Category::all();
+        $tutors = Tutor::all();
         $program = Program::where('id', $id)->first();
         $accourse = Ac_course::where('program_id', $program->id)->get();
 
         return view('dashboard/company/program-detail', [
             'userLogin' => $userLogin, 
             'categories' => $categories,
+            'tutors' => $tutors,
             'program' => $program,
             'accourse'=> $accourse
         ]);
@@ -182,7 +184,7 @@ class ProgramController extends Controller
             'company_id' => $company->id,
             'category_id' => $data['category'],
             'program_id' => $program->id,
-            //'tutor_id' => $data['tutor'],
+            'tutor_id' => $data['tutor'],
             'name' => $data['name'],
             'description' => $data['description'],
             'price' => $data['price'],
