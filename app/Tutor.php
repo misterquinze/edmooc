@@ -20,7 +20,11 @@ class Tutor extends Model
     }
 
     public function course(){
-        return $this->hasOne('App\course');
+        return $this->hasMany('App\course');
+    }
+
+    public function ac_course(){
+        return $this->hasMany('App\ac_course');
     }
 
     public function topic(){

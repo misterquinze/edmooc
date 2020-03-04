@@ -318,16 +318,7 @@
             };
             $('#add-modal').modal(options)
         })
-        /**
-        * for showing edit item popup
-        */
-        $(document).on('click', .id, function() {
-            $(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
-            var options = {
-            'backdrop': 'static'
-            };
-            $('#id').modal(options)
-        })
+        
 
         // on modal show
             //add topik
@@ -345,29 +336,14 @@
 
         })
             //edit topik
-        $('#edit-modal').on('show.bs.modal', function() {
-            var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
-            var row = el.closest(".data-row");
-            // get the data
-            
-            var name = row.children(".name").text();
-            var description = row.children(".description").text();
-            // fill the data in the input fields
-           
-            $("#modal-input-name").val(name);
-            $("#modal-input-description").val(description);
-
-        })
+        
         // on modal hide
         $('#add-modal').on('hide.bs.modal', function() {
             $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
             $("#edit-form").trigger("reset");
         })
 
-        $('#edit-modal').on('hide.bs.modal', function() {
-            $('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
-            $("#edit-form").trigger("reset");
-        })
+        
     })
     </script>
 

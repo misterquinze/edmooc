@@ -27,7 +27,12 @@ class Ac_course extends Model
         return $this->belongsTo('App\company');
     }
 
+    public function tutor(){
+        return $this->belongsTo('App\tutor');
+    }
+
     public function category(){
         return $this->hasOne('App\category');
     }
+
 }
