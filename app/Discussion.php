@@ -25,10 +25,10 @@ class Discussion extends Model
         return $this->belongsTo('App\user', 'foreign_key');
     }
 
-    public function comment(){
+    public function comments(){
         //$courses = App\Topic::find($id)->courses;
         
-        return $this->hasMany('App\Comment');
+        return $this->morphMany('App\Comment', 'commentable');
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Discussion;
 use App\User;
+use App\Comments;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class DiscussionController extends Controller
         $userLogin = Auth::user();
         $discussions = Discussion::findOrFail($discId);
         $discussions  = Discussion::where('id', $discussions->id)->first();
-        
+        $comment = Comments::where('commentable_id', $discussions->id)->get();
         
 
         //dd($discussions);
@@ -36,7 +37,8 @@ class DiscussionController extends Controller
         */
         return view('classroom/discussion/discussion', [
             'userLogin' => $userLogin,
-            'discussions' => $discussions
+            'discussions' => $discussions,
+            'comment' => $comment,
        ]);
     }
 
@@ -132,4 +134,28 @@ class DiscussionController extends Controller
     {
         
     }
+
+    public function addComment(Request $request, Discussion $disc)
+    {
+        $comment = New Comments;
+        $comment->user_id = Auth::user()->id;
+        $comment->content = $request->content;
+
+        $disc->comments()->save($comment);
+        
+        return back()->withInfo('komentar terkirim!');
+    }
+
+    public function replyComment(Request $request, Comments $comment)
+    {
+        $reply = New Comments;
+        $reply->user_id = Auth::user()->id;
+        $reply->content = $request->content;
+
+        $comment->comments()->save($reply);
+        
+        return back()->withInfo('komentar balasan terkirim!');
+    }
+
+    
 }

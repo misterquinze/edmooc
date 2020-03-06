@@ -54,63 +54,125 @@
 @endsection
 
 @section('content')
-    <link rel="stylesheet" href="{{ URL('css/classroom/discussion.css') }}">
+    <link rel="stylesheet" href="{{ URL('css/classroom/forum.css') }}">
     
     <section class="content">
         <div id="forum">
             <template>
                 <div id="display-container">
                     <div class="gridspan">
-                    <h3 class="title">Fourm Diskusi </h3>
-                        {{-- 
-                        <a href="{{route('discussion.create', [$courses->id])}}">
-                            <span class="add-btn">Buat Diskusi</span>
-                        </a>--}}
-                        <button type="button" class="add-btn" id="add-item" data-item-id="1">Buat Diskusi</button>
+                        <h3 class="title">Forum Diskusi </h3>
+                            {{-- 
+                            <a href="{{route('discussion.create', [$courses->id])}}">
+                                <span class="add-btn">Buat Diskusi</span>
+                            </a>
+                        <button type="button" class="add-btn" id="add-item" data-item-id="1">Buat Diskusi</button>--}}
                     </div>
                     <hr>
-                    @if ($discussions->isEmpty())
-                    <div class="course-list">
-                        <div class="top-section gridspan">
-                            <div class="col-left">
-                                <div class="course-detail">
-                                    @if (session('discussion'))
-                                        <div class="card-body">
-                                            <h2 class="alert alert-info">
-                                                {{ session('discussion') }}
-                                            </h2>
-                                        </div>
-                                    @endif
-                                </div>     
-                            </div>
-                            </div>                      
-                        </div>
-                        <div class="bottom-section gridspan">  
-                        </div>     
-                    </div>
-                    @else
-                    @foreach($discussions as $disc)
-                    <div class="course-list">
-                        <div class="top-section gridspan">
-                            <div class="col-left">
-                                <div class="course-title" style="margin-bottom: 20px;">
-                                    <a href="{{route('discussion.index', [$disc->id])}}">
-                                        <h3 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$disc->title}}</h3> 
-                                    </a>
-                                </div>
-                                <div class="course-detail">
-                                    <div class="course-detail">
-                                        <span>{{$disc->content}}</span>
+                    <div class="course-content">
+                        <div class="gridspan">
+                            <div class="right-section">
+                               
+                                <div class="filter-box">
+                                    <div class="filter-header">
+                                        Deskripsi
+                                    </div>
+                                    <div class="filter-body">
+                                        <p>
+                                        Selamat datang di forum diskusi kursus! silahkan bertanya, berdiskusi dan berdebat materi kursus.
+                                        </p>
                                     </div>
                                 </div>
-                            </div>                      
+                                <div class="filter-box">
+                                    <div class="filter-header">
+                                        Tutor Kursus
+                                    </div>
+                                    <div class="filter-body">
+                                        {{$courses->tutor_id}}
+                                    </div>
+                                </div>
+                                
+                                <div class="filter-box">
+                                    <div class="filter-header">
+                                        Topik Diskusi
+                                    </div>
+                                    <div class="filter-body">
+                                        <form action="{{ URL('') }}" method="post">
+                                            {{ csrf_field() }}
+                                            
+                                            <label class="filter-container">
+                                                Topik 1
+                                                <input type="checkbox" name="free">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="filter-container">
+                                                Topik 2
+                                                <input type="checkbox" name="paid">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="left-section">
+                                <div class="disc-header gridspan">
+                                    
+                                    <div class="head-left">Search 
+                                    </div>
+                                    <div class="head-right"><button type="button" class="add" id="add-item" data-item-id="1">Buat Diskusi</button>
+                                    </div>
+                                </div>
+                                <div class="disc-list">
+                                @if ($discussions->isEmpty())
+                                    <div class="course-list">
+                                        <div class="top-section gridspan">
+                                            <div class="col-left">
+                                                <div class="course-detail">
+                                                    @if (session('discussion'))
+                                                        <div class="card-body">
+                                                            <h2 class="alert alert-info">
+                                                                {{ session('discussion') }}
+                                                            </h2>
+                                                        </div>
+                                                    
+                                                </div>     
+                                            </div>
+                                        </div>                      
+                                    </div>
+                                @endif
+                                @else
+                                    @foreach($discussions as $disc)
+                                    <a id="disc" href="{{route('discussion.index', [$disc->id])}}">
+                                        <div class="course-list">
+                                            <div class="top-section gridspan">
+                                                <div class="col-left">
+                                                    <div class="course-title" style="margin-bottom: 20px;">
+                                                        <h3 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$disc->title}}</h3> 
+                                                    </div>
+                                                    <div class="course-detail">
+                                                        <div class="course-detail">
+                                                            <span>{{str_limit($disc->content, 70) }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-right">
+                                                    <span style="margin-right: 5px;">5</span>
+                                                    <i class="fa fa-comment"></i>
+                                                </div>                      
+                                            </div>
+                                   
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                </div>
+                                @endif
+                            </div>
                         </div>
-                        <div class="bottom-section gridspan">  
-                           
-                        </div>     
                     </div>
-                    @endforeach
-                    @endif
+                    
+                    
+                    
                 </div>
                 <!-- modal Tambah Diskusi -->
                 <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
