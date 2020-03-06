@@ -19,7 +19,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/', 'VisitorController@getHomepage');
 Route::get('/course', 'VisitorController@getCourses');
-Route::get('/course/{id}/preview', 'VisitorController@getCoursePreview');
+Route::get('/accourse/{id}/preview', 'VisitorController@getAcCoursePreview');
 Route::get('/enroll', 'StudentController@enroll')->name('enroll');
 Route::get('/about', 'VisitorController@getAbout');
 Route::get('/contact', 'VisitorController@getContact');
@@ -32,21 +32,38 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/dashboard/settings', 'DashboardController@updateProfile');
 
 
-    // Student
+    // Student - MyCourse
     Route::get('/dashboard/course/me', 'StudentController@getMyCourse');
-    Route::get('/dashboard/favorite', 'StudentController@getFavorite');
-
+    // Student - ClassOverview & TopicList
+    Route::get('/dashboard/student/course/{id}/overview', 'StudentController@getOverview')->name('student.overview');
+    // Student - TopicDetail & ContentList
+    Route::get('/dashboard/student/topic/{topicId}', 'StudentController@getTopic')->name('student.topic.index');
+    // Student - ContentDetail
+    Route::get('classroom/topic/content/{contentId}', 'ContentsController@index')->name('student.content.index');
+    // Student - Enroll & Unenroll
     Route::get('/enroll/{id}', 'StudentController@enroll')->name('enroll');
     Route::get('/unenroll/{id}', 'StudentController@unenroll')->name('unenroll');
-
+    // Student - Transaction
     Route::get('/dashboard/transaction', 'StudentController@getTransaction');
 
-    // Company
+    // Company - Program
+    Route::get('/dashboard/company/program', 'ProgramController@index')->name('program.index');
+    Route::get('/dashboard/company/program', 'ProgramController@create')->name('program.create');
+    Route::post('/dashboard/company/program', 'ProgramController@store')->name('program.store');
+    Route::get('/dashboard/program/{id}/edit', 'ProgramController@edit')->name('program.edit');
+    Route::put('/dashboard/program/{id}/edit', 'ProgramController@update')->name('program.update');
+    Route::delete('/dashboard/program/{id}/delete', 'ProgramController@deleteProgram')->name('program.delete');
+    Route::get('/dashboard/program/{id}/detail', 'ProgramController@programDetail')->name('program.detail');
+
+    //Company - AcademicCourse
+    Route::post('dashboard/program/{id}/detail', 'ProgramController@createAcCourse')->name('company.academic.create');
+    // Company - ProCourse
     Route::get('/dashboard/course/list', 'CompanyController@getMyCourse');
     Route::post('/dashboard/course/list', 'CompanyController@createCourse');
     Route::get('/dashboard/course/{id}/edit', 'CompanyController@getEditCourseForm');
     Route::put('/dashboard/course/{id}/edit', 'CompanyController@updateCourse');
     Route::delete('/dashboard/course/{id}/delete', 'CompanyController@deleteCourse');
+    // Company - payment
     Route::get('/dashboard/revenue', 'CompanyController@getRevenue');
     
     // Tutor
@@ -87,7 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::delete('/classroom/{topicId}/delete', 'TutorController@deleteTopic')->name('topic.delete');
 
     // Content
-    Route::get('classroom/topic/content/{contentId}', 'ContentsController@index')->name('content.index');
+    
     Route::get('classroom/topic/{topicId}/content/create', 'ContentsController@create')->name('content.create');
     Route::post('classroom/topic/{topicId}/content', 'ContentsController@store')->name('content.store');
     Route::get('classroom/topic/content/{content}', 'ContentsController@show')->name('content.show');
@@ -97,10 +114,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Tutor & Student (Classroom)
     Route::get('/classroom/{id}/overview', 'ClassController@getOverview');
-    
-    
+    //Classroom - ForumPage
     Route::get('/classroom/{id}/forum', 'ClassController@getForum')->name('forum');
-    
+    //Classroom - Discussion
     Route::get('/classroom/discussion/{discId}', 'DiscussionController@index')->name('discussion.index');
     Route::get('/classroom/{id}/discussion', 'DiscussionController@create')->name('discussion.create');
     Route::post('/classroom/{id}/discussion', 'DiscussionController@store')->name('discussion.store');

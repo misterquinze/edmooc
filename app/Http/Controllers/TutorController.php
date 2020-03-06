@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Tutor;
 use App\Course;
+use App\Ac_course;
 use App\Company;
 use App\Category;
 use App\Topic;
@@ -23,6 +24,7 @@ class TutorController extends Controller
         $topics = Topic::all();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
         $courses = Course::where('tutor_id', $tutor->id)->get();
+        $accourse = Ac_course::where('tutor_id', $tutor->id)->get();
 
         if ($courses->isEmpty()) {
             \Session::flash('course', 'Dont have course to teach');
@@ -36,9 +38,10 @@ class TutorController extends Controller
             'userLogin', 
             'categories', 
             'company', 
-            'topic', 
-            'courses', 
-            'contents'));
+            'topics', 
+            'courses',
+            'accourse', 
+        ));
     }
     
 
@@ -100,6 +103,7 @@ class TutorController extends Controller
         $userLogin = Auth::user();
         $topic = Topic::findOrFail($topicId);
         $topic = Topic::where('id', $topic->id)->first();
+        //$topics = Course::findOrFail($id)->topics()->get();
         $contents = Content::where('topic_id', $topic->id)->get();
 
         if ($contents->isEmpty()) {
@@ -113,6 +117,7 @@ class TutorController extends Controller
         return view('dashboard/tutor/content/list', [
             'userLogin' => $userLogin,
             'topic' => $topic,
+            
             'contents' => $contents
         ]);
     }
@@ -212,7 +217,7 @@ class TutorController extends Controller
         $userLogin = Auth::user();
         $topic = Topic::findOrFail($topicId);
         $topic = Topic::where('id', $topic->id)->first();
-       // $topic = Topic::find($topicId);
+       //$topic = Topic::find($topicId);
 
         $topics = Topic::where('course_id', $topic->course->id)->get();
         $questions = QuizQuestion::where('topic_id',$topic->id)->get();

@@ -67,7 +67,7 @@ class ClassController extends Controller
    public function getForum(Course $courses, $id)
    {
      $userLogin = Auth::user();
-     $courses = Course::where('id', $id)->get();
+     $courses = Course::where('id', $id)->first();
      $discussions  = Course::findOrFail($id)->discussions()->get();
      $topics = Course::findOrFail($id)->topics()->get();
 

@@ -87,14 +87,13 @@
             </div>
             <div class="right-section">
                 @foreach ($courses as $course)
+                <a href="{{ URL('course/' .$course->id. '/preview')}}">
                 <div class="course-list ">
                     <div class="top-section gridspan">
                             <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                         <div class="col-left">
                             <div class="course-detail">
-                                <a href="{{ URL('course/' .$course->id. '/preview')}}">
                                     <h3 class="course-name">{{ $course->name }}</h3>
-                                </a>
                                 <div class="label-container">
                                     <span class="label">{{$course->company->name}}</span>
                                 </div>
@@ -118,10 +117,50 @@
                         </div>    
                     </div>
                 </div>
+                </a>
+                @endforeach
+                @foreach ($accourse as $ac)
+                <a href="{{ URL('accourse/' .$ac->id. '/preview')}}"> 
+                <div class="course-list ">
+                    <div class="top-section gridspan">
+                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="col-left">
+                            <div class="course-detail">
+                                
+                                <h3 class="course-name">{{ $ac->name }} </h3>
+                               
+                                <div class="label-container">
+                                    <span class="label">{{$ac->company->name}}</span>
+                                    <span class="label">kursus akademik</span>
+                                </div>
+                                <hr>
+                                <h5 class="course-description">{{$ac->description}}
+                                </h5>  
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="bottom-section gridspan">
+                        <div class="col-left">
+                            <span class="price">Rp {{ number_format($ac->price) }}</span>
+                        </div>
+                        <div class="col-right">
+                        <a class="enroll-btn" type="button" href="{{route('enroll' ,[$ac->id] )}}">Enroll</a>    
+                          
+                        </div>    
+                    </div>
+                </div>
+                </a>
                 @endforeach
                 {{$courses->links()}}
             </div>
         </div>
         
-    </div>    
+    </div> 
+    <script>
+        var msg = '{{Session::get('alert')}}';
+        var exist = '{{Session::has('alert')}}';
+        if(exist){
+          alert(msg);
+        }
+    </script>   
 @endsection

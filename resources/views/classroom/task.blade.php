@@ -88,6 +88,7 @@
             </div>
         </div>
     </section>
+<<<<<<< HEAD
 
 
     <script src="{{ URL('js/vue.js') }}"></script>
@@ -129,3 +130,6 @@
         }
     </script>
 @endsection
+=======
+@endsection
+>>>>>>> ec893703dcdd308321f46bb32d4fce105d73b17a

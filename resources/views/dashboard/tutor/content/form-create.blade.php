@@ -36,6 +36,7 @@
 @endsection
 
 @section('content')
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL('css/classroom/discussion/create.css') }}">
 
     <section class="content">
@@ -62,30 +63,40 @@
                             </div>
 
                             <div class="input-container">
-                                <h4 class="input-title">Upload Materi</h4>
-                                <p class="input-sub-title">Silahkan unggah materi disini</p>
-                                <input type="text" name="source"
-                                class="regular-input" value="">
-
-                            </div>
-
-                            <div class="input-container">
                                 <h4 class="input-title">Tipe Konten</h4>
                                 <p class="input-sub-title">Tentukan tipe konten</p>
                                 <label class="radio-container">
                                     Video
-                                    <input type="radio" name="type" value="video"><span class="checkmark"></span>
+                                    <input type="radio" name="type" value="video" v-model="contentType"><span class="checkmark"></span>
+                                </label>
+                                <label class="radio-container">
+                                    Slide
+                                    <input type="radio" name="type" value="slide" v-model="contentType"><span class="checkmark"></span>
                                 </label>
                                 <label class="radio-container">
                                     Artikel
-                                    <input type="radio" name="type" value="video"><span class="checkmark"></span>
-                                </label>
-                                <label class="radio-container">
-                                    Audio
-                                    <input type="radio" name="type" value="video"><span class="checkmark"></span>
+                                    <input type="radio" name="type" value="artikel" v-model="contentType"><span class="checkmark"></span>
                                 </label>
                             </div>
+                            <div v-if="contentType == 'video'" class="input-container">
+                                <h4 class="input-title">Upload Video</h4>
+                                <p class="input-sub-title">Ukuran video tidak boleh lebih dari 4 GB </p>
+                                <input type="file" name="source" class="regular-input" required>
+                            </div>
+                            <div v-if="contentType == 'slide'" class="input-container">
+                                <h4 class="input-title">Upload Slide Presentasi</h4>
+                                <p class="input-sub-title">Ukuran file tidak boleh lebih dari 500 MB </p>
+                                <input type="file" name="source" class="regular-input" required>
+                            </div>
+                            <div  v-if="contentType == 'artikel'" class="input-container">
+                                <h4 class="input-title">Tambahkan Artikel</h4>
+                                <p class="input-sub-title">Tulis isi artikel </p>
+                                <div id="editor">
+                                    <p>tes</p>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="form-footer gridspan">
                             <a href="{{ route('tutor.content.index', [$topic->id]) }}" class="cancel-btn">Batal</a>
                             <button type="submit" class="submit-btn">Kirim</button>
@@ -101,6 +112,11 @@
     <script>
         new Vue({
             el: '#forum',
+            data() {
+                return {
+                    contentType: 'video',   
+                }
+            },
             
             methods: {
                 changeType(type){
@@ -115,6 +131,12 @@
             }
         });
     </script>
-
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quill = new Quill('#editor', {
+          theme: 'snow'
+        });
+      </script>
+    
   
 @endsection

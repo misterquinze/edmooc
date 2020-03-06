@@ -118,7 +118,7 @@
         </div>
 
         @foreach($contents as $index => $content)     
-            <a href="{{route('content.index', [$content->id])}}" class="topic-content">
+            <a href="{{route('student.content.index', [$content->id])}}" class="topic-content">
                 <div class="topic-content-index">Materi {{ $index+1 }}</div>
                 <div class="topic-content-name">{{ $content->title }}</div>
                 <span class="fa fa-angle-right"></span>

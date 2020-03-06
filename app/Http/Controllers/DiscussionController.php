@@ -20,11 +20,12 @@ class DiscussionController extends Controller
     {   
         $userLogin = Auth::user();
         $discussions = Discussion::findOrFail($discId);
-        $discussions  = Discussion::where('id', $discussions->id)->get();
+        $discussions  = Discussion::where('id', $discussions->id)->first();
+        
         
 
         //dd($discussions);
-
+        /** 
         if ($discussions->isEmpty()){
             \Session::flash('discussion', 'Dont have discussion');
         }else{
@@ -32,6 +33,7 @@ class DiscussionController extends Controller
                 $disc = Discussion::find($disc->id);
             }
         }
+        */
         return view('classroom/discussion/discussion', [
             'userLogin' => $userLogin,
             'discussions' => $discussions

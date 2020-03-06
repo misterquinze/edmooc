@@ -1,6 +1,26 @@
-.content{
-    padding-left: 25px;
-    padding-right: 25px;
+
+.swal-button--confirm{
+	background-color: #83305a;
+}
+
+.swal-footer,
+.swal-text{
+	text-align: center;
+}
+
+
+.search-box{
+    padding: 10px 20px;
+    border: 1px solid #dbe2e8;
+    color: #2e3d49;
+    background: #fff;
+    width: 100%;
+    outline: 0;
+    font-size: 14px;
+    margin: 20px auto 0;
+    border-radius: 30px;
+    display: block;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
 }
 
 .title{
@@ -20,10 +40,15 @@
 }
 
 hr{
-    border:none;
+    border: none;
     border-bottom: 1px solid #cccccc;
     margin: 10px 0 20px;
 }
+
+/* .course-content{
+    padding: 50px;
+    background-color: #fafafa;
+} */
 
 .gridspan::after{
     content: "";
@@ -31,21 +56,218 @@ hr{
     clear: both;
 }
 
-.content .course-list{
+.left-section{
+    width: 250px;
+    float: left;
+}
+
+.left-section .filter-title{
+    font-size: 14px;
+    color: #7d97ad;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.left-section .filter-box{
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 10px 0 rgba(46,61,73,.05);
+}
+
+.left-section .filter-box .filter-header{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cccccc;
+    border-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.left-section .filter-box .filter-body{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #cccccc;
+}
+
+.filter-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default checkbox */
+.filter-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+}
+  
+/* On mouse-over, add a grey background color */
+.filter-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the checkbox is checked, add a blue background */
+.filter-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the checkmark when checked */
+.filter-container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.filter-container .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.input{
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: hsla(240,2%,57%,.1);
+}
+
+
+.right-section{
+    width: calc(100% - 280px);
+    float: left;
+    margin-left: 30px;
+}
+
+.right-section a.custom-card, a.custom-card:hover {
+  color: inherit;
+}
+
+.right-section .course-list{
     width: 100%;
     background-color: #ffffff;
     border: 1px solid #cccccc;
     border-radius: 4px;
     margin-bottom: 30px;
     box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+}
+
+.right-section .course-list .top-section{
     padding: 20px;
 }
 
-.content .course-list .top-section .col-left .course-title .course-name{
-    margin-top: 5;
+
+.right-section .course-list .top-section .course-image{
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;    
+    float: left;
+    border-radius: 4px;
 }
 
+.right-section .course-list .top-section .course-detail{
+    width: calc(1005 - 250px);
+    float: left;
+    padding-left: 20px;
+}
 
+.right-section .course-list .top-section .course-detail .course-name{
+    font-size: 20px;
+    font-weight: 700;
+    color: #282828;
+    margin: 0 0 5px;
+}
+
+.right-section .course-list .top-section .course-detail .course-company{
+    font-size: 13px;
+    font-weight: 500;
+    color: #8e8e8e;
+    margin: 0;
+}
+
+.right-section .course-list .top-section .course-detail .category{
+    font-size: 14px;
+    color: #8e8e8e;
+    margin: 0;
+}
+
+.right-section .course-list .bottom-section{
+    border-top: 1px solid #cccccc;
+    padding: 10px 20px;
+}
+
+.right-section .course-list .bottom-section .col-left{
+    width: 50%;
+    float: left;
+    text-align: left;
+    padding: 5px 0;
+}
+
+.right-section .course-list .bottom-section .col-left .price{
+    color: #002347;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.right-section .course-list .bottom-section .col-right{
+    width: 50%;
+    float: left;
+}
+
+.right-section .course-list .bottom-section .col-right .edit-btn{
+    float: right;
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.right-section .course-list .bottom-section .col-right .delete-btn{
+    float: right;
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
 .form-create{
     border: 1px solid #cccccc;
@@ -199,87 +421,6 @@ hr{
     background-color: #002347;
     cursor: pointer;
 }
-.modal .modal-dialog{
-    border: 1px solid #cccccc;
-}
-
-
-.modal .modal-dialog .modal-content .modal-header .modal-title{
-    width: 100%;
-    text-align: center;
-    color: #ffffff;
-    padding: 30px 0;
-    font-size: 22px;
-    font-weight: 700;
-    background-color: #002347;
-}
-
-.modal .modal-dialog .modal-content .modal-body{
-    background-color: #ffffff;
-    padding: 20px;
-    
-}
-
-.modal .modal-dialog .modal-content .modal-body .card-body{
-    padding: 20px;
-    
-}
-
-.modal-body .card-body .input-container{
-    margin-bottom: 40px;
-}
-
-.modal-body .card-body .input-container .input-title{
-    font-size: 22px;
-    font-weight: 700;
-    margin: 0;
-}
-
-.modal-body .card-body .input-container .input-sub-title{
-    font-size: 14px;
-    font-weight: 600;
-    color: #8e8e8e;
-    margin: 0 0 10px;
-}
-
-.modal-body .card-body .input-container .regular-input{
-    width: 500px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    padding: 10px 15px;
-}
-
-.modal-body .card-body .input-container .regular-textarea{
-    width: 500px;
-    min-height: 150px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    padding: 10px 15px;
-}
-
-.modal-body .card-footer{
-    background-color: #e5e5e5;
-    padding: 10px 20px;
-    text-align: right;
-}
-
-.modal-body .card-footer .cancel-btn{
-    padding: 8px 15px;
-    border: 1px solid #002347;
-    border-radius: 4px;
-    color: #002347;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.modal-body .card-footer .submit-btn{
-    padding: 8px 15px;
-    border: 1px solid #002347;
-    border-radius: 4px;
-    color: #ffffff;
-    background-color: #002347;
-    cursor: pointer;
-}
 
 @media only screen and (max-width: 1023px){
     .form-create .form-body .input-container .regular-input{
@@ -307,3 +448,4 @@ hr{
         text-align: center;
     }
 }
+

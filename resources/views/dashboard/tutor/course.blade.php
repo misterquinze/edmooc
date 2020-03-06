@@ -48,6 +48,25 @@
                 </div>
             </div> 
         @endforeach
+        @foreach ($accourse as $ac)    
+            <div class="course-list ">
+                <div class="top-section gridspan">
+                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="col-left">
+                        <div class="course-detail">
+                            <h3 class="course-name">{{ $ac->name }}</h3> 
+                            <h5 class="course-description">{{$ac->description}}
+                            </h5>
+                        </div>
+                    </div>                     
+                    <div class="col-right">
+                        <div class="proceed-btn">
+                            <a class=" nav-link" href="">Materi</a>  
+                        </div>
+                    </div> 
+                </div>
+            </div> 
+        @endforeach
         @endif
     </section>
 @endsection

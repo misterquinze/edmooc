@@ -1,0 +1,298 @@
+.register-content{
+    padding: 50px;
+    background-color: #fafafa;
+    
+}
+
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.tab-menu{
+    margin-bottom: 30px;
+}
+
+.tab-menu ul{
+    padding: 0;
+    margin: 0;
+    border-radius: 4px;
+
+}
+
+.tab-menu ul li{
+    padding: 10px 0;
+    text-align: left;
+    margin: 0;
+    display: inline-block;
+    width: calc(60% / 3);
+    font-weight: 600;
+    cursor: pointer;
+    float: left;
+    color: #002347;  
+}
+
+.tab-menu ul li::after{
+    border-bottom: solid 3px  #002347;
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+   
+}
+
+.tab-menu ul li.is-active,
+.tab-menu ul li:hover::after{
+    
+    /*background-color: #002347; */
+    transform: scaleX(1);
+    border-bottom: solid 3px  #002347;
+    color: #002347;
+}
+
+.register-box{
+    width: 1000px;
+    height: auto;
+    padding: 50px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin: 0 auto;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.register-box .title{
+    text-align: center;
+}
+
+.register-box .sub-title{
+    margin-top: 20px;
+    text-align: center;
+    width: 350px;
+    margin: 0 auto 50px;
+}
+
+.swal-button--confirm{
+	background-color: #83305a;
+}
+
+.swal-footer,
+.swal-text{
+	text-align: center;
+}
+
+
+
+
+.title{
+    margin: 5px 0 0;
+    font-weight: 600;
+    float: left;
+}
+
+hr{
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    margin: 10px 0 20px;
+}
+
+
+
+
+.gridspan::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.right-section{
+    width: 250px;
+    float: right;
+}
+
+.right-section .filter-title{
+    font-size: 14px;
+    color: #7d97ad;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.right-section .filter-box{
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 10px 0 rgba(46,61,73,.05);
+}
+
+.right-section .filter-box .filter-header{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cccccc;
+    border-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.right-section .filter-box .filter-body{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #cccccc;
+}
+
+.filter-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default checkbox */
+.filter-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+}
+  
+/* On mouse-over, add a grey background color */
+.filter-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the checkbox is checked, add a blue background */
+.filter-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the checkmark when checked */
+.filter-container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.filter-container .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.input{
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: hsla(240,2%,57%,.1);
+}
+
+.left-section{
+    width: calc(100% - 280px);
+    float: left;
+    margin-right: 20px;
+}
+
+.left-section .course-list{
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+}
+
+.left-section .course-list .top-section{
+    width: 100%;
+    padding: 20px;
+   
+}
+.left-section .course-list .middle-section {
+    float: left;
+    width: 100%;
+}
+
+.left-section .course-list .add-topic{
+    
+    padding: 7px 15px;
+    background-color: #002347;
+    color: #ffffff;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.left-section .course-list .bottom-section {
+    border-top: 1px solid #cccccc;
+    padding: 10px 20px 10px 20px;
+}
+
+
+.left-section .course-list .bottom-section .col-left{
+   width: 50%;
+   float: left;
+
+    
+}
+
+.left-section .course-list .bottom-section .col-left .course-name{
+    font-size: 20px;
+    font-weight: 700;
+    color: #282828;
+    margin: 0 0 5px;
+}
+
+.left-section .course-list .bottom-section .col-right{
+    width: 50%;
+    float: left;
+
+ }
+
+.left-section .course-list .bottom-section .col-right .edit-btn{
+    float: right;
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+ } 
+
+.left-section .course-list .bottom-section .col-right .delete-btn{
+    float: right;
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+

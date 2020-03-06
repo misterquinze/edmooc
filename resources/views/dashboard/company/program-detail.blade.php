@@ -1,39 +1,28 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    <title>Overview Class</title>
+    <title>Detail Program</title>
 @endsection
 
 @section('menu')
-    <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
-    <li><a href="{{ URL('dashboard/tutor/course/list') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
-
-    <li class="active"><a href="{{ URL('classroom/'.$course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
-        
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Topik</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">        
-            @foreach($topics as $topic)
-                <li><a href="{{ route('tutor.topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
-            @endforeach
-        </ul>
-    </li>
-    <li>
-        <a href="{{ URL('classroom/'.$course->id.'/forum') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
-            {{-- <span class="pull-right-container">
-                <small class="label pull-right bg-green">1</small>
-            </span> --}}
-        </a>
-    </li>
-    <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
-    <li><a href="{{ route('tutor.score.list', [$course->id]) }}"><i class="fa fa-list"></i> <span>Nilai</span></a></li>
+<li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+<li><a href="{{ URL('dashboard/course/list') }}"><i class="fa fa-book"></i> <span>Professional</span></a></li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-pie-chart"></i>
+        <span>Akademik</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        @foreach($accourse as $ac)        
+        <li><a href=""><i class="fa fa-circle-o"></i>{{$ac->name}}</a></li>
+        @endforeach
+    </ul>
+</li>
+<li><a href="{{ URL('dashboard/revenue') }}"><i class="fa fa-list"></i> <span>Pendapatan</span></a></li>
+{{-- <li><a href="{{ URL('dashboard/settings') }}"><i class="fa fa-gear"></i> <span>Pengaturan</span></a></li> --}}
 @endsection
 
 @section('content')
@@ -44,7 +33,7 @@
             <template>
                 <div id="display-container">
                     <div class="course-title">
-                        <h2 class="course-name">{{ $course->name }}</h2>
+                        <h2 class="course-name">{{ $program->name }}</h2>
                     </div>
                     <hr>
                     <div class="course-content">    
@@ -56,25 +45,25 @@
                             <div class="middle-section">
                                 
 
-                                <div class="course-detail-title">Deskripsi</div>
-                                <div class="course-detail-value">{{ $course->description }}</div>
+                                <div class="course-detail-title">Gelar Yang Didapat</div>
+                                <div class="course-detail-value">{{ $program->degree }}</div>
 
-                                <div class="course-detail-title">Tipe</div>
-                                <div class="course-detail-value">{{ $course->type }}</div>
+                                <div class="course-detail-title">Persyaratan</div>
+                                <div class="course-detail-value">{{ $program->requirement }}</div>
 
-                                <div class="course-detail-title">Price</div>
-                                <div class="course-detail-value">Rp {{ number_format($course->price) }}</div>
+                                
+                                
 
                             </div>
                             <div class="right-section">
-                                <div class="course-detail-title">Institusi</div>
+                                {{--<div class="course-detail-title">Institusi</div>
                                 <div class="course-detail-value">{{ $course->company->name }}</div>
 
                                 <div class="course-detail-title">Mulai Kursus</div>
                                 <div class="course-detail-value">{{ $course->start_date }}</div>
 
                                 <div class="course-detail-title">Kursus Berakhir</div>
-                                <div class="course-detail-value">{{ $course->end_date }}</div>
+                                <div class="course-detail-value">{{ $course->end_date }}</div>--}}
 
                                 
                             </div>
@@ -83,76 +72,48 @@
 
                     <div class="topic-content">
                         <div class="topic-content-header gridspan">
-                            <h3 class="topic-title">Topik</h3>
-                            {{--<button class="add-topic-button" @click.prevent="changeType('create')">Tambah Topik</button>--}}
-                            <button type="button" class="add-topic-button" id="add-item" data-item-id="1">Tambah Topik</button>
+                            <h3 class="topic-title">Kursus</h3>
+                            <button class="add-topic-button" @click.prevent="changeType('create')">Tambah Kursus</button>
+                            {{--<button type="button" class="add-topic-button" id="add-item" data-item-id="1">Tambah Kursus</button>--}}
                         </div>
                         <div class="topic-list gridspan">
-                            <div class="left-section header">Nama Topik</div>
+                            <div class="left-section header">Nama Kursus</div>
                             <div class="right-section header">Opsi</div>
                         </div>
-                        @foreach($topics as $topic)
+                        @foreach($accourse as $p)
                             <div class="topic-list gridspan">
                                 <div class="left-section">
-                                    <a href="{{ route('tutor.content.index', [$topic->id]) }}" class="topic-name">
-                                        {{$topic->name}}
+                                    <a href="" class="topic-name">
+                                        {{$p->name}}
                                     </a>
                                 </div>
                                 <div class="right-section">
-                                    <span @click.prevent="changeType('edit',{{ $topic->id }})" class="edit-btn">
+                                    <span @click.prevent="changeType('edit',{{ $p->id }})" class="edit-btn">
                                         <i class="fa fa-edit"></i>
                                     </span>
-                                    {{--<button type="button" class="edit-topic-button" id="{{ $topic->id }}" data-item-id="{{ $topic->id }}"><i class="fa fa-edit"></i></button>--}}
-                                    <span class="delete-btn" onclick="deleteTopic({{ $topic->id }})">
+                                    
+                                    <span class="delete-btn" onclick="deleteTopic({{ $p->id }})">
                                         <i class="fa fa-trash"></i>
                                     </span>
                                 </div>
                             </div>
-                            <form class="form-delete" id="delete-{{ $topic->id }}" action="{{ route('tutor.topic.delete', [$topic->id]) }} "  method="POST" style="display: none;">
+                            <form class="form-delete" id="delete-{{ $p->id }}" action="{{ route('tutor.topic.delete', [$p->id]) }} "  method="POST" style="display: none;">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="delete">
                             </form>
                         @endforeach
                     </div>
                 </div>
-
-                @foreach($topics as $topic)
-                    <div id="form-edit-{{ $topic->id }}" class="form-create form-edit">
-                        <div class="form-header">Edit Topik</div>
-                        <form action="{{ route('tutor.topic.update', [$topic->id]) }}" method="POST">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="_method" value="put">
-
-                            <div class="form-body">
-                                <div class="input-container">
-                                    <h4 class="input-title">Judul Materi</h4>
-                                    <p class="input-sub-title">Beri Judul Materi</p>
-                                    <input type="text" name="name" class="regular-input" value="{{ $topic->name }}" required>
-                                </div>
-                                <div class="input-container">
-                                    <h4 class="input-title">Deskripsi Topik</h4>
-                                    <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
-                                    <textarea name="description" class="regular-textarea" required>{{ $topic->description }}</textarea>
-                                </div>
-                            </div>
-                            <div class="form-footer gridspan">
-                                <span class="cancel-btn" @click.prevent="changeType('display')">Batal</span>
-                                <button type="submit" class="submit-btn">Kirim</button>
-                            </div>
-                        </form>
-                    </div>
-                @endforeach
-
-                {{--<div id="form-container" class="form-create">
+                <div id="form-container" class="form-create">
                     <div class="form-header">
                         Buat Topik Baru
                     </div>
                     
-                    <form action="{{ route('tutor.topic.create', [$course->id]) }}" method="POST">
+                    <form action="{{ route('company.academic.create', [$program->id]) }}" method="POST">
                         <div class="form-body">
                             {{ csrf_field() }}
                             <div class="input-container">
-                                <h4 class="input-title">Judul Materi</h4>
+                                <h4 class="input-title">Judul Kursus</h4>
                                 <p class="input-sub-title">Beri Judul Materi</p>
                                 <input type="text" name="name" class="regular-input" required>
                             </div>
@@ -161,64 +122,70 @@
                                 <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
                                 <textarea name="description" class="regular-textarea" required></textarea>
                             </div>
-                            
+                            <div class="input-container">
+                                <h4 class="input-title">Tentukan Passing Grade</h4>
+                                <p class="input-sub-title">menentukan syarat nilai kelulusan kursus</p>
+                                <input type="number" name="passing_grade" class="regular-input" required>
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Biaya Kursus</h4>
+                                <p class="input-sub-title">Tentukan biaya kursus</p>
+                                <input type="number" name="price" class="regular-input" required>
+                            </div>
+                            <div id="category" class="input-container">
+                                <h4 class="input-title">Kategori Kursus</h4>
+                                <p class="input-sub-title">Tentukan kategori kursus</p>
+                                @foreach ($categories as $category)
+                                    <label class="radio-container">
+                                        {{$category->name}}
+                                        <input type="radio" name="category" value="{{$category->id}}" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Tutor Kursus</h4>
+                                <p class="input-sub-title">Tentukan Tutor kursus</p>
+                                {{--<select name="tutor" class="regular-select">
+                                    <option>Pilih Tutor</option>
+                                        @foreach ($tutors as $tutor)
+                                            <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
+                                        @endforeach   
+                                </select>--}}
+                                @foreach ($tutors as $tutor)
+                                    <label class="radio-container">
+                                        {{$tutor->user->name}}
+                                        <input type="radio" name="tutor" value="{{$tutor->id}}" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Tanggal Mulai</h4>
+                                <p class="input-sub-title">Tentukan tanggal mulai kursus</p>
+                                <input type="text" name="startDate" class="regular-input" id="startDate" placeholder="Choose Date" required>
+                            </div>
+    
+                            <div class="input-container">
+                                <h4 class="input-title">Tanggal Selesai</h4>
+                                <p class="input-sub-title">Tentukan tanggal selesai kursus</p>
+                                <input type="text" name="endDate" class="regular-input" id="endDate" placeholder="Choose Date" required>
+                            </div>
                         </div>
                         <div class="form-footer gridspan">
                             <span class="cancel-btn" @click.prevent="changeType('display')">Batal</span>
                             <button type="submit" class="submit-btn">Kirim</button>
                         </div>
                     </form>
-                </div>--}}
-                <!-- modal Edit Topik -->
-                @foreach($topics as $topic)
-                <div class="modal fade" id="{{ $topic->id }}" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="edit-modal-label">Edit Topik</h5>
-                            </div>
-                            <div class="modal-body" id="attachment-body-content">
-                                <form id="form-container" class="form-horizontal" method="POST" action="{{ route('tutor.topic.update', [$topic->id]) }}">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="_method" value="put">
-                                    <div class="card-body">
-                                    <!-- name -->
-                                        <div class="input-container">
-                                            <h4 class="input-title">Judul Materi</h4>
-                                            <p class="input-sub-title">Beri Judul Materi</p>
-                                            
-                                            <input type="text" name="name" class="regular-input" id="modal-input-name" required autofocus>
-                                        </div>
-                                    
-                                    <!-- description -->
-                                        <div class="input-container">
-                                            <h4 class="input-title">Deskripsi Topik</h4>
-                                            <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
-                                           
-                                            <textarea name="description" class="regular-textarea" id="modal-input-description"required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer gridspan">
-                                        <button type="submit" class="submit-btn" >Kirim</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
-                            </div>
-                           
-                        </div>
-                       
-                    </div>
                 </div>
-                @endforeach
+                
                 <!-- modal Tambah Topik -->
-                <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
+                {{--<div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <div class="modal-header">
-                            <h5 class="modal-title" id="edit-modal-label">Tambah Topik</h5>
+                            <h5 class="modal-title" id="edit-modal-label">Tambah Kursus</h5>
                         
                             </div>
                             <div class="modal-body" id="attachment-body-content">
@@ -249,7 +216,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </template>
         </div>  
     </section>
@@ -318,7 +285,7 @@
             };
             $('#add-modal').modal(options)
         })
-        
+       
 
         // on modal show
             //add topik
@@ -335,7 +302,7 @@
             $("#modal-input-description").val(description);
 
         })
-            //edit topik
+            
         
         // on modal hide
         $('#add-modal').on('hide.bs.modal', function() {

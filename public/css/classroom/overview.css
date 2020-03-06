@@ -86,8 +86,8 @@
 
 hr{
     border: none;
-    border-bottom: 1px solid #cccccc;
-    margin: 10px 0 20px;
+    border-bottom: 0px solid #cccccc;
+    margin: 5px 0 5px;
 }
 
 .gridspan::after{
@@ -95,15 +95,24 @@ hr{
     display: table;
     clear: both;
 }
+.course-title{
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 5px 20px 5px 20px;
+    border-bottom: #8e8e8e;
+
+}
 
 .course-content{
     background-color: #ffffff;
     border-radius: 4px;
-    padding: 20px 20px 0;
+    padding: 5px 20px 0;
 }
 
+
 .course-content .left-section{
-    width: 250px;
+    width: 23.33%;
     float: left;
 }
 
@@ -114,12 +123,35 @@ hr{
     border-radius: 4px;
 }
 
-.course-content .right-section{
-    width: calc(100% - 250px);
+.course-content .middle-section{
+    width: 33.33%;
     float: left;
     padding-left: 20px;
 }
 
+.course-content .middle-section .course-name{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 20px;
+}
+
+.course-content .middle-section .course-detail-title{
+    font-size: 14px;
+    font-weight: bold;
+    color: #282828;
+}
+
+.course-content .middle-section .course-detail-value{
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+.course-content .right-section{
+    width: 33.33%;
+    float: left;
+    padding-left: 20px;
+}
 .course-content .right-section .course-name{
     font-size: 20px;
     font-weight: bold;
@@ -137,7 +169,6 @@ hr{
     color: #666666;
     margin-bottom: 20px;
 }
-
 .topic-content{
     background-color: #ffffff;
     padding: 20px;
@@ -292,6 +323,88 @@ hr{
 }
 
 .form-create .form-footer .submit-btn{
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #002347;
+    cursor: pointer;
+}
+
+.modal .modal-dialog{
+    border: 1px solid #cccccc;
+}
+
+
+.modal .modal-dialog .modal-content .modal-header .modal-title{
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    padding: 30px 0;
+    font-size: 22px;
+    font-weight: 700;
+    background-color: #002347;
+}
+
+.modal .modal-dialog .modal-content .modal-body{
+    background-color: #ffffff;
+    padding: 20px;
+    
+}
+
+.modal .modal-dialog .modal-content .modal-body .card-body{
+    padding: 20px;
+    
+}
+
+.modal-body .card-body .input-container{
+    margin-bottom: 40px;
+}
+
+.modal-body .card-body .input-container .input-title{
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.modal-body .card-body .input-container .input-sub-title{
+    font-size: 14px;
+    font-weight: 600;
+    color: #8e8e8e;
+    margin: 0 0 10px;
+}
+
+.modal-body .card-body .input-container .regular-input{
+    width: 500px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.modal-body .card-body .input-container .regular-textarea{
+    width: 500px;
+    min-height: 150px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.modal-body .card-footer{
+    background-color: #e5e5e5;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.modal-body .card-footer .cancel-btn{
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #002347;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.modal-body .card-footer .submit-btn{
     padding: 8px 15px;
     border: 1px solid #002347;
     border-radius: 4px;
