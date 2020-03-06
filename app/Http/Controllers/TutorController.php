@@ -147,7 +147,7 @@ class TutorController extends Controller
                 'source' => $data['source']
                 
             ]);
-        }elseif($data['type'] == 'artikel'){
+        }elseif($data['type'] == 'slide'){
             $contents = Content::create([
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,

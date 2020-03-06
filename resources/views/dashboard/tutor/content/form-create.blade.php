@@ -91,9 +91,7 @@
                             <div  v-if="contentType == 'artikel'" class="input-container">
                                 <h4 class="input-title">Tambahkan Artikel</h4>
                                 <p class="input-sub-title">Tulis isi artikel </p>
-                                <div id="editor">
-                                    <p>tes</p>
-                                </div>
+                                <textarea name="artikel" class="regular-textarea"></textarea>
                             </div>
                         </div>
                         
@@ -109,6 +107,7 @@
     </section>
 @endforeach
     <script src="{{ URL('js/vue.js') }}"></script>
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
         new Vue({
             el: '#forum',
@@ -130,13 +129,13 @@
                 }
             }
         });
+
+        CKEDITOR.replace( 'description' );
+       
+        
     </script>
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script>
-        var quill = new Quill('#editor', {
-          theme: 'snow'
-        });
-      </script>
+    
+   
     
   
 @endsection

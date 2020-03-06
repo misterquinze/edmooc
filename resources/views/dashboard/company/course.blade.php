@@ -24,7 +24,6 @@
                         <span class="add-btn" @click.prevent="changeType('create')">Buat Baru</span>
                     </div>
                     <hr>
-    
                     <div class="course-content">
                         <div class="gridspan">
                             <div class="left-section">
@@ -236,6 +235,7 @@
     </section>
 
     <script src="{{ URL('js/vue.js') }}"></script>
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     {{-- <script src="{{ URL('js/sweetalert.min.js') }}"></script> --}}
 
     <script>
@@ -259,7 +259,7 @@
             }
 
         });
-      
+        CKEDITOR.replace( 'description' );
 
     </script>
     <script>

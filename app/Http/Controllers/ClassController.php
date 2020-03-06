@@ -6,8 +6,9 @@ use App\Content;
 use App\Topic;
 use App\Course;
 use App\Tutor;
-;
+
 use App\Discussion;
+use App\Comments;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -70,6 +71,8 @@ class ClassController extends Controller
      $courses = Course::where('id', $id)->first();
      $discussions  = Course::findOrFail($id)->discussions()->get();
      $topics = Course::findOrFail($id)->topics()->get();
+     
+     
 
      //dd( $discussions);
 
@@ -81,7 +84,7 @@ class ClassController extends Controller
           }
       }
        return view('classroom/forum', 
-       compact('userLogin', 'courses', 'discussions', 'topics') );
+       compact('userLogin', 'courses', 'discussions', 'topics', ) );
    }
   
    public function getTask($id){

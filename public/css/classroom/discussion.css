@@ -31,21 +31,243 @@ hr{
     clear: both;
 }
 
-.content .course-list{
-    width: 100%;
+.right-section{
+    width: 300px;
+    float: right;
+}
+
+.right-section .filter-title{
+    font-size: 14px;
+    color: #7d97ad;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.right-section .filter-box{
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 10px 0 rgba(46,61,73,.05);
+}
+
+.right-section .filter-box .filter-header{
     background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cccccc;
+    border-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.right-section .filter-box .filter-body{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #cccccc;
+}
+
+.filter-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* On mouse-over, add a grey background color */
+.filter-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the checkbox is checked, add a blue background */
+.filter-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the checkmark when checked */
+.filter-container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.filter-container .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.input{
+    width: 100%;
     border: 1px solid #cccccc;
     border-radius: 4px;
-    margin-bottom: 30px;
-    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
-    padding: 20px;
+    padding: 10px;
+    background-color: hsla(240,2%,57%,.1);
 }
 
-.content .course-list .top-section .col-left .course-title .course-name{
-    margin-top: 5;
+.left-section{
+    width: calc(100% - 330px);
+    float: left;
+    margin-right: 30px;
+    
+}
+
+.left-section .disc-header{
+    width: 100%;
+    
+    
+}
+
+.left-section .disc-header .head-left{
+    
+    width: 88%;
+    padding: 15px 5px 10px 20px;
+    float: left;
+   
+}
+
+.left-section .disc-header .head-right{
+    
+    width: 12%;
+    padding: 10px 5px 10px 5px;
+    float: right;
+    
 }
 
 
+
+.left-section .disc-list{
+    padding: 0px 10px 0px 10px;
+
+}
+
+.content .course-list{
+    width: 100%;
+   
+    background-color: #fafafa;
+    border: 1px solid #cccccc;
+    border-radius: 1px;
+    margin-bottom: 20px;
+    padding: 10px 16px 16px 16px;
+}
+
+
+
+.left-section .course-list .top-section .col-left {
+    width: 10%;
+    float: left;
+    text-align: left;
+    padding: 10px 5px 5px 5px;
+}
+
+.left-section .course-list .top-section .col-left .user-image{
+    border-radius: 50%;
+    width: 100%;
+}
+
+.left-section .course-list .top-section .col-right{
+    width: 90%;
+    float: left;
+    padding: 10px 20px 20px 5px; 
+}
+
+
+.left-section .course-list .top-section .col-right .course-detail .course-description {
+    text-align: justify;
+}
+
+.left-section .course-list .top-section .col-right .bottom-right{
+    margin-top: 20px;
+}
+
+.disc-list .comment-form{
+    width: 100%;
+    background-color: #fafafa;
+    border-bottom: 1px solid #cccccc;
+    border-radius: 1px;
+    margin-bottom: 10px;
+    padding: 10px 16px 16px 16px;
+}
+
+.disc-list .comment-form .top-section .col-left {
+    width: 10%;
+    float: left;
+    text-align: left;
+    padding: 10px 5px 5px 5px;
+}
+
+.disc-list .comment-form .top-section .col-left .user-image{
+    border-radius: 50%;
+    width: 100%;
+}
+
+.disc-list .comment-form .top-section .col-right{
+    width: 90%;
+    float: left;
+    padding: 10px 20px 20px 5px; 
+}
+
+.disc-list .comment-form .top-section .col-right 
+
+.disc-list .comment-form .top-section .col-right .add{
+    background-color: #002347 ;
+    color: #ffffff;
+    border: 1px solid #002347;
+    font-size: 15px;
+    
+    cursor: pointer;
+}
+
+.disc-list .show-comment{
+    width: 100%;
+    background-color: #fafafa;
+    border: 1px solid #cccccc;
+    border-radius: 1px;
+    margin-bottom: 10px;
+    padding: 10px 16px 16px 16px;
+}
+
+.disc-list .show-comment .top-section .col-left {
+    width: 10%;
+    float: left;
+    text-align: left;
+    padding: 10px 5px 5px 5px;
+}
+
+.disc-list .show-comment .top-section .col-left .user-image{
+    border-radius: 50%;
+    width: 100%;
+}
+
+.disc-list .show-comment .top-section .col-right{
+    width: 90%;
+    float: left;
+    padding: 10px 20px 20px 5px; 
+}
+
+.disc-list .show-comment .show-reply {
+    margin-left: 70px;
+}
+
+.disc-list  .reply-form {
+    margin-left: 70px;
+}
 
 .form-create{
     border: 1px solid #cccccc;
