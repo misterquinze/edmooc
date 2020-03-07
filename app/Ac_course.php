@@ -34,5 +34,10 @@ class Ac_course extends Model
     public function category(){
         return $this->hasOne('App\category');
     }
+    public function ac_topics(){
+        //$courses = App\Topic::find($id)->courses;
+        
+        return $this->hasMany('App\ac_topic');
+    }
 
 }

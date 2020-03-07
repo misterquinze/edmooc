@@ -29,26 +29,7 @@
                 </div>
             @endif
         @else
-        @foreach ($courses as $course)    
-            <div class="course-list ">
-                <div class="top-section gridspan">
-                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
-                        <div class="col-left">
-                        <div class="course-detail">
-                            <h3 class="course-name">{{ $course->name }}</h3> 
-                            <span class="label">Kursus Professional</span>
-                            <h5 class="course-description">{{$course->description}}
-                            </h5>
-                        </div>
-                    </div>                     
-                    <div class="col-right">
-                        <div class="proceed-btn">
-                            <a class=" nav-link" href="{{ route('tutor.topic.index', [$course->id]) }}">Materi</a>  
-                        </div>
-                    </div> 
-                </div>
-            </div> 
-        @endforeach
+        
         @foreach ($accourse as $ac)    
             <div class="course-list ">
                 <div class="top-section gridspan">
@@ -56,14 +37,13 @@
                         <div class="col-left">
                         <div class="course-detail">
                             <h3 class="course-name">{{ $ac->name }}</h3> 
-                            <span class="label">Kursus Akademik</span>
                             <h5 class="course-description">{{$ac->description}}
                             </h5>
                         </div>
                     </div>                     
                     <div class="col-right">
                         <div class="proceed-btn">
-                            <a class=" nav-link" href="{{route ('tutor.actopic.index', [$ac->id])}} ">Materi</a>  
+                            <a class=" nav-link" href="{{ route('tutor.actopic.index', [$course->id]) }}">Materi</a>  
                         </div>
                     </div> 
                 </div>

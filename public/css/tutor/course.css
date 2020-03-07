@@ -93,6 +93,15 @@ hr{
     margin: 0 0 5px;
 }
 
+.content .course-list .top-section .course-detail  .label{
+    background-color: #002347;
+    border: 1px solid #002347;
+    color: #fafafa;
+    font-size: 10px;
+    padding: 2px;
+    border-radius: 4px;
+}
+
 .content .course-list .top-section .col-left{
     width: 400px;
     float: left;

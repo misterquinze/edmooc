@@ -10,7 +10,7 @@
 <li class="treeview">
     <a href="#">
         <i class="fa fa-pie-chart"></i>
-        <span>Akademik</span>
+        <span>{{$program->name}}</span>
         <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
         </span>
@@ -26,7 +26,7 @@
 @endsection
 
 @section('content')
-    <link rel="stylesheet" href="{{ URL('css/classroom/overview.css') }}"> 
+    <link rel="stylesheet" href="{{ URL('css/dashboard/company/program-detail.css') }}"> 
 
     <section class="content">
         <div id="course">
@@ -48,14 +48,12 @@
                                 <div class="course-detail-title">Gelar Yang Didapat</div>
                                 <div class="course-detail-value">{{ $program->degree }}</div>
 
-                                <div class="course-detail-title">Persyaratan</div>
-                                <div class="course-detail-value">{{ $program->requirement }}</div>
-
-                                
                                 
 
                             </div>
                             <div class="right-section">
+                                <div class="course-detail-title">Persyaratan</div>
+                                <div class="course-detail-value">{{ $program->requirement }}</div>
                                 {{--<div class="course-detail-title">Institusi</div>
                                 <div class="course-detail-value">{{ $course->company->name }}</div>
 
@@ -65,7 +63,6 @@
                                 <div class="course-detail-title">Kursus Berakhir</div>
                                 <div class="course-detail-value">{{ $course->end_date }}</div>--}}
 
-                                
                             </div>
                         </div>    
                     </div>
@@ -80,24 +77,24 @@
                             <div class="left-section header">Nama Kursus</div>
                             <div class="right-section header">Opsi</div>
                         </div>
-                        @foreach($accourse as $p)
+                        @foreach($accourse as $ac)
                             <div class="topic-list gridspan">
                                 <div class="left-section">
                                     <a href="" class="topic-name">
-                                        {{$p->name}}
+                                        {{$ac->name}}
                                     </a>
                                 </div>
                                 <div class="right-section">
-                                    <span @click.prevent="changeType('edit',{{ $p->id }})" class="edit-btn">
+                                    <span @click.prevent="changeType('edit',{{ $ac->id }})" class="edit-btn">
                                         <i class="fa fa-edit"></i>
                                     </span>
                                     
-                                    <span class="delete-btn" onclick="deleteTopic({{ $p->id }})">
+                                    <span class="delete-btn" onclick="deleteTopic({{ $ac->id }})">
                                         <i class="fa fa-trash"></i>
                                     </span>
                                 </div>
                             </div>
-                            <form class="form-delete" id="delete-{{ $p->id }}" action="{{ route('tutor.topic.delete', [$p->id]) }} "  method="POST" style="display: none;">
+                            <form class="form-delete" id="delete-{{ $ac->id }}" action="{{ route('company.academic.delete', [$ac->id]) }} "  method="POST" style="display: none;">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="delete">
                             </form>
@@ -178,7 +175,81 @@
                         </div>
                     </form>
                 </div>
-                
+                @foreach($accourse as $ac)
+                <div id="form-edit-{{ $ac->id }}" class="form-create form-edit">
+                    <div class="form-header">Edit Kursus</div>
+                    <form action="{{ route('company.academic.update', [$ac->id]) }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="put">
+
+                        <div class="form-body">
+                            <div class="input-container">
+                                <h4 class="input-title">Judul Kursus</h4>
+                                <p class="input-sub-title">Beri Judul Kursus</p>
+                                <input type="text" name="name" class="regular-input" value="{{ $ac->name }}" required>
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Deskripsi Kursus</h4>
+                                <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
+                                <textarea name="description" class="regular-textarea" required>{{ $ac->description }}</textarea>
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Tentukan Passing Grade</h4>
+                                <p class="input-sub-title">menentukan syarat nilai kelulusan kursus</p>
+                                <input type="number" name="passing_grade" class="regular-input" required>
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Biaya Kursus</h4>
+                                <p class="input-sub-title">Tentukan biaya kursus</p>
+                                <input type="number" name="price" class="regular-input" required>
+                            </div>
+                            <div id="category" class="input-container">
+                                <h4 class="input-title">Kategori Kursus</h4>
+                                <p class="input-sub-title">Tentukan kategori kursus</p>
+                                @foreach ($categories as $category)
+                                    <label class="radio-container">
+                                        {{$category->name}}
+                                        <input type="radio" name="category" value="{{$category->id}}" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Tutor Kursus</h4>
+                                <p class="input-sub-title">Tentukan Tutor kursus</p>
+                                {{--<select name="tutor" class="regular-select">
+                                    <option>Pilih Tutor</option>
+                                        @foreach ($tutors as $tutor)
+                                            <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
+                                        @endforeach   
+                                </select>--}}
+                                @foreach ($tutors as $tutor)
+                                    <label class="radio-container">
+                                        {{$tutor->user->name}}
+                                        <input type="radio" name="tutor" value="{{$tutor->id}}" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Tanggal Mulai</h4>
+                                <p class="input-sub-title">Tentukan tanggal mulai kursus</p>
+                                <input type="text" name="startDate" class="regular-input" id="startDate" placeholder="Choose Date" required>
+                            </div>
+    
+                            <div class="input-container">
+                                <h4 class="input-title">Tanggal Selesai</h4>
+                                <p class="input-sub-title">Tentukan tanggal selesai kursus</p>
+                                <input type="text" name="endDate" class="regular-input" id="endDate" placeholder="Choose Date" required>
+                            </div>
+                        </div>
+                        <div class="form-footer gridspan">
+                            <span class="cancel-btn" @click.prevent="changeType('display')">Batal</span>
+                            <button type="submit" class="submit-btn">Kirim</button>
+                        </div>
+                    </form>
+                </div>
+            @endforeach
                 <!-- modal Tambah Topik -->
                 {{--<div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">

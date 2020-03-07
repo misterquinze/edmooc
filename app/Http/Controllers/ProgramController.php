@@ -163,37 +163,7 @@ class ProgramController extends Controller
         return redirect('/dashboard/company/program');
     }
 
-    /**
-     * Create academic course.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
 
-    public function createAcCourse(Request $request, Program $program, $id)
-    {
-        $userLogin = Auth::user();
-        $company = Company::where('user_id', $userLogin->id)->first();
-        $program = Program::where('id', $program->id)->get();
-        $program = Program::findOrFail($id);
-        $data = $request->all();
-        $startDate = date('Y-m-d', strtotime($data['startDate']));
-        $endDate = date('Y-m-d', strtotime($data['endDate']));
-
-        $accourse = Ac_course::create([
-            'company_id' => $company->id,
-            'category_id' => $data['category'],
-            'program_id' => $program->id,
-            'tutor_id' => $data['tutor'],
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'price' => $data['price'],
-            'passing_grade' => $data['passing_grade'],
-            'start_date' => $startDate,
-            'end_date' => $endDate
-            
-        ]);
-        //dd($accourse);
-        return back();
-    }
+    
 }

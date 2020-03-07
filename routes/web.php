@@ -56,8 +56,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/program/{id}/detail', 'ProgramController@programDetail')->name('program.detail');
 
     //Company - AcademicCourse
-    Route::post('dashboard/program/{id}/detail', 'ProgramController@createAcCourse')->name('company.academic.create');
-    // Company - ProCourse
+    Route::post('dashboard/program/{id}/detail', 'AcademicController@createAcCourse')->name('company.academic.create');
+    Route::put('/dashboard/accourse/{id}/edit', 'AcademicController@updateAcCourse')->name('company.academic.update');
+    Route::delete('/dashboard/accourse/{id}/delete', 'AcademicController@deleteAcCourse')->name('company.academic.delete');
+    
+    // Company - ProfessionalCourse
     Route::get('/dashboard/course/list', 'CompanyController@getMyCourse');
     Route::post('/dashboard/course/list', 'CompanyController@createCourse');
     Route::get('/dashboard/course/{id}/edit', 'CompanyController@getEditCourseForm');
@@ -68,11 +71,19 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Tutor
     Route::get('/dashboard/tutor/course/list', 'TutorController@getMyCourse');
-    // Tutor - Topic
+    // Tutor - ProfessionalTopic
     Route::get('/dashboard/tutor/course/{id}/overview', 'TutorController@getTopicList')->name('tutor.topic.index');
     Route::post('/dashboard/tutor/topic/{topicId}',  'TutorController@createTopic')->name('tutor.topic.create');
     Route::put('/dashboard/tutor/topic/{topicId}/edit', 'TutorController@updateTopic')->name('tutor.topic.update');
     Route::delete('/dashboard/tutor/topic/{topicId}/delete', 'TutorController@deleteTopic')->name('tutor.topic.delete');
+
+    //Tutor - AcademicTopic
+    Route::get('/dashboard/tutor/accourse/{id}/overview', 'AcademicController@getAcTopicList')->name('tutor.actopic.index');
+    Route::post('/dashboard/tutor/actopic/{topicId}',  'AcademicController@createAcTopic')->name('tutor.actopic.create');
+    Route::put('/dashboard/tutor/actopic/{topicId}/edit', 'AcademicController@updateAcTopic')->name('tutor.actopic.update');
+    Route::delete('/dashboard/tutor/actopic/{topicId}/delete', 'AcademicController@deleteAcTopic')->name('tutor.actopic.delete');
+    
+
     // Tutor - Topic Content
     Route::get('/dashboard/tutor/topic/{topicId}', 'TutorController@getContentList')->name('tutor.content.index');
     Route::get('/dashboard/tutor/content/{contentId}', 'TutorController@getContentDetail')->name('tutor.content.detail');

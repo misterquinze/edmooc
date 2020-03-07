@@ -99,7 +99,6 @@ class TutorController extends Controller
         return back();
     }
 
-
     // Content
     public function getContentList($topicId){
         $userLogin = Auth::user();
