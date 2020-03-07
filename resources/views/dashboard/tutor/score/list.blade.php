@@ -1,14 +1,14 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    <title>Overview Class</title>
+    <title> Preview Nilai - EdMOOC</title>
 @endsection
 
 @section('menu')
     <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
     <li><a href="{{ URL('dashboard/tutor/course/list') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
 
-    <li><a href="{{ URL('classroom/'.$course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+    <li><a href="{{ URL('classroom/'.$courses->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
     <li class="treeview">
         <a href="#">
@@ -24,7 +24,7 @@
             @endforeach
         </ul>
     </li>
-    <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
+    <li><a href="{{ route('tutor.task.index', [$courses ->id]) }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
     <li class="active"><a href=""><i class="fa fa-list"></i> <span>Nilai</span></a></li>
 @endsection
 
@@ -38,7 +38,7 @@
                 <div class="score-title-underline"></div>
 
                 <template v-for="(n,index) in 5">
-                    <a href="{{ route('tutor.score.detail', [$course->id,1]) }}" class="score-list gridspan">
+                    <a href="{{ route('tutor.score.detail', [$courses->id,1]) }}" class="score-list gridspan">
                         <div class="number-list">@{{ index+1 }}</div>
                         <img src="{{ URL('img/dummy.jpg') }}" class="student-photo">
                         <p class="student-name">Budi Sudarson</p>

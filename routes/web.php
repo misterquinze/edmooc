@@ -91,6 +91,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/tutor/topic/{topicId}/quiz/result', 'TutorController@getQuizAnswerList')->name('tutor.quiz.answer.list');
     Route::get('/dashboard/tutor/topic/{topicId}/quiz/result/{resultId}', 'TutorController@getQuizAnswerDetail')->name('tutor.quiz.answer.index');
     Route::put('/dashboard/tutor/quiz/result/{resultId}/score', 'TutorController@updateScore')->name('tutor.quiz.score');
+    //Tutor - Task
+    Route::get('/dashboard/tutor/{id}/task', 'TutorController@getTaskDetail')->name('tutor.task.index');
+    Route::get('/dashboard/tutor/{id}/task/preview', 'TutorController@getPreviewTaskForm')->name('tutor.task.preview');
+    Route::get('/dashboard/tutor/{id}/task/create', 'TutorController@getTaskForm')->name('tutor.task.create');
+    Route::post('/dashboard/tutor/{id}/task/create', 'TutorController@storeTask')->name('tutor.task.store');
+    Route::get('/dashboard/tutor/{id}/task/edit', 'TutorController@getEditTaskForm')->name('tutor.task.dit');
+    Route::put('/dashboard/tutor/{id}/task/edit', 'TutorController@update')->name('tutor.task.update');
+    Route::get('/dashboard/tutor/{id}/task/result', 'TutorController@getTaskAnswerList')->name('tutor.task.answer.list');
+    Route::get('/dashboard/tutor/{id}/task/result/{resultId}', 'TutorController@gettaskAnswerDetail')->name('tutor.task.answer.index');
+    Route::put('/dashboard/tutor/task/result/{resultId}/score', 'TutorController@updateScore')->name('tutor.task.score');
     // Tutor - Score
     Route::get('/dashboard/tutor/course/{courseId}/score', 'TutorController@getScoreList')->name('tutor.score.list');
     Route::get('/dashboard/tutor/course/{courseId}/score/{scoreId}', 'TutorController@getScoreDetail')->name('tutor.score.detail');

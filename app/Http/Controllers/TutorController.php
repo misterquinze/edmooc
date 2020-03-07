@@ -14,6 +14,8 @@ use App\Topic;
 use App\Content;
 use App\QuizQuestion;
 use App\QuizOption;
+use App\TaskQuestion;
+use App\TaskOption;
 
 class TutorController extends Controller
 {
@@ -40,7 +42,7 @@ class TutorController extends Controller
             'company', 
             'topics', 
             'courses',
-            'accourse', 
+            'accourse'
         ));
     }
     
@@ -287,17 +289,104 @@ class TutorController extends Controller
         ]);
     }
 
+     // task
+     public function getTaskDetail(course $courses, $id){
+        $userLogin = Auth::user();
+        $courses = Course::where('id', $id)->first();
+        
+        return view('dashboard/tutor/task/detail', [
+            'userLogin' => $userLogin,
+            'courses' => $courses
+        ]);
+    }
+
+    public function getTaskForm(course $courses, $id){
+        $userLogin = Auth::user();
+        $courses = Course::where('id', $id)->first();
+        
+
+        return view('dashboard/tutor/task/form-create',[
+            'userLogin' => $userLogin,
+            'courses' => $courses
+        ]);
+    }
+
+    public function getPreviewTaskForm($id){
+        $userLogin = Auth::user();
+        $courses = Course::where('id', $id)->first();
+       //$topic = Topic::find($topicId);
+
+        $questions = TaskQuestion::where('course_id',$courses->id)->get();
+        // dd($questions);
+        //dd($topic);
+        return view('dashboard/tutor/task/preview',[
+            'userLogin' => $userLogin,
+            'courses' => $courses,
+            
+            'questions' => $questions
+        ]);
+    }
+
+    public function storeTask(Request $request, $topicId){
+        $courses = Course::where('id', $id)->get();
+        $courses = Course::findOrFail($id);
+        $userLogin = Auth::user();
+        $userLogin = User::where('id', $userLogin->id)->first();
+        
+        
+        $data = $request->all();
+        //dd($data);
+        //dd($courses);
+        //dd($userLogin);
+        $taskQuestion = TaskQuestion::create([
+                
+            'user_id' => $userLogin->id,
+            'course_id' => $courses->id,
+            'title' => $data['title'],
+            'content' => $data['content'],
+        ]);    
+        //dd($data);
+        //dd($courses);
+        //dd($discussions);
+        $taskQuestion->save();
+    
+        return view('dashboard/tutor/task/detail', [
+            'userLogin' => $userLogin,
+            'courses' => $courses
+        ]);
+    }
+
+    public function getTaskAnswerList($id){
+        $userLogin = Auth::user();
+        $courses = Course::where('id', $id)->first();
+        
+        return view('dashboard/tutor/Task/answer-list',[
+            'userLogin' => $userLogin,
+            'courses' => $courses
+        ]);
+    }
+
+    public function getTaskAnswerDetail($id, $resultId){
+        $userLogin = Auth::user();
+        $courses = Course::where('id', $id)->first();
+
+
+        return view('dashboard/tutor/task/answer-detail',[
+            'userLogin' => $userLogin,
+            'courses' => $courses
+        ]);
+    }
 
     // Score / Nilai
     public function getScoreList($courseId){
         $userLogin = Auth::user();
-        $course = Course::where('id', $courseId)->first();
+        $courses = Course::where('id', $courseId)->first();
         $topics = Course::findOrFail($courseId)->topics()->get();
         $discussions = Course::findOrFail($courseId)->discussions()->get();
 
         return view('dashboard/tutor/score/list', [
              'userLogin' => $userLogin, 
-             'course' => $course, 
+             'courses' => $courses, 
              'topics' => $topics, 
              'discussions' => $discussions
         ]);
@@ -305,13 +394,13 @@ class TutorController extends Controller
 
     public function getScoreDetail($courseId,$scoreId){
         $userLogin = Auth::user();
-        $course = Course::where('id', $courseId)->first();
+        $courses = Course::where('id', $courseId)->first();
         $topics = Course::findOrFail($courseId)->topics()->get();
         $discussions = Course::findOrFail($courseId)->discussions()->get();
 
         return view('dashboard/tutor/score/detail', [
              'userLogin' => $userLogin, 
-             'course' => $course, 
+             'courses' => $courses, 
              'topics' => $topics, 
              'discussions' => $discussions
         ]);

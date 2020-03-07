@@ -5,31 +5,7 @@
 @endsection
 
 @section('menu')
-    <li class="treeview active">
-        <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Materi</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            @foreach($topics as $topic)
-                <li><a href="{{ URL('classroom/topic/'.$topic->id) }}"><i class="fa fa-circle-o"></i>{{ $topic->name }}</a></li>
-            @endforeach
-        </ul>
-    </li>
-
-    {{-- <li>
-        <a href="{{ URL('classroom/1/discussion') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
-            <span class="pull-right-container">
-                <small class="label pull-right bg-green">1</small>
-            </span>
-        </a>
-    </li>
-
-    <li><a href="{{ URL('classroom/1/topic/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li> --}}
+    <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
 @endsection
 
 @section('content')

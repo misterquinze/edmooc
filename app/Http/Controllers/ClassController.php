@@ -84,7 +84,7 @@ class ClassController extends Controller
           }
       }
        return view('classroom/forum', 
-       compact('userLogin', 'courses', 'discussions', 'topics', ) );
+       compact('userLogin', 'courses', 'discussions', 'topics' ) );
    }
   
    public function getTask($id){

@@ -32,7 +32,8 @@
             </span> --}}
         </a>
     </li>
-    <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
+    {{-- <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li> --}}
+    <li><a href="{{ route('tutor.task.index', [$course ->id]) }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
     <li><a href="{{ route('tutor.score.list', [$course->id]) }}"><i class="fa fa-list"></i> <span>Nilai</span></a></li>
 @endsection
 
