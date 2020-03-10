@@ -63,7 +63,8 @@ class TutorController extends Controller
         ]);
     }
 
-    public function createTopic(Request $request, Course $courses, $id){
+    public function createTopic(Request $request, Course $courses, $id)
+    {
         $courses = Course::where('id', $courses->id)->get();
         $courses = Course::findOrFail($id);
         $userLogin = Auth::user();
@@ -101,8 +102,11 @@ class TutorController extends Controller
     }
 
     // Content
-    public function getContentList($topicId){
+    public function getContentList($id, $topicId)
+    {
         $userLogin = Auth::user();
+        $course = Course::where('id', $id)->first();
+        $topics = Course::findOrFail($id)->topics()->get();
         $topic = Topic::findOrFail($topicId);
         $topic = Topic::where('id', $topic->id)->first();
         //$topics = Course::findOrFail($id)->topics()->get();
@@ -118,22 +122,25 @@ class TutorController extends Controller
 
         return view('dashboard/tutor/content/list', [
             'userLogin' => $userLogin,
+            'topics' => $topics,
             'topic' => $topic,
-            
             'contents' => $contents
         ]);
     }
 
-    public function getContentDetail($contentId)
+    public function getContentDetail($id, $topicId, $contentId)
     {
         $userLogin = Auth::user();
-       
-        $contents = Content::findOrFail($contentId);
-        $contents = Content::where('id', $contents->id)->get();
+        $course = Course::where('id', $id)->first();
+        $topic = Topic::findOrFail($topicId);
+        $topic = Topic::where('id', $topic->id)->first();
+        $content = Content::findOrFail($contentId);
+        $content = Content::where('id', $content->id)->get();
+        $contents = Content::where('topic_id', $topic->id)->get();
         //$topics = Course::findOrFail($topicId)->topics()->get();
         
         //dd($contents);
-        return view('dashboard/tutor/content/detail', compact('userLogin', 'contents'));
+        return view('dashboard/tutor/content/detail', compact('userLogin', 'topic', 'content', 'contents'));
     }
 
     public function createContentForm($topicId){   
@@ -188,7 +195,7 @@ class TutorController extends Controller
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-           
+                'source' =>'storage/' .$newName
             ]);
         }
         

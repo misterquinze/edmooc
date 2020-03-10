@@ -5,7 +5,6 @@
 @endsection
 
 @section('menu')
-    <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
     <li><a href="{{ URL('dashboard/list/course') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
 
     <li class="active"><a href="{{ URL('classroom/'.$topic->course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
@@ -45,7 +44,7 @@
         </div>
 
         @foreach($contents as $index => $content)     
-            <a href="{{route('tutor.content.detail', [$content->id])}}" class="topic-content">
+            <a href="{{ URL('/dashboard/'.$topic->course->id.'/tutor/'.$topic->id.'/content/'.$content->id) }}" class="topic-content">
                 <div class="topic-content-index">Materi {{ $index+1 }}</div>
                 <div class="topic-content-name">{{ $content->title }}</div>
                 <span class="fa fa-angle-right"></span>

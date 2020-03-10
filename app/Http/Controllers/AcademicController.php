@@ -149,7 +149,8 @@ class AcademicController extends Controller
     }
 
     // Topik
-    public function createAcTopic(Request $request, Ac_course $accourses, $id){
+    public function createAcTopic(Request $request, Ac_course $accourses, $id)
+    {
         $accourses =  Ac_course::where('id', $accourses->id)->get();
         $accourses =  Ac_course::findOrFail($id);
         $userLogin = Auth::user();
@@ -168,20 +169,21 @@ class AcademicController extends Controller
         return back();
     }
 
-    public function updateAcTopic(Request $request, $topicId){
-        $topics = Topic::findOrFail($topicId);
+    public function updateAcTopic(Request $request, $topicId)
+    {
+        $ac_topics = Ac_topic::findOrFail($topicId);
         $data = $request->all();
 
-        $topics->name = $data['name'];
-        $topics->description = $data['description'];
-        $topics->save();
+        $ac_topics->name = $data['name'];
+        $ac_topics->description = $data['description'];
+        $ac_topics->save();
 
         return back();
     }
 
     public function deleteAcTopic($id){
-        $topics = Topic::findOrFail($id);
-        $topics->delete();
+        $ac_topics = Ac_topic::findOrFail($id);
+        $ac_topics->delete();
 
         return back();
     }
@@ -191,6 +193,7 @@ class AcademicController extends Controller
     {
         $userLogin = Auth::user();
         $accourse = Ac_course::where('id', $id)->first();
+        $ac_topics = Ac_course::findOrFail($id)->ac_topics()->get();
         $ac_topic = Ac_topic::findOrFail($topicId);
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         //$topics = Course::findOrFail($id)->topics()->get();
@@ -206,6 +209,7 @@ class AcademicController extends Controller
 
         return view('dashboard/tutor/ac-content/ac-list', [
             'userLogin' => $userLogin,
+            'ac_topics' => $ac_topics,
             'ac_topic' => $ac_topic,
             'ac_contents' => $ac_contents
         ]);
@@ -215,7 +219,7 @@ class AcademicController extends Controller
     {
         $userLogin = Auth::user();
         $accourse = Ac_course::where('id', $id)->first();
-        $ac_topics = Ac_course::findOrFail($id)->ac_topics()->get();
+        
         $ac_topic = Ac_topic::findOrFail($topicId);
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         $ac_content = Ac_content::findOrFail($AccontentId);

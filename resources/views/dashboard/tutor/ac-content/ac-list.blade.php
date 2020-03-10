@@ -5,7 +5,7 @@
 @endsection
 
 @section('menu')
-    <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+    
     <li><a href="{{route('tutor.actopic.index', [$ac_topic->Ac_course->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
     <li class="treeview active">
         <a href="#">
@@ -15,11 +15,11 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
-        {{-- <ul class="treeview-menu">        
-            @foreach($topics as $topic)
-                <li><a href="{{ route('tutor.topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
+        <ul class="treeview-menu">        
+            @foreach($ac_topics as $topic)
+                <li><a href=""><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
             @endforeach
-        </ul> --}}
+        </ul> 
     </li>
     <li>
         <a href="{{ URL('classroom/1/discussion') }}">

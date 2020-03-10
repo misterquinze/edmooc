@@ -7,7 +7,7 @@
 @endsection
 
 @section('menu')
-    <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+    
     <li><a href="{{route('tutor.actopic.index', [$ac_topic->Ac_course->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
     <li><a href="{{ URL('/dashboard/tutor/' .$ac_topic->Ac_course->id.  '/actopic/'.$ac_topic->id) }}"><i class="fa fa-book"></i> <span>{{$ac_topic->name}}</span></a></li>
     
@@ -20,8 +20,11 @@
             </span>
         </a>
         <ul class="treeview-menu active">
-            <li><a href="{{ route('tutor.actopic.index', [$ac_topic->id]) }}"><i class="fa fa-circle-o"></i>{{$ac_topic->name}}</a></li>
+            @foreach ($ac_topics as $topic)
+            <li><a href=""><i class="fa fa-circle-o"></i>{{$ac_topic->name}}</a></li>
+            @endforeach
         </ul>
+     
     </li>--}}
     <li>
         <a href="{{ URL('classroom/1/discussion') }}">

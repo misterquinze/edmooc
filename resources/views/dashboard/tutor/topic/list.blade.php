@@ -8,7 +8,7 @@
     <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
     <li><a href="{{ URL('dashboard/tutor/course/list') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
 
-    <li class="active"><a href="{{ URL('classroom/'.$course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+    <li class="active"><a href="{{ route('tutor.topic.index', [$course->id])}}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
     <li class="treeview">
         <a href="#">
@@ -95,7 +95,7 @@
                         @foreach($topics as $topic)
                             <div class="topic-list gridspan">
                                 <div class="left-section">
-                                    <a href="{{ route('tutor.content.index', [$topic->id]) }}" class="topic-name">
+                                    <a href="{{URL('/dashboard/tutor/'.$course->id.'/topic/'.$topic->id)}}" class="topic-name">
                                         {{$topic->name}}
                                     </a>
                                 </div>
