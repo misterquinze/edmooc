@@ -8,7 +8,7 @@
     <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
     <li><a href="{{ URL('dashboard/tutor/course/list') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
 
-    <li class="active"><a href="{{ URL('classroom/'.$accourse->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+    <li class="active"><a href="{{ route('tutor.actopic.index', [$accourse->id])  }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
     <li class="treeview">
         <a href="#">
@@ -25,12 +25,12 @@
         </ul>
     </li>
     <li>
-        {{--<a href="{{ URL('classroom/'.$accourse->id.'/forum') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
+        <a href="">
+            <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
              <span class="pull-right-container">
-                <small class="label pull-right bg-green">1</small>
+                
             </span> 
-        </a>--}}
+        </a>
     </li>
     <li><a href="{{ URL('classroom/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
     <li><a href=""><i class="fa fa-list"></i> <span>Nilai</span></a></li>
@@ -94,7 +94,7 @@
                         @foreach($ac_topics as $topic)
                             <div class="topic-list gridspan">
                                 <div class="left-section">
-                                    <a href="{{route('tutor.accontent.index', [$topic->id])}} " class="topic-name">
+                                    <a href="{{ URL('/dashboard/tutor/' .$accourse->id.  '/actopic/'.$topic->id) }}" class="topic-name">
                                         {{$topic->name}}
                                     </a>
                                 </div>

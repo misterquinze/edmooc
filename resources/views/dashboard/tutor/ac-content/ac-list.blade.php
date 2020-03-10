@@ -6,11 +6,8 @@
 
 @section('menu')
     <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
-    <li><a href="{{ URL('dashboard/list/course') }}"><i class="fa fa-book"></i> <span>Kursus Saya</span></a></li>
-
-    <li class="active"><a href="{{ URL('classroom/'.$ac_topic->Ac_course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
-        
-    <li class="treeview">
+    <li><a href="{{route('tutor.actopic.index', [$ac_topic->Ac_course->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+    <li class="treeview active">
         <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Topik</span>
@@ -23,6 +20,14 @@
                 <li><a href="{{ route('tutor.topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
             @endforeach
         </ul> --}}
+    </li>
+    <li>
+        <a href="{{ URL('classroom/1/discussion') }}">
+            <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
+            <span class="pull-right-container">
+            
+            </span>
+        </a>
     </li>
     <li><a href="{{ route('tutor.quiz.index', [$ac_topic->id]) }}"><i class="fa fa-book"></i> <span>Kuis</span></a></li>
 @endsection
@@ -45,7 +50,7 @@
         </div>
 
         @foreach($ac_contents as $index => $content)     
-            <a href="{{route('tutor.accontent.detail', [$content->id])}}" class="topic-content">
+            <a href="{{ URL('/dashboard/'.$ac_topic->Ac_course->id. '/tutor/' .$ac_topic->id. '/accontent/'.$content->id) }}" class="topic-content">
                 <div class="topic-content-index">Materi {{ $index+1 }}</div>
                 <div class="topic-content-name">{{ $content->title }}</div>
                 <span class="fa fa-angle-right"></span>

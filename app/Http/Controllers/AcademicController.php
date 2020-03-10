@@ -187,8 +187,10 @@ class AcademicController extends Controller
     }
 
     //content
-    public function getAcContentList($topicId){
+    public function getAcContentList($id, $topicId)
+    {
         $userLogin = Auth::user();
+        $accourse = Ac_course::where('id', $id)->first();
         $ac_topic = Ac_topic::findOrFail($topicId);
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         //$topics = Course::findOrFail($id)->topics()->get();
@@ -209,16 +211,20 @@ class AcademicController extends Controller
         ]);
     }
 
-    public function getAcContentDetail($AccontentId)
+    public function getAcContentDetail($id, $topicId, $AccontentId)
     {
         $userLogin = Auth::user();
-       
-        $ac_contents = Ac_content::findOrFail($AccontentId);
-        $ac_contents = Ac_content::where('id', $ac_contents->id)->get();
+        $accourse = Ac_course::where('id', $id)->first();
+        $ac_topics = Ac_course::findOrFail($id)->ac_topics()->get();
+        $ac_topic = Ac_topic::findOrFail($topicId);
+        $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
+        $ac_content = Ac_content::findOrFail($AccontentId);
+        $ac_content = Ac_content::where('id', $ac_content->id)->get();
+        $ac_contents = Ac_content::where('ac_topic_id', $ac_topic->id)->get();
         //$topics = Course::findOrFail($topicId)->topics()->get();
         
         //dd($contents);
-        return view('dashboard/tutor/content/detail', compact('userLogin', 'ac_contents'));
+        return view('dashboard/tutor/ac-content/ac-detail', compact('userLogin', 'ac_topic', 'ac_content', 'ac_contents'));
     }
 
     public function createAcContentForm($ActopicId){   

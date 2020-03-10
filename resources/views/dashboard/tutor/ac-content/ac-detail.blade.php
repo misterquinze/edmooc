@@ -1,39 +1,33 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    @foreach($Accontents as $cont)
+    @foreach($ac_contents as $cont)
     <title>{{$cont->title}}</title>
     @endforeach
 @endsection
 
 @section('menu')
-
-    {{--<li class="active"><a href="{{ URL('classroom/'.$topic->course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>--}}
+    <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+    <li><a href="{{route('tutor.actopic.index', [$ac_topic->Ac_course->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+    <li><a href="{{ URL('/dashboard/tutor/' .$ac_topic->Ac_course->id.  '/actopic/'.$ac_topic->id) }}"><i class="fa fa-book"></i> <span>{{$ac_topic->name}}</span></a></li>
     
-    <li class="treeview active">
+    {{--<li class="treeview">
         <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Materi</span>
+            <span>Topik</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
-        <ul class="treeview-menu">
-            {{--<li class="active"><a href="{{ URL('classroom/1/topic/1') }}"><i class="fa fa-circle-o"></i> 1: Sistem Informasi</a></li>
-            <li><a href="{{ URL('classroom/1/topic/2') }}"><i class="fa fa-circle-o"></i> 2: Rekayasa Perangkat Lunak</a></li>
-            <li><a href="{{ URL('classroom/1/topic/3') }}"><i class="fa fa-circle-o"></i> 3: Web Development</a></li>
-            <li><a href="{{ URL('classroom/1/topic/4') }}"><i class="fa fa-circle-o"></i> 4: Basisdata</a></li>-
-            @foreach($topics as $topic)
-            <li><a href="{{ URL('classroom/'.$topic->id.'/topic') }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
-            @endforeach --}}
+        <ul class="treeview-menu active">
+            <li><a href="{{ route('tutor.actopic.index', [$ac_topic->id]) }}"><i class="fa fa-circle-o"></i>{{$ac_topic->name}}</a></li>
         </ul>
-    </li>
-
+    </li>--}}
     <li>
         <a href="{{ URL('classroom/1/discussion') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
+            <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
             <span class="pull-right-container">
-                <small class="label pull-right bg-green">1</small>
+            
             </span>
         </a>
     </li>
@@ -44,62 +38,81 @@
 @section('content')
 
     <link rel="stylesheet" href="{{ URL('css/dashboard/tutor/topic/content.css') }}">
-@foreach($Accontents as $cont)
+
     
     <section class="content">
         <div id="content">
             <template>
                 <div id="display-container">
                     <div class="gridspan">
-                        <h5 class="title"> Course Title > Topic Title > Materi 1 </h5>
+                    <h5 class="title"> <a href="{{route('tutor.actopic.index', [$ac_topic->Ac_course->id]) }}">{{$ac_topic->Ac_course->name}}</a> > <a href="{{ URL('/dashboard/tutor/' .$ac_topic->Ac_course->id.  '/actopic/'.$ac_topic->id) }}">{{$ac_topic->name}}</a> > <a href="">{{$cont->title}}</a> </h5>
                     </div>
                     <hr>
                     <div class="topic-content">
                         <div class="gridspan">
-                            
+                            <div class="right-section">
+                                <div class="filter-box">
+                                    <div class="filter-header">
+                                        {{$ac_topic->name}}
+                                    </div>
+                                    @foreach ($ac_contents as $ac)
+                                    <div class="filter-body">
+                                        <a href="">{{$ac->title}}</a> 
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="left-section">
+                                @if ($ac_content->isEmpty())
+                                @if (session('content'))
+                                    <div class="card-body">
+                                        <h2 class="alert alert-info">
+                                            {{ session('content') }}
+                                        </h2>
+                                    </div>
+                                @endif
+                                @else
+                                @foreach ($ac_content as $cont)
+                                    
+                                
+                                <div class="content-detail">
+                                    <div class="content-title">
+                                        <h2>{{$cont->title}}</h2>
+                                    </div>
+                                    @if($cont->type == 'video')
+                                    <div class="content-video">
+                                        <video src="{{asset ( $cont->source)}}" frameborder="1" width="700" controls></video>
+                                    </div>
+                                    <div class="explanation" style="text-justify">
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corruptiasperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
+                                        </p>
+                                    </div>
+                                    @elseif($cont->type == 'slide')
+                                    <div class="topic-slide">
+                                        {{asset ( $cont->source)}}
+                                    </div>
+                                    <div class="explanation">
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corrupti asperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
+                                        </p>
+                                    </div>
+                                    @else 
+                                    <div class="explanation">
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corrupti asperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
+                                        </p>
+                                    </div>
+                                    @endif
+                                </div>
+                                @endforeach
+                                @endif
+                            </div>
                         </div>
-                        @if ($Accontents->isEmpty())
-                        @if (session('content'))
-                            <div class="card-body">
-                                <h2 class="alert alert-info">
-                                    {{ session('content') }}
-                                </h2>
-                            </div>
-                        @endif
-                        @else    
-                            <div class="topic-title">
-                                <h2>{{$cont->title}}</h2>
-                            </div>
-                            @if($cont->type == 'video')
-                            <div class="topic-video">
-                                <video src="{{asset ( $cont->source)}}" frameborder="1" width="500" controls></video>
-                            </div>
-                            <div class="explanation" style="text-justify">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corrupti asperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
-                                </p>
-                            </div>
-                            @elseif($cont->type == 'slide')
-                            <div class="topic-slide">
-                                {{asset ( $cont->source)}}
-                            </div>
-                            <div class="explanation">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corrupti asperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
-                                </p>
-                            </div>
-                            @else 
-                            <div class="explanation">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corrupti asperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
-                                </p>
-                            </div>
-                            @endif
-                        @endif
                     </div>
                 </div>
             </template>
         </div>
     </section>
 
-@endforeach
+
 <script src="{{ URL('js/vue.js') }}"></script>
 {{-- <script src="{{ URL('js/sweetalert.min.js') }}"></script> --}}
 

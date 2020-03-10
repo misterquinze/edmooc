@@ -94,8 +94,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/dashboard/tutor/content/{contentId}', 'TutorController@deleteContent')->name('tutor.content.delete');
 
     //Tutor - AcademicTopicContent
-    Route::get('/dashboard/tutor/actopic/{topicId}', 'AcademicController@getAcContentList')->name('tutor.accontent.index');
-    Route::get('/dashboard/tutor/accontent/{AccontentId}', 'AcademicController@getAcContentDetail')->name('tutor.accontent.detail');
+    Route::get('/dashboard/tutor/{id}/actopic/{topicId}', 'AcademicController@getAcContentList')->name('tutor.accontent.index');
+    Route::get('/dashboard/{id}/tutor/{topicId}/accontent/{AccontentId}', 'AcademicController@getAcContentDetail')->name('tutor.accontent.detail');
     Route::get('/dashboard/tutor/topic/{topicId}/accontent/create', 'AcademicController@createAcContentForm')->name('tutor.accontent.create');
     Route::post('/dashboard/tutor/topic/{topicId}/accontent/create', 'AcademicController@storeAcContent')->name('tutor.accontent.store');
 
