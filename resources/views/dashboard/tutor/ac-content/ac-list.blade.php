@@ -35,7 +35,7 @@
         <div class="topic-detail-header">
             <div class="top-section">
                 <h2 class="topic-name">{{ $ac_topic->name }}</h2>
-                <a href="{{route('tutor.content.create', [$ac_topic->id])}}" class="add-content-button">
+                <a href="{{route('tutor.accontent.create', [$ac_topic->id])}}" class="add-content-button">
                     Tambah Materi
                 </a>
             </div>
@@ -44,8 +44,8 @@
             </div>
         </div>
 
-        @foreach($contents as $index => $content)     
-            <a href="{{route('tutor.content.detail', [$content->id])}}" class="topic-content">
+        @foreach($ac_contents as $index => $content)     
+            <a href="{{route('tutor.accontent.detail', [$content->id])}}" class="topic-content">
                 <div class="topic-content-index">Materi {{ $index+1 }}</div>
                 <div class="topic-content-name">{{ $content->title }}</div>
                 <span class="fa fa-angle-right"></span>

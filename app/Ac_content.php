@@ -13,8 +13,8 @@ class Ac_content extends Model
         'title',
         'description',
         'type',
-        'source',
-        'artikel'
+        'source'
+        
         
     ];
 
