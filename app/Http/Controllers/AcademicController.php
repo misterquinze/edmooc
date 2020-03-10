@@ -208,50 +208,71 @@ class AcademicController extends Controller
         ]);
     }
 
-    public function createContentForm($topicId){   
+    public function getAcContentDetail($AccontentId)
+    {
         $userLogin = Auth::user();
-        $topics = Topic::where('id', $topicId)->get();
+       
+        $Accontents = Content::findOrFail($AccontentId);
+        $Accontents = Content::where('id', $Accontents->id)->get();
+        //$topics = Course::findOrFail($topicId)->topics()->get();
+        
+        //dd($contents);
+        return view('dashboard/tutor/content/detail', compact('userLogin', 'contents'));
+    }
+
+    public function createAcContentForm($ActopicId){   
+        $userLogin = Auth::user();
+        $topics = Topic::where('id', $ActopicId)->get();
         return view('dashboard/tutor/content/form-create', compact('userLogin', 'topics'));
     }
 
-    public function storeContent(Request $request, $topicId){   
-        $topics = Topic::where('id', $topicId)->get();
-        $topics = Topic::findOrFail($topicId);
+    public function storeAcContent(Request $request, $ActopicId){   
+        $topics = Topic::where('id', $ActopicId)->get();
+        $topics = Topic::findOrFail($ActopicId);
         $userLogin = Auth::user();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
         
         $data = $request->all();
+        $file = $request->file('source');
+        $fileName = time();
+        $ext = $request->file('source')->getClientOriginalExtension();
+        $newName = $fileName . '.' .$ext;
+        //$path = $request->file('source')->storeAs('source', $fileName.".".$ext);
+        
+        Storage::putFileAs('public', $request->file('source'), $newName);
+        
         //dd($data);
-
         if($data['type'] == 'video'){
+            
             $contents = Content::create([
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'source' => $data['source']
+                'source' => 'storage/' .$newName
                 
             ]);
         }elseif($data['type'] == 'slide'){
+            
             $contents = Content::create([
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'source' => $data['source']
+                'source' =>'storage/' .$newName
                 
             ]);
         }else{
+
             $contents = Content::create([
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'source' => $data['source']
-                
+           
             ]);
         }
         
@@ -271,6 +292,7 @@ class AcademicController extends Controller
         
         return redirect()->route('tutor.content.index', [$topics->id]);
     }
+
 
 
 

@@ -22,7 +22,9 @@ class ContentsController extends Controller
         $contents = Content::findOrFail($contentId);
         $contents = Content::where('id', $contents->id)->get();
         //$topics = Course::findOrFail($topicId)->topics()->get();
-        return view('classroom/topic/content/index', compact('userLogin', 'contents'));
+        //dd($contents);
+       
+        return view('dashboard/tutor/content/detail', compact('userLogin', 'contents', ''));
     }
 
     public function create($topicId)
@@ -43,6 +45,7 @@ class ContentsController extends Controller
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
         
         $data = $request->all();
+        
         //dd($data);
 
         if($data['type'] == 'video'){

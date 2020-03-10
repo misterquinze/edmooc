@@ -47,7 +47,7 @@
                         Konten
                     </div>
                 
-                    <form action="{{ route('tutor.content.store', [$topic->id]) }}" method="POST">
+                    <form action="{{ route('tutor.content.store', [$topic->id]) }}" method="POST" enctype="multipart/form-data">
                         <div class="form-body">
                             {{ csrf_field() }}
                             <div class="input-container">
@@ -107,7 +107,7 @@
     </section>
 @endforeach
     <script src="{{ URL('js/vue.js') }}"></script>
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    
     <script>
         new Vue({
             el: '#forum',
@@ -130,7 +130,7 @@
             }
         });
 
-        CKEDITOR.replace( 'description' );
+        
        
         
     </script>

@@ -16,6 +16,7 @@ use App\QuizQuestion;
 use App\QuizOption;
 use App\TaskQuestion;
 use App\TaskOption;
+use Illuminate\Support\Facades\Storage;
 
 class TutorController extends Controller
 {
@@ -123,6 +124,18 @@ class TutorController extends Controller
         ]);
     }
 
+    public function getContentDetail($contentId)
+    {
+        $userLogin = Auth::user();
+       
+        $contents = Content::findOrFail($contentId);
+        $contents = Content::where('id', $contents->id)->get();
+        //$topics = Course::findOrFail($topicId)->topics()->get();
+        
+        //dd($contents);
+        return view('dashboard/tutor/content/detail', compact('userLogin', 'contents'));
+    }
+
     public function createContentForm($topicId){   
         $userLogin = Auth::user();
         $topics = Topic::where('id', $topicId)->get();
@@ -136,37 +149,46 @@ class TutorController extends Controller
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
         
         $data = $request->all();
+        $file = $request->file('source');
+        $fileName = time();
+        $ext = $request->file('source')->getClientOriginalExtension();
+        $newName = $fileName . '.' .$ext;
+        //$path = $request->file('source')->storeAs('source', $fileName.".".$ext);
+        
+        Storage::putFileAs('public', $request->file('source'), $newName);
+        
         //dd($data);
-
         if($data['type'] == 'video'){
+            
             $contents = Content::create([
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'source' => $data['source']
+                'source' => 'storage/' .$newName
                 
             ]);
         }elseif($data['type'] == 'slide'){
+            
             $contents = Content::create([
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'source' => $data['source']
+                'source' =>'storage/' .$newName
                 
             ]);
         }else{
+
             $contents = Content::create([
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'source' => $data['source']
-                
+           
             ]);
         }
         
