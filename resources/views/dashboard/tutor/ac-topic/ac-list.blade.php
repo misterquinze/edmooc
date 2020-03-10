@@ -94,7 +94,7 @@
                         @foreach($ac_topics as $topic)
                             <div class="topic-list gridspan">
                                 <div class="left-section">
-                                    <a href="" class="topic-name">
+                                    <a href="{{route('tutor.accontent.index', [$topic->id])}} " class="topic-name">
                                         {{$topic->name}}
                                     </a>
                                 </div>

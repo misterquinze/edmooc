@@ -20,6 +20,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/', 'VisitorController@getHomepage');
 Route::get('/course', 'VisitorController@getCourses');
 Route::get('/accourse/{id}/preview', 'VisitorController@getAcCoursePreview');
+Route::get('/course/{id}/preview', 'VisitorController@getCoursePreview');
 Route::get('/enroll', 'StudentController@enroll')->name('enroll');
 Route::get('/about', 'VisitorController@getAbout');
 Route::get('/contact', 'VisitorController@getContact');
@@ -83,8 +84,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/dashboard/tutor/actopic/{topicId}/edit', 'AcademicController@updateAcTopic')->name('tutor.actopic.update');
     Route::delete('/dashboard/tutor/actopic/{topicId}/delete', 'AcademicController@deleteAcTopic')->name('tutor.actopic.delete');
     
-    
-
     // Tutor - Professional Topic Content
     Route::get('/dashboard/tutor/topic/{topicId}', 'TutorController@getContentList')->name('tutor.content.index');
     Route::get('/dashboard/tutor/content/{contentId}', 'TutorController@getContentDetail')->name('tutor.content.detail');
@@ -95,7 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/dashboard/tutor/content/{contentId}', 'TutorController@deleteContent')->name('tutor.content.delete');
 
     //Tutor - AcademicTopicContent
-    Route::get('/dashboard/tutor/actopic/{topicId}', 'AcademicControllerr@getAcContentList')->name('tutor.accontent.index');
+    Route::get('/dashboard/tutor/actopic/{topicId}', 'AcademicController@getAcContentList')->name('tutor.accontent.index');
     Route::get('/dashboard/tutor/accontent/{AccontentId}', 'AcademicController@getAcContentDetail')->name('tutor.accontent.detail');
     Route::get('/dashboard/tutor/topic/{topicId}/accontent/create', 'AcademicController@createAcContentForm')->name('tutor.accontent.create');
     Route::post('/dashboard/tutor/topic/{topicId}/accontent/create', 'AcademicController@storeAcContent')->name('tutor.accontent.store');

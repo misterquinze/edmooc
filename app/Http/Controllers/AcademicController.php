@@ -9,7 +9,8 @@ use App\Ac_course;
 use App\User;
 use App\Category;
 use App\Tutor;
-use App\ac_topic;
+use App\Ac_topic;
+use App\Ac_content;
 use App\Discussion;
 use App\Program;
 
@@ -190,7 +191,7 @@ class AcademicController extends Controller
         $ac_topic = Ac_topic::findOrFail($topicId);
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         //$topics = Course::findOrFail($id)->topics()->get();
-        $contents = Ac_content::where('topic_id', $ac_topic->id)->get();
+        $contents = Ac_content::where('ac_topic_id', $ac_topic->id)->get();
 
         if ($contents->isEmpty()) {
             \Session::flash('content', 'Dont have content');
@@ -200,7 +201,7 @@ class AcademicController extends Controller
             }
         }
 
-        return view('dashboard/tutor/content/list', [
+        return view('dashboard/tutor/ac-content/ac-list', [
             'userLogin' => $userLogin,
             'ac_topic' => $ac_topic,
             
@@ -212,12 +213,12 @@ class AcademicController extends Controller
     {
         $userLogin = Auth::user();
        
-        $Accontents = Content::findOrFail($AccontentId);
-        $Accontents = Content::where('id', $Accontents->id)->get();
+        $Accontents = Ac_content::findOrFail($AccontentId);
+        $Accontents = Ac_content::where('id', $Accontents->id)->get();
         //$topics = Course::findOrFail($topicId)->topics()->get();
         
         //dd($contents);
-        return view('dashboard/tutor/content/detail', compact('userLogin', 'contents'));
+        return view('dashboard/tutor/content/detail', compact('userLogin', 'Accontents'));
     }
 
     public function createAcContentForm($ActopicId){   

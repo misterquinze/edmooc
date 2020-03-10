@@ -23,7 +23,7 @@ class Ac_topic extends Model
         return $this->belongsTo('App\tutor');
     }
 
-    public function content(){
-        return $this->hasMany('App\content');
+    public function ac_content(){
+        return $this->hasMany('App\ac_content');
     }
 }
