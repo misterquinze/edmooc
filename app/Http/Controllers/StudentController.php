@@ -14,7 +14,8 @@ use App\UserCourse;
 class StudentController extends Controller
 {
     
-    public function getMyCourse(){
+    public function getMyCourse()
+    {
         $userLogin = Auth::user();
         if (Auth::check()) {
             $enrollment = Enrollment::where('user_id', '=', Auth::id())
@@ -42,7 +43,8 @@ class StudentController extends Controller
         ]);
     }
 
-    public function getOverview(Course $courses, $id){
+    public function getOverview(Course $courses, $id)
+    {
           
         $userLogin = Auth::user();
         $course = Course::where('id', $id)->first();
@@ -55,9 +57,10 @@ class StudentController extends Controller
              'topics' => $topics, 
              'discussions' => $discussions
         ]);
-   }
+    }
 
-   public function getTopic($topicId){
+   public function getTopic($topicId)
+   {
         $userLogin = Auth::user();
         $topic = Topic::findOrFail($topicId);
         $topic = Topic::where('id', $topic->id)->first();
@@ -66,8 +69,8 @@ class StudentController extends Controller
 
         if ($contents->isEmpty()) {
             \Session::flash('content', 'Dont have content');
-        }else {
-            foreach($contents as $content){
+        } else {
+            foreach ($contents as $content){
                 $content = Content::find($content->id);
             }
         }
@@ -75,10 +78,28 @@ class StudentController extends Controller
         return view('dashboard/student/content/list', [
             'userLogin' => $userLogin,
             'topic' => $topic,
-            
             'contents' => $contents
         ]);
-   }
+    }
+
+    public function getContentDetail($id, $topicId, $contentId)
+    {
+        $userLogin = Auth::user();
+        $course = Course::where('id', $id)->first();
+        $topic = Topic::findOrFail($topicId);
+        $topic = Topic::where('id', $topic->id)->first();
+        $content = Content::findOrFail($contentId);
+        $content = Content::where('id', $content->id)->get();
+        $contents = Content::where('topic_id', $topic->id)->get();
+        //dd($contents);
+       
+        return view('dashboard/student/content/detail', compact(
+            'userLogin',
+            'topic', 
+            'content', 
+            'contents' 
+        ));
+    }
 
     public function enroll(Course $course, $id)
     {   

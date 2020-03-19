@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Student - TopicDetail & ContentList
     Route::get('/dashboard/student/topic/{topicId}', 'StudentController@getTopic')->name('student.topic.index');
     // Student - ContentDetail
-    Route::get('classroom/topic/content/{contentId}', 'ContentsController@index')->name('student.content.index');
+    Route::get('classroom/{id}/topic/{topicId}/content/{contentId}', 'StudentController@getContentDetail')->name('student.content.index');
     // Student - Enroll & Unenroll
     Route::get('/enroll/{id}', 'StudentController@enroll')->name('enroll');
     Route::get('/unenroll/{id}', 'StudentController@unenroll')->name('unenroll');

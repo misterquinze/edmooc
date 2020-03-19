@@ -23,6 +23,7 @@
             @endforeach--}}
         </ul> 
     </li>
+    
     {{--<li><a href="{{ route('student.quiz.index', [$topic->id]) }}"><i class="fa fa-book"></i> <span>Kuis</span></a></li>--}}
 @endsection
 
@@ -42,7 +43,7 @@
         </div>
 
         @foreach($contents as $index => $content)     
-            <a href="{{route('student.content.index', [$content->id])}}" class="topic-content">
+            <a href="{{URL('/classroom/'.$topic->course->id.'/topic/'.$topic->id.'/content/'.$content->id)}}" class="topic-content">
                 <div class="topic-content-index">Materi {{ $index+1 }}</div>
                 <div class="topic-content-name">{{ $content->title }}</div>
                 <span class="fa fa-angle-right"></span>

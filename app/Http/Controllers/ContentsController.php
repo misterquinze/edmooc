@@ -24,7 +24,7 @@ class ContentsController extends Controller
         //$topics = Course::findOrFail($topicId)->topics()->get();
         //dd($contents);
        
-        return view('dashboard/tutor/content/detail', compact('userLogin', 'contents', ''));
+        return view('dashboard/tutor/content/detail', compact('userLogin', 'contents' ));
     }
 
     public function create($topicId)
