@@ -37,19 +37,53 @@
     </section>
     @if($userLogin->role == 'student')
     <section class="content">
-        <h3 class="title"></h3>
-
-        <div class="course-list">
-            <div class="gridspan">
-                <div class="col-left">
-                    <div class="label-container">
+        <div class="gridspan">
+            <div class="course-left">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title text-center">
+                                Member Sejak
+                            </div>
+                            <div class="card-content text-center">
+                                {{$userLogin->created_at->format('d M Y')}}
+                            </div>
+                            
+                        </div>
                         
                     </div>
-                    
                 </div>
-               
+            </div>
+            <div class="course-middle">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title text-center">
+                                0
+                            </div>
+                             <div class="card-content text-center">
+                                Kursus 
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="course-right">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title text-center">
+                                0
+                            </div>
+                             <div class="card-content text-center">
+                                Lulus Kursus
+                             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        
 
     </section>
     @elseif($userLogin->role == 'company')
