@@ -125,7 +125,7 @@
                             </div>
                             <div class="desc">
                                 <p class="JustifyFull">
-                                    Kursus professioanal merupakan kursus yang hanya menawarkan sertifikat professioanal terakreditasi
+                                    Kursus professioanal merupakan kursus yang menawarkan sertifikat professioanal terakreditasi
                                 </p>
                                 <a href="{{ URL('dashboard/course/list') }}">Pelajari lebih lanjut</a>
                             </div>
@@ -159,7 +159,33 @@
     </section>
     @elseif($userLogin->role == 'tutor')
     <section class="content">
+        <div class="course-list">
+            <div class="gridspan">
+                <div class="col-left">
+                    <div class="label-container">
+                        <img src="{{ URL('img/book.jpg') }}" class="card-image">
+                    </div>
+                </div>
+                <div class="col-right">
+                    <div class="label-container">
+                        <div class="title">
+                            Selamat datang di halaman dasbor Tutor!
+                        </div>
+                        <div class="desc">
+                            <p class="JustifyFull">
+                                Anda sebagai tutor dapat membuat materi kursus pada kursus yang anda ajar 
+
+                                
+                            </p>
+
+                            <a href="">Pelajari lebih lanjut</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="gridspan">
+            
             <div class="course-left">
                 <div class="gridspan">
                     <div class="col-left">

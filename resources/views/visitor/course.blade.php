@@ -27,7 +27,14 @@
                     <div class="col-lg-6">
                         <div class="banner_content text-center">
                             <h2>Courses</h2>
-                            <input type="text" class="search-box" placeholder="Search">
+                        <form action="/course/search" method="GET">
+                            <span class="input-group gridspan">
+                                <input type="text" max="200" class="search-box"  name="search" placeholder="Search Course"  value="{{old ('search')}}" >
+                                <button class="submit-btn" type="submit"><i class="fa fa-search"></i></button>
+                            </span>
+                            
+                        </form>
+                        
                         </div>
                     </div>
                 </div>

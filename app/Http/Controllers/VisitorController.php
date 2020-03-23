@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
 {
-    public function getHomepage(){
+    public function getHomepage()
+    {
         $userLogin = Auth::user();
 
         return view('visitor/home',[
@@ -19,12 +20,13 @@ class VisitorController extends Controller
         ]);
     }
 
-    public function getCourses(){
+    public function getCourses()
+    {
         $userLogin = Auth::user();
         $categories = Category::all();
-        $courses = Course::all();
+        
         $courses = Course::paginate(5);
-        $accourse = Ac_course::all();
+       
         $accourse = Ac_course::paginate(5);
 
         return view('visitor/course',[
@@ -35,7 +37,8 @@ class VisitorController extends Controller
         ]);
     }
 
-    public function getCoursePreview($id){
+    public function getCoursePreview($id)
+    {
         $userLogin = Auth::user();
         $courses = Course::findOrFail($id);
         $courses = Course::where('id', $courses->id)->get();
@@ -48,7 +51,8 @@ class VisitorController extends Controller
         ]);
     }
 
-    public function getAcCoursePreview($id){
+    public function getAcCoursePreview($id)
+    {
         $userLogin = Auth::user();
        
         $accourse = Ac_course::findOrFail($id);
@@ -61,7 +65,8 @@ class VisitorController extends Controller
         ]);
     }
 
-    public function getAbout(){
+    public function getAbout()
+    {
         $userLogin = Auth::user();
 
         return view('visitor/about',[
@@ -70,7 +75,8 @@ class VisitorController extends Controller
         ]);
     }
 
-    public function getContact(){
+    public function getContact()
+    {
         $userLogin = Auth::user();
 
         return view('visitor/contact',[
@@ -79,7 +85,8 @@ class VisitorController extends Controller
         ]);
     }
 
-    public function filter(Request $request){
+    public function filter(Request $request)
+    {
         $course = Course::all();
         if($request->type){
             $course = $course->where('type', $request->type);
@@ -89,5 +96,22 @@ class VisitorController extends Controller
 
     }
 
-    
+    public function search(Request $request)
+    {   
+        $userLogin = Auth::user();
+        
+        $search = $request->search;
+      
+        $courses = Course::where('name', 'like', "%" .$search. "%")->paginate();
+        
+        $accourse = Ac_course::where('name', 'like', "%" .$search. "%")->paginate();
+        
+
+        //dd($courses);
+        return view('visitor/course', [
+            'userLogin' => $userLogin,
+            'courses' => $courses,
+            'accourse' => $accourse
+        ]);
+    }
 }

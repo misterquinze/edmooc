@@ -1,16 +1,34 @@
-.search-box{
+.input-group{
+
+    margin-top: 20px;
+}
+
+.input-group .submit-btn{
+    float: left;
+    border: 1px solid #fff;
+    cursor: pointer;
+    background: #fff;
+    width: 6%;
+}
+
+.input-group .submit-btn:hover {
+    border: 1px solid #cccccc;
+    background-color: #cccccc;
+
+  }
+
+.input-group .search-box{
     padding: 10px 20px;
-    border: 1px solid #dbe2e8;
     color: #2e3d49;
     background: #fff;
-    width: 100%;
-    outline: 0;
+    width: 94%;
     font-size: 14px;
-    margin: 20px auto 0;
-    border-radius: 30px;
+    border: 1px solid #fff;
     display: block;
-    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+    
 }
+
+
 
 .course-content{
     padding: 50px;

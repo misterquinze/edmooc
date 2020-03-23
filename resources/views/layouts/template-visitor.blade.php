@@ -9,6 +9,7 @@
         {{--<link rel="stylesheet" href="{{ mix('css/all.css') }}" />--}}
         <link rel="stylesheet" href="{{ URL('template/2/css/bootstrap.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/flaticon.css') }}" />
+        <link rel="stylesheet" href="{{ URL('template/1/bower_components/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ URL('template/2/css/themify-icons.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/vendors/owl-carousel/owl.carousel.min.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/vendors/nice-select/css/nice-select.css') }}" />

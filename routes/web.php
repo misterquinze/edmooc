@@ -19,6 +19,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/', 'VisitorController@getHomepage');
 Route::get('/course', 'VisitorController@getCourses');
+Route::get('/course/search', 'VisitorController@search');
 Route::get('/accourse/{id}/preview', 'VisitorController@getAcCoursePreview');
 Route::get('/course/{id}/preview', 'VisitorController@getCoursePreview');
 Route::get('/enroll', 'StudentController@enroll')->name('enroll');
