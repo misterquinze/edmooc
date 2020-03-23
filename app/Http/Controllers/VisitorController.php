@@ -88,4 +88,6 @@ class VisitorController extends Controller
         return $course;
 
     }
+
+    
 }

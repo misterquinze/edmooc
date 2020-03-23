@@ -61,6 +61,28 @@
                         </form>
                     </div>
                 </div>
+                <div class="filter-box">
+                    <div class="filter-header">
+                        Program
+                    </div>
+                    <div class="filter-body">
+                        
+                        <form action="{{URL('')}}" method="post">
+                            {{ csrf_field() }}
+                            
+                            <label class="filter-container">
+                                Academic
+                                <input type="checkbox" name="free">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="filter-container">
+                                Professional
+                                <input type="checkbox" name="paid">
+                                <span class="checkmark"></span>
+                            </label>
+                        </form>
+                    </div>
+                </div>
                
                 <div class="filter-box">
                     <div class="filter-header">
@@ -76,7 +98,7 @@
                                 <span class="checkmark"></span>
                             </label>
                             <label class="filter-container">
-                                Education
+                                Technology
                                 <input type="checkbox" name="paid">
                                 <span class="checkmark"></span>
                             </label>
