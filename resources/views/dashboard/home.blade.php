@@ -85,21 +85,73 @@
     </section>
     @elseif($userLogin->role == 'company')
     <section class="content">
-        
         <div class="course-list">
             <div class="gridspan">
                 <div class="col-left">
                     <div class="label-container">
-                        <p> Selamat datang di halaman dasbor Institusi</p>
-                        <p> Untuk membuat kursus professional silahan membuka menu Professioanl</p>
-                        <p> Untuk membuat kursus akademik silahan membuka menu Akaedmik</p>
-                        
+                        <img src="{{ URL('img/book.jpg') }}" class="card-image">
                     </div>
-                    
                 </div>
                 <div class="col-right">
-                    <div class="proceed-btn">
-                        
+                    <div class="label-container">
+                        <div class="title">
+                            Selamat datang di halaman dasbor Institusi!
+                        </div>
+                        <div class="desc">
+                            <p class="JustifyFull">
+                                Anda sebagai institusi dapat membuat kursus sesuai dengan tujuan anda, terdapat 2 pilihan dalam membuat kursus. Kursus Professional dan Kursus Akademik. 
+
+                                
+                            </p>
+
+                            <a href="">Pelajari lebih lanjut</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gridspan">
+            <div class="card-left">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <img src="{{ URL('img/prof.jpg') }}" class="card-image">
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="label-container">
+                            <div class="title">
+                                Kursus Professional
+                            </div>
+                            <div class="desc">
+                                <p class="JustifyFull">
+                                    Kursus professioanal merupakan kursus yang hanya menawarkan sertifikat professioanal terakreditasi
+                                </p>
+                                <a href="{{ URL('dashboard/course/list') }}">Pelajari lebih lanjut</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-right">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <img src="{{ URL('img/academic.jpg') }}" class="card-image">
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="label-container">
+                            <div class="title">
+                                Kursus Akademik
+                            </div>
+                            <div class="desc">
+                                <p class="JustifyFull">
+                                    Kursus akademik merupakan kursus berjenjang yang menawarkan gelar jika telah menyelesaikan keseluruhan kursus...
+                                </p>
+                                <a href="{{ URL('dashboard/company/program') }}">Pelajari lebih lanjut</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,30 +185,6 @@
                                 Kursus Diajar
                              </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-       
-    </section>
-    @elseif($userLogin->role == 'company')
-    <section class="content">
-        
-        <div class="course-list">
-            <div class="gridspan">
-                <div class="col-left">
-                    <div class="label-container">
-                        <p> Selamat datang di halaman dasbor Institusi</p>
-                        <p> Untuk membuat kursus professional silahan membuka menu Professioanl</p>
-                        <p> Untuk membuat kursus akademik silahan membuka menu Akaedmik</p>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col-right">
-                    <div class="proceed-btn">
-                        
                     </div>
                 </div>
             </div>
