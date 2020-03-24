@@ -37,51 +37,132 @@
     </section>
     @if($userLogin->role == 'student')
     <section class="content">
-        <div class="gridspan">
-            <div class="course-left">
-                <div class="gridspan">
-                    <div class="col-left">
-                        <div class="label-container">
-                            <div class="card-title text-center">
-                                Member Sejak
-                            </div>
-                            <div class="card-content text-center">
-                                {{$userLogin->created_at->format('d M Y')}}
+        <div class="student-box">
+            <div class="gridspan">
+                <div class="student-box-1">
+                    <div class="gridspan">
+                        <div class="col-left">
+                            <div class="label-container">
+                                <div class="card-title">
+                                    EdMOOC
+                                </div>
+                                <div class="card-content ">
+                                    {{$userLogin->name}}
+                                    <br>
+                                    {{$userLogin->email}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="course-middle">
-                <div class="gridspan">
-                    <div class="col-left">
-                        <div class="label-container">
-                            <div class="card-title text-center">
-                                0
+                <div class="student-box-2">
+                    <div class="gridspan">
+                        <div class="col-left">
+                            <div class="label-container">
+                                <div class="card-title text-center">
+                                    Member sejak
+                                </div>
+                                 <div class="card-content text-center">
+                                    {{$userLogin->created_at->format('d M Y')}} 
+                                 </div>
                             </div>
-                             <div class="card-content text-center">
-                                Kursus 
-                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="course-right">
-                <div class="gridspan">
-                    <div class="col-left">
-                        <div class="label-container">
-                            <div class="card-title text-center">
-                                0
+                <div class="student-box-3">
+                    <div class="gridspan">
+                        <div class="col-left">
+                            <div class="label-container">
+                                <div class="card-title text-center">
+                                    0
+                                </div>
+                                 <div class="card-content text-center">
+                                    Lulus Kursus
+                                 </div>
                             </div>
-                             <div class="card-content text-center">
-                                Lulus Kursus
-                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-box-4">
+                    <div class="gridspan">
+                        <div class="col-left">
+                            <div class="label-container">
+                                <div class="card-title text-center">
+                                    0
+                                </div>
+                                 <div class="card-content text-center">
+                                    Lulus Kursus
+                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-       
+        <div class="student-course">
+            <div class="student-course-head">
+                <h1>
+                    MY COURSES
+                </h1>
+                <hr>
+            </div>
+            <div class="student-course-body">
+                @if ($courses->isEmpty())
+                @if (session('course'))
+                    <div class="card-body">
+                        <h2 class="alert alert-info">
+                            {{ session('course') }}
+                        </h2>
+                    </div>
+                @endif
+                @else
+                @foreach ($courses as $course)    
+                <div class="student-course-list ">
+                    <div class="top-section gridspan">
+                        <ul style="list-style-type:none" class="dropdown">
+                            <li class="dropdown-list">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i type="button" class="fa fa-ellipsis-v" ></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="">Unenroll</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Settings</a>
+                                    </li>       
+                                </ul> 
+                            </li> 
+                        </ul>
+                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="col-left">
+                            <div class="course-detail">
+                                <a href="{{URL ('dashboard/student/course/'.$course->id.'/overview')}}">
+                                    <h3 class="course-name">{{ $course->name }}
+                                    </h3> 
+                                </a>
+                                <h5 class="course-description">{{$course->description}}
+                                </h5>
+                            </div>
+                        </div>                     
+                        <div class="col-right">
+                            <div class="proceed-btn">
+                                <a class="nav-link" href="">Materi</a>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="bottom-section gridspan">
+                        <div class="col-left">
+                            <span class="company">{{$course->company->name}}</span>
+                        </div>
+                        <div class="col-right">
+                        </div>
+                    </div>
+                </div> 
+                @endforeach
+                @endif
+            </div>
+        </div>
     </section>
     @elseif($userLogin->role == 'company')
     <section class="content">

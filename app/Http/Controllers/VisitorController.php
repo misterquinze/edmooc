@@ -101,9 +101,8 @@ class VisitorController extends Controller
         $userLogin = Auth::user();
         
         $search = $request->search;
-      
-        $courses = Course::where('name', 'like', "%" .$search. "%")->paginate();
         
+        $courses = Course::where('name', 'like', "%" .$search. "%")->paginate();
         $accourse = Ac_course::where('name', 'like', "%" .$search. "%")->paginate();
         
 

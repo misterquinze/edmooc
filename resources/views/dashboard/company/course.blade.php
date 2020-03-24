@@ -32,7 +32,14 @@
                                         Search
                                     </div>
                                     <div class="filter-body">
-                                        <input type="text" name="search" class="input" placeholder="Search course name">
+                                        <form class="search-group" action="/dashboard/course/search" method="GET">
+                                            <span>
+                                                <input type="text" name="search" class="search-input" placeholder="Search course name">
+                                                <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+                                            </span>
+                                            
+                                        </form>
+                                        
                                     </div>
                                 </div>
                 
@@ -125,7 +132,7 @@
                                         <input type="hidden" name="_method" value="delete">
                                     </form>
                                 @endforeach
-                                
+                                {{$courses->links()}}
                             </div>
                         </div>
                     </div>

@@ -20,12 +20,31 @@ class DashboardController extends Controller
     public function getDashboard()
     {
         $userLogin = Auth::user();
+        if (Auth::check()) {
+            $enrollment = Enrollment::where('user_id', '=', Auth::id())
+                                    ->get();
+            $courses = [];
+            foreach ($enrollment as $row) {
+                $courses[] = $row->course;
+            }
+            $courses = collect($courses);
+        } else {
+            $courses = Course::all();
+        }
         
+        if ($courses->isEmpty()) {
+            \Session::flash('course', 'Not enrolled to any courses');
+        } else {
+            foreach ($courses as $course) {
+                $course = Course::find($course->id);
+            }
+        }
         $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
         
         //dd($enrollment);
         return view('dashboard/home', [
             'userLogin'=>$userLogin,
+            'courses' =>$courses,
             'enrollment'=>$enrollment
         ]);
     }

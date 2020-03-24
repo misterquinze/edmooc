@@ -39,7 +39,7 @@
 }
 
 hr{
-    border: none;
+    
     border-bottom: 1px solid #cccccc;
     margin: 10px 0 20px;
 }
@@ -88,6 +88,8 @@ hr{
     border-radius: 0 0 4px 4px;
     border: 1px solid #cccccc;
 }
+
+
 
 .filter-container {
     display: block;
@@ -163,6 +165,28 @@ hr{
     padding: 5px;
     background-color: hsla(240,2%,57%,.1);
 }
+
+.search-group{
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.search-input{
+    width: calc(100% - 40px);
+    border: 1px solid #fff;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.search-btn{
+    width: 30px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #fff;
+}
+
+
 
 .right-section{
     width: calc(100% - 280px);

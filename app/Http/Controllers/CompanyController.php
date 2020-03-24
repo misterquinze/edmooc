@@ -16,7 +16,7 @@ class CompanyController extends Controller
         $categories = Category::all();
         $tutors = Tutor::all();
         $company = Company::where('user_id', $userLogin->id)->first();
-        $courses = Course::where('company_id', $company->id)->get();
+        $courses = Course::where('company_id', $company->id)->paginate(5);
         // $courses = Company::all();
 
         return view ('dashboard/company/course', [
@@ -171,6 +171,29 @@ class CompanyController extends Controller
         
         return view('dashboard/company/revenue',[
             'userLogin' => $userLogin
+        ]);
+    }
+
+    public function searchCourse(Request $request)
+    {   
+        $userLogin = Auth::user();
+        $categories = Category::all();
+        $tutors = Tutor::all();
+        $company = Company::where('user_id', $userLogin->id)->first();
+        $courses = Course::where('company_id', $company->id)->get();
+        $search = $request->search;
+        
+        
+        $courses = Course::where('name', 'like', "%" .$search. "%")->paginate(5);
+       
+        
+
+        //dd($courses);
+        return view ('dashboard/company/course', [
+            'userLogin' => $userLogin,
+            'categories' => $categories,
+            'tutors' => $tutors,
+            'courses' => $courses,
         ]);
     }
 }

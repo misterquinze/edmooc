@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Company - payment
     Route::get('/dashboard/revenue', 'CompanyController@getRevenue');
     
+    Route::get('/dashboard/course/search', 'CompanyController@searchCourse');
     // Tutor
     Route::get('/dashboard/tutor/course/list', 'TutorController@getMyCourse');
     // Tutor - ProfessionalTopic

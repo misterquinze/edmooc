@@ -19,7 +19,10 @@
     
 
     <section class="content-header">
-        
+        <h1>
+            MY COURSES
+        </h1>
+        <hr>
     </section>
 
     <section class="content">
