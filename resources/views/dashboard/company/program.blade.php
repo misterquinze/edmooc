@@ -34,7 +34,13 @@
                                         Search
                                     </div>
                                     <div class="filter-body">
-                                        <input type="text" name="search" class="input" placeholder="Search course name">
+                                        <form class="search-group" action="/dashboard/program/search" method="GET">
+                                            <span>
+                                                <input type="text" name="search" class="search-input" placeholder="Search program name">
+                                                <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+                                            </span>
+                                            
+                                        </form>
                                     </div>
                                 </div>
                 

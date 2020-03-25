@@ -54,9 +54,15 @@
                                     <a class="nav-link" href="{{ URL('contact') }}">Contact</a>
                                 </li>
                                 @if($userLogin)
+                                    @if($userLogin->role == 'student')
                                     <li class="login">
-                                        <a class="login-btn" href="{{ URL('dashboard') }}">My Classroom</a>
+                                        <a class="login-btn" href="{{ URL('dashboard') }}">My Course</a>
                                     </li>
+                                    @else
+                                    <li class="login">
+                                        <a class="login-btn" href="{{ URL('dashboard') }}">Dashboard</a>
+                                    </li>
+                                    @endif
                                 @else
                                     <li class="login">
                                         <a class="login-btn" href="{{ route('login') }}">Login</a>

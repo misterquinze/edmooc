@@ -163,7 +163,22 @@ class ProgramController extends Controller
         return redirect('/dashboard/company/program');
     }
 
-    
+    public function searchProgram(Request $request)
+    {   
+        $userLogin = Auth::user();
+        $company = Company::where('user_id', $userLogin->id)->first();
+        $program = Program::where('company_id', $company->id)->get();
+        $search = $request->search;
+        
+        $program = Program::where('name', 'like', "%" .$search. "%")->paginate(5);
+       
+        //dd($program);
+        return view ('dashboard/company/program', [
+            'userLogin' => $userLogin,
+            'company' => $company,
+            'program' => $program,
+        ]);
+    }
 
     
 }

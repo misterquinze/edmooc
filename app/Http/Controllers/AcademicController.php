@@ -133,6 +133,29 @@ class AcademicController extends Controller
         return back();
     }
 
+    /**
+    public function searchAcCourse(Request $request, $id)
+    {   
+        $userLogin = Auth::user();
+        $categories = Category::all();
+        $tutors = Tutor::all();
+        $program = Program::where('id', $id)->first();
+        $accourse = Ac_course::where('program_id', $program->id)->get();
+        $search = $request->search;
+        
+        
+        $accourse = Ac_course::where('name', 'like', "%" .$search. "%")->paginate(5);
+       
+        //dd($courses);
+        return view ('dashboard/company/course', [
+            'userLogin' => $userLogin,
+            'categories' => $categories,
+            'tutors' => $tutors,
+            'accourse' => $accourse,
+        ]);
+    }
+    */
+    
     // course overview
     public function getAcTopicList($id)
     {
