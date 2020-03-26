@@ -46,3 +46,41 @@
     background-color: #002347;
     color: #fdc632;
 }
+
+.input-group{
+    padding: 27px 0;
+    margin-left: 20px;
+}
+
+.input-group .submit-btn{
+    float: left;
+    border: 1px solid #002347;
+    cursor: pointer;
+    background: #002347;
+   
+}
+
+.input-group .submit-btn .fa-search{
+    color: #fff;
+}
+
+.input-group .submit-btn:hover {
+    border: 1px solid #fff;
+    background-color: #fff;
+
+  }
+
+.input-group .submit-btn .fa-search:hover{
+    color: #002347;
+}  
+
+  .input-group .search-box{
+    padding: 5px 20px;
+    color: #2e3d49;
+    background: #fff;
+    border: 1px solid #cccccc;
+    font-size: 14px;
+    
+    display: block;
+    
+}

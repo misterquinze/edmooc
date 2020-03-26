@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{ URL('template/2/css/bootstrap.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/flaticon.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/themify-icons.css') }}" />
+        <link rel="stylesheet" href="{{ URL('template/1/bower_components/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ URL('template/2/vendors/owl-carousel/owl.carousel.min.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/vendors/nice-select/css/nice-select.css') }}" />
         <link rel="stylesheet" href="{{ URL('template/2/css/style.css') }}" />
@@ -38,21 +39,19 @@
                             <span class="icon-bar"></span> <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-
+                        <form action="/course/search" method="GET">
+                            <span class="input-group">
+                                <input type="text" max="200" class="search-box"  name="search" placeholder="Search Course"  value="{{old ('search')}}" >
+                                <button class="submit-btn" type="submit"><i class="fa fa-search"></i></button>
+                            </span>
+                            
+                        </form>
                         <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                             <ul class="nav navbar-nav menu_nav ml-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ URL('/') }}">Home</a>
-                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ URL('course') }}">Courses</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ URL('about') }}">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ URL('contact') }}">Contact</a>
-                                </li>
+                                
                                 @if($userLogin)
                                     @if($userLogin->role == 'student')
                                     <li class="login">
@@ -652,47 +651,38 @@
         <footer class="footer-area section_gap">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-2 col-md-6 single-footer-widget">
-                        <h4>Top Products</h4>
+                    <div class="col-lg-3 col-md-6 single-footer-widget">
+                        <h4>EdMOOC</h4>
                         <ul>
-                            <li><a href="#">Managed Website</a></li>
-                            <li><a href="#">Manage Reputation</a></li>
-                            <li><a href="#">Power Tools</a></li>
-                            <li><a href="#">Marketing Service</a></li>
+                            <li><a href="{{ URL('about') }}">About</a></li>
+                            <li><a href="{{ URL('contact') }}">Career</a></li>
+                            <li><a href="#">Professional Program</a></li>
+                            <li><a href="#">Academic Program</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 single-footer-widget">
-                        <h4>Quick Links</h4>
+                    <div class="col-lg-3 col-md-6 single-footer-widget">
+                        <h4>Community</h4>
                         <ul>
-                            <li><a href="#">Jobs</a></li>
-                            <li><a href="#">Brand Assets</a></li>
-                            <li><a href="#">Investor Relations</a></li>
-                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Learners</a></li>
+                            <li><a href="#">Partners</a></li>
+                            <li><a href="#">Developers</a></li>
+                            <li><a href="#">Beta Testers</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 single-footer-widget">
-                        <h4>Features</h4>
+                    <div class="col-lg-3 col-md-6 single-footer-widget">
+                        <h4>More</h4>
                         <ul>
-                            <li><a href="#">Jobs</a></li>
-                            <li><a href="#">Brand Assets</a></li>
-                            <li><a href="#">Investor Relations</a></li>
-                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">Accessibilty</a></li>
+                            <li><a href="{{ URL('contact') }}">Contact</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 single-footer-widget">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="#">Guides</a></li>
-                            <li><a href="#">Research</a></li>
-                            <li><a href="#">Experts</a></li>
-                            <li><a href="#">Agencies</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 single-footer-widget">
+            
+                    <div class="col-lg-3 col-md-6 single-footer-widget">
                         <h4>Newsletter</h4>
                         <p>You can trust us. we only send promo offers,</p>
                         <div class="form-wrap" id="mc_embed_signup">
