@@ -89,7 +89,7 @@ class StudentController extends Controller
         $topic = Topic::findOrFail($topicId);
         $topic = Topic::where('id', $topic->id)->first();
         $content = Content::findOrFail($contentId);
-        $content = Content::where('id', $content->id)->get();
+        $content = Content::where('id', $content->id)->first();
         $contents = Content::where('topic_id', $topic->id)->get();
         //dd($contents);
        

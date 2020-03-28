@@ -91,7 +91,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Tutor - Professional Topic Content
     Route::get('/dashboard/tutor/{id}/topic/{topicId}', 'TutorController@getContentList')->name('tutor.content.index');
     Route::get('/dashboard/{id}/tutor/{topicId}/content/{contentId}', 'TutorController@getContentDetail')->name('tutor.content.detail');
-    Route::get('/dashboard/tutor/topic/{topicId}/content/create', 'TutorController@createContentForm')->name('tutor.content.create');
+    Route::get('/dashboard/{id}/tutor/topic/{topicId}/content/create', 'TutorController@createContentForm')->name('tutor.content.create');
     Route::post('/dashboard/tutor/topic/{topicId}/content/create', 'TutorController@storeContent')->name('tutor.content.store');
     Route::get('/dashboard/tutor/content/{contentId}/edit', 'TutorController@editContentForm')->name('tutor.content.edit');
     Route::patch('/dashboard/tutor/content/{contentId}/edit', 'TutorController@updateContent')->name('tutor.content.update');

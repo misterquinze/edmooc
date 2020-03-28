@@ -96,7 +96,7 @@
                         </div>
                         
                         <div class="form-footer gridspan">
-                            <a href="{{ route('tutor.content.index', [$topic->id]) }}" class="cancel-btn">Batal</a>
+                            <a href="{{URL('/dashboard/tutor/' .$course->id. '/topic/' .$topic->id)}}" class="cancel-btn">Batal</a>
                             <button type="submit" class="submit-btn">Kirim</button>
                         </div>
                     </form>

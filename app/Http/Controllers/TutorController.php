@@ -126,6 +126,7 @@ class TutorController extends Controller
 
         return view('dashboard/tutor/content/list', [
             'userLogin' => $userLogin,
+            'course' => $course,
             'topics' => $topics,
             'topic' => $topic,
             'contents' => $contents
@@ -139,7 +140,7 @@ class TutorController extends Controller
         $topic = Topic::findOrFail($topicId);
         $topic = Topic::where('id', $topic->id)->first();
         $content = Content::findOrFail($contentId);
-        $content = Content::where('id', $content->id)->get();
+        $content = Content::where('id', $content->id)->first();
         $contents = Content::where('topic_id', $topic->id)->get();
         //$topics = Course::findOrFail($topicId)->topics()->get();
         
@@ -152,11 +153,12 @@ class TutorController extends Controller
         ));
     }
 
-    public function createContentForm($topicId)
+    public function createContentForm($id, $topicId)
     {   
         $userLogin = Auth::user();
+        $course = Course::where('id', $id)->first();
         $topics = Topic::where('id', $topicId)->get();
-        return view('dashboard/tutor/content/form-create', compact('userLogin', 'topics'));
+        return view('dashboard/tutor/content/form-create', compact('userLogin', 'course', 'topics'));
     }
 
     public function storeContent(Request $request, $topicId)

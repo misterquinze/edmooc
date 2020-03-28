@@ -43,31 +43,40 @@
         <div id="course">
             <template>
                 <div id="display-container">
-                    {{-- <div class="gridspan">
-                        <h3 class="title">{{$course->name}}</h3>  
-                    </div> --}}
-                    {{-- <hr> --}}
+                    <div class="course-title">
+                        <h2 class="course-name">{{$course->name}}</h2>  
+                    </div> 
+                    <hr> 
                     
                     <div class="course-content">    
                         <div class="gridspan">
                             <div class="left-section">
                                 <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                             </div>
-
-                            <div class="right-section">
-                                <h2 class="course-name">{{ $course->name }}</h2>
+                            <div class="middle-section">
+                                
 
                                 <div class="course-detail-title">Deskripsi</div>
                                 <div class="course-detail-value">{{ $course->description }}</div>
 
-                                <div class="course-detail-title">Type</div>
+                                <div class="course-detail-title">Tipe</div>
                                 <div class="course-detail-value">{{ $course->type }}</div>
 
                                 <div class="course-detail-title">Price</div>
                                 <div class="course-detail-value">Rp {{ number_format($course->price) }}</div>
 
-                                <div class="course-detail-title">Last Update</div>
-                                <div class="course-detail-value">{{ $course->updated_at }}</div>
+                            </div>
+
+                            <div class="right-section">
+                                <div class="course-detail-title">Institusi</div>
+                                <div class="course-detail-value">{{ $course->company->name }}</div>
+
+                                <div class="course-detail-title">Mulai Kursus</div>
+                                <div class="course-detail-value">{{ $course->start_date }}</div>
+
+                                <div class="course-detail-title">Kursus Berakhir</div>
+                                <div class="course-detail-value">{{ $course->end_date }}</div>
+
                             </div>
                         </div>    
                     </div>
@@ -79,7 +88,7 @@
                         </div>
                         <div class="topic-list gridspan">
                             <div class="left-section header">Nama Topik</div>
-                            <div class="right-section header">Opsi</div>
+                            <div class="right-section header">#</div>
                         </div>
                         @foreach($topics as $topic)
                             <div class="topic-list gridspan">

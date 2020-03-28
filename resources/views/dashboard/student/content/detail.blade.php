@@ -1,20 +1,20 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-    @foreach($contents as $cont)
-    <title>{{$cont->title}}</title>
-    @endforeach
+    
+    <title>{{$content->title}}</title>
+   
 @endsection
 
 @section('menu')
 
     {{--<li class="active"><a href="{{ URL('classroom/'.$topic->course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>--}}
-    <li><a href="{{route('tutor.topic.index', [$topic->course->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
-    <li><a href="{{ URL('/dashboard/tutor/' .$topic->course->id.  '/actopic/'.$topic->id) }}"><i class="fa fa-book"></i> <span>{{$topic->name}}</span></a></li>
+    <li><a href="{{route('student.overview', [$topic->course->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+    
     <li class="treeview active">
         <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Materi</span>
+            <span>{{$topic->name}}</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -27,74 +27,53 @@
             @foreach($topics as $topic)
             <li><a href="{{ URL('classroom/'.$topic->id.'/topic') }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
             @endforeach --}}
+            @foreach($contents as $cont)
+            <li><a href=""><i class="fa fa-circle-o"></i>{{$cont->title}}</a></li>
+            @endforeach
         </ul>
     </li>
 
     <li>
         <a href="{{ URL('classroom/1/discussion') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
+            <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
             <span class="pull-right-container">
-                <small class="label pull-right bg-green">1</small>
+                
             </span>
         </a>
     </li>
 
-    <li><a href="{{ URL('classroom/1/topic/1/task') }}"><i class="fa fa-book"></i> <span>Tugas</span></a></li>
 @endsection
 
 @section('content')
 
-    <link rel="stylesheet" href="{{ URL('css/dashboard/tutor/topic/content.css') }}">
+    <link rel="stylesheet" href="{{ URL('css/dashboard/student/topic/content.css') }}">
 
-    
     <section class="content">
         <div id="content">
             <template>
                 <div id="display-container">
                     <div class="gridspan">
-                    <h5 class="title"> <a href="{{route('student.overview', [$topic->course->id]) }}">{{$topic->course->name}}</a> > <a href="{{ URL('/dashboard/student/' .$topic->course->id.  '/topic/'.$topic->id) }}">{{$topic->name}}</a> > <a href="">{{$cont->title}}</a> </h5>
+                    <h5 class="title-link"> <a href="{{route('student.overview', [$topic->course->id]) }}">{{$topic->course->name}}</a> > <a href="{{ URL('/dashboard/student/topic/'.$topic->id) }}">{{$topic->name}}</a> > {{$content->title}} </h5>
                     </div>
                     <hr>
                     <div class="topic-content">
                         <div class="gridspan">
-                            <div class="right-section">
-                                <div class="filter-box">
-                                    <div class="filter-header">
-                                        {{$topic->name}}
-                                    </div>
-                                    @foreach ($contents as $cont)
-                                    <div class="filter-body">
-                                        <a href="">{{$cont->title}}</a> 
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
                             <div class="left-section">
-                                @if ($content->isEmpty())
-                                @if (session('content'))
-                                    <div class="card-body">
-                                        <h2 class="alert alert-info">
-                                            {{ session('content') }}
-                                        </h2>
-                                    </div>
-                                @endif
-                                @else
-                                @foreach ($content as $cont)
-                                    
+                              
                                 
                                 <div class="content-detail">
                                     <div class="content-title">
-                                        <h2>{{$cont->title}}</h2>
+                                        <h2>{{$content->title}}</h2>
                                     </div>
-                                    @if($cont->type == 'video')
+                                    @if($content->type == 'video')
                                     <div class="content-video">
-                                        <video src="{{asset ( $cont->source)}}" frameborder="1" width="700" controls></video>
+                                        <video src="{{asset ( $content->source)}}" frameborder="1"  controls></video>
                                     </div>
                                     <div class="explanation" style="text-justify">
                                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe corruptiasperiores quas tempore. Quibusdam repudiandae officia ex consequuntur voluptatum, reprehenderit numquam doloremque quam cupiditate eum fuga necessitatibus sequi consectetur!
                                         </p>
                                     </div>
-                                    @elseif($cont->type == 'slide')
+                                    @elseif($content->type == 'slide')
                                     <div class="topic-slide">
                                         {{asset ( $cont->source)}}
                                     </div>
@@ -109,8 +88,8 @@
                                     </div>
                                     @endif
                                 </div>
-                                @endforeach
-                                @endif
+                                
+                               
                             </div>
                         </div>
                     </div>

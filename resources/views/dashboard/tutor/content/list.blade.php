@@ -34,7 +34,7 @@
         <div class="topic-detail-header">
             <div class="top-section">
                 <h2 class="topic-name">{{ $topic->name }}</h2>
-                <a href="{{route('tutor.content.create', [$topic->id])}}" class="add-content-button">
+                <a href="{{URL('/dashboard/' .$course->id. '/tutor/topic/' .$topic->id. '/content/create')}}" class="add-content-button">
                     Tambah Materi
                 </a>
             </div>
@@ -47,7 +47,6 @@
             <a href="{{ URL('/dashboard/'.$topic->course->id.'/tutor/'.$topic->id.'/content/'.$content->id) }}" class="topic-content">
                 <div class="topic-content-index">Materi {{ $index+1 }}</div>
                 <div class="topic-content-name">{{ $content->title }}</div>
-                <span class="fa fa-angle-right"></span>
             </a>
         @endforeach
     </section>

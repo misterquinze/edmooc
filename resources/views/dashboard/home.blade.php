@@ -266,35 +266,7 @@
             </div>
         </div>
         <div class="gridspan">
-            
-            <div class="course-left">
-                <div class="gridspan">
-                    <div class="col-left">
-                        <div class="label-container">
-                            <div class="card-title text-center">
-                                Member Sejak
-                            </div>
-                            <div class="card-content text-center">
-                                {{$userLogin->created_at->format('d M Y')}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="course-middle">
-                <div class="gridspan">
-                    <div class="col-left">
-                        <div class="label-container">
-                            <div class="card-title text-center">
-                                0
-                            </div>
-                             <div class="card-content text-center">
-                                Kursus Diajar
-                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
         </div>
     </section>
     @endif

@@ -31,39 +31,7 @@ hr{
     clear: both;
 }
 
-.right-section{
-    width: 330px;
-    float: right;
-}
 
-.right-section .filter-title{
-    font-size: 14px;
-    color: #7d97ad;
-    font-weight: 600;
-    margin-top: 0;
-}
-
-.right-section .filter-box{
-    margin-bottom: 20px;
-    box-shadow: 5px 5px 10px 0 rgba(46,61,73,.05);
-}
-
-.right-section .filter-box .filter-header{
-    background-color: #ffffff;
-    padding: 10px 15px;
-    
-    border: 1px solid #cccccc;
-    border-bottom: 0;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.right-section .filter-box .filter-body{
-    background-color: #ffffff;
-    padding: 10px 15px;
-   
-    border: 1px solid #cccccc;
-}
 
 .filter-container {
     display: block;
@@ -124,7 +92,7 @@ hr{
 
 
 .left-section{
-    width: calc(100% - 330px);
+    width: 100%;
     float: left;
     
     border: 1px solid #cccccc;
