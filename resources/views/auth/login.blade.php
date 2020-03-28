@@ -1,18 +1,11 @@
 @extends('layouts.template-visitor')
 
 @section('menu')
-    <li class="nav-item">
-        <a class="nav-link" href="{{ URL('/') }}">Home</a>
-    </li>
+    
     <li class="nav-item">
         <a class="nav-link" href="{{ URL('course') }}">Courses</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ URL('about') }}">About</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ URL('contact') }}">Contact</a>
-    </li>
+  
 @endsection
 
 @section('content')
@@ -42,8 +35,8 @@
                 <form action="{{ route('login') }}" method="POST">
                     {{ csrf_field() }}
 
-                    <input type="email" name="email" placeholder="Email Address">
-                    <input type="password" name="password" placeholder="Password">
+                    <input id="input-box" type="email" name="email" placeholder="Email Address">
+                    <input id="input-box" type="password" name="password" placeholder="Password">
                     
                     <button type="submit" class="submit-button">LOGIN</button>
                 </form>

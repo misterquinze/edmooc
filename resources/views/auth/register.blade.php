@@ -5,16 +5,7 @@
 @endsection
 @section('menu')
     <li class="nav-item">
-        <a class="nav-link" href="{{ URL('/') }}">Home</a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link" href="{{ URL('course') }}">Courses</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ URL('about') }}">About</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ URL('contact') }}">Contact</a>
     </li>
 @endsection
 
@@ -54,13 +45,13 @@
                     <div class="form">
                         <form action="{{ route('register') }}" method="POST">
                             {{ csrf_field() }}
-                            <input type="hidden" name="type" value="student">
+                            <input id="input-box" type="hidden" name="type" value="student">
         
-                            <input type="text" name="name" placeholder="Full Name">
-                            <input type="email" name="email" placeholder="Email Address">
-                            <input type="password" name="password" placeholder="Password">
-                            <input type="text" name="address" placeholder="Address">
-                            <input type="tel" name="phone" placeholder="Phone">
+                            <input id="input-box" type="text" name="name" placeholder="Full Name">
+                            <input id="input-box" type="email" name="email" placeholder="Email Address">
+                            <input id="input-box" type="password" name="password" placeholder="Password">
+                            <input id="input-box" type="text" name="address" placeholder="Address">
+                            <input id="input-box" type="tel" name="phone" placeholder="Phone">
                             
                             <button type="submit" class="submit-button">SIGN UP</button>
                         </form>

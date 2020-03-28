@@ -64,15 +64,17 @@
     color: #fff;
 }
 
+.input-group .submit-btn .fa-search:hover{
+    color: #002347;
+} 
+
 .input-group .submit-btn:hover {
     border: 1px solid #fff;
     background-color: #fff;
 
   }
 
-.input-group .submit-btn .fa-search:hover{
-    color: #002347;
-}  
+ 
 
   .input-group .search-box{
     padding: 5px 20px;
