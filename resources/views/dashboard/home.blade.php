@@ -268,84 +268,64 @@
                 </div>
             </div>
         </div>
-        <div class="course">
-            <div class="student-course-head">
+        <div class="tutor-course">
+            <div class="tutor-course-head">
                 <h1>
                     MY COURSES
                 </h1>
                 <hr>
             </div>
-            <div class="student-course-body">
-                @if ($tcourses->isEmpty())
-                @if (session('course'))
-                    <div class="card-body">
-                        <h2 class="alert alert-info">
-                            {{ session('course') }}
-                        </h2>
-                    </div>
-                @endif
-                @else
-                @foreach ($tcourses as $course)    
-                <div class="student-course-list ">
+            <div class="tutor-course-body">
+                
+                {{--@foreach ($tcourses as $course)--}}
+                    
+                <div class="tutor-course-list ">
                     <div class="top-section gridspan">
-                       
-                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                         <div class="col-left">
+                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        </div>
+                        <a href="" class="link">
+                        <div class="col-right">
                             <div class="course-detail">
-                                <a href="{{URL ('dashboard/student/course/'.$course->id.'/overview')}}">
-                                    <h3 class="course-name">{{ $course->name }}
-                                    </h3> 
-                                </a>
-                                <h5 class="course-description">{{$course->description}}
+                               
+                                <h3 class="course-name">course->name
+                                </h3> 
+                                <span class="label">course->company->name</span>
+                                <span class="label">Kursus Akademik</span>
+                                <h5 class="course-description">tes
                                 </h5>
                             </div>
-                        </div>                     
-                        <div class="col-right">
-                            <div class="proceed-btn">
-                                <a class="nav-link" href="{{route ('student.overview', [$course->id])}}">Materi</a>
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="bottom-section gridspan">
-                        <div class="col-left">
-                            <span class="company">{{$course->company->name}}</span>
                         </div>
-                        <div class="col-right">
-                        </div>
+                        </a>                          
                     </div>
-                </div> 
-                @endforeach
-                @foreach ($taccourse as $course)    
-                <div class="student-course-list ">
+                </div>
+                
+                {{--@endforeach--}}
+                {{--@foreach ($taccourse as $course)--}}    
+                <div class="tutor-course-list ">
                     <div class="top-section gridspan">
                        
-                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        
                         <div class="col-left">
+                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        </div>
+                        <div class="col-right">
                             <div class="course-detail">
-                                <a href="{{URL ('dashboard/student/course/'.$course->id.'/overview')}}">
-                                    <h3 class="course-name">{{ $course->name }}
-                                    </h3> 
-                                </a>
-                                <h5 class="course-description">{{$course->description}}
-                                </h5>
-                            </div>
+                                
+                                <h3 class="course-name">course->name
+                                </h3> 
+                                <span class="label">course->company->name</span>
+                            <span class="label">Kursus Professional</span>
+                           
+                            <h5 class="course-description">tes
+                            </h5>
+                        </div>
                         </div>                     
-                        <div class="col-right">
-                            <div class="proceed-btn">
-                                <a class="nav-link" href="{{route ('student.overview', [$course->id])}}">Materi</a>
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="bottom-section gridspan">
-                        <div class="col-left">
-                            <span class="company">{{$course->company->name}}</span>
-                        </div>
-                        <div class="col-right">
-                        </div>
+                        
                     </div>
                 </div> 
-                @endforeach
-                @endif
+                {{--@endforeach--}}
+                
             </div>
         </div>
     </section>

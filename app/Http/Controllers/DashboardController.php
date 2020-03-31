@@ -22,36 +22,41 @@ class DashboardController extends Controller
     public function getDashboard()
     {
         $userLogin = Auth::user();
+        
         if (Auth::check()) {
-            $enrollment = Enrollment::where('user_id', '=', Auth::id())
-                                    ->get();
+            $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
             $courses = [];
             foreach ($enrollment as $row) {
                 $courses[] = $row->course;
             }
             $courses = collect($courses);
         } else {
-            $courses = Course::all();
+             $courses = Course::all();
         }
-        
+            
         if ($courses->isEmpty()) {
-            \Session::flash('course', 'Not enrolled to any courses');
+             \Session::flash('course', 'Not enrolled to any courses');
         } else {
             foreach ($courses as $course) {
                 $course = Course::find($course->id);
             }
         }
+        
+        //$tutor = Tutor::where('user_id', $userLogin->id)->first();
+        //$tcourses = Course::where('tutor_id', $tutor->id)->get();
+        //$taccourse = Ac_course::where('tutor_id', $tutor->id)->get();
+        
+        
         $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
-        $tutor = Tutor::where('user_id', $userLogin->id)->first();
-        $tcourses = Course::where('tutor_id', $tutor->id)->get();
-        $taccourse = Ac_course::where('tutor_id', $tutor->id)->get();
+        
+        
         //dd($enrollment);
         return view('dashboard/home', [
-            'userLogin'=>$userLogin,
-            'courses' =>$courses,
-            'tcourses' =>$tcourses,
-            'taccourse' =>$taccourse,
-            'enrollment'=>$enrollment
+            'userLogin'=> $userLogin,
+            'courses' => $courses,
+            //'tcourses' => $tcourses,
+            //'taccourse' => $taccourse,
+            'enrollment'=> $enrollment
         ]);
     }
 
