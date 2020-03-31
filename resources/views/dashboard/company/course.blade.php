@@ -37,9 +37,7 @@
                                                 <input type="text" name="search" class="search-input" placeholder="Search course name">
                                                 <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
                                             </span>
-                                            
                                         </form>
-                                        
                                     </div>
                                 </div>
                 

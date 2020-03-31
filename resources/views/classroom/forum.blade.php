@@ -43,7 +43,7 @@
         </li>
         <li class="active">
             <a href="{{ URL('classroom/'.$courses->id.'/forum') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
+            <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
                 {{-- <span class="pull-right-container">
                     <small class="label pull-right bg-green">1</small>
                 </span> --}}
@@ -118,9 +118,15 @@
                             <div class="left-section">
                                 <div class="disc-header gridspan">
                                     
-                                    <div class="head-left">Search 
+                                    <div class="head">
+                                        <form class="search-group" action="{{ route('search.discussion',  [ $courses->id]) }}" method="GET">
+                                            <span>
+                                                <input type="text" name="search" class="search-input" placeholder="Search discussion">
+                                                <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+                                            </span>
+                                        </form> 
                                     </div>
-                                    <div class="head-right"><button type="button" class="add" id="add-item" data-item-id="1">Buat Diskusi</button>
+                                    <div class="head"><button type="button" class="add" id="add-item" data-item-id="1">Buat Diskusi</button>
                                     </div>
                                 </div>
                                 <div class="disc-list">

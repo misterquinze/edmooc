@@ -148,6 +148,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/classroom/{id}/overview', 'ClassController@getOverview');
     //Classroom - ForumPage
     Route::get('/classroom/{id}/forum', 'ClassController@getForum')->name('forum');
+    Route::get('/classroom/{id}/search', 'ClassController@searchDiscussion')->name('search.discussion');
     //Classroom - Discussion
     Route::get('/classroom/discussion/{discId}', 'DiscussionController@index')->name('discussion.index');
     Route::get('/classroom/{id}/discussion', 'DiscussionController@create')->name('discussion.create');

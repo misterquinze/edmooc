@@ -38,7 +38,7 @@
     @if($userLogin->role == 'student')
     <section class="content">
         <div class="student-box">
-            <div class="gridspan">
+            
                 <div class="student-box-1">
                     <div class="gridspan">
                         <div class="col-left">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="student-box-3">
+                <div class="student-box-2">
                     <div class="gridspan">
                         <div class="col-left">
                             <div class="label-container">
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="student-box-4">
+                <div class="student-box-2">
                     <div class="gridspan">
                         <div class="col-left">
                             <div class="label-container">
@@ -97,9 +97,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </div>
-        <div class="course">
+        <div class="student-course">
             <div class="student-course-head">
                 <h1>
                     MY COURSES

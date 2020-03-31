@@ -66,34 +66,54 @@ class ClassController extends Controller
      }
    
    public function getForum(Course $courses, $id)
-   {
-     $userLogin = Auth::user();
-     $courses = Course::where('id', $id)->first();
-     $discussions  = Course::findOrFail($id)->discussions()->get();
-     $topics = Course::findOrFail($id)->topics()->get();
+     {
+          $userLogin = Auth::user();
+          $courses = Course::where('id', $id)->first();
+          $discussions  = Course::findOrFail($id)->discussions()->get();
+          $topics = Course::findOrFail($id)->topics()->get();
      
-     
+          //dd( $discussions);
 
-     //dd( $discussions);
-
-     if ($discussions->isEmpty()){
+          if ($discussions->isEmpty()) {
           \Session::flash('discussion', 'Dont have discussion');
-      }else{
-          foreach($discussions as $disc){
+          } else {
+               foreach($discussions as $disc){
               $disc = Discussion::find($disc->id);
+               }
           }
-      }
-       return view('classroom/forum', 
-       compact('userLogin', 'courses', 'discussions', 'topics' ) );
-   }
+          return view('classroom/forum', 
+          compact('userLogin', 'courses', 'discussions', 'topics' ) );
+     }
   
-   public function getTask($id){
+   public function getTask($id)
+   {
        $userLogin = Auth::user();
 
        return view('classroom/task', [
             'userLogin' => $userLogin,
        ]);
    }
+
+   public function searchDiscussion(Request $request, $id)
+   {   
+          $userLogin = Auth::user();
+          
+          $courses = Course::where('id', $id)->first();
+          $discussions  = Course::findOrFail($id)->discussions()->get();
+          $topics = Course::findOrFail($id)->topics()->get();
+          
+          $search = $request->search;
+          
+          $discussions = Discussion::where('title', 'like', "%" .$search. "%")->paginate(5);
+     
+          //dd($courses);
+          return view ('classroom/forum', [
+               'userLogin' => $userLogin,
+               'courses' => $courses,
+               'topics' => $topics,
+               'discussions' => $discussions
+          ]);
+     }
 
 
 }
