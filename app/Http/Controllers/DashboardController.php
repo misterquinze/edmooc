@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Tutor;
 use App\Course;
+use App\Ac_course;
 use App\Enrollment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,11 +42,15 @@ class DashboardController extends Controller
             }
         }
         $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
-        
+        $tutor = Tutor::where('user_id', $userLogin->id)->first();
+        $tcourses = Course::where('tutor_id', $tutor->id)->get();
+        $taccourse = Ac_course::where('tutor_id', $tutor->id)->get();
         //dd($enrollment);
         return view('dashboard/home', [
             'userLogin'=>$userLogin,
             'courses' =>$courses,
+            'tcourses' =>$tcourses,
+            'taccourse' =>$taccourse,
             'enrollment'=>$enrollment
         ]);
     }

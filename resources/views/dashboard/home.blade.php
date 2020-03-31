@@ -16,7 +16,7 @@
     @elseif($userLogin->role == 'company')
         <li class="active"><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
         <li><a href="{{ URL('dashboard/course/list') }}"><i class="fa fa-book"></i> <span>Professional</span></a></li>
-        <li><a href="{{ URL('dashboard/company/program') }}"><i class="fa fa-book"></i> <span>Akademik</span></a></li>
+        <li><a href="{{ URL('dashboard/company/program') }}"><i class="fa fa-graduation-cap"></i> <span>Akademik</span></a></li>
         <li><a href="{{ URL('dashboard/revenue') }}"><i class="fa fa-list"></i> <span>Pendapatan</span></a></li>
         {{-- <li><a href="{{ URL('dashboard/settings') }}"><i class="fa fa-gear"></i> <span>Pengaturan</span></a></li> --}}
     @elseif($userLogin->role == 'tutor')
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="student-course">
+        <div class="course">
             <div class="student-course-head">
                 <h1>
                     MY COURSES
@@ -147,7 +147,7 @@
                         </div>                     
                         <div class="col-right">
                             <div class="proceed-btn">
-                                <a class="nav-link" href="">Materi</a>
+                                <a class="nav-link" href="{{route ('student.overview', [$course->id])}}">Materi</a>
                             </div>
                         </div>  
                     </div>
@@ -181,61 +181,64 @@
                         <div class="desc">
                             <p class="JustifyFull">
                                 Anda sebagai institusi dapat membuat kursus sesuai dengan tujuan anda, terdapat 2 pilihan dalam membuat kursus. Kursus Professional dan Kursus Akademik. 
-
-                                
                             </p>
-
                             <a href="">Pelajari lebih lanjut</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="gridspan">
-            <div class="card-left">
-                <div class="gridspan">
-                    <div class="col-left">
-                        <div class="label-container">
-                            <img src="{{ URL('img/prof.jpg') }}" class="card-image">
-                        </div>
-                    </div>
-                    <div class="col-right">
-                        <div class="label-container">
-                            <div class="title">
-                                Kursus Professional
-                            </div>
-                            <div class="desc">
-                                <p class="JustifyFull">
-                                    Kursus professioanal merupakan kursus yang menawarkan sertifikat professioanal terakreditasi
-                                </p>
-                                <a href="{{ URL('dashboard/course/list') }}">Pelajari lebih lanjut</a>
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <div class="gridspan">
+                        <div class="col-left">
+                            <div class="label-container">
+                                <img src="{{ URL('img/prof.jpg') }}" class="card-image">
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-right">
-                <div class="gridspan">
-                    <div class="col-left">
-                        <div class="label-container">
-                            <img src="{{ URL('img/academic.jpg') }}" class="card-image">
-                        </div>
-                    </div>
-                    <div class="col-right">
-                        <div class="label-container">
-                            <div class="title">
-                                Kursus Akademik
-                            </div>
-                            <div class="desc">
-                                <p class="JustifyFull">
-                                    Kursus akademik merupakan kursus berjenjang yang menawarkan gelar jika telah menyelesaikan keseluruhan kursus...
-                                </p>
-                                <a href="{{ URL('dashboard/company/program') }}">Pelajari lebih lanjut</a>
+                        <div class="col-right">
+                            <div class="label-container">
+                                <div class="title">
+                                    Kursus Professional
+                                </div>
+                                <div class="desc">
+                                    <p class="JustifyFull">
+                                        Kursus professioanal merupakan kursus yang menawarkan sertifikat professioanal terakreditasi
+                                    </p>
+                                    <a href="{{ URL('dashboard/course/list') }}">Pelajari lebih lanjut</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="column">
+                <div class="card">
+                    <div class="gridspan">
+                        <div class="col-left">
+                            <div class="label-container">
+                                <img src="{{ URL('img/academic.jpg') }}" class="card-image">
+                            </div>
+                        </div>
+                        <div class="col-right">
+                            <div class="label-container">
+                                <div class="title">
+                                    Kursus Akademik
+                                </div>
+                                <div class="desc">
+                                    <p class="JustifyFull">
+                                        Kursus akademik merupakan kursus berjenjang yang menawarkan gelar jika telah menyelesaikan keseluruhan kursus...
+                                    </p>
+                                    <a href="{{ URL('dashboard/company/program') }}">Pelajari lebih lanjut</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+
         </div>
     </section>
     @elseif($userLogin->role == 'tutor')
@@ -265,8 +268,85 @@
                 </div>
             </div>
         </div>
-        <div class="gridspan">
-        
+        <div class="course">
+            <div class="student-course-head">
+                <h1>
+                    MY COURSES
+                </h1>
+                <hr>
+            </div>
+            <div class="student-course-body">
+                @if ($tcourses->isEmpty())
+                @if (session('course'))
+                    <div class="card-body">
+                        <h2 class="alert alert-info">
+                            {{ session('course') }}
+                        </h2>
+                    </div>
+                @endif
+                @else
+                @foreach ($tcourses as $course)    
+                <div class="student-course-list ">
+                    <div class="top-section gridspan">
+                       
+                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="col-left">
+                            <div class="course-detail">
+                                <a href="{{URL ('dashboard/student/course/'.$course->id.'/overview')}}">
+                                    <h3 class="course-name">{{ $course->name }}
+                                    </h3> 
+                                </a>
+                                <h5 class="course-description">{{$course->description}}
+                                </h5>
+                            </div>
+                        </div>                     
+                        <div class="col-right">
+                            <div class="proceed-btn">
+                                <a class="nav-link" href="{{route ('student.overview', [$course->id])}}">Materi</a>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="bottom-section gridspan">
+                        <div class="col-left">
+                            <span class="company">{{$course->company->name}}</span>
+                        </div>
+                        <div class="col-right">
+                        </div>
+                    </div>
+                </div> 
+                @endforeach
+                @foreach ($taccourse as $course)    
+                <div class="student-course-list ">
+                    <div class="top-section gridspan">
+                       
+                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="col-left">
+                            <div class="course-detail">
+                                <a href="{{URL ('dashboard/student/course/'.$course->id.'/overview')}}">
+                                    <h3 class="course-name">{{ $course->name }}
+                                    </h3> 
+                                </a>
+                                <h5 class="course-description">{{$course->description}}
+                                </h5>
+                            </div>
+                        </div>                     
+                        <div class="col-right">
+                            <div class="proceed-btn">
+                                <a class="nav-link" href="{{route ('student.overview', [$course->id])}}">Materi</a>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="bottom-section gridspan">
+                        <div class="col-left">
+                            <span class="company">{{$course->company->name}}</span>
+                        </div>
+                        <div class="col-right">
+                        </div>
+                    </div>
+                </div> 
+                @endforeach
+                @endif
+            </div>
         </div>
     </section>
     @endif

@@ -28,7 +28,7 @@
 
 @section('content')
 
-    <link rel="stylesheet" href="{{ URL('css/classroom/topic.css') }}">
+    <link rel="stylesheet" href="{{ URL('css/tutor/topic/content.css') }}">
 
     <section class="content">
         <div class="topic-detail-header">
@@ -47,6 +47,7 @@
             <a href="{{ URL('/dashboard/'.$topic->course->id.'/tutor/'.$topic->id.'/content/'.$content->id) }}" class="topic-content">
                 <div class="topic-content-index">Materi {{ $index+1 }}</div>
                 <div class="topic-content-name">{{ $content->title }}</div>
+                <span class="fa fa-gear topic-preview"></span>
             </a>
         @endforeach
     </section>
