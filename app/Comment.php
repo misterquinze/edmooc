@@ -6,21 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = [
-        'user_id',
-        'disc_id',
-        'content'
-    ];
-
-    public function discussion(){
-       //$comments = App\Discussion::find($id)->discussions;
-       
-        return $this->belongsTo('App\Discussion', 'foreign_key');
-
+    public function commentable()
+    {
+        return $this->morphTo();
     }
 
     public function user(){
 
         return $this->belongsTo('App\User', 'foreign_key');
+    }
+
+    public function comments(){
+        //$courses = App\Topic::find($id)->courses;
+        
+        return $this->morphMany('App\Comment', 'commentable');
     }
 }

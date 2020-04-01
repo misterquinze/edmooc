@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Discussion;
 use App\User;
-use App\Comments;
+use App\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -22,10 +22,10 @@ class DiscussionController extends Controller
         $userLogin = Auth::user();
         $discussions = Discussion::findOrFail($discId);
         $discussions  = Discussion::where('id', $discussions->id)->first();
-        $comment = Comments::where('commentable_id', $discussions->id)->get();
+        $comment = Comment::where('commentable_id', $discussions->id)->get();
         
 
-        //dd($discussions);
+        //dd($comment);
         /** 
         if ($discussions->isEmpty()){
             \Session::flash('discussion', 'Dont have discussion');
@@ -137,7 +137,7 @@ class DiscussionController extends Controller
 
     public function addComment(Request $request, Discussion $disc)
     {
-        $comment = New Comments;
+        $comment = New Comment;
         $comment->user_id = Auth::user()->id;
         $comment->content = $request->content;
 
@@ -146,9 +146,9 @@ class DiscussionController extends Controller
         return back()->withInfo('komentar terkirim!');
     }
 
-    public function replyComment(Request $request, Comments $comment)
+    public function replyComment(Request $request, Comment $comment)
     {
-        $reply = New Comments;
+        $reply = New Comment;
         $reply->user_id = Auth::user()->id;
         $reply->content = $request->content;
 

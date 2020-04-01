@@ -128,28 +128,15 @@ hr{
     
 }
 
-.left-section .disc-header{
-    width: 100%;
-    
-    
-}
 
-.left-section .disc-header .head-left{
+
+.left-section .disc-header .head{
     
-    width: 88%;
-    padding: 15px 5px 10px 20px;
+    width: 50%;
+    padding: 15px 20px 10px 20px;
     float: left;
    
 }
-
-.left-section .disc-header .head-right{
-    
-    width: 12%;
-    padding: 10px 5px 10px 5px;
-    float: right;
-    
-}
-
 
 
 .left-section .disc-list{
@@ -159,14 +146,12 @@ hr{
 
 .content .course-list{
     width: 100%;
-   
     background-color: #fafafa;
     border: 1px solid #cccccc;
     border-radius: 1px;
     margin-bottom: 20px;
-    padding: 10px 16px 16px 16px;
+    padding: 10px 10px 10px 10px;
 }
-
 
 
 .left-section .course-list .top-section .col-left {
@@ -199,10 +184,14 @@ hr{
 .disc-list .comment-form{
     width: 100%;
     background-color: #fafafa;
-    border-bottom: 1px solid #cccccc;
+    border: 1px solid #cccccc;
     border-radius: 1px;
     margin-bottom: 10px;
     padding: 10px 16px 16px 16px;
+}
+
+.disc-list #comment-box{
+    border-bottom: 1px solid #cccccc;
 }
 
 .disc-list .comment-form .top-section .col-left {

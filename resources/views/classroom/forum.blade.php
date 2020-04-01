@@ -163,7 +163,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-right">
-                                                    <span style="margin-right: 5px;">5</span>
+                                                <span style="margin-right: 5px;">{{$disc->comments->count()}}</span>
                                                     <i class="fa fa-comment"></i>
                                                 </div>                      
                                             </div>

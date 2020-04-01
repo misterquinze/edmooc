@@ -1,7 +1,7 @@
 @extends('layouts.template-student')
 
 @section('tab-title')
-<title>Diskusi</title>
+<title>Forum Diskusi</title>
 @endsection
 
 @section('menu')
@@ -10,7 +10,7 @@
     <li class="treeview">
         <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Materi</span>
+            <span>Topik</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -24,8 +24,7 @@
 
     <li class="active">
         <a href="{{ URL('classroom/1/forum') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
-            
+            <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
         </a>
     </li>
 
@@ -36,9 +35,10 @@
     <link rel="stylesheet" href="{{ URL('css/classroom/discussion.css') }}">
     
     <section class="content">
+
         <div id="display-container">
             <div class="gridspan">
-                <h3 class="title"> Diskusi </h3>
+                <h3 class="title"> Forum Diskusi </h3>
             </div>
             <hr>
             <div class="course-content">
@@ -66,12 +66,12 @@
                     </div>
                     <div class="left-section">
                         <div class="disc-header gridspan">
-                            <div class="head-left">
+                            <div class="head">
                                 <a href="{{ url()->previous() }}">
                                 <i class="fa fa-arrow-left"></i><span style="margin-left: 3px;">back</span>
                                 </a>
                             </div>
-                            <div class="head-right"></div>
+                            <div class="head"></div>
                         </div>
                         <div class="disc-list">
                             <div class="course-list">
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="col-right">
                                         <div class="course-title" style="margin-bottom: 20px;">
-                                            <h2 class="course-name" style="margin-top: 5px; margin-bottom: 10px;"> {{$discussions->title}}</h2>
+                                            <h2 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$discussions->title}}</h2>
                                             <span>posted by {{$discussions->user_id}}</span> 
                                         </div>
                                         <div class="course-detail">   
@@ -120,7 +120,7 @@
                             @forelse($discussions->comments as $c)
                             <div class="show-comment">
                                 
-                                <div class="top-section gridspan">
+                                <div id="comment-box" class="top-section gridspan">
                                     <div class="col-left">
                                         <img src="{{URL('template/1/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
                                     </div>
@@ -140,6 +140,7 @@
                                         </div>     
                                     </div>                      
                                 </div>
+                                @forelse($comment->comments as $reply)
                                 <div class="show-reply">
                                     <div class="top-section gridspan">
                                         <div class="col-left">
@@ -148,7 +149,7 @@
                                         <div class="col-right">
                                             <div class="course-detail">
                                                 <h5>
-                                                reply
+                                                {{$reply->content}}
                                                 </h5>
                                                 <br>
                                                 <span></span>
@@ -159,6 +160,9 @@
                                         </div>                      
                                     </div>
                                 </div>
+                                @empty
+                                <div>no reply</div>
+                                @endforelse  
                                 <div id="" class="reply-form ">
                                     <div class="top-section gridspan">
                                         <div class="col-left">
