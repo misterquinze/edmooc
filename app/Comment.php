@@ -11,13 +11,14 @@ class Comment extends Model
         return $this->morphTo();
     }
 
-    public function user(){
+    public function user()
+    {
 
         return $this->belongsTo('App\User', 'foreign_key');
     }
 
-    public function comments(){
-        //$courses = App\Topic::find($id)->courses;
+    public function comments()
+    {
         
         return $this->morphMany('App\Comment', 'commentable');
     }

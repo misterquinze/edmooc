@@ -154,7 +154,8 @@
                                             <div class="top-section gridspan">
                                                 <div class="col-left">
                                                     <div class="course-title" style="margin-bottom: 20px;">
-                                                        <h3 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$disc->title}}</h3> 
+                                                        <h3 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$disc->title}}</h3>
+                                                        <span>posted {{$disc->created_at->diffForHumans()}} </span> 
                                                     </div>
                                                     <div class="course-detail">
                                                         <div class="course-detail">

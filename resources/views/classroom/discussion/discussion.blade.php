@@ -82,16 +82,22 @@
                                     <div class="col-right">
                                         <div class="course-title" style="margin-bottom: 20px;">
                                             <h2 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$discussions->title}}</h2>
-                                            <span>posted by {{$discussions->user_id}}</span> 
+                                            <span>posted by {{$discussions->user_id}} | {{$discussions->created_at->diffForHumans()}} </span> 
                                         </div>
                                         <div class="course-detail">   
                                             <h5 class="course-description">{{$discussions->content}}</h5>
                                         </div>
                                         <div class="bottom-right gridspan">
-                                            <a data-toggle="collapse" href="#1-collapse1reply">
-                                                <i class="fa fa-comment-o"></i><span style="margin-left: 5px;">Reply</span>
+                                            <a class="tools" style="padding-left: 10px;" href="">
+                                                <i class="fa fa-arrow-up"></i><span style="margin-left: 5px;">0 Upvotes</span>
                                             </a>
                                             
+                                            <a class="tools" style="padding-left: 20px;" data-toggle="collapse" href="#1-collapse1reply">
+                                                <i  class="fa fa-comment-o"></i><span style="margin-left: 5px;">Reply</span>
+                                            </a>
+                                            <a class="tools" style="padding-left: 20px;" href="">
+                                                <i class=""></i><span >Follow discussion</span>
+                                            </a>
                                         </div>
                                     </div>                      
                                 </div>
@@ -105,10 +111,10 @@
                                         <form action="{{route('addComment', $discussions->id)}}" method="post">
                                             {{ csrf_field() }}
                                             <div class="form-comment">
-                                                <input type="text" name="content" placeholder="Your comment here" required>
+                                                <textarea type="text" name="content" class="regular-input" placeholder="Your comment here" required></textarea>
                                             </div>
-                                            <div class="button">
-                                                <button class="add" type="submit">Submit</button>
+                                            <div class="submit">
+                                                <button class="submit-btn" type="submit">Submit</button>
                                             </div>
                                         </form>
                                         <div class="bottom-section gridspan">
@@ -117,24 +123,26 @@
                                     </div>
                                 </div>
                             </div>
-                            @forelse($discussions->comments as $c)
+                            @forelse($discussions->comments as $comment)
                             <div class="show-comment">
-                                
                                 <div id="comment-box" class="top-section gridspan">
                                     <div class="col-left">
                                         <img src="{{URL('template/1/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
                                     </div>
                                     <div class="col-right">
                                         <div class="course-detail">
-                                            <h5>{{ $c->id}}</h5>
+                                            <h5>posted by {{$comment->user_id}} . {{$comment->created_at->diffForHumans()}} </h5>
                                             <h5>
-                                            {{$c->content}}
+                                            {{$comment->content}}
                                             </h5>
                                             <br>
                                             <span></span>
                                         </div>
                                         <div class="bottom-section gridspan">
-                                            <a href="">
+                                            <a class="tools" style="padding-left: 10px;" href="">
+                                                <i class="fa fa-arrow-up"></i><span style="margin-left: 5px;">0 Upvotes</span>
+                                            </a>
+                                            <a class="tools" style="padding-left: 20px" href="">
                                                 <i class="fa fa-comment-o"></i><span style="margin-left: 5px;">Reply</span>
                                             </a>
                                         </div>     
@@ -149,9 +157,12 @@
                                         <div class="col-right">
                                             <div class="course-detail">
                                                 <h5>
+                                                {{$reply->user_id}} . {{$reply->created_at->diffForHumans()}}
+                                                </h5>
+                                                <h5>
                                                 {{$reply->content}}
                                                 </h5>
-                                                <br>
+                                                
                                                 <span></span>
                                             </div>
                                             <div class="bottom-section gridspan">
@@ -161,7 +172,7 @@
                                     </div>
                                 </div>
                                 @empty
-                                <div>no reply</div>
+                                <div class="show-reply">no reply</div>
                                 @endforelse  
                                 <div id="" class="reply-form ">
                                     <div class="top-section gridspan">
@@ -169,13 +180,13 @@
                                             <img src="{{URL('template/1/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
                                         </div>
                                         <div class="col-right">
-                                            <form action="{{route('replyComment', $c->id)}}" method="post">
+                                            <form action="{{route('replyComment', $comment->id)}}" method="post">
                                                 {{ csrf_field() }}
                                                 <div class="form-comment">
-                                                    <input type="text" name="content" placeholder="Your reply here" required>
+                                                    <textarea type="text" name="content" class="regular-input" placeholder="Your reply here" required></textarea>
                                                 </div>
-                                                <div class="button">
-                                                    <button class="ad-btn" type="submit">Submit</button>
+                                                <div class="submit">
+                                                    <button class="submit-btn" type="submit">Submit</button>
                                                 </div>
                                             </form>
                                             <div class="bottom-section gridspan">
@@ -184,7 +195,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             @empty
                             <div>no comment</div>
                             @endforelse  

@@ -181,6 +181,35 @@ hr{
     margin-top: 20px;
 }
 
+.tools{
+    color:  #999999;
+    
+}
+
+.tools:hover{
+    color:  #337ab7;
+}
+
+.regular-input{
+    width: 100%;
+    min-height: 150px;
+    padding: 10px 15px;
+}
+
+.submit{
+    padding-top: 10px;
+}
+
+.submit-btn{
+    float: right;
+    padding: 8px 15px;
+    border: 1px solid #002347;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #002347;
+    cursor: pointer;
+}
+
 .disc-list .comment-form{
     width: 100%;
     background-color: #fafafa;

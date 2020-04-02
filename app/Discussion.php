@@ -13,19 +13,22 @@ class Discussion extends Model
         'content'
     ];
 
-    public function course($id){
+    public function course($id)
+    {
         $discussions = App\Course::find($id)->discussions;
        
         return $this->belongsTo('App\course', 'foreign_key');
 
     }
 
-    public function user(){
+    public function user()
+    {
 
-        return $this->belongsTo('App\user', 'foreign_key');
+        return $this->belongsTo('App\User', 'foreign_key');
     }
 
-    public function comments(){
+    public function comments()
+    {
         //$courses = App\Topic::find($id)->courses;
         
         return $this->morphMany('App\Comment', 'commentable');
