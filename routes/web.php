@@ -155,6 +155,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/classroom/{id}/discussion', 'DiscussionController@store')->name('discussion.store');
     Route::get('/classroom/discussion/{discId}/edit', 'DiscussionController@edit')->name('discussion.edit');
     Route::put('/classroom/discussion/{discId}/edit', 'DiscussionController@update')->name('discussion.update');
+    Route::delete('/classroom/discussion/{discId}/delete', 'DiscussionController@deleteDiscussion')->name('discussion.delete');
+
     Route::post('/comment/addComment/{disc}', 'DiscussionController@addComment')->name('addComment');
     Route::post('/comment/replyComment/{comment}', 'DiscussionController@replyComment')->name('replyComment');
     

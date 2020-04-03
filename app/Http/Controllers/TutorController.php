@@ -229,6 +229,14 @@ class TutorController extends Controller
         return redirect()->route('tutor.content.index', [$topics->id]);
     }
 
+    public function deleteContent($id)
+    {
+        $contents = Content::findOrFail($id);
+        $contents->delete();
+
+        return back();
+    }
+
 
     // Kuis
     public function getQuizDetail($topicId)

@@ -149,9 +149,10 @@
                                 @endif
                                 @else
                                     @foreach($discussions as $disc)
-                                    <a id="disc" href="{{route('discussion.index', [$disc->id])}}">
+                                    
                                         <div class="course-list">
                                             <div class="top-section gridspan">
+                                                <a id="disc" href="{{route('discussion.index', [$disc->id])}}">
                                                 <div class="col-left">
                                                     <div class="course-title" style="margin-bottom: 20px;">
                                                         <h3 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$disc->title}}</h3>
@@ -163,24 +164,62 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                </a>
                                                 <div class="col-right">
+                                                @if(auth()->user()->role == 'tutor')
+                                                <span @click.prevent="changeType('edit',{{ $disc->id }})" class="edit-btn">
+                                                    <i class="fa fa-edit"></i>
+                                                </span>
+                                                <span style="padding-left: 10px" class="delete-btn" onclick="deleteDiscussion({{$disc->id}} )">
+                                                    <i class="fa fa-trash"></i>
+                                                </span>
+                                                <form class="form-delete" id="delete-{{ $disc->id }}" action="{{ route('discussion.delete', [$disc->id]) }} "  method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="_method" value="delete">
+                                                </form>
+                                                @else
                                                 <span style="margin-right: 5px;">{{$disc->comments->count()}}</span>
                                                     <i class="fa fa-comment"></i>
+                                                @endif
                                                 </div>                      
                                             </div>
                                    
                                         </div>
-                                    </a>
+                                    
                                     @endforeach
                                 </div>
                                 @endif
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    
                 </div>
+                <!-- Form Edit Diskusi -->
+                @foreach($discussions as $disc)
+                    <div id="form-edit-{{ $disc->id }}" class="form-create form-edit">
+                        <div class="form-header">Edit Diskusi</div>
+                        <form action="{{ route('discussion.update', [$disc->id]) }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="put">
+
+                            <div class="form-body">
+                                <div class="input-container">
+                                    <h4 class="input-title">Judul Materi</h4>
+                                    <p class="input-sub-title">Beri Judul Materi</p>
+                                    <input type="text" name="title" class="regular-input" value="{{ $disc->title }}" required>
+                                </div>
+                                <div class="input-container">
+                                    <h4 class="input-title">Deskripsi Topik</h4>
+                                    <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
+                                    <textarea name="content" class="regular-textarea" required>{{ $disc->content}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-footer gridspan">
+                                <span class="cancel-btn" @click.prevent="changeType('display')">Batal</span>
+                                <button type="submit" class="submit-btn">Kirim</button>
+                            </div>
+                        </form>
+                    </div>
+                @endforeach
                 <!-- modal Tambah Diskusi -->
                 <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
@@ -265,18 +304,40 @@
                 }
             },
             methods: {
-                changeType(type){
+                changeType(type,id){
                     if(type == 'display'){
                         $("#display-container").show()
                         $("#form-container").hide()
-                    }else{
+                        $(".form-edit").hide()
+                    }else if(type == 'create'){
                         $("#display-container").hide()
                         $("#form-container").show()
+                        $(".form-edit").hide()
+                    }else{
+                        $("#display-container").hide()
+                        $("#form-container").hide()
+                        $("#form-edit-"+id).show()
                     }
                 }
             }
 
         });
+    </script>
+    <script>
+       function deleteDiscussion(id) {
+            swal({   
+                title: "Apakah anda yakin?",
+                text: "Data topik yang dihapus tidak dapat dikembalikan",
+                icon: "warning",
+                closeOnClickOutside: true,
+                buttons: ["Batal","Hapus"],
+            })
+            .then((willDelete) => {
+                if(willDelete){
+                    $('.form-delete#delete-'+id).submit();
+                }
+            });
+        } 
     </script>
     <script>
         $(document).ready(function() 

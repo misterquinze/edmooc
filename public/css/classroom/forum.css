@@ -168,11 +168,11 @@ hr{
 .left-section .disc-list{
     padding: 0px 10px 0px 10px;
 }
-a .course-list{
+a .col-left{
     color: #002347;
 }
 
-a .course-list:hover{
+a .col-left:hover{
     color: #002347;
 
 }

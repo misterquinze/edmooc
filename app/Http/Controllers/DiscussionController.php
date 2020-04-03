@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Course;
 use App\Discussion;
 use App\User;
 use App\Comment;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+
 
 
 class DiscussionController extends Controller
@@ -107,9 +108,18 @@ class DiscussionController extends Controller
      * @param  \App\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Discussion $discussion)
+    public function edit(Discussion $discId)
     {
-        //
+        $userLogin = Auth::user();
+        
+        $discussions = Discussion::find($discId);
+        // dd('hello');
+
+        return view('classroom/discussion/discussion-edit', [
+            'userLogin' => $userLogin,
+            'discussions' => $discussions,
+            
+        ]);
     }
 
     /**
@@ -119,9 +129,16 @@ class DiscussionController extends Controller
      * @param  \App\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Discussion $discussion)
+    public function update(Request $request, $discId)
     {
-       
+        $discussions = Discussion::findOrFail($discId);
+        $data = $request->all();
+
+        $discussions->title = $data['title'];
+        $discussions->content = $data['content'];
+        $discussions->save();
+
+        return back();
     }
 
     /**
@@ -130,9 +147,11 @@ class DiscussionController extends Controller
      * @param  \App\Content  $discussion
      * @return \Illuminate\Http\Response
      */
-    public function destroy($contentId)
+    public function deleteDiscussion($discId)
     {
-        
+        $discussions = Discussion::findOrFail($discId);$discussions->delete();
+
+        return redirect('classroom/forum');
     }
 
     public function addComment(Request $request, Discussion $disc)

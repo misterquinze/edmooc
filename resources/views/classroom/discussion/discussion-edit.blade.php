@@ -37,13 +37,13 @@ extends('layouts.template-student')
 @endsection
 @section('content')
 <div id="form-container" class="form-create">
-        <div class="form-header">Buat Diskusi</div>
+        <div class="form-header">edit Diskusi</div>
       
-        <form action="{{action('DiscussionController@store', ['discId' => $discussions->id])}}" method="POST">
+        <form action="{{ URL('classroom/discussion/'.$discussions->id.'/edit') }}" method="POST">
         
             <div class="form-body">
                 {{ csrf_field() }}
-
+                <input type="hidden" name="_method" value="PUT">
                 <div class="input-container">
                     <h4 class="input-title">Judul Disukusi</h4>
                     <p class="input-sub-title">Beri judul diskusi anda sejelas mungkin</p>
