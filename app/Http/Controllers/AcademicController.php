@@ -17,26 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AcademicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -68,28 +49,6 @@ class AcademicController extends Controller
         ]);
         //dd($accourse);
         return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -161,7 +120,7 @@ class AcademicController extends Controller
     {
         $userLogin = Auth::user();
         $accourse = Ac_course::where('id', $id)->first();
-        $ac_topics = Ac_course::findOrFail($id)->ac_topics()->get();
+        $ac_topics = Ac_course::findOrFail($id)->ac_topic()->get();
         //$discussions = Ac_course::findOrFail($id)->discussions()->get();
 
         return view('dashboard/tutor/ac-topic/ac-list', [
@@ -218,7 +177,7 @@ class AcademicController extends Controller
     {
         $userLogin = Auth::user();
         $accourse = Ac_course::where('id', $id)->first();
-        $ac_topics = Ac_course::findOrFail($id)->ac_topics()->get();
+        $ac_topics = Ac_course::findOrFail($id)->ac_topic()->get();
         $ac_topic = Ac_topic::findOrFail($topicId);
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         //$topics = Course::findOrFail($id)->topics()->get();
@@ -234,6 +193,7 @@ class AcademicController extends Controller
 
         return view('dashboard/tutor/ac-content/ac-list', [
             'userLogin' => $userLogin,
+            'accourse' => $accourse,
             'ac_topics' => $ac_topics,
             'ac_topic' => $ac_topic,
             'ac_contents' => $ac_contents
@@ -248,7 +208,7 @@ class AcademicController extends Controller
         $ac_topic = Ac_topic::findOrFail($topicId);
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         $ac_content = Ac_content::findOrFail($AccontentId);
-        $ac_content = Ac_content::where('id', $ac_content->id)->get();
+        $ac_content = Ac_content::where('id', $ac_content->id)->first();
         $ac_contents = Ac_content::where('ac_topic_id', $ac_topic->id)->get();
         //$topics = Course::findOrFail($topicId)->topics()->get();
         
@@ -261,16 +221,18 @@ class AcademicController extends Controller
         ));
     }
 
-    public function createAcContentForm($ActopicId)
+    public function createAcContentForm($id, $ActopicId)
     {   
         $userLogin = Auth::user();
+        $accourse = Ac_course::where('id', $id)->first();
         $ac_topics = Ac_topic::where('id', $ActopicId)->get();
         return view('dashboard/tutor/ac-content/ac-create', compact(
-            'userLogin', 
+            'userLogin',
+            'accourse', 
             'ac_topics'
         ));
     }
-
+    
     public function storeAcContent(Request $request, $ActopicId)
     {   
         $ac_topics = Ac_topic::where('id', $ActopicId)->get();
@@ -340,8 +302,40 @@ class AcademicController extends Controller
         return redirect()->route('tutor.accontent.index', [$ac_topics->id]);
     }
 
+    public function deleteContent($id)
+    {
+        $ac_contents = Ac_content::findOrFail($id);
+        $ac_contents->delete();
 
+        return back();
+    }
     
+    // Kuis
+    public function getQuizDetail($ActopicId)
+    {
+        $userLogin = Auth::user();
+        $ac_topic = Ac_topic::findOrFail($ActopicId);
+        $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
+        
+        return view('dashboard/tutor/quiz/detail', [
+            'userLogin' => $userLogin,
+            'ac_topic' => $ac_topic
+        ]);
+    }
 
+    public function getQuizForm($ActopicId)
+    {
+        $userLogin = Auth::user();
+        $ac_topic = Ac_topic::find($ActopicId);
+
+        $ac_topics = Ac_topic::where('course_id', $ac_topic->course->id)->get();
+        
+
+        return view('dashboard/tutor/quiz/form-create',[
+            'userLogin' => $userLogin,
+            'ac_topics' => $ac_topics,
+            'ac_topic' => $ac_topic,
+        ]);
+    }
 
 }

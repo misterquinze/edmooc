@@ -19,25 +19,34 @@ class Ac_course extends Model
         'end_date'
     ];
 
-    public function company(){
+    public function company()
+    {
         return $this->belongsTo('App\company');
     }
 
-    public function program(){
-        return $this->belongsTo('App\company');
+    public function program()
+    {
+        return $this->belongsTo('App\program');
     }
 
-    public function tutor(){
+    public function tutor()
+    {
         return $this->belongsTo('App\tutor');
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->hasOne('App\category');
     }
-    public function ac_topics(){
-        //$courses = App\Topic::find($id)->courses;
+    public function ac_topic()
+    {
         
         return $this->hasMany('App\ac_topic');
+    }
+
+    public function ac_discussion()
+    {
+        return $this->hasMany('App\ac_discussion');
     }
 
 }

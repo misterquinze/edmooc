@@ -103,7 +103,7 @@
                 </div>
                 <div id="form-container" class="form-create">
                     <div class="form-header">
-                        Buat Topik Baru
+                        Buat Kursus Baru
                     </div>
                     
                     <form action="{{ route('company.academic.create', [$program->id]) }}" method="POST">
@@ -115,7 +115,7 @@
                                 <input type="text" name="name" class="regular-input" required>
                             </div>
                             <div class="input-container">
-                                <h4 class="input-title">Deskripsi Topik</h4>
+                                <h4 class="input-title">Deskripsi Kursus</h4>
                                 <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
                                 <textarea name="description" class="regular-textarea" required></textarea>
                             </div>

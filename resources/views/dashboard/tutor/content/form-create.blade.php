@@ -25,10 +25,8 @@
 
     <li>
         <a href="{{ URL('classroom/1/discussion') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
-            <span class="pull-right-container">
-                <small class="label pull-right bg-green">1</small>
-            </span>
+            <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
+           
         </a>
     </li>
 

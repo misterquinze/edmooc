@@ -25,9 +25,9 @@
 
     <li>
         <a href="{{ URL('classroom/1/discussion') }}">
-            <i class="fa fa-th"></i> <span>Forum Diskusi</span>
+            <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
             <span class="pull-right-container">
-                <small class="label pull-right bg-green">1</small>
+                
             </span>
         </a>
     </li>
@@ -44,7 +44,7 @@
             <template>
                 <div id="form-container" class="form-create">
                     <div class="form-header">
-                        Konten
+                        Konten 
                     </div>
                 
                     <form action="{{ route('tutor.accontent.store', [$topic->id]) }}" method="POST" enctype="multipart/form-data">
@@ -96,7 +96,7 @@
                         </div>
                         
                         <div class="form-footer gridspan">
-                            <a href="{{ route('tutor.content.index', [$topic->id]) }}" class="cancel-btn">Batal</a>
+                            <a href="{{URL('/dashboard/tutor/' .$accourse->id. '/actopic/' .$topic->id)}}" class="cancel-btn">Batal</a>
                             <button type="submit" class="submit-btn">Kirim</button>
                         </div>
                     </form>

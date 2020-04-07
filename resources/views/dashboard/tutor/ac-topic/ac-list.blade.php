@@ -25,7 +25,7 @@
         </ul>
     </li>
     <li>
-        <a href="">
+        <a href="{{ URL('classroom/ac/'.$accourse->id.'/forum') }}">
             <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
              <span class="pull-right-container">
                 
@@ -45,6 +45,7 @@
                 <div id="display-container">
                     <div class="course-title">
                         <h2 class="course-name">{{ $accourse->name }}</h2>
+                       
                     </div>
                     <hr>
                     <div class="course-content">    
@@ -59,8 +60,8 @@
                                 <div class="course-detail-title">Deskripsi</div>
                                 <div class="course-detail-value">{{ $accourse->description }}</div>
 
-                                <div class="course-detail-title">Tipe</div>
-                                <div class="course-detail-value">{{ $accourse->type }}</div>
+                                <div class="course-detail-title">Program</div>
+                                <div class="course-detail-value">{{$accourse->program->name}}</div>
 
                                 <div class="course-detail-title">Price</div>
                                 <div class="course-detail-value">Rp {{ number_format($accourse->price) }}</div>

@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/student/topic/{topicId}', 'StudentController@getTopic')->name('student.topic.index');
     // Student - ContentDetail
     Route::get('classroom/{id}/topic/{topicId}/content/{contentId}', 'StudentController@getContentDetail')->name('student.content.index');
+
     // Student - Enroll & Unenroll
     Route::get('/enroll/{id}', 'StudentController@enroll')->name('enroll');
     Route::get('/unenroll/{id}', 'StudentController@unenroll')->name('unenroll');
@@ -97,11 +98,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/dashboard/tutor/content/{contentId}/edit', 'TutorController@updateContent')->name('tutor.content.update');
     Route::delete('/dashboard/tutor/content/{contentId}', 'TutorController@deleteContent')->name('tutor.content.delete');
 
-    //Tutor - AcademicTopicContent
-    Route::get('/dashboard/tutor/{id}/actopic/{topicId}', 'AcademicController@getAcContentList')->name('tutor.accontent.index');
+    //Tutor - Academic Topic Content
+    Route::get('/dashboard/tutor/{id}/actopic/{ActopicId}', 'AcademicController@getAcContentList')->name('tutor.accontent.index');
     Route::get('/dashboard/{id}/tutor/{topicId}/accontent/{AccontentId}', 'AcademicController@getAcContentDetail')->name('tutor.accontent.detail');
-    Route::get('/dashboard/tutor/topic/{topicId}/accontent/create', 'AcademicController@createAcContentForm')->name('tutor.accontent.create');
-    Route::post('/dashboard/tutor/topic/{topicId}/accontent/create', 'AcademicController@storeAcContent')->name('tutor.accontent.store');
+    Route::get('/dashboard/{id}/tutor/topic/{ActopicId}/accontent/create', 'AcademicController@createAcContentForm')->name('tutor.accontent.create');
+    Route::post('/dashboard/tutor/topic/{ActopicId}/accontent/create', 'AcademicController@storeAcContent')->name('tutor.accontent.store');
 
     // Tutor - Topic Quiz
     Route::get('/dashboard/tutor/topic/{topicId}/quiz', 'TutorController@getQuizDetail')->name('tutor.quiz.index');
@@ -156,13 +157,28 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/classroom/discussion/{discId}/edit', 'DiscussionController@edit')->name('discussion.edit');
     Route::put('/classroom/discussion/{discId}/edit', 'DiscussionController@update')->name('discussion.update');
     Route::delete('/classroom/discussion/{discId}/delete', 'DiscussionController@deleteDiscussion')->name('discussion.delete');
-
+    //Classroom - Dsicussion - Comment/Reply 
     Route::post('/comment/addComment/{disc}', 'DiscussionController@addComment')->name('addComment');
     Route::post('/comment/replyComment/{comment}', 'DiscussionController@replyComment')->name('replyComment');
     
-    Route::get('/classroom/{taskId}/task', 'ClassController@getTask');
+    //Academic - Classroom - ForumPage
+    Route::get('/classroom/ac/{id}/forum', 'AcDiscussionController@getForum')->name('academic.forum');
+    Route::get('/classroom/ac/{id}/search', 'AcDiscussionController@searchDiscussion')->name('academic.search.discussion');
+    //Academic - Classroom - Discussion
+    Route::get('/classroom/ac/discussion/{discId}', 'AcDiscussionController@index')->name('academic.discussion.index');
+    Route::get('/classroom/ac/{id}/discussion', 'AcDiscussionController@create')->name('academic.discussion.create');
+    Route::post('/classroom/ac/{id}/discussion', 'AcDiscussionController@store')->name('academic.discussion.store');
+    Route::get('/classroom/ac/discussion/{discId}/edit', 'AcDiscussionController@edit')->name('academic.discussion.edit');
+    Route::put('/classroom/ac/discussion/{discId}/edit', 'AcDiscussionController@update')->name('academic.discussion.update');
+    Route::delete('/classroom/ac/discussion/{discId}/delete', 'AcDiscussionController@deleteDiscussion')->name('academic.discussion.delete');
+    //Academic - Classroom - Dsicussion - Comment/Reply 
+    Route::post('/ac/comment/addComment/{disc}', 'AcDiscussionController@addComment')->name('academic.addComment');
+    Route::post('/ac/comment/replyComment/{comment}', 'AcDiscussionController@replyComment')->name('academic.replyComment');
 
-    Route::get('/tutor/course', 'TutorController@getCourse');
+
+
+    Route::get('/classroom/{taskId}/task', 'ClassController@getTask');
+    
 
 
     

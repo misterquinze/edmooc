@@ -91,16 +91,6 @@ class DiscussionController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Discussion  $discussion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Discussion $discussion)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -176,5 +166,7 @@ class DiscussionController extends Controller
         return back()->withInfo('komentar balasan terkirim!');
     }
 
+
+    //Academic - Discussion
     
 }

@@ -21,11 +21,21 @@
             <template>
                 <div id="display-container">
                     <div class="gridspan">
-                        <h3 class="title">Program</h3>
+                        <h3 class="title">Program Akademik</h3>
                         <span class="add-btn" @click.prevent="changeType('create')">Buat Baru</span>
                     </div>
                     <hr>
-    
+                    <div class="welcome-card">
+                        <div class="top-section gridspan">
+                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                            <div class="course-detail">
+                                <h3 class="course-name">Selamat Datang di Program Akademik</h3> 
+                                <h5 class="course-description">
+                                </h5> 
+                            </div>
+                        </div>
+                        
+                    </div>
                     <div class="course-content">
                         <div class="gridspan">
                             <div class="left-section">

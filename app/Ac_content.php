@@ -18,11 +18,13 @@ class Ac_content extends Model
         
     ];
 
-    public function tutor(){
+    public function tutor()
+    {
         return $this->belongsTo('App\tutor');
     }
 
-    public function ac_topic(){
+    public function ac_topic()
+    {
         return $this->belongsTo('App\ac_topic');
     }
 }

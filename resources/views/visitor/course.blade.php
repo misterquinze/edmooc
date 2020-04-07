@@ -146,6 +146,7 @@
                                 <div class="label-container">
                                     <span class="label">{{$ac->company->name}}</span>
                                     <span class="label">kursus akademik</span>
+                                    <span class="label">{{$ac->program->name}}</span>
                                 </div>
                                 <hr>
                                 <h5 class="course-description">{{$ac->description}}

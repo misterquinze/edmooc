@@ -7,7 +7,7 @@
 @section('menu')
     @if(auth()->user()->role == 'tutor')
         <li><a href="{{ URL('dashboard') }}"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
-        <li><a href="{{ URL('classroom/'.$courses->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+        <li><a href="{{ URL('classroom/'.$ac_course->id.'/overview' ) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-pie-chart"></i>
@@ -17,14 +17,14 @@
                 </span>
             </a>
             <ul class="treeview-menu">        
-                @foreach($topics as $topic)
+                @foreach($ac_topic as $topic)
                     <li><a href="{{ route('tutor.topic.index', [$topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
                 @endforeach
             </ul>
         </li>
-        <li class="active"><a href="{{ URL('classroom/'.$courses->id.'/forum') }}"><i class="fa fa-comment"></i> <span>Forum Diskusi</span></a></li>
+        <li class="active"><a href="{{ URL('classroom/'.$ac_course->id.'/forum') }}"><i class="fa fa-comment"></i> <span>Forum Diskusi</span></a></li>
     @else
-        <li><a href="{{  route('student.overview', [$courses->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
+        <li><a href="{{  route('student.overview', [$ac_course->id]) }}"><i class="fa fa-book"></i> <span>Ringkasan</span></a></li>
         
         <li class="treeview">
         <a href="#">
@@ -35,13 +35,13 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            @foreach($topics as $topic)
+            @foreach($ac_topic as $topic)
             <li><a href="{{ route('student.topic.index',  [ $topic->id]) }}"><i class="fa fa-circle-o"></i>{{$topic->name}}</a></li>
             @endforeach
         </ul>
         </li>
         <li class="active">
-            <a href="{{ URL('classroom/'.$courses->id.'/forum') }}">
+            <a href="{{ URL('classroom/'.$ac_course->id.'/forum') }}">
             <i class="fa fa-comment"></i> <span>Forum Diskusi</span>
                 {{-- <span class="pull-right-container">
                     <small class="label pull-right bg-green">1</small>
@@ -87,7 +87,7 @@
                                         Tutor Kursus
                                     </div>
                                     <div class="filter-body">
-                                        {{$courses->tutor_id}}
+                                        {{$ac_course->tutor_id}}
                                     </div>
                                 </div>
                                 
@@ -118,7 +118,7 @@
                                 <div class="disc-header gridspan">
                                     
                                     <div class="head">
-                                        <form class="search-group" action="{{ route('search.discussion',  [ $courses->id]) }}" method="GET">
+                                        <form class="search-group" action="{{ route('academic.search.discussion',  [ $ac_course->id]) }}" method="GET">
                                             <span>
                                                 <input type="text" name="search" class="search-input" placeholder="Search discussion">
                                                 <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
                                 <div class="disc-list">
-                                @if ($discussions->isEmpty())
+                                @if ($ac_discussion->isEmpty())
                                     <div class="course-list">
                                         <div class="top-section gridspan">
                                             <div class="col-left">
@@ -147,11 +147,11 @@
                                     </div>
                                 @endif
                                 @else
-                                    @foreach($discussions as $disc)
+                                    @foreach($ac_discussion as $disc)
                                     
                                         <div class="course-list">
                                             <div class="top-section gridspan">
-                                                <a id="disc" href="{{route('discussion.index', [$disc->id])}}">
+                                                <a id="disc" href="{{route('academic.discussion.index', [$disc->id])}}">
                                                 <div class="col-left">
                                                     <div class="course-title" style="margin-bottom: 20px;">
                                                         <h3 class="course-name" style="margin-top: 5px; margin-bottom: 5px;"> {{$disc->title}}</h3>
@@ -172,7 +172,7 @@
                                                 <span style="padding-left: 10px" class="delete-btn" onclick="deleteDiscussion({{$disc->id}} )">
                                                     <i class="fa fa-trash"></i>
                                                 </span>
-                                                <form class="form-delete" id="delete-{{ $disc->id }}" action="{{ route('discussion.delete', [$disc->id]) }} "  method="POST" style="display: none;">
+                                                <form class="form-delete" id="delete-{{ $disc->id }}" action="{{ route('academic.discussion.delete', [$disc->id]) }} "  method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                     <input type="hidden" name="_method" value="delete">
                                                 </form>
@@ -193,10 +193,10 @@
                     </div>
                 </div>
                 <!-- Form Edit Diskusi -->
-                @foreach($discussions as $disc)
+                @foreach($ac_discussion as $disc)
                     <div id="form-edit-{{ $disc->id }}" class="form-create form-edit">
                         <div class="form-header">Edit Diskusi</div>
-                        <form action="{{ route('discussion.update', [$disc->id]) }}" method="POST">
+                        <form action="{{ route('academic.discussion.update', [$disc->id]) }}" method="POST">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="put">
 
@@ -229,7 +229,7 @@
                         
                             </div>
                             <div class="modal-body" id="attachment-body-content">
-                                <form id="form-container" class="form-horizontal" method="POST" action="{{route('discussion.store', [$courses->id])}}">
+                                <form id="form-container" class="form-horizontal" method="POST" action="{{route('academic.discussion.store', [$ac_course->id])}}">
                                     {{ csrf_field() }}
                                     <div class="card-body">
                                     <!-- name -->

@@ -154,8 +154,6 @@ class StudentController extends Controller
         $favorite = Favorite::all();
         $course = Course::all();
 
-        
-
         if ($favorite->isEmpty()) {
             \Session::flash('course', 'No favorite course');
         } else {

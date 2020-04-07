@@ -40,7 +40,7 @@
         <div class="topic-detail-header">
             <div class="top-section">
                 <h2 class="topic-name">{{ $ac_topic->name }}</h2>
-                <a href="{{route('tutor.accontent.create', [$ac_topic->id])}}" class="add-content-button">
+                <a href="{{URL('/dashboard/' .$accourse->id. '/tutor/topic/' .$topic->id. '/accontent/create')}}" class="add-content-button">
                     Tambah Materi
                 </a>
             </div>
