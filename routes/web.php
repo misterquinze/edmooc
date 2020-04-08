@@ -33,22 +33,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/settings', 'DashboardController@getSettings');
     Route::put('/dashboard/settings', 'DashboardController@updateProfile');
 
-
-    // Student - MyCourse
-    Route::get('/dashboard/course/me', 'StudentController@getMyCourse');
-    // Student - ClassOverview & TopicList
-    Route::get('/dashboard/student/course/{id}/overview', 'StudentController@getOverview')->name('student.overview');
-    // Student - TopicDetail & ContentList
-    Route::get('/dashboard/student/topic/{topicId}', 'StudentController@getTopic')->name('student.topic.index');
-    // Student - ContentDetail
-    Route::get('classroom/{id}/topic/{topicId}/content/{contentId}', 'StudentController@getContentDetail')->name('student.content.index');
-
-    // Student - Enroll & Unenroll
-    Route::get('/enroll/{id}', 'StudentController@enroll')->name('enroll');
-    Route::get('/unenroll/{id}', 'StudentController@unenroll')->name('unenroll');
-    // Student - Transaction
-    Route::get('/dashboard/transaction', 'StudentController@getTransaction');
-
     // Company - Program
     Route::get('/dashboard/company/program', 'ProgramController@index')->name('program.index');
     Route::get('/dashboard/company/program', 'ProgramController@create')->name('program.create');
@@ -75,20 +59,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/revenue', 'CompanyController@getRevenue');
     
     Route::get('/dashboard/course/search', 'CompanyController@searchCourse');
+
     // Tutor
     Route::get('/dashboard/tutor/course/list', 'TutorController@getMyCourse');
+    
     // Tutor - ProfessionalTopic
     Route::get('/dashboard/tutor/course/{id}/overview', 'TutorController@getTopicList')->name('tutor.topic.index');
     Route::post('/dashboard/tutor/topic/{topicId}',  'TutorController@createTopic')->name('tutor.topic.create');
     Route::put('/dashboard/tutor/topic/{topicId}/edit', 'TutorController@updateTopic')->name('tutor.topic.update');
     Route::delete('/dashboard/tutor/topic/{topicId}/delete', 'TutorController@deleteTopic')->name('tutor.topic.delete');
 
-    //Tutor - AcademicTopic
-    Route::get('/dashboard/tutor/accourse/{id}/overview', 'AcademicController@getAcTopicList')->name('tutor.actopic.index');
-    Route::post('/dashboard/tutor/actopic/{topicId}',  'AcademicController@createAcTopic')->name('tutor.actopic.create');
-    Route::put('/dashboard/tutor/actopic/{topicId}/edit', 'AcademicController@updateAcTopic')->name('tutor.actopic.update');
-    Route::delete('/dashboard/tutor/actopic/{topicId}/delete', 'AcademicController@deleteAcTopic')->name('tutor.actopic.delete');
-    
     // Tutor - Professional Topic Content
     Route::get('/dashboard/tutor/{id}/topic/{topicId}', 'TutorController@getContentList')->name('tutor.content.index');
     Route::get('/dashboard/{id}/tutor/{topicId}/content/{contentId}', 'TutorController@getContentDetail')->name('tutor.content.detail');
@@ -98,6 +78,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/dashboard/tutor/content/{contentId}/edit', 'TutorController@updateContent')->name('tutor.content.update');
     Route::delete('/dashboard/tutor/content/{contentId}', 'TutorController@deleteContent')->name('tutor.content.delete');
 
+    //Tutor - AcademicTopic
+    Route::get('/dashboard/tutor/accourse/{id}/overview', 'AcademicController@getAcTopicList')->name('tutor.actopic.index');
+    Route::post('/dashboard/tutor/actopic/{topicId}',  'AcademicController@createAcTopic')->name('tutor.actopic.create');
+    Route::put('/dashboard/tutor/actopic/{topicId}/edit', 'AcademicController@updateAcTopic')->name('tutor.actopic.update');
+    Route::delete('/dashboard/tutor/actopic/{topicId}/delete', 'AcademicController@deleteAcTopic')->name('tutor.actopic.delete');
+    
     //Tutor - Academic Topic Content
     Route::get('/dashboard/tutor/{id}/actopic/{ActopicId}', 'AcademicController@getAcContentList')->name('tutor.accontent.index');
     Route::get('/dashboard/{id}/tutor/{topicId}/accontent/{AccontentId}', 'AcademicController@getAcContentDetail')->name('tutor.accontent.detail');
@@ -128,58 +114,73 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/tutor/course/{courseId}/score', 'TutorController@getScoreList')->name('tutor.score.list');
     Route::get('/dashboard/tutor/course/{courseId}/score/{scoreId}', 'TutorController@getScoreDetail')->name('tutor.score.detail');
 
-
-
-    // Route::get('/classroom/topic/{topicId}', 'ClassController@getTopic')->name('topic.index');
-    // Route::post('/classroom/{id}/topic',  'TutorController@createTopic')->name('topic.create');
-    // Route::get('/classroom/topic/{topicId}/edit', 'TutorController@getEditTopicForm')->name('topic.edit');
-    // Route::put('/dashboard/topic/{topicId}/edit', 'TutorController@updateTopic')->name('topic.update');
-    // Route::delete('/classroom/{topicId}/delete', 'TutorController@deleteTopic')->name('topic.delete');
-
-    // Content
     
-    Route::get('classroom/topic/{topicId}/content/create', 'ContentsController@create')->name('content.create');
-    Route::post('classroom/topic/{topicId}/content', 'ContentsController@store')->name('content.store');
-    Route::get('classroom/topic/content/{content}', 'ContentsController@show')->name('content.show');
-    Route::get('classroom/topic/content/{content}/edit', 'ContentsController@edit')->name('content.edit');
-    Route::patch('classroom/topic/content/{content}', 'ContentsController@update')->name('content.update');
-    Route::delete('classroom/topic/contents/{contents}', 'ContentsController@delete')->name('content.delete');
-    
-    // Tutor & Student (Classroom)
+    // Student - Pro - MyCourse
+    Route::get('/dashboard/course/me', 'StudentController@getMyCourse');
+    // Student - Pro - ClassOverview & TopicList
+    Route::get('/dashboard/student/course/{id}/overview', 'StudentController@getOverview')->name('student.overview');
+    // Student - Pro - TopicDetail & ContentList
+    Route::get('/dashboard/student/topic/{topicId}', 'StudentController@getTopic')->name('student.topic.index');
+    // Student - Pro - ContentDetail
+    Route::get('classroom/{id}/topic/{topicId}/content/{contentId}', 'StudentController@getContentDetail')->name('student.content.index');
+    // Student - Pro - Enroll & Unenroll
+    Route::get('/enroll/{id}', 'StudentController@enroll')->name('enroll');
+    Route::get('/unenroll/{id}', 'StudentController@unenroll')->name('unenroll');
+    // Student - Pro - Transaction
+    Route::get('/dashboard/transaction', 'StudentController@getTransaction');
+
+    // Student - Acadedmic - MyCourse
+    Route::get('/dashboard/course/me', 'StudentController@getMyCourse');
+    // Student - Acadedmic - ClassOverview & TopicList
+    Route::get('/dashboard/student/ac/course/{id}/overview', 'StudentController@getOverview')->name('student.ac.overview');
+    // Student - Acadedmic - TopicDetail & ContentList
+    Route::get('/dashboard/student/ac/topic/{topicId}', 'StudentController@getTopic')->name('student.ac.topic.index');
+    // Student - Acadedmic - ContentDetail
+    Route::get('classroom/ac/{id}/topic/{topicId}/content/{contentId}', 'StudentController@getContentDetail')->name('student.ac.content.index');
+    // Student - Acadedmic - Enroll & Unenroll
+    Route::get('/enroll/ac/{id}', 'StudentController@Acenroll')->name('ac.enroll');
+    Route::get('/unenroll/ac/{id}', 'StudentController@Acunenroll')->name('ac.unenroll');
+    // Student - Acadedmic - Transaction
+    Route::get('/dashboard/transaction', 'StudentController@getTransaction');
+
+
+    // Tutor & Student (Discussion)
     Route::get('/classroom/{id}/overview', 'ClassController@getOverview');
-    //Classroom - ForumPage
+    //Pro - ForumPage
     Route::get('/classroom/{id}/forum', 'ClassController@getForum')->name('forum');
     Route::get('/classroom/{id}/search', 'ClassController@searchDiscussion')->name('search.discussion');
-    //Classroom - Discussion
+    //Pro - Discussion
     Route::get('/classroom/discussion/{discId}', 'DiscussionController@index')->name('discussion.index');
     Route::get('/classroom/{id}/discussion', 'DiscussionController@create')->name('discussion.create');
     Route::post('/classroom/{id}/discussion', 'DiscussionController@store')->name('discussion.store');
     Route::get('/classroom/discussion/{discId}/edit', 'DiscussionController@edit')->name('discussion.edit');
     Route::put('/classroom/discussion/{discId}/edit', 'DiscussionController@update')->name('discussion.update');
     Route::delete('/classroom/discussion/{discId}/delete', 'DiscussionController@deleteDiscussion')->name('discussion.delete');
-    //Classroom - Dsicussion - Comment/Reply 
+    //Pro - Discussion - Comment/Reply 
     Route::post('/comment/addComment/{disc}', 'DiscussionController@addComment')->name('addComment');
     Route::post('/comment/replyComment/{comment}', 'DiscussionController@replyComment')->name('replyComment');
     
-    //Academic - Classroom - ForumPage
+    //Academic - ForumPage
     Route::get('/classroom/ac/{id}/forum', 'AcDiscussionController@getForum')->name('academic.forum');
     Route::get('/classroom/ac/{id}/search', 'AcDiscussionController@searchDiscussion')->name('academic.search.discussion');
-    //Academic - Classroom - Discussion
+    //Academic - Discussion
     Route::get('/classroom/ac/discussion/{discId}', 'AcDiscussionController@index')->name('academic.discussion.index');
     Route::get('/classroom/ac/{id}/discussion', 'AcDiscussionController@create')->name('academic.discussion.create');
     Route::post('/classroom/ac/{id}/discussion', 'AcDiscussionController@store')->name('academic.discussion.store');
     Route::get('/classroom/ac/discussion/{discId}/edit', 'AcDiscussionController@edit')->name('academic.discussion.edit');
     Route::put('/classroom/ac/discussion/{discId}/edit', 'AcDiscussionController@update')->name('academic.discussion.update');
     Route::delete('/classroom/ac/discussion/{discId}/delete', 'AcDiscussionController@deleteDiscussion')->name('academic.discussion.delete');
-    //Academic - Classroom - Dsicussion - Comment/Reply 
+    //Academic - Dsicussion - Comment/Reply 
     Route::post('/ac/comment/addComment/{disc}', 'AcDiscussionController@addComment')->name('academic.addComment');
     Route::post('/ac/comment/replyComment/{comment}', 'AcDiscussionController@replyComment')->name('academic.replyComment');
 
 
-
+    // Content
+    Route::get('classroom/topic/{topicId}/content/create', 'ContentsController@create')->name('content.create');
+    Route::post('classroom/topic/{topicId}/content', 'ContentsController@store')->name('content.store');
+    Route::get('classroom/topic/content/{content}', 'ContentsController@show')->name('content.show');
+    Route::get('classroom/topic/content/{content}/edit', 'ContentsController@edit')->name('content.edit');
+    Route::patch('classroom/topic/content/{content}', 'ContentsController@update')->name('content.update');
+    Route::delete('classroom/topic/contents/{contents}', 'ContentsController@delete')->name('content.delete');
     Route::get('/classroom/{taskId}/task', 'ClassController@getTask');
-    
-
-
-    
 });

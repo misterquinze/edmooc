@@ -196,4 +196,110 @@ class StudentController extends Controller
         return back();
     }
 
+    /*Student Academic Course*/
+    public function getOverviewAcademic(Course $courses, $id)
+    {
+          
+        $userLogin = Auth::user();
+        $course = Course::where('id', $id)->first();
+        $topics = Course::findOrFail($id)->topics()->get();
+        $discussions = Course::findOrFail($id)->discussions()->get();
+
+        return view('dashboard/student/overview', [
+             'userLogin' => $userLogin, 
+             'course' => $course, 
+             'topics' => $topics, 
+             'discussions' => $discussions
+        ]);
+    }
+
+   public function getTopicAcademic($topicId)
+   {
+        $userLogin = Auth::user();
+        $topic = Topic::findOrFail($topicId);
+        $topic = Topic::where('id', $topic->id)->first();
+        //$topics = Course::where('')->topics()->get();
+        $contents = Content::where('topic_id', $topic->id)->get();
+
+        if ($contents->isEmpty()) {
+            \Session::flash('content', 'Dont have content');
+        } else {
+            foreach ($contents as $content){
+                $content = Content::find($content->id);
+            }
+        }
+
+        return view('dashboard/student/content/list', [
+            'userLogin' => $userLogin,
+            'topic' => $topic,
+            'contents' => $contents
+        ]);
+    }
+
+    public function getContentDetailAcademic($id, $topicId, $contentId)
+    {
+        $userLogin = Auth::user();
+        $course = Course::where('id', $id)->first();
+        $topic = Topic::findOrFail($topicId);
+        $topic = Topic::where('id', $topic->id)->first();
+        $content = Content::findOrFail($contentId);
+        $content = Content::where('id', $content->id)->first();
+        $contents = Content::where('topic_id', $topic->id)->get();
+        //dd($contents);
+       
+        return view('dashboard/student/content/detail', compact(
+            'userLogin',
+            'topic', 
+            'content', 
+            'contents' 
+        ));
+    }
+
+    public function enrollAcademic(Course $course, $id)
+    {   
+        $course = Course::find($id);
+
+        if (Auth::guest()) {
+            return redirect(route('login'));
+        }
+        else{
+            //dd('test');
+            if(Auth::user()->role == 'student'){
+                $enrollment = Enrollment::create([
+                    'user_id' => Auth::id(),
+                    'course_id' => $course->id,
+                    'status' => 0,
+                ]);
+                $enrollment->save();
+                return redirect('/dashboard');
+            } else {
+                \Session::flash('course', 'Not enrolled to any courses');
+                return redirect('/course')->with('alert', 'sorry, youre not student!');
+            }
+            
+        }
+        //add enroll request to admin dashboard
+        
+        
+        return view('dashboard/student/course', [
+            'enrollment' => $enrollment,
+            'course' => $course
+        ]);
+    }
+
+    public function unenrollAcademic(Course $course, $id)
+    {   
+        $course = Course::find($id);
+
+        $enrollment = Enrollment::where([
+            'user_id' => Auth::id(),
+            'course_id' => $course->id,
+            'status' => 0,
+        ]);
+        $enrollment->delete();
+        
+        \Session::flash('flash_message', 'You have been unenrolled from the course!');
+        return redirect('/dashboard/course/me');
+    }
+
 }
