@@ -132,14 +132,14 @@ Route::group(['middleware' => 'auth'], function () {
     // Student - Acadedmic - MyCourse
     Route::get('/dashboard/course/me', 'StudentController@getMyCourse');
     // Student - Acadedmic - ClassOverview & TopicList
-    Route::get('/dashboard/student/ac/course/{id}/overview', 'StudentController@getOverview')->name('student.ac.overview');
+    Route::get('/dashboard/student/ac/course/{id}/overview', 'StudentController@getOverviewAcademic')->name('student.ac.overview');
     // Student - Acadedmic - TopicDetail & ContentList
-    Route::get('/dashboard/student/ac/topic/{topicId}', 'StudentController@getTopic')->name('student.ac.topic.index');
+    Route::get('/dashboard/student/ac/topic/{topicId}', 'StudentController@getTopicAcademic')->name('student.ac.topic.index');
     // Student - Acadedmic - ContentDetail
-    Route::get('classroom/ac/{id}/topic/{topicId}/content/{contentId}', 'StudentController@getContentDetail')->name('student.ac.content.index');
+    Route::get('classroom/ac/{id}/topic/{topicId}/content/{contentId}', 'StudentController@getContentDetailAcademic')->name('student.ac.content.index');
     // Student - Acadedmic - Enroll & Unenroll
-    Route::get('/enroll/ac/{id}', 'StudentController@Acenroll')->name('ac.enroll');
-    Route::get('/unenroll/ac/{id}', 'StudentController@Acunenroll')->name('ac.unenroll');
+    Route::get('/enroll/ac/{id}', 'StudentController@enrollAcademic')->name('ac.enroll');
+    Route::get('/unenroll/ac/{id}', 'StudentController@unenrollAcademic')->name('ac.unenroll');
     // Student - Acadedmic - Transaction
     Route::get('/dashboard/transaction', 'StudentController@getTransaction');
 

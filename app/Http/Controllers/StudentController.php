@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Course;
 use App\Topic;
 use App\Content;
+use App\Ac_course;
+use App\Ac_topic;
+use App\Ac_content;
 use App\Enrollment;
 use App\Favorite;
 use App\UserCourse;
@@ -201,63 +204,63 @@ class StudentController extends Controller
     {
           
         $userLogin = Auth::user();
-        $course = Course::where('id', $id)->first();
-        $topics = Course::findOrFail($id)->topics()->get();
-        $discussions = Course::findOrFail($id)->discussions()->get();
+        $ac_course = Ac_course::where('id', $id)->first();
+        $ac_topic = Ac_course::findOrFail($id)->ac_topic()->get();
+        $ac_discussion = Ac_course::findOrFail($id)->ac_discussion()->get();
 
-        return view('dashboard/student/overview', [
+        return view('dashboard/student/ac/overview', [
              'userLogin' => $userLogin, 
-             'course' => $course, 
-             'topics' => $topics, 
-             'discussions' => $discussions
+             'ac_course' => $ac_course, 
+             'ac_topic' => $ac_topic, 
+             'ac_discussion' => $ac_discussion
         ]);
     }
 
    public function getTopicAcademic($topicId)
    {
         $userLogin = Auth::user();
-        $topic = Topic::findOrFail($topicId);
-        $topic = Topic::where('id', $topic->id)->first();
+        $ac_topic = Ac_topic::findOrFail($topicId);
+        $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         //$topics = Course::where('')->topics()->get();
-        $contents = Content::where('topic_id', $topic->id)->get();
+        $ac_contents = Ac_content::where('topic_id', $ac_topic->id)->get();
 
-        if ($contents->isEmpty()) {
-            \Session::flash('content', 'Dont have content');
+        if ($ac_content->isEmpty()) {
+            \Session::flash('ac_content', 'Dont have content');
         } else {
-            foreach ($contents as $content){
-                $content = Content::find($content->id);
+            foreach ($ac_content as $content){
+                $content = Ac_content::find($content->id);
             }
         }
 
-        return view('dashboard/student/content/list', [
+        return view('dashboard/student/academic/ac_content/list', [
             'userLogin' => $userLogin,
-            'topic' => $topic,
-            'contents' => $contents
+            'ac_topic' => $ac_topic,
+            'ac_contents' => $ac_contents
         ]);
     }
 
     public function getContentDetailAcademic($id, $topicId, $contentId)
     {
         $userLogin = Auth::user();
-        $course = Course::where('id', $id)->first();
-        $topic = Topic::findOrFail($topicId);
-        $topic = Topic::where('id', $topic->id)->first();
-        $content = Content::findOrFail($contentId);
-        $content = Content::where('id', $content->id)->first();
-        $contents = Content::where('topic_id', $topic->id)->get();
+        $ac_course = Ac_course::where('id', $id)->first();
+        $ac_topic = Ac_topic::findOrFail($topicId);
+        $ac_topic = Ac_topic::where('id', $ac_topic ->id)->first();
+        $ac_content = Ac_content::findOrFail($contentId);
+        $ac_content = Ac_content::where('id', $ac_content->id)->first();
+        $ac_contents = Ac_content::where('ac_topic_id', $ac_topic ->id)->get();
         //dd($contents);
        
         return view('dashboard/student/content/detail', compact(
             'userLogin',
-            'topic', 
-            'content', 
-            'contents' 
+            'ac_topic', 
+            'ac_content', 
+            'ac_contents' 
         ));
     }
 
-    public function enrollAcademic(Course $course, $id)
+    public function enrollAcademic(Ac_course $ac_course, $id)
     {   
-        $course = Course::find($id);
+        $ac_course = Ac_course::find($id);
 
         if (Auth::guest()) {
             return redirect(route('login'));
@@ -283,17 +286,17 @@ class StudentController extends Controller
         
         return view('dashboard/student/course', [
             'enrollment' => $enrollment,
-            'course' => $course
+            'ac_course' => $ac_course
         ]);
     }
 
-    public function unenrollAcademic(Course $course, $id)
+    public function unenrollAcademic(Ac_course $ac_course, $id)
     {   
-        $course = Course::find($id);
+        $ac_course = Ac_course::find($id);
 
         $enrollment = Enrollment::where([
             'user_id' => Auth::id(),
-            'course_id' => $course->id,
+            'ac_course_id' => $ac_course->id,
             'status' => 0,
         ]);
         $enrollment->delete();
