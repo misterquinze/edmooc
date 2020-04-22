@@ -166,6 +166,15 @@ class CompanyController extends Controller
         return redirect('/dashboard/company/course');
     }
 
+    public function changeCourseStatus(Request $request)
+    {
+        $course = Course::find($request->id);
+        $course->status = $request->status;
+        $course->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+
     public function getRevenue(){
         $userLogin = Auth::user();
         

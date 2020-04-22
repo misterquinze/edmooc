@@ -142,7 +142,9 @@ class ProgramController extends Controller
         $data = $request->all();
 
         $program->name = $data['name'];
+        $program->description = $data['description'];
         $program->degree = $data['degree'];
+        $program->degree = $data['estimate'];
         $program->requirement = $data['requirement'];
 
         $program->save();
@@ -161,6 +163,15 @@ class ProgramController extends Controller
         $program = Program::find($id);
         $program->delete();
         return redirect('/dashboard/company/program');
+    }
+
+    public function changeProgramStatus(Request $request)
+    {
+        $program = Course::find($request->id);
+        $program->status = $request->status;
+        $program->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
     }
 
     public function searchProgram(Request $request)

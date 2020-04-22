@@ -11,6 +11,7 @@ class Program extends Model
         'name',
         'degree',
         'requirement',
+        'status'
     ];
 
     public function company(){

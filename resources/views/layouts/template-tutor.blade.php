@@ -15,10 +15,16 @@
         <link rel="stylesheet" href="{{ URL('template/1/bower_components/morris.js/morris.css') }}">
         <link rel="stylesheet" href="{{ URL('template/1/bower_components/jvectormap/jquery-jvectormap.css') }}">
         <link rel="stylesheet" href="{{ URL('template/1/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+        
         <link rel="stylesheet" href="{{ URL('template/1/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
         <link rel="stylesheet" href="{{ URL('template/1/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    </head>
+
+       
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"  />
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
 

@@ -44,9 +44,9 @@
 
                             <div class="middle-section">
                                 
-
-                                <div class="course-detail-title">Gelar Yang Didapat</div>
-                                <div class="course-detail-value">{{ $program->degree }}</div>
+                                <div class="course-detail-title">Deskripsi</div>
+                                <div class="course-detail-value">{{ $program->description }}</div>
+                                
 
                                 
 
@@ -54,6 +54,8 @@
                             <div class="right-section">
                                 <div class="course-detail-title">Persyaratan</div>
                                 <div class="course-detail-value">{{ $program->requirement }}</div>
+                                <div class="course-detail-title">Gelar Yang Didapat</div>
+                                <div class="course-detail-value">{{ $program->degree }}</div>
                                 {{--<div class="course-detail-title">Institusi</div>
                                 <div class="course-detail-value">{{ $course->company->name }}</div>
 
@@ -75,6 +77,7 @@
                         </div>
                         <div class="topic-list gridspan">
                             <div class="left-section header">Nama Kursus</div>
+                            <div class="middle-section header">Status</div>
                             <div class="right-section header">Opsi</div>
                         </div>
                         @foreach($accourse as $ac)
@@ -83,6 +86,9 @@
                                     <a href="" class="topic-name">
                                         {{$ac->name}}
                                     </a>
+                                </div>
+                                <div class="middle-section">
+                                    <input data-id="{{$ac->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $ac->status ? 'checked' : '' }} >
                                 </div>
                                 <div class="right-section">
                                     <span @click.prevent="changeType('edit',{{ $ac->id }})" class="edit-btn">
@@ -384,6 +390,25 @@
         
     })
     </script>
-
+    <script>
+    $(function() 
+    {
+        $('.toggle-class').change(function() 
+        {
+            var status = $(this).prop('checked') == true ? 1 : 0; 
+            var id = $(this).data('id'); 
+      
+            $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/dashboard/accourse/changeStatus',
+            data: {'status': status, 'id': id},
+            success: function(data){
+              console.log(data.success)
+            }
+            });
+        })
+    })
+    </script>
     
 @endsection

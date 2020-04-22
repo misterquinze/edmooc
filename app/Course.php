@@ -18,6 +18,7 @@ class Course extends Model
         'description',
         'type',
         'price',
+        'status',
         'start_date',
         'end_date'
     ];

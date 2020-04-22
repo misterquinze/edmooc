@@ -25,17 +25,7 @@
                         <span class="add-btn" @click.prevent="changeType('create')">Buat Baru</span>
                     </div>
                     <hr>
-                    <div class="welcome-card">
-                        <div class="top-section gridspan">
-                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
-                            <div class="course-detail">
-                                <h3 class="course-name">Selamat Datang di Program Akademik</h3> 
-                                <h5 class="course-description">
-                                </h5> 
-                            </div>
-                        </div>
-                        
-                    </div>
+                   
                     <div class="course-content">
                         <div class="gridspan">
                             <div class="left-section">
@@ -53,76 +43,26 @@
                                         </form>
                                     </div>
                                 </div>
-                
-                                <div class="filter-box">
-                                    <div class="filter-header">
-                                        Type
-                                    </div>
-                                    <div class="filter-body">
-                                        <form action="{{ URL('') }}" method="post">
-                                            {{ csrf_field() }}
-                                            
-                                            <label class="filter-container">
-                                                Free Courses
-                                                <input type="checkbox" name="free">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                            <label class="filter-container">
-                                                Paid Courses
-                                                <input type="checkbox" name="paid">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </form>
-                                    </div>
-                                </div>
-                                
-                                <div class="filter-box">
-                                    <div class="filter-header">
-                                        Category
-                                    </div>
-                                    <div class="filter-body">
-                                        <form action="{{ URL('') }}" method="post">
-                                            {{ csrf_field() }}
-                                            
-                                            <label class="filter-container">
-                                                Business
-                                                <input type="checkbox" name="free">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                            <label class="filter-container">
-                                                Education
-                                                <input type="checkbox" name="paid">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </form>
-                                    </div>
-                                </div>
-                                
-                                <div class="filter-box">
-                                    <div class="filter-header">
-                                        Date
-                                    </div>
-                                    <div class="filter-body">
-                                        <input type="text" name="date" id="filterDate" class="input" placeholder="Choose Date">
-                                    </div>
-                                </div>
+            
                             </div>
                             
                             <div class="right-section">
-                                @foreach ($program as $p)
+                                {{--@foreach ($program as $p)
                                     <a href="{{ route ('program.detail', [$p->id])}} ">  
                                     <div class="course-list ">
                                         <div class="top-section gridspan">
                                             <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                                             <div class="course-detail">
                                                 <h3 class="course-name">{{ $p->name }}</h3> 
-                                                <h5 class="course-description">{{$p->description}}
+                                                <h5 class="course-description">
+                                                    <p>{{str_limit($p->description), 10 }} 
+                                                </p>
                                                 </h5> 
                                             </div>
                                         </div>
                                         <div class="bottom-section gridspan">
                                             <div class="col-left">
-                                                tes
+                                                
                                             </div>
                                             <div class="col-right">
                                                 <span class="delete-btn" onclick="deleteProgram({{ $p->id }})">
@@ -140,8 +80,34 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete">
                                     </form>
-                                @endforeach
-                                
+                                @endforeach--}}
+                                <table class="table table-bordered">
+                                    <thead>
+                                       <tr>
+                                          <th>Nama Program</th>
+                                          <th>Jumlah Kursus</th>
+                                          <th>Status</th>
+                                          <th>Opsi</th>
+                                       </tr> 
+                                    </thead>
+                                    <tbody>
+                                       @foreach($program as $p)
+                                          <tr>
+                                             <td><a href="{{ route ('program.detail', [$p->id])}} "> {{ $p->name }}</a></td>
+                                             <td>{{ $p->ac_course->count() }}</td>
+                                             <td> <input data-id="{{$p->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $p->status ? 'checked' : '' }}></td>
+                                             <td>
+                                                <span class="delete-btn" onclick="deleteCourse({{ $p->id }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </span>
+                                                <a href="{{ URL('dashboard/program/'.$p->id.'/edit') }}" class="edit-btn">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                             </td>
+                                          </tr>
+                                       @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -161,11 +127,20 @@
                                 <p class="input-sub-title">Beri nama kursus anda sejelas mungkin</p>
                                 <input type="text" name="name" class="regular-input" required>
                             </div>
-    
+                            <div class="input-container">
+                                <h4 class="input-title">Deskripsi Program</h4>
+                                <p class="input-sub-title">Beri deskripsi program anda sejelas mungkin</p>
+                                <textarea name="description" class="regular-textarea" required></textarea>
+                            </div>
                             <div class="input-container">
                                 <h4 class="input-title">Gelar Program</h4>
-                                <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
+                                <p class="input-sub-title">Beri gelar yang didapatkan setelah menyelesaikan kursus</p>
                                 <input type="text" name="degree" class="regular-input" required>
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Estimasi Waktu</h4>
+                                <p class="input-sub-title">Beri keterangan estimasi yang dibutuhkan untuk menyelesaikan program</p>
+                                <textarea type="text" name="estimate" class="regular-input" required></textarea>
                             </div>
                             <div class="input-container">
                                 <h4 class="input-title">Persyaratan Program</h4>
@@ -229,6 +204,25 @@
             });
         }
     </script>
-
+    <script>
+    $(function() 
+    {
+        $('.toggle-class').change(function() 
+        {
+            var status = $(this).prop('checked') == true ? 1 : 0; 
+            var id = $(this).data('id'); 
+      
+            $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/dashboard/program/changeStatus',
+            data: {'status': status, 'id': id},
+            success: function(data){
+              console.log(data.success)
+            }
+            });
+        })
+    })
+    </script>
     
 @endsection

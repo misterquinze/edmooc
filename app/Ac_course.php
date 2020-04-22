@@ -15,6 +15,7 @@ class Ac_course extends Model
         'description',
         'passing_grade',
         'price',
+        'status',
         'start_date',
         'end_date'
     ];

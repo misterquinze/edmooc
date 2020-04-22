@@ -92,6 +92,15 @@ class AcademicController extends Controller
         return back();
     }
 
+    public function changeAcCourseStatus(Request $request)
+    {
+        $accourse = Ac_course::find($request->id);
+        $accourse->status = $request->status;
+        $accourse->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+
     /**
     public function searchAcCourse(Request $request, $id)
     {   

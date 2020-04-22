@@ -212,13 +212,19 @@ hr{
 }
 
 .topic-content .topic-list .left-section{
-    width: calc(100% - 150px);
+    width: calc(100% - 300px);
     float: left;
     padding: 10px;
 }
 
 .topic-content .topic-list .left-section .topic-name{
     color: #002347;
+}
+
+.topic-content .topic-list .middle-section{
+    width: 150px;
+    float: left;
+    padding: 10px;
 }
 
 .topic-content .topic-list .right-section{

@@ -101,6 +101,7 @@
             </div>
             <div class="right-section">
                 @foreach ($courses as $course)
+                @if($course->status == '1')
                 <a href="{{ URL('course/' .$course->id. '/preview')}}">
                 <div class="course-list ">
                     <div class="top-section gridspan">
@@ -132,8 +133,15 @@
                     </div>
                 </div>
                 </a>
+                @else 
+                <div>
+
+                </div>
+                @endif
                 @endforeach
+                
                 @foreach ($accourse as $ac)
+                @if($ac->status == '1')
                 <a href="{{ URL('accourse/' .$ac->id. '/preview')}}"> 
                 <div class="course-list ">
                     <div class="top-section gridspan">
@@ -149,7 +157,7 @@
                                     <span class="label">{{$ac->program->name}}</span>
                                 </div>
                                 <hr>
-                                <h5 class="course-description">{{$ac->description}}
+                                <h5 class="course-description">{{str_limit($ac->description, 30) }}
                                 </h5>  
                             </div>
                         </div>  
@@ -165,8 +173,14 @@
                     </div>
                 </div>
                 </a>
+                @else 
+                <div>
+
+                </div>
+                @endif
                 @endforeach
                 {{$courses->links()}}
+               
             </div>
         </div>
         

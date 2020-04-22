@@ -124,7 +124,7 @@ hr{
 }
 
 .course-content .middle-section{
-    width: 33.33%;
+    width: 63.33%;
     float: left;
     padding-left: 20px;
 }
@@ -148,7 +148,7 @@ hr{
 }
 
 .course-content .right-section{
-    width: 33.33%;
+    width: 13.33%;
     float: left;
     padding-left: 20px;
 }
@@ -202,6 +202,8 @@ hr{
     float: right;
 }
 
+
+
 .topic-content .topic-list{
     font-size: 14px;
 }
@@ -225,6 +227,30 @@ hr{
     width: 150px;
     float: left;
     padding: 10px;
+}
+
+.topic-content .topic-body:hover{
+    background-color: #f2f2f2;
+}
+
+a .topic-body{
+    color: #002347;
+}
+
+.topic-content .topic-body .left-section{
+    width: calc(100% - 150px);
+    float: left;
+    padding: 10px;
+}
+
+.topic-content .topic-body .left-section .topic-name{
+    color: #002347;
+}
+
+.topic-content .topic-body .right-section{
+    width: 150px;
+    float: left;
+    padding: 10px 10px 10px 45px;
 }
 
 .topic-content .topic-list .right-section .edit-btn{

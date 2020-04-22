@@ -41,68 +41,16 @@
                                     </div>
                                 </div>
                 
-                                <div class="filter-box">
-                                    <div class="filter-header">
-                                        Type
-                                    </div>
-                                    <div class="filter-body">
-                                        <form action="{{ URL('') }}" method="post">
-                                            {{ csrf_field() }}
-                                            
-                                            <label class="filter-container">
-                                                Free Courses
-                                                <input type="checkbox" name="free">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                            <label class="filter-container">
-                                                Paid Courses
-                                                <input type="checkbox" name="paid">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </form>
-                                    </div>
-                                </div>
-                                
-                                <div class="filter-box">
-                                    <div class="filter-header">
-                                        Category
-                                    </div>
-                                    <div class="filter-body">
-                                        <form action="{{ URL('') }}" method="post">
-                                            {{ csrf_field() }}
-                                            
-                                            <label class="filter-container">
-                                                Business
-                                                <input type="checkbox" name="free">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                            <label class="filter-container">
-                                                Education
-                                                <input type="checkbox" name="paid">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </form>
-                                    </div>
-                                </div>
-                                
-                                <div class="filter-box">
-                                    <div class="filter-header">
-                                        Date
-                                    </div>
-                                    <div class="filter-body">
-                                        <input type="text" name="date" id="filterDate" class="input" placeholder="Choose Date">
-                                    </div>
-                                </div>
                             </div>
                             <div class="right-section">
-                                    @foreach ($courses as $course)    
+                                    {{--@foreach ($courses as $course)    
                                         <div class="course-list ">
                                             <div class="top-section gridspan">
                                                     
                                                 <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                                                 <div class="course-detail">
                                                     <h3 class="course-name">{{ $course->name }}</h3> 
-                                                    <h5 class="course-description">{{$course->description}}
+                                                    <h5 class="course-description">{{str_limit($course->description,30) }}
                                                     </h5> 
                                                 </div>
                                             </div>
@@ -121,6 +69,7 @@
                                                     <a href="{{ URL('dashboard/course/'.$course->id.'/edit') }}" class="edit-btn">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
+                                                    <input data-id="{{$course->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $course->status ? 'checked' : '' }}>
                                                 </div>
                         
                                             </div>
@@ -130,7 +79,34 @@
                                         <input type="hidden" name="_method" value="delete">
                                     </form>
                                 @endforeach
-                                {{$courses->links()}}
+                                {{$courses->links()}}--}}
+                                <table class="table table-bordered">
+                                    <thead>
+                                       <tr>
+                                          <th>Nama Kursus</th>
+                                          <th>Nama Pengajar</th>
+                                          <th>Status</th>
+                                          <th>Opsi</th>
+                                       </tr> 
+                                    </thead>
+                                    <tbody>
+                                       @foreach($courses as $course)
+                                          <tr>
+                                             <td>{{ $course->name }}</td>
+                                             <td>{{ $course->tutor->name }}</td>
+                                             <td> <input data-id="{{$course->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $course->status ? 'checked' : '' }}></td>
+                                             <td>
+                                                <span class="delete-btn" onclick="deleteCourse({{ $course->id }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </span>
+                                                <a href="{{ URL('dashboard/course/'.$course->id.'/edit') }}" class="edit-btn">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                             </td>
+                                          </tr>
+                                       @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -287,6 +263,25 @@
             });
         }
     </script>
-
+    <script>
+    $(function() 
+    {
+        $('.toggle-class').change(function() 
+        {
+            var status = $(this).prop('checked') == true ? 1 : 0; 
+            var id = $(this).data('id'); 
+      
+            $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/dashboard/course/changeStatus',
+            data: {'status': status, 'id': id},
+            success: function(data){
+              console.log(data.success)
+            }
+            });
+        })
+    })
+    </script>
     
 @endsection

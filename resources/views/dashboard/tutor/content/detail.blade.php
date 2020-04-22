@@ -51,14 +51,13 @@
                 <div id="display-container">
                     <div class="gridspan">
                     <h5 class="title"> <a href="{{route('tutor.topic.index', [$topic->course->id]) }}">{{$topic->course->name}}</a> > <a href="{{ URL('/dashboard/tutor/' .$topic->course->id.  '/topic/'.$topic->id) }}">{{$topic->name}}</a> > {{$content->title}} </h5>
+                    <h5 class="navigation">  <a href=""> < Sebelumnya </a> | <a href=""> Selanjutnya > </a>  </h5>
                     </div>
                     <hr>
                     <div class="topic-content">
                         <div class="gridspan">
                         
                             <div class="left-section">
-                              
-                                
                                 <div class="content-detail">
                                     <div class="content-title">
                                         <h2>{{$content->title}}</h2>

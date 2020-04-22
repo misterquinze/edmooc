@@ -151,7 +151,7 @@ hr{
 
 .left-section{
     width: 250px;
-    float: left;
+    float: right;
 }
 
 .left-section .filter-title{
@@ -168,7 +168,7 @@ hr{
 
 .left-section .filter-box .filter-header{
     background-color: #ffffff;
-    padding: 10px 15px;
+    padding: 8px 15px;
     border-radius: 4px 4px 0 0;
     border: 1px solid #cccccc;
     border-bottom: 0;
@@ -279,10 +279,63 @@ hr{
     background: #fff;
 }
 
+.right-section .table{
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+}
+
+.right-section .table{
+    border-collapse: collapse;
+}
+
+td a{
+    color: #002347;
+}
+
+.right-section .table th {
+    background-color: #002347;
+    color: white;
+    text-align: center;
+}
+
+.right-section .table tr:hover{
+    background-color: #f5f5f5;
+}
+
+.right-section .table td {
+    
+    color: #002347;
+    text-align: center;
+    padding: 10px;
+}
+
+.right-section .table .edit-btn{
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.right-section .table .delete-btn{
+    border: 1px solid #e60000;
+    background-color: #e60000;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .right-section{
     width: calc(100% - 280px);
     float: left;
-    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .right-section a.custom-card, a.custom-card:hover {

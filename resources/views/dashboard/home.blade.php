@@ -188,6 +188,73 @@
                 </div>
             </div>
         </div>
+        <div class="student-box">
+            
+            <div class="student-box-1">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title">
+                                EdMOOC
+                            </div>
+                            <div class="card-content ">
+                                {{$userLogin->name}}
+                                <br>
+                                {{$userLogin->email}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="student-box-2">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title text-center">
+                                2
+                            </div>
+                             <div class="card-content text-center">
+                                Program Dibuat
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="student-box-2">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title text-center">
+                                6
+                            </div>
+                             <div class="card-content text-center">
+                                Kursus Dibuat
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="student-box-2">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title text-center">
+                                0
+                            </div>
+                             <div class="card-content text-center">
+                                Jumlah Siswa
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="student-course-head">
+            <h1>
+                FITUR
+            </h1>
+            <hr>
+        </div>
         <div class="row">
             <div class="column">
                 <div class="card">
@@ -243,30 +310,40 @@
     </section>
     @elseif($userLogin->role == 'tutor')
     <section class="content">
-        <div class="course-list">
-            <div class="gridspan">
-                <div class="col-left">
-                    <div class="label-container">
-                        <img src="{{ URL('img/book.jpg') }}" class="card-image">
-                    </div>
-                </div>
-                <div class="col-right">
-                    <div class="label-container">
-                        <div class="title">
-                            Selamat datang di halaman dasbor Tutor!
-                        </div>
-                        <div class="desc">
-                            <p class="JustifyFull">
-                                Anda sebagai tutor dapat membuat materi kursus pada kursus yang anda ajar 
-
-                                
-                            </p>
-
-                            <a href="">Pelajari lebih lanjut</a>
+        <div class="student-box">
+            
+            <div class="student-box-1">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title">
+                                EdMOOC
+                            </div>
+                            <div class="card-content ">
+                                {{$userLogin->name}}
+                                <br>
+                                {{$userLogin->email}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="student-box-2">
+                <div class="gridspan">
+                    <div class="col-left">
+                        <div class="label-container">
+                            <div class="card-title text-center">
+                                2
+                            </div>
+                             <div class="card-content text-center">
+                                Kursus Diajar
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+           
         </div>
         <div class="tutor-course">
             <div class="tutor-course-head">
@@ -288,9 +365,9 @@
                         <div class="col-right">
                             <div class="course-detail">
                                
-                                <h3 class="course-name">course->name
+                                <h3 class="course-name">Data Mining
                                 </h3> 
-                                <span class="label">course->company->name</span>
+                                <span class="label">company1</span>
                                 <span class="label">Kursus Akademik</span>
                                 <h5 class="course-description">tes
                                 </h5>
@@ -312,9 +389,9 @@
                         <div class="col-right">
                             <div class="course-detail">
                                 
-                                <h3 class="course-name">course->name
+                                <h3 class="course-name">Programming Dasar
                                 </h3> 
-                                <span class="label">course->company->name</span>
+                                <span class="label">Company1</span>
                             <span class="label">Kursus Professional</span>
                            
                             <h5 class="course-description">tes

@@ -20,28 +20,131 @@ hr{
     margin: 10px 0 20px;
 }
 
+.right-section{
+    width: 250px;
+    float: right;
+}
+
+.filter-title{
+    font-size: 14px;
+    color: #7d97ad;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.right-section .filter-box{
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 10px 0 rgba(46,61,73,.05);
+}
+
+.right-section .filter-box .filter-header{
+    background-color: #002347;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cccccc;
+    border-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.right-section .filter-box .filter-body{
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #cccccc;
+}
+
+.input{
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: hsla(240,2%,57%,.1);
+}
+
+.search-group{
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.search-input{
+    width: calc(100% - 40px);
+    border: 1px solid #fff;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.search-btn{
+    width: 30px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.left-section{
+    width: calc(100% - 280px);
+    float: left;
+    
+}
+
+.left-section .table{
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+}
+
+.left-section .table{
+    border-collapse: collapse;
+}
+
+.left-section .table th {
+    background-color: #002347;
+    color: white;
+    text-align: center;
+}
+
+.left-section .table tr:hover{
+    background-color: #f5f5f5;
+}
+
+.left-section .table td {
+    
+    color: #002347;
+    text-align: center;
+    padding: 10px;
+}
+
+.left-section .table .edit-btn{
+    border: 1px solid #002347;
+    background-color: #002347;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.left-section .table .delete-btn{
+    border: 1px solid #e60000;
+    background-color: #e60000;;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
 .content{
     padding-left: 25px;
     padding-right: 25px;
 }
 
-.content .search-section{
-    width: calc((100% / 3) - 10px);
-    float: left;
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 4px;
-    margin-right: 15px;
-}
 
-.content .search-section .search-input{
-    width: 100%;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    padding: 10px;
-    background-color: #fafafa;
-    font-size: 12px;
-}
 
 .content .course-list{
     width: 100%;
@@ -62,7 +165,6 @@ hr{
     position: absolute;
     
 }
-
 
 
 .content .course-list .top-section{
