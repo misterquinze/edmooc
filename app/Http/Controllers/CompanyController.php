@@ -14,10 +14,27 @@ class CompanyController extends Controller
     public function getMyCourse(){
         $userLogin = Auth::user();
         $categories = Category::all();
-        $tutors = Tutor::all();
         $company = Company::where('user_id', $userLogin->id)->first();
+        $tutors = Tutor::where('company_id', $company->id)->get();
         $courses = Course::where('company_id', $company->id)->paginate(5);
         // $courses = Company::all();
+
+        if ($courses->isEmpty()) {
+            \Session::flash('course', 'Dont have course to teach');
+        } else {
+            foreach ($courses as $course) {
+                $course = Course::find($course->id);
+            }
+        }
+
+        if ($tutors->isEmpty()) {
+            \Session::flash('tutors', 'Dont have tutor');
+        } else {
+            foreach ($tutors as $tutor) {
+                $tutor = Tutor::find($tutor->id);
+            }
+        }
+
 
         return view ('dashboard/company/course', [
             'userLogin' => $userLogin,

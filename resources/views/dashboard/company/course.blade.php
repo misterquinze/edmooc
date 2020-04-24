@@ -14,7 +14,9 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ URL('css/dashboard/company/course.css') }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+    
     <section class="content">
         <div id="course">
             <template>
@@ -90,11 +92,21 @@
                                        </tr> 
                                     </thead>
                                     <tbody>
-                                       @foreach($courses as $course)
+                                        @if ($courses->isEmpty())
+                                            <tr>
+                                                <td>Belum ada kursus</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        @else
+                                        @foreach($courses as $course)
                                           <tr>
+                                              
                                              <td>{{ $course->name }}</td>
                                              <td>{{ $course->tutor->name }}</td>
-                                             <td> <input data-id="{{$course->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $course->status ? 'checked' : '' }}></td>
+                                             <td><input type="checkbox" data-id="{{ $course->id }}" name="status" class="js-switch" {{ $course->status == 1 ? 'checked' : '' }}> 
+                                                 {{--<input data-id="{{$course->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $course->status ? 'checked' : '' }}>--}}</td>
                                              <td>
                                                 <span class="delete-btn" onclick="deleteCourse({{ $course->id }})">
                                                     <i class="fa fa-trash"></i>
@@ -103,8 +115,10 @@
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                              </td>
+                                             
                                           </tr>
-                                       @endforeach
+                                        @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -181,13 +195,18 @@
                                             <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
                                         @endforeach   
                                 </select>--}}
+                                @if($tutors->isEmpty())
+                                <div>Belum ada tutor</div>
+                                @else
                                 @foreach ($tutors as $tutor)
                                     <label class="radio-container">
-                                        {{$tutor->user->name}}
+                                        {{$tutor->name}} 
                                         <input type="radio" name="tutor" value="{{$tutor->id}}" >
                                         <span class="checkmark"></span>
+                                        <span class="input-sub-title">{{$tutor->description}} </span> 
                                     </label>
                                 @endforeach
+                                @endif
                             </div>
 
                             <div class="input-container">
@@ -216,7 +235,7 @@
     </section>
 
     <script src="{{ URL('js/vue.js') }}"></script>
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    
     {{-- <script src="{{ URL('js/sweetalert.min.js') }}"></script> --}}
 
     <script>
@@ -240,7 +259,7 @@
             }
 
         });
-        CKEDITOR.replace( 'description' );
+        
 
     </script>
     <script>
@@ -266,7 +285,7 @@
     <script>
     $(function() 
     {
-        $('.toggle-class').change(function() 
+        $('.js-switch').change(function() 
         {
             var status = $(this).prop('checked') == true ? 1 : 0; 
             var id = $(this).data('id'); 
@@ -283,5 +302,11 @@
         })
     })
     </script>
-    
+    <script>
+        let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+
+        elems.forEach(function(html) {
+            let switchery = new Switchery(html,  { size: 'small' });
+        });
+    </script>
 @endsection

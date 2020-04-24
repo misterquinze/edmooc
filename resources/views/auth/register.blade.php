@@ -66,11 +66,11 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="type" value="company">
 
-                            <input type="text" name="name" placeholder="Company Name">
-                            <input type="email" name="email" placeholder="Email Address">
-                            <input type="password" name="password" placeholder="Password">
-                            <input type="text" name="address" placeholder="Company Address">
-                            <input type="tel" name="phone" placeholder="Company Phone">
+                            <input id="input-box" type="text" name="name" placeholder="Institution Name">
+                            <input id="input-box" type="email" name="email" placeholder="Email Address">
+                            <input id="input-box" type="password" name="password" placeholder="Password">
+                            <input id="input-box" type="text" name="address" placeholder="Institution Address">
+                            <input id="input-box" type="tel" name="phone" placeholder="Institution Phone">
                             
                             <button type="submit" class="submit-button">SIGN UP</button>
                         </form>
@@ -85,12 +85,12 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="type" value="tutor">
         
-                            <input type="text" name="name" placeholder="Full Name">
-                            <input type="email" name="email" placeholder="Email Address">
-                            <input type="password" name="password" placeholder="Password">
-                            <input type="text" name="address" placeholder="Address">
-                            <input type="tel" name="phone" placeholder="Phone">
-                            <input type="text" name="description" placeholder="Explained your expertise">
+                            <input id="input-box" type="text" name="name" placeholder="Full Name">
+                            <input id="input-box" type="email" name="email" placeholder="Email Address">
+                            <input id="input-box" type="password" name="password" placeholder="Password">
+                            <input id="input-box" type="text" name="address" placeholder="Address">
+                            <input id="input-box" type="tel" name="phone" placeholder="Phone">
+                            <input  id="input-box"type="text" name="description" placeholder="Explained your expertise">
                             
                             <select name="company" class="regular-select">
                                 <option>Pilih Institusi</option>
@@ -102,7 +102,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                            
+                            <br>
                             <button type="submit" class="submit-button">SIGN UP</button>
                         </form>
                     </div>

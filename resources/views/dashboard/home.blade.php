@@ -211,7 +211,7 @@
                     <div class="col-left">
                         <div class="label-container">
                             <div class="card-title text-center">
-                                2
+                                0
                             </div>
                              <div class="card-content text-center">
                                 Program Dibuat
@@ -225,7 +225,7 @@
                     <div class="col-left">
                         <div class="label-container">
                             <div class="card-title text-center">
-                                6
+                                0
                             </div>
                              <div class="card-content text-center">
                                 Kursus Dibuat
