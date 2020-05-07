@@ -9,6 +9,13 @@
     float: left;
 }
 
+
+.navigation{
+    margin: 5px 0 0;
+    font-weight: 600;
+    float: right;
+}
+
 .add-btn{
     float: right;
     padding: 7px 15px;

@@ -93,6 +93,8 @@ class ProgramController extends Controller
         $program = Program::create([
             'company_id' => $company->id,
             'name' => $data['name'],
+            'description' => $data['description'],
+            'estimate' =>$data['estimate'],
             'degree' => $data['degree'],
             'requirement' => $data['requirement'],
             

@@ -1,18 +1,11 @@
 @extends('layouts.template-visitor')
 
 @section('menu')
-    <li class="nav-item">
-        <a class="nav-link" href="{{ URL('/') }}">Home</a>
-    </li>
+   
     <li class="nav-item">
         <a class="nav-link" href="{{ URL('course') }}">Courses</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ URL('about') }}">About</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ URL('contact') }}">Contact</a>
-    </li>
+    
 @endsection
 
 @section('content')

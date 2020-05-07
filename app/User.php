@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function discussion()
     {
-        return $this->hasMany('App\Discussion');
+        return $this->hasMany('App\discussion');
     }
 
     public function comment()

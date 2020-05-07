@@ -53,7 +53,8 @@
             <template>
                 <div id="display-container">
                     <div class="gridspan">
-                    <h5 class="title-link"> <a href="{{route('student.overview', [$topic->course->id]) }}">{{$topic->course->name}}</a> > <a href="{{ URL('/dashboard/student/topic/'.$topic->id) }}">{{$topic->name}}</a> > {{$content->title}} </h5>
+                    <h5 class="title"> <a href="{{route('student.overview', [$topic->course->id]) }}">{{$topic->course->name}}</a> > <a href="{{ URL('/dashboard/student/topic/'.$topic->id) }}">{{$topic->name}}</a> > {{$content->title}} </h5>
+                    <h5 class="navigation">  <a href=""> < Sebelumnya </a> | <a href=""> Selanjutnya > </a>  </h5>
                     </div>
                     <hr>
                     <div class="topic-content">

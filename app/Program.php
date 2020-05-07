@@ -9,6 +9,8 @@ class Program extends Model
     protected $fillable = [
         'company_id',
         'name',
+        'description',
+        'estimate',
         'degree',
         'requirement',
         'status'

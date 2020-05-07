@@ -87,32 +87,11 @@
                                         Tutor Kursus
                                     </div>
                                     <div class="filter-body">
-                                        {{$courses->tutor_id}}
+                                        {{$courses->tutor->name}}
                                     </div>
                                 </div>
                                 
-                                <div class="filter-box">
-                                    <div class="filter-header">
-                                        Topik Diskusi
-                                    </div>
-                                    <div class="filter-body">
-                                        <form action="{{ URL('') }}" method="post">
-                                            {{ csrf_field() }}
-                                            
-                                            <label class="filter-container">
-                                                Topik 1
-                                                <input type="checkbox" name="free">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                            <label class="filter-container">
-                                                Topik 2
-                                                <input type="checkbox" name="paid">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </form>
-                                    </div>
-                                </div>
-                                
+                               
                             </div>
                             <div class="left-section">
                                 <div class="disc-header gridspan">
@@ -166,9 +145,7 @@
                                                 </a>
                                                 <div class="col-right">
                                                 @if(auth()->user()->role == 'tutor')
-                                                <span @click.prevent="changeType('edit',{{ $disc->id }})" class="edit-btn">
-                                                    <i class="fa fa-edit"></i>
-                                                </span>
+                                                
                                                 <span style="padding-left: 10px" class="delete-btn" onclick="deleteDiscussion({{$disc->id}} )">
                                                     <i class="fa fa-trash"></i>
                                                 </span>

@@ -15,7 +15,9 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ URL('css/dashboard/company/program.css') }}">
-
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
     <section class="content">
         <div id="program">
             <template>
@@ -95,14 +97,18 @@
                                           <tr>
                                              <td><a href="{{ route ('program.detail', [$p->id])}} "> {{ $p->name }}</a></td>
                                              <td>{{ $p->ac_course->count() }}</td>
-                                             <td> <input data-id="{{$p->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $p->status ? 'checked' : '' }}></td>
+                                             <td>  <input type="checkbox" data-id="{{ $p->id }}" name="status" class="js-switch" {{ $p->status == 1 ? 'checked' : '' }}></td>
                                              <td>
-                                                <span class="delete-btn" onclick="deleteCourse({{ $p->id }})">
+                                                <span class="delete-btn" onclick="deleteProgram({{ $p->id }})">
                                                     <i class="fa fa-trash"></i>
                                                 </span>
                                                 <a href="{{ URL('dashboard/program/'.$p->id.'/edit') }}" class="edit-btn">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                                <form class="form-delete" id="delete-{{ $p->id }}" action="{{ URL('dashboard/program/'.$p->id.'/delete') }}"  method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="_method" value="delete">
+                                                </form>
                                              </td>
                                           </tr>
                                        @endforeach
@@ -204,25 +210,32 @@
             });
         }
     </script>
+  
     <script>
-    $(function() 
-    {
-        $('.toggle-class').change(function() 
+        $(function() 
         {
-            var status = $(this).prop('checked') == true ? 1 : 0; 
-            var id = $(this).data('id'); 
-      
-            $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '/dashboard/program/changeStatus',
-            data: {'status': status, 'id': id},
-            success: function(data){
-              console.log(data.success)
-            }
-            });
+            $('.js-switch').change(function() 
+            {
+                var status = $(this).prop('checked') == true ? 1 : 0; 
+                var id = $(this).data('id'); 
+          
+                $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '/dashboard/program/changeStatus',
+                data: {'status': status, 'id': id},
+                success: function(data){
+                  console.log(data.success)
+                }
+                });
+            })
         })
-    })
-    </script>
+        </script>
+        <script>
+            let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     
+            elems.forEach(function(html) {
+                let switchery = new Switchery(html,  { size: 'small' });
+            });
+        </script>
 @endsection

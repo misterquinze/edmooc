@@ -365,11 +365,11 @@
                         <div class="col-right">
                             <div class="course-detail">
                                
-                                <h3 class="course-name">Data Mining
+                                <h3 class="course-name">Ekonomi Makro & Mikro
                                 </h3> 
-                                <span class="label">company1</span>
-                                <span class="label">Kursus Akademik</span>
-                                <h5 class="course-description">tes
+                                <span class="label">Institution A</span>
+                                <span class="label">Kursus Professional</span>
+                                <h5 class="course-description">Kursus mempelajari teori eknonomi makro dan mikro
                                 </h5>
                             </div>
                         </div>
@@ -378,7 +378,7 @@
                 </div>
                 
                 {{--@endforeach--}}
-                {{--@foreach ($taccourse as $course)--}}    
+                {{--@foreach ($taccourse as $course)    
                 <div class="tutor-course-list ">
                     <div class="top-section gridspan">
                        
@@ -401,7 +401,7 @@
                         
                     </div>
                 </div> 
-                {{--@endforeach--}}
+                @endforeach--}}
                 
             </div>
         </div>

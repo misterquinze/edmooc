@@ -114,9 +114,14 @@
                                                 <a href="{{ URL('dashboard/course/'.$course->id.'/edit') }}" class="edit-btn">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
+                                                <form class="form-delete" id="delete-{{ $course->id }}" action="{{ URL('dashboard/course/'.$course->id.'/delete') }}"  method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="_method" value="delete">
+                                                </form>
                                              </td>
                                              
                                           </tr>
+                                            
                                         @endforeach
                                         @endif
                                     </tbody>

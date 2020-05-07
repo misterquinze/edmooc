@@ -2,10 +2,11 @@
 
 @section('menu')
     
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link" href="{{ URL('course') }}">Courses</a>
     </li>
     
+   
 @endsection
 
 @section('content')
@@ -19,7 +20,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <div class="banner_content text-center">
-                            <h2>Courses Catalog</h2>
+                            <h2>Program Catalog</h2>
                         </div>
                     </div>
                 </div>
@@ -34,23 +35,19 @@
                
                 <div class="filter-box">
                     <div class="filter-header">
-                        Program
+                        Institution
                     </div>
                     <div class="filter-body">
                         
                         <form action="{{URL('')}}" method="post">
                             {{ csrf_field() }}
-                            
+                            @foreach($companies as $company)
                             <label class="filter-container">
-                                Academic
+                                {{$company->name}}
                                 <input type="checkbox" name="Academic">
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="filter-container">
-                                Professional
-                                <input type="checkbox" name="paid">
-                                <span class="checkmark"></span>
-                            </label>
+                            @endforeach
                         </form>
                     </div>
                 </div>
@@ -74,86 +71,46 @@
         
             </div>
             <div class="right-section">
-                @foreach ($courses as $course)
-                @if($course->status == '1')
-                <a href="{{ URL('course/' .$course->id. '/preview')}}">
+                @foreach ($program as $p)
+                @if($p->status == '1')
+                <a href="">
                 <div class="course-list ">
                     <div class="top-section gridspan">
                             <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
                         <div class="col-left">
                             <div class="course-detail">
-                                    <h3 class="course-name">{{ $course->name }}</h3>
+                                    <h3 class="course-name">{{ $p->name }}</h3>
                                 <div class="label-container">
-                                    <span class="label">{{$course->company->name}}</span>
+                                    <span class="label">{{$p->company->name}}</span>
                                 </div>
                                 <hr>
-                                <h5 class="course-description">{{$course->description}}
+                                <h5 class="course-description">{{str_limit($p->description, 80)}}
                                 </h5>  
                             </div>
                         </div>  
                     </div>
                     <div class="bottom-section gridspan">
                         <div class="col-left">
-                            @if ($course->type == 'paid')
-                                <span class="price">Rp {{ number_format($course->price) }}</span>
-                            @else
-                                <span class="price">Gratis</span>
-                            @endif
+                            
                         </div>
                         <div class="col-right">
-                        <a class="enroll-btn" type="button" href="{{route('enroll' ,[$course->id] )}}">Enroll</a>    
+                        <a class="enroll-btn" type="button" href="{{route('enroll' ,[$p->id] )}}">Enroll</a>    
                           
                         </div>    
                     </div>
                 </div>
                 </a>
+               
                 @else 
                 <div>
 
                 </div>
                 @endif
+               
                 @endforeach
                 
-                @foreach ($accourse as $ac)
-                @if($ac->status == '1')
-                <a href="{{ URL('accourse/' .$ac->id. '/preview')}}"> 
-                <div class="course-list ">
-                    <div class="top-section gridspan">
-                            <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
-                        <div class="col-left">
-                            <div class="course-detail">
-                                
-                                <h3 class="course-name">{{ $ac->name }} </h3>
-                               
-                                <div class="label-container">
-                                    <span class="label">{{$ac->company->name}}</span>
-                                    <span class="label">kursus akademik</span>
-                                    <span class="label">{{$ac->program->name}}</span>
-                                </div>
-                                <hr>
-                                <h5 class="course-description">{{str_limit($ac->description, 30) }}
-                                </h5>  
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="bottom-section gridspan">
-                        <div class="col-left">
-                            <span class="price">Rp {{ number_format($ac->price) }}</span>
-                        </div>
-                        <div class="col-right">
-                        <a class="enroll-btn" type="button" href="{{route('enroll' ,[$ac->id] )}}">Enroll</a>    
-                          
-                        </div>    
-                    </div>
-                </div>
-                </a>
-                @else 
-                <div>
-
-                </div>
-                @endif
-                @endforeach
-                {{$courses->links()}}
+               
+                
                
             </div>
         </div>

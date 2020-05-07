@@ -27,7 +27,9 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ URL('css/dashboard/company/program-detail.css') }}"> 
-
+    <link rel="stylesheet" href="{{ URL('css/dashboard/company/course.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
     <section class="content">
         <div id="course">
             <template>
@@ -88,7 +90,7 @@
                                     </a>
                                 </div>
                                 <div class="middle-section">
-                                    <input data-id="{{$ac->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $ac->status ? 'checked' : '' }} >
+                                    <input type="checkbox" data-id="{{ $ac->id }}" name="status" class="js-switch" {{ $ac->status == 1 ? 'checked' : '' }}>
                                 </div>
                                 <div class="right-section">
                                     <span @click.prevent="changeType('edit',{{ $ac->id }})" class="edit-btn">
@@ -391,24 +393,31 @@
     })
     </script>
     <script>
-    $(function() 
-    {
-        $('.toggle-class').change(function() 
+        $(function() 
         {
-            var status = $(this).prop('checked') == true ? 1 : 0; 
-            var id = $(this).data('id'); 
-      
-            $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '/dashboard/accourse/changeStatus',
-            data: {'status': status, 'id': id},
-            success: function(data){
-              console.log(data.success)
-            }
-            });
+            $('.js-switch').change(function() 
+            {
+                var status = $(this).prop('checked') == true ? 1 : 0; 
+                var id = $(this).data('id'); 
+          
+                $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '/dashboard/accourse/changeStatus',
+                data: {'status': status, 'id': id},
+                success: function(data){
+                  console.log(data.success)
+                }
+                });
+            })
         })
-    })
-    </script>
+        </script>
+        <script>
+            let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+    
+            elems.forEach(function(html) {
+                let switchery = new Switchery(html,  { size: 'small' });
+            });
+        </script>
     
 @endsection

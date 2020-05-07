@@ -226,7 +226,7 @@ class TutorController extends Controller
 
         $contents = Content::where('topic_id', $topics->id)->get();
         
-        return redirect()->route('tutor.content.index', [$topics->id]);
+        return back();
     }
 
     public function deleteContent($id)

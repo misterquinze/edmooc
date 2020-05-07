@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Program;
+use App\Company;
 use App\Course;
 use App\Ac_course;
 use App\Category;
@@ -37,6 +39,23 @@ class VisitorController extends Controller
         ]);
     }
 
+    public function getProgram()
+    {
+        $userLogin = Auth::user();
+        $categories = Category::all();
+        $companies = Company::all();
+        $program = Program::paginate(5);
+        $accourse = Ac_course::paginate(5);
+
+        return view('visitor/program',[
+            'userLogin' => $userLogin,
+            'categories' => $categories,
+            'companies' => $companies,
+            'program' => $program,
+            'accourse' => $accourse
+        ]);
+    }
+
     public function getCoursePreview($id)
     {
         $userLogin = Auth::user();
@@ -64,6 +83,8 @@ class VisitorController extends Controller
             'accourse' => $accourse
         ]);
     }
+
+
 
     public function getAbout()
     {
@@ -113,4 +134,5 @@ class VisitorController extends Controller
             'accourse' => $accourse
         ]);
     }
+    
 }

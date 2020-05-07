@@ -24,7 +24,7 @@ class Discussion extends Model
     public function user()
     {
 
-        return $this->belongsTo('App\User', 'foreign_key');
+        return $this->belongsTo('App\user', 'foreign_key');
     }
 
     public function comments()

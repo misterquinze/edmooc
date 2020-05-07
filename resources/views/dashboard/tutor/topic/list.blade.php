@@ -256,7 +256,7 @@
     </section>
 
     <script src="{{ URL('js/vue.js') }}"></script>
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    
     <script>
         new Vue({
             el: '#course',
@@ -348,9 +348,7 @@
     })
     
     </script>
-    <script>
-        CKEDITOR.replace( 'description' );
-    </script>
+    
 
     
 @endsection
