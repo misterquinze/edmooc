@@ -11,6 +11,7 @@ use App\Ac_course;
 use App\Ac_topic;
 use App\Ac_content;
 use App\Enrollment;
+use App\Ac_enrollment;
 use App\Favorite;
 use App\UserCourse;
 
@@ -21,28 +22,38 @@ class StudentController extends Controller
     {
         $userLogin = Auth::user();
         if (Auth::check()) {
-            $enrollment = Enrollment::where('user_id', '=', Auth::id())
-                                    ->get();
+            $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
+            $ac_enrollment = Ac_enrollment::where('user_id', '=', Auth::id())->get();
             $courses = [];
+            $ac_courses = [];
             foreach ($enrollment as $row) {
                 $courses[] = $row->course;
             }
             $courses = collect($courses);
+            foreach ($ac_enrollment as $row) {
+                $ac_courses[] = $row->ac_course;
+            }
+            $ac_courses = collect($ac_courses);
         } else {
-            $courses = Course::all();
+             $courses = Course::all();
+             $ac_courses = Ac_course::all();
         }
         
-        if ($courses->isEmpty()) {
+        if ($courses or $ac_courses->isEmpty()) {
             \Session::flash('course', 'Not enrolled to any courses');
         } else {
-            foreach ($courses as $course) {
-                $course = Course::find($course->id);
-            }
+           foreach ($courses as $course) {
+               $course = Course::find($course->id);
+           }
+           foreach ($ac_courses as $ac_course) {
+               $ac_course = Ac_course::find($ac_course->id);
+           }
         }
 
         return view('dashboard/student/course',[
             'userLogin' => $userLogin,
             'courses' => $courses,
+            'ac_courses' => $ac_courses
         ]);
     }
 
@@ -127,7 +138,7 @@ class StudentController extends Controller
             }
             
         }
-        //add enroll request to admin dashboard
+        
         
         
         return view('dashboard/student/course', [
@@ -267,16 +278,19 @@ class StudentController extends Controller
         }
         else{
             //dd('test');
-            if(Auth::user()->role == 'student'){
-                $enrollment = Enrollment::create([
+            if(Auth::user()->role == 'student')
+            {
+                $ac_enrollment = Ac_enrollment::create(
+                    [
                     'user_id' => Auth::id(),
-                    'course_id' => $course->id,
+                    'ac_course_id' => $ac_course->id,
                     'status' => 0,
-                ]);
-                $enrollment->save();
+                    ]
+                );
+                $ac_enrollment->save();
                 return redirect('/dashboard');
             } else {
-                \Session::flash('course', 'Not enrolled to any courses');
+                \Session::flash('accourse', 'Not enrolled to any courses');
                 return redirect('/course')->with('alert', 'sorry, youre not student!');
             }
             
@@ -285,7 +299,7 @@ class StudentController extends Controller
         
         
         return view('dashboard/student/course', [
-            'enrollment' => $enrollment,
+            'ac_enrollment' => $ac_enrollment,
             'ac_course' => $ac_course
         ]);
     }
@@ -294,12 +308,12 @@ class StudentController extends Controller
     {   
         $ac_course = Ac_course::find($id);
 
-        $enrollment = Enrollment::where([
+        $ac_enrollment = Ac_enrollment::where([
             'user_id' => Auth::id(),
             'ac_course_id' => $ac_course->id,
             'status' => 0,
         ]);
-        $enrollment->delete();
+        $ac_enrollment->delete();
         
         \Session::flash('flash_message', 'You have been unenrolled from the course!');
         return redirect('/dashboard/course/me');

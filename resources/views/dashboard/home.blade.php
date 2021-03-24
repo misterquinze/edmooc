@@ -73,11 +73,31 @@
                     <div class="gridspan">
                         <div class="col-left">
                             <div class="label-container">
+                                <div class="card-content text-center">
+                                    Mengikuti
+                                </div>
                                 <div class="card-title text-center">
-                                    0
+                                    {{$courses->count()}}
                                 </div>
                                  <div class="card-content text-center">
-                                    Lulus Kursus
+                                     Kursus Professional
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-box-2">
+                    <div class="gridspan">
+                        <div class="col-left">
+                            <div class="label-container">
+                                <div class="card-content text-center">
+                                    Mengikuti
+                                </div>
+                                <div class="card-title text-center">
+                                    {{$ac_courses->count()}}
+                                </div>
+                                 <div class="card-content text-center">
+                                     Kursus Akademik
                                  </div>
                             </div>
                         </div>
@@ -126,7 +146,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="">Unenroll</a>
+                                        <a href="{{route('unenroll' ,[$course->id] )}}">Unenroll</a>
                                     </li>
                                     <li>
                                         <a href="#">Settings</a>
@@ -138,6 +158,51 @@
                         <div class="col-left">
                             <div class="course-detail">
                                 <a href="{{URL ('dashboard/student/course/'.$course->id.'/overview')}}">
+                                    <h3 class="course-name">{{ $course->name }}
+                                    </h3> 
+                                </a>
+                                <h5 class="course-description">{{$course->description}}
+                                </h5>
+                            </div>
+                        </div>                     
+                        <div class="col-right">
+                            <div class="proceed-btn">
+                                <a class="nav-link" href="{{route ('student.overview', [$course->id])}}">Materi</a>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="bottom-section gridspan">
+                        <div class="col-left">
+                            <span class="company">{{$course->company->name}}</span>
+                        </div>
+                        <div class="col-right">
+                        </div>
+                    </div>
+                </div> 
+                @endforeach
+
+                @foreach ($ac_courses as $course)    
+                <div class="student-course-list ">
+                    <div class="top-section gridspan">
+                        <ul style="list-style-type:none" class="dropdown">
+                            <li class="dropdown-list">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i type="button" class="fa fa-ellipsis-v" ></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{route('ac.unenroll' ,[$course->id] )}}">Unenroll</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Settings</a>
+                                    </li>       
+                                </ul> 
+                            </li> 
+                        </ul>
+                        <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                        <div class="col-left">
+                            <div class="course-detail">
+                                <a href="{{URL ('dashboard/student/ac/course/'.$course->id.'/overview')}}">
                                     <h3 class="course-name">{{ $course->name }}
                                     </h3> 
                                 </a>

@@ -141,7 +141,7 @@
                             <span class="price">Rp {{ number_format($ac->price) }}</span>
                         </div>
                         <div class="col-right">
-                        <a class="enroll-btn" type="button" href="{{route('enroll' ,[$ac->id] )}}">Enroll</a>    
+                        <a class="enroll-btn" type="button" href="{{route('ac.enroll', [$ac->id] )}}">Enroll</a>    
                           
                         </div>    
                     </div>

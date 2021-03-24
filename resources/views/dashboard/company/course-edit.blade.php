@@ -30,13 +30,13 @@
                             <div class="input-container">
                                 <h4 class="input-title">Nama Kursus</h4>
                                 <p class="input-sub-title">Beri nama kursus anda sejelas mungkin</p>
-                                <input type="text" name="name" class="regular-input" value="{{ $course->name }}" required>
+                                <input type="text" name="name" class="regular-input" required>
                             </div>
     
                             <div class="input-container">
                                 <h4 class="input-title">Deskripsi Kursus</h4>
                                 <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
-                                <textarea name="description" class="regular-textarea" required>{{ $course->description }}</textarea>
+                                <textarea name="description" class="regular-textarea" required></textarea>
                             </div>
 
                             <div class="input-container">
@@ -57,46 +57,61 @@
                             <div v-if="courseType == 'paid'" class="input-container">
                                 <h4 class="input-title">Biaya Kursus</h4>
                                 <p class="input-sub-title">Tentukan biaya kursus</p>
-                                <input type="number" name="price" class="regular-input"  value="{{ $course->price }}" required>
+                                <input type="number" name="price" class="regular-input" required>
                             </div>
                             
-                            <div class="input-container">
+                            <div id="category" class="input-container">
                                 <h4 class="input-title">Kategori Kursus</h4>
                                 <p class="input-sub-title">Tentukan kategori kursus</p>
-                                <select name="category" class="regular-select">
+                                {{--<select name="category" class="regular-select">
                                     <option>Pilih kategori</option>
                                     @foreach ($categories as $category)
-                                        @if ($category->id == $course->category_id)
-                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                                        @else
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach 
+                                </select>--}}
+                                @foreach ($categories as $category)
+                                    <label class="radio-container">
+                                        {{$category->name}}
+                                        <input type="radio" name="category" value="{{$category->id}}" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                @endforeach
                             </div>
 
                             <div class="input-container">
-                                    <h4 class="input-title">Tutor Kursus</h4>
-                                    <p class="input-sub-title">Tentukan Tutor kursus</p>
-                                    <select name="tutor" class="regular-select">
-                                        <option>Pilih Tutor</option>
+                                <h4 class="input-title">Tutor Kursus</h4>
+                                <p class="input-sub-title">Tentukan Tutor kursus</p>
+                                {{--<select name="tutor" class="regular-select">
+                                    <option>Pilih Tutor</option>
                                         @foreach ($tutors as $tutor)
                                             <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
-                                        @endforeach
-                                    </select>
+                                        @endforeach   
+                                </select>--}}
+                                @if($tutors->isEmpty())
+                                <div>Belum ada tutor</div>
+                                @else
+                                @foreach ($tutors as $tutor)
+                                    <label class="radio-container">
+                                        {{$tutor->name}} 
+                                        <input type="radio" name="tutor" value="{{$tutor->id}}" >
+                                        <span class="checkmark"></span>
+                                        <span class="input-sub-title">{{$tutor->description}} </span> 
+                                    </label>
+                                @endforeach
+                                @endif
                             </div>
 
-                            {{--<div class="input-container">
+                            <div class="input-container">
                                 <h4 class="input-title">Tanggal Mulai</h4>
                                 <p class="input-sub-title">Tentukan tanggal mulai kursus</p>
-                                <input type="text" name="startDate" class="regular-input" id="startDate" value="{{ $course->start_date }}" placeholder="Choose Date" required>
+                                <input type="text" name="startDate" class="regular-input" id="startDate" placeholder="Choose Date" required>
                             </div>
     
                             <div class="input-container">
                                 <h4 class="input-title">Tanggal Selesai</h4>
                                 <p class="input-sub-title">Tentukan tanggal selesai kursus</p>
-                                <input type="text" name="endDate" class="regular-input" id="endDate" value="{{ $course->end_date }}" placeholder="Choose Date" required>
-                            </div>--}}
+                                <input type="text" name="endDate" class="regular-input" id="endDate" placeholder="Choose Date" required>
+                            </div>
     
                         </div>
                         <div class="form-footer gridspan">

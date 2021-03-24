@@ -122,7 +122,7 @@ class VisitorController extends Controller
         $userLogin = Auth::user();
         
         $search = $request->search;
-        
+        $categories = Category::all();
         $courses = Course::where('name', 'like', "%" .$search. "%")->paginate();
         $accourse = Ac_course::where('name', 'like', "%" .$search. "%")->paginate();
         
@@ -130,6 +130,7 @@ class VisitorController extends Controller
         //dd($courses);
         return view('visitor/course', [
             'userLogin' => $userLogin,
+            'categories' => $categories,
             'courses' => $courses,
             'accourse' => $accourse
         ]);

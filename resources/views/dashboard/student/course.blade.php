@@ -93,6 +93,64 @@
                 </div>
             </div> 
         @endforeach
+        @foreach ($ac_courses as $course)    
+            <div class="course-list ">
+                    
+                <div class="top-section gridspan">
+                    <ul style="list-style-type:none" class="dropdown">
+                        <li class="dropdown-list">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i type="button" class="fa fa-ellipsis-v" ></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{route('unenroll' ,[$course->id] )}}">Unenroll</a>
+                                </li>
+                                <li>
+                                    <a href="#">Settings</a>
+                                </li>       
+                            </ul> 
+                        </li> 
+                    </ul>
+                    
+                    <img src="{{ URL('img/dummy.jpg') }}" class="course-image">
+                    <div class="col-left">
+                        <div class="course-detail">
+                            <a href="{{URL ('dashboard/student/course/'.$course->id.'/overview')}}">
+                                <h3 class="course-name">{{ $course->name }}
+                                </h3> 
+                            </a>
+                            <h5 class="course-description">{{$course->description}}
+                            </h5>
+                        </div>
+                    </div>                     
+                    <div class="col-right">
+                           
+                        <div class="proceed-btn">
+                            <a class="nav-link" href="{{route ('student.overview', [$course->id])}}">Materi</a>
+                        </div>
+                       
+                    </div>  
+                </div>
+                <div class="bottom-section gridspan">
+                    <div class="col-left">
+                        <span class="company">{{$course->company->name}}</span>
+                    </div>
+                    <div class="col-right">
+                        
+                    </div>
+                      
+                    {{--<div class="love-btn">
+                        @if (Auth::check())
+                            <favorite class=""
+                                :post={{ $course->id }}
+                                :favorited={{ $course->favorited() ? 'true' : 'false' }}>
+                            </favorite>
+                        @endif
+                    </div>--}}
+                </div>
+            </div> 
+        @endforeach
         @endif
     </section>
     <script src="{{ URL('js/vue.js') }}"></script>    

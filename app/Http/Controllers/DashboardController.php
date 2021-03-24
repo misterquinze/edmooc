@@ -6,6 +6,7 @@ use App\Tutor;
 use App\Course;
 use App\Ac_course;
 use App\Enrollment;
+use App\Ac_enrollment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -25,38 +26,46 @@ class DashboardController extends Controller
         
         if (Auth::check()) {
             $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
+            $ac_enrollment = Ac_enrollment::where('user_id', '=', Auth::id())->get();
             $courses = [];
+            $ac_courses = [];
             foreach ($enrollment as $row) {
                 $courses[] = $row->course;
             }
             $courses = collect($courses);
+            foreach ($ac_enrollment as $row) {
+                $ac_courses[] = $row->ac_course;
+            }
+            $ac_courses = collect($ac_courses);
         } else {
              $courses = Course::all();
+             $ac_courses = Ac_course::all();
         }
+
             
-        if ($courses->isEmpty()) {
+        if ($courses or $ac_courses->isEmpty()) {
              \Session::flash('course', 'Not enrolled to any courses');
         } else {
             foreach ($courses as $course) {
                 $course = Course::find($course->id);
             }
+            foreach ($ac_courses as $ac_course) {
+                $ac_course = Ac_course::find($ac_course->id);
+            }
         }
-        
-        //$tutor = Tutor::where('user_id', $userLogin->id)->first();
-        //$tcourses = Course::where('tutor_id', $tutor->id)->get();
-        //$taccourse = Ac_course::where('tutor_id', $tutor->id)->get();
-        
-        
+       
         $enrollment = Enrollment::where('user_id', '=', Auth::id())->get();
-        
+        $ac_enrollment = Ac_enrollment::where('user_id', '=', Auth::id())->get();
         
         //dd($enrollment);
         return view('dashboard/home', [
             'userLogin'=> $userLogin,
             'courses' => $courses,
-            //'tcourses' => $tcourses,
+            'ac_courses' => $ac_courses,
             //'taccourse' => $taccourse,
-            'enrollment'=> $enrollment
+            'enrollment'=> $enrollment,
+            'ac_enrollment'=> $ac_enrollment
+            
         ]);
     }
 

@@ -228,8 +228,8 @@
                                     <div class="card-body">
                                     <!-- name -->
                                         <div class="input-container">
-                                            <h4 class="input-title">Judul Materi</h4>
-                                            <p class="input-sub-title">Beri Judul Materi</p>
+                                            <h4 class="input-title">Judul Topik</h4>
+                                            <p class="input-sub-title">Beri Judul Topik</p>
                                             
                                             <input type="text" name="name" class="regular-input" id="modal-input-name" required autofocus>
                                         </div>

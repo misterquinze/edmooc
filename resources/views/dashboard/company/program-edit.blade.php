@@ -32,11 +32,20 @@
                                 <p class="input-sub-title">Beri nama kursus anda sejelas mungkin</p>
                                 <input type="text" name="name" class="regular-input" required>
                             </div>
-    
+                            <div class="input-container">
+                                <h4 class="input-title">Deskripsi Program</h4>
+                                <p class="input-sub-title">Beri deskripsi program anda sejelas mungkin</p>
+                                <textarea name="description" class="regular-textarea" required></textarea>
+                            </div>
                             <div class="input-container">
                                 <h4 class="input-title">Gelar Program</h4>
-                                <p class="input-sub-title">Beri deskripri kursus anda sejelas mungkin</p>
+                                <p class="input-sub-title">Beri gelar yang didapatkan setelah menyelesaikan kursus</p>
                                 <input type="text" name="degree" class="regular-input" required>
+                            </div>
+                            <div class="input-container">
+                                <h4 class="input-title">Estimasi Waktu</h4>
+                                <p class="input-sub-title">Beri keterangan estimasi yang dibutuhkan untuk menyelesaikan program</p>
+                                <textarea type="text" name="estimate" class="regular-input" required></textarea>
                             </div>
                             <div class="input-container">
                                 <h4 class="input-title">Persyaratan Program</h4>

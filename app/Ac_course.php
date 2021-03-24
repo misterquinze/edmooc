@@ -50,4 +50,10 @@ class Ac_course extends Model
         return $this->hasMany('App\ac_discussion');
     }
 
+    public function ac_enrollment()
+    {
+        return $this->hasMany('App\ac_enrollment');
+    }
+
+
 }
