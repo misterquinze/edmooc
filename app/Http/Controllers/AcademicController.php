@@ -172,7 +172,6 @@ class AcademicController extends Controller
     {
         $ac_topics = Ac_topic::findOrFail($id);
         $ac_topics->delete();
-
         return back();
     }
 
@@ -186,43 +185,43 @@ class AcademicController extends Controller
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         //$topics = Course::findOrFail($id)->topics()->get();
         $ac_contents = Ac_content::where('ac_topic_id', $ac_topic->id)->get();
-
         if ($ac_contents->isEmpty()) {
             \Session::flash('content', 'Dont have content');
-        }else {
-            foreach($ac_contents as $content){
+        } else {
+            foreach ($ac_contents as $content) {
                 $content = Ac_content::find($content->id);
             }
         }
-
-        return view('dashboard/tutor/ac-content/ac-list', [
-            'userLogin' => $userLogin,
-            'accourse' => $accourse,
-            'ac_topics' => $ac_topics,
-            'ac_topic' => $ac_topic,
-            'ac_contents' => $ac_contents
-        ]);
+        return view(
+            'dashboard/tutor/ac-content/ac-list', [
+                'userLogin' => $userLogin,
+                'accourse' => $accourse,
+                'ac_topics' => $ac_topics,
+                'ac_topic' => $ac_topic,
+                'ac_contents' => $ac_contents
+            ]
+        );
     }
 
     public function getAcContentDetail($id, $topicId, $AccontentId)
     {
         $userLogin = Auth::user();
         $accourse = Ac_course::where('id', $id)->first();
-        
         $ac_topic = Ac_topic::findOrFail($topicId);
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
         $ac_content = Ac_content::findOrFail($AccontentId);
         $ac_content = Ac_content::where('id', $ac_content->id)->first();
         $ac_contents = Ac_content::where('ac_topic_id', $ac_topic->id)->get();
         //$topics = Course::findOrFail($topicId)->topics()->get();
-        
         //dd($contents);
-        return view('dashboard/tutor/ac-content/ac-detail', compact(
-            'userLogin', 
-            'ac_topic', 
-            'ac_content', 
-            'ac_contents'
-        ));
+        return view(
+            'dashboard/tutor/ac-content/ac-detail', compact(
+                'userLogin', 
+                'ac_topic', 
+                'ac_content', 
+                'ac_contents'
+            )
+        );
     }
 
     public function createAcContentForm($id, $ActopicId)
@@ -230,11 +229,13 @@ class AcademicController extends Controller
         $userLogin = Auth::user();
         $accourse = Ac_course::where('id', $id)->first();
         $ac_topics = Ac_topic::where('id', $ActopicId)->get();
-        return view('dashboard/tutor/ac-content/ac-create', compact(
-            'userLogin',
-            'accourse', 
-            'ac_topics'
-        ));
+        return view(
+            'dashboard/tutor/ac-content/ac-create', compact(
+                'userLogin',
+                'accourse', 
+                'ac_topics'
+            )
+        );
     }
     
     public function storeAcContent(Request $request, $ActopicId)
@@ -243,20 +244,17 @@ class AcademicController extends Controller
         $ac_topics = Ac_topic::findOrFail($ActopicId);
         $userLogin = Auth::user();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
-        
         $data = $request->all();
         $file = $request->file('source');
         $fileName = time();
         $ext = $request->file('source')->getClientOriginalExtension();
         $newName = $fileName . '.' .$ext;
         //$path = $request->file('source')->storeAs('source', $fileName.".".$ext);
-        
         Storage::putFileAs('public', $request->file('source'), $newName);
-        
         //dd($data);
         if ($data['type'] == 'video') {
-            
-            $ac_contents = Ac_content::create([
+            $ac_contents = Ac_content::create(
+                [
                 'tutor_id' => $tutor->id,
                 'ac_topic_id' => $ac_topics->id,
                 'title' => $data['title'],
@@ -264,45 +262,42 @@ class AcademicController extends Controller
                 'type' => $data['type'],
                 'source' => 'storage/' .$newName
                 
-            ]);
+                ]
+            );
         } elseif ($data['type'] == 'slide') {
-            
-            $ac_contents = Ac_content::create([
+            $ac_contents = Ac_content::create(
+                [
                 'tutor_id' => $tutor->id,
                 'ac_topic_id' => $ac_topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
                 'source' =>'storage/' .$newName
-                
-            ]);
+                ]
+            );
         } else {
-
-            $ac_contents = Ac_content::create([
+            $ac_contents = Ac_content::create(
+                [
                 'tutor_id' => $tutor->id,
                 'ac_topic_id' => $ac_topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
                 'source' =>'storage/' .$newName
-           
-            ]);
+                ]
+            );
         }
-        
         $ac_contents->save();
         $ac_topics = Ac_topic::where('id', $ActopicId)->first();
         $contentsData = Ac_content::where('ac_topic_id', $ac_topics->id)->get();
-
         if ($contentsData->isEmpty()) {
             \Session::flash('content', 'Dont have content');
         } else {
-            foreach ($contentsData as $content){
+            foreach ($contentsData as $content) {
                 $content = Ac_content::find($content->id);
             }
         }
-
         $ac_contents = Ac_content::where('ac_topic_id', $ac_topics->id)->get();
-        
         return redirect()->route('tutor.accontent.index', [$ac_topics->id]);
     }
 
@@ -310,7 +305,6 @@ class AcademicController extends Controller
     {
         $ac_contents = Ac_content::findOrFail($id);
         $ac_contents->delete();
-
         return back();
     }
     
@@ -320,26 +314,26 @@ class AcademicController extends Controller
         $userLogin = Auth::user();
         $ac_topic = Ac_topic::findOrFail($ActopicId);
         $ac_topic = Ac_topic::where('id', $ac_topic->id)->first();
-        
-        return view('dashboard/tutor/quiz/detail', [
-            'userLogin' => $userLogin,
-            'ac_topic' => $ac_topic
-        ]);
+        return view(
+            'dashboard/tutor/quiz/detail', [
+                'userLogin' => $userLogin,
+                'ac_topic' => $ac_topic
+            ]
+        );
     }
 
     public function getQuizForm($ActopicId)
     {
         $userLogin = Auth::user();
         $ac_topic = Ac_topic::find($ActopicId);
-
         $ac_topics = Ac_topic::where('course_id', $ac_topic->course->id)->get();
-        
-
-        return view('dashboard/tutor/quiz/form-create',[
-            'userLogin' => $userLogin,
-            'ac_topics' => $ac_topics,
-            'ac_topic' => $ac_topic,
-        ]);
+        return view(
+            'dashboard/tutor/quiz/form-create', [
+                'userLogin' => $userLogin,
+                'ac_topics' => $ac_topics,
+                'ac_topic' => $ac_topic
+            ]
+        );
     }
 
 }

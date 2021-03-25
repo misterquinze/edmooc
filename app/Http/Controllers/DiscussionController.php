@@ -24,23 +24,21 @@ class DiscussionController extends Controller
         $discussions = Discussion::findOrFail($discId);
         $discussions  = Discussion::where('id', $discussions->id)->first();
         $comment = Comment::where('commentable_id', $discussions->id)->get();
-        
-
         //dd($comment);
-        /** 
-        if ($discussions->isEmpty()){
-            \Session::flash('discussion', 'Dont have discussion');
-        }else{
-            foreach($discussions as $disc){
-                $disc = Discussion::find($disc->id);
-            }
-        }
-        */
-        return view('classroom/discussion/discussion', [
-            'userLogin' => $userLogin,
-            'discussions' => $discussions,
-            'comment' => $comment,
-       ]);
+        // if ($discussions->isEmpty()){
+        //     \Session::flash('discussion', 'Dont have discussion');
+        // }else{
+        //     foreach($discussions as $disc){
+        //         $disc = Discussion::find($disc->id);
+        //     }
+        // }
+        return view(
+            'classroom/discussion/discussion', [
+                'userLogin' => $userLogin,
+                'discussions' => $discussions,
+                'comment' => $comment
+            ]
+        );
     }
 
     /**
@@ -53,7 +51,6 @@ class DiscussionController extends Controller
         $userLogin = Auth::user();
         $courses = Course::where('id', $id)->get();
         //$courses = Course::findOrFail($id);
-
         return view('classroom/discussion/create', compact('userLogin', 'courses'));
     }
 
@@ -65,32 +62,28 @@ class DiscussionController extends Controller
      */
     public function store(Request $request, Course $courses, $id)
     {   
-        
         $courses = Course::where('id', $id)->get();
         $courses = Course::findOrFail($id);
         $userLogin = Auth::user();
         $userLogin = User::where('id', $userLogin->id)->first();
-        
-        
         $data = $request->all();
         //dd($data);
         //dd($courses);
         //dd($userLogin);
-        $discussions = Discussion::create([
-                
+        $discussions = Discussion::create(
+            [
             'user_id' => $userLogin->id,
             'course_id' => $courses->id,
             'title' => $data['title'],
             'content' => $data['content'],
-        ]);    
+            ]
+        );    
         //dd($data);
         //dd($courses);
         //dd($discussions);
         $discussions->save();
-
         return back();
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -101,15 +94,14 @@ class DiscussionController extends Controller
     public function edit(Discussion $discId)
     {
         $userLogin = Auth::user();
-        
         $discussions = Discussion::find($discId);
         // dd('hello');
-
-        return view('classroom/discussion/discussion-edit', [
-            'userLogin' => $userLogin,
-            'discussions' => $discussions,
-            
-        ]);
+        return view(
+            'classroom/discussion/discussion-edit', [
+                'userLogin' => $userLogin,
+                'discussions' => $discussions
+            ]
+        );
     }
 
     /**
@@ -123,11 +115,9 @@ class DiscussionController extends Controller
     {
         $discussions = Discussion::findOrFail($discId);
         $data = $request->all();
-
         $discussions->title = $data['title'];
         $discussions->content = $data['content'];
         $discussions->save();
-
         return back();
     }
 
@@ -140,7 +130,6 @@ class DiscussionController extends Controller
     public function deleteDiscussion($discId)
     {
         $discussions = Discussion::findOrFail($discId);$discussions->delete();
-
         return redirect('classroom/forum');
     }
 
@@ -149,9 +138,7 @@ class DiscussionController extends Controller
         $comment = New Comment;
         $comment->user_id = Auth::user()->id;
         $comment->content = $request->content;
-
         $disc->comments()->save($comment);
-        
         return back()->withInfo('komentar terkirim!');
     }
 
@@ -160,13 +147,7 @@ class DiscussionController extends Controller
         $reply = New Comment;
         $reply->user_id = Auth::user()->id;
         $reply->content = $request->content;
-
         $comment->comments()->save($reply);
-        
         return back()->withInfo('komentar balasan terkirim!');
-    }
-
-
-    //Academic - Discussion
-    
+    }    
 }
