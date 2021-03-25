@@ -33,8 +33,8 @@ class AcademicController extends Controller
         $data = $request->all();
         $startDate = date('Y-m-d', strtotime($data['startDate']));
         $endDate = date('Y-m-d', strtotime($data['endDate']));
-
-        $accourse = Ac_course::create([
+        $accourse = Ac_course::create(
+            [
             'company_id' => $company->id,
             'category_id' => $data['category'],
             'program_id' => $program->id,
@@ -45,8 +45,8 @@ class AcademicController extends Controller
             'passing_grade' => $data['passing_grade'],
             'start_date' => $startDate,
             'end_date' => $endDate
-            
-        ]);
+            ]
+        );
         //dd($accourse);
         return back();
     }
@@ -54,18 +54,16 @@ class AcademicController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function updateAcCourse(Request $request, $id)
     {
         $accourse = Ac_course::find($id);
         $data = $request->all();
-
         $startDate = date('Y-m-d', strtotime($data['startDate']));
         $endDate = date('Y-m-d', strtotime($data['endDate']));
-
         $accourse->name = $data['name'];
         $accourse->description = $data['description'];
         $accourse->price = $data['price'];
@@ -74,9 +72,7 @@ class AcademicController extends Controller
         $accourse->start_date = $startDate;
         $accourse->end_date = $endDate;
         $accourse->save();
-
         return back();
-    
     }
 
     /**
@@ -101,28 +97,28 @@ class AcademicController extends Controller
         return response()->json(['success'=>'Status change successfully.']);
     }
 
-    /**
-    public function searchAcCourse(Request $request, $id)
-    {   
-        $userLogin = Auth::user();
-        $categories = Category::all();
-        $tutors = Tutor::all();
-        $program = Program::where('id', $id)->first();
-        $accourse = Ac_course::where('program_id', $program->id)->get();
-        $search = $request->search;
+    
+    // public function searchAcCourse(Request $request, $id)
+    // {   
+    //     $userLogin = Auth::user();
+    //     $categories = Category::all();
+    //     $tutors = Tutor::all();
+    //     $program = Program::where('id', $id)->first();
+    //     $accourse = Ac_course::where('program_id', $program->id)->get();
+    //     $search = $request->search;
         
         
-        $accourse = Ac_course::where('name', 'like', "%" .$search. "%")->paginate(5);
+    //     $accourse = Ac_course::where('name', 'like', "%" .$search. "%")->paginate(5);
        
-        //dd($courses);
-        return view ('dashboard/company/course', [
-            'userLogin' => $userLogin,
-            'categories' => $categories,
-            'tutors' => $tutors,
-            'accourse' => $accourse,
-        ]);
-    }
-    */
+    //     //dd($courses);
+    //     return view ('dashboard/company/course', [
+    //         'userLogin' => $userLogin,
+    //         'categories' => $categories,
+    //         'tutors' => $tutors,
+    //         'accourse' => $accourse,
+    //     ]);
+    // }
+    
     
     // course overview
     public function getAcTopicList($id)
@@ -132,12 +128,14 @@ class AcademicController extends Controller
         $ac_topics = Ac_course::findOrFail($id)->ac_topic()->get();
         //$discussions = Ac_course::findOrFail($id)->discussions()->get();
 
-        return view('dashboard/tutor/ac-topic/ac-list', [
-             'userLogin' => $userLogin, 
-             'accourse' => $accourse, 
-             'ac_topics' => $ac_topics 
-             //'discussions' => $discussions
-        ]);
+        return view(
+            'dashboard/tutor/ac-topic/ac-list', [
+                'userLogin' => $userLogin, 
+                'accourse' => $accourse, 
+                'ac_topics' => $ac_topics 
+                //'discussions' => $discussions
+            ]
+        );
     }
 
     // Topik
@@ -147,17 +145,16 @@ class AcademicController extends Controller
         $accourses =  Ac_course::findOrFail($id);
         $userLogin = Auth::user();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
-
         $data = $request->all();
-
-        $ac_topics = Ac_topic::create([        
+        $ac_topics = Ac_topic::create(
+            [        
             'ac_course_id' => $accourses->id,
             'tutor_id' => $tutor->id,
             'name' => $data['name'],
             'description' => $data['description'],    
-        ]);
+            ]
+        );
         $ac_topics->save();
-
         return back();
     }
 
@@ -165,11 +162,9 @@ class AcademicController extends Controller
     {
         $ac_topics = Ac_topic::findOrFail($topicId);
         $data = $request->all();
-
         $ac_topics->name = $data['name'];
         $ac_topics->description = $data['description'];
         $ac_topics->save();
-
         return back();
     }
 
