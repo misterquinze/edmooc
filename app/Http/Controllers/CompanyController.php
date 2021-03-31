@@ -11,14 +11,14 @@ use App\Tutor;
 
 class CompanyController extends Controller
 {
-    public function getMyCourse(){
+    public function getMyCourse()
+    {
         $userLogin = Auth::user();
         $categories = Category::all();
         $company = Company::where('user_id', $userLogin->id)->first();
         $tutors = Tutor::where('company_id', $company->id)->get();
         $courses = Course::where('company_id', $company->id)->paginate(5);
         // $courses = Company::all();
-
         if ($courses->isEmpty()) {
             \Session::flash('course', 'Dont have course to teach');
         } else {
@@ -34,45 +34,49 @@ class CompanyController extends Controller
                 $tutor = Tutor::find($tutor->id);
             }
         }
-
-
-        return view ('dashboard/company/course', [
-            'userLogin' => $userLogin,
-            'categories' => $categories,
-            'tutors' => $tutors,
-            'courses' => $courses,
-        ]);
+        return view(
+            'dashboard/company/course', [
+                'userLogin' => $userLogin,
+                'categories' => $categories,
+                'tutors' => $tutors,
+                'courses' => $courses
+            ]
+        );
     }
     
-    public function getEditCourseForm($id){
+    public function getEditCourseForm($id)
+    {
         $userLogin = Auth::user();
         $categories = Category::all();
         $tutors = Tutor::all();
         $course = Course::find($id);
         // dd('hello');
-
-        return view('dashboard/company/course-edit',[
-            'userLogin' => $userLogin,
-            'categories' => $categories,
-            'tutors' => $tutors,
-            'course' => $course,
-        ]);
+        return view(
+            'dashboard/company/course-edit', [
+                'userLogin' => $userLogin,
+                'categories' => $categories,
+                'tutors' => $tutors,
+                'course' => $course
+            ]
+        );
     }
     
-    public function createCourse(Request $request){
+    public function createCourse(Request $request)
+    {
         $userLogin = Auth::user();
-        $company = Company::where('user_id',$userLogin->id)->first();
+        $company = Company::where('user_id', $userLogin->id)->first();
         // dd($userLogin);
         // dd($company);
         $data = $request->all();
-        $startDate = date('Y-m-d',strtotime($data['startDate']));
-        $endDate = date('Y-m-d',strtotime($data['endDate']));
+        $startDate = date('Y-m-d', strtotime($data['startDate']));
+        $endDate = date('Y-m-d', strtotime($data['endDate']));
         
         // dd($data['tutor']);
         
-        if($data['type'] == 'free'){
-            if($data['category'] == '1'){
-                $course = Course::create([
+        if ($data['type'] == 'free') {
+            if ($data['category'] == '1') {
+                $course = Course::create(
+                    [
                     'company_id' => $company->id,
                     'category_id' => $data['category'],
                     'tutor_id' => $data['tutor'],
@@ -81,10 +85,11 @@ class CompanyController extends Controller
                     'type' => $data['type'],
                     'start_date' => $startDate,
                     'end_date' => $endDate
-                    
-                ]);
-            }else if($data['category'] == '2'){
-                $course = Course::create([
+                    ]
+                );
+            } else if ($data['category'] == '2') {
+                $course = Course::create(
+                    [
                     'company_id' => $company->id,
                     'category_id' => $data['category'],
                     'tutor_id' => $data['tutor'],
@@ -93,9 +98,11 @@ class CompanyController extends Controller
                     'type' => $data['type'],
                     'start_date' => $startDate,
                     'end_date' => $endDate
-                ]);
-            }else{
-                $course = Course::create([
+                    ]
+                );
+            } else {
+                $course = Course::create(
+                    [
                     'company_id' => $company->id,
                     'category_id' => $data['category'],
                     'tutor_id' => $data['tutor'],
@@ -104,12 +111,14 @@ class CompanyController extends Controller
                     'type' => $data['type'],
                     'start_date' => $startDate,
                     'end_date' => $endDate
-                ]);
+                    ]
+                );
             }
-        }else{
+        } else {
             //dd('hello');
-            if($data['category'] == '1'){
-                $course = Course::create([
+            if ($data['category'] == '1') {
+                $course = Course::create(
+                    [
                     'company_id' => $company->id,
                     'category_id' => $data['category'],
                     'tutor_id' => $data['tutor'],
@@ -119,10 +128,11 @@ class CompanyController extends Controller
                     'price' => $data['price'],
                     'start_date' => $startDate,
                     'end_date' => $endDate
-                ]);
-            }
-            else if($data['category'] == '2'){
-                $course = Course::create([
+                    ]
+                );
+            } else if ($data['category'] == '2') {
+                $course = Course::create(
+                    [
                     'company_id' => $company->id,
                     'category_id' => $data['category'],
                     'tutor_id' => $data['tutor'],
@@ -132,10 +142,11 @@ class CompanyController extends Controller
                     'price' => $data['price'],
                     'start_date' => $startDate,
                     'end_date' => $endDate
-                ]);
-            }
-            else{
-                $course = Course::create([
+                    ]
+                );
+            } else {
+                $course = Course::create(
+                    [
                     'company_id' => $company->id,
                     'category_id' => $data['category'],
                     'tutor_id' => $data['tutor'],
@@ -145,26 +156,25 @@ class CompanyController extends Controller
                     'price' => $data['price'],
                     'start_date' => $startDate,
                     'end_date' => $endDate
-                ]);
+                    ]
+                );
             }
         }
-
         return back();
     }
 
-    public function updateCourse(Request $request, $id){
+    public function updateCourse(Request $request, $id) 
+    {
         $course = Course::find($id);
         $data = $request->all();
-
-        $startDate = date('Y-m-d',strtotime($data['startDate']));
-        $endDate = date('Y-m-d',strtotime($data['endDate']));
-
+        $startDate = date('Y-m-d', strtotime($data['startDate']));
+        $endDate = date('Y-m-d', strtotime($data['endDate']));
         $course->name = $data['name'];
         $course->description = $data['description'];
-        if($data['type'] == 'paid'){
+        if ($data['type'] == 'paid') {
             $course->type = $data['type'];
             $course->price = $data['price'];
-        }else{
+        } else {
             $course->type = $data['type'];
             $course->price = null;
         }
@@ -173,11 +183,11 @@ class CompanyController extends Controller
         $course->start_date = $startDate;
         $course->end_date = $endDate;
         $course->save();
-
         return redirect('/dashboard/course/list');
     }
 
-    public function deleteCourse($id){
+    public function deleteCourse($id)
+    {
         $course = Course::find($id);
         $course->delete();
         return redirect('/dashboard/company/course');
@@ -188,16 +198,17 @@ class CompanyController extends Controller
         $course = Course::find($request->id);
         $course->status = $request->status;
         $course->save();
-
         return response()->json(['success'=>'Status change successfully.']);
     }
 
-    public function getRevenue(){
+    public function getRevenue()
+    {
         $userLogin = Auth::user();
-        
-        return view('dashboard/company/revenue',[
-            'userLogin' => $userLogin
-        ]);
+        return view(
+            'dashboard/company/revenue', [
+                'userLogin' => $userLogin
+            ]
+        );
     }
 
     public function searchCourse(Request $request)
@@ -208,18 +219,15 @@ class CompanyController extends Controller
         $company = Company::where('user_id', $userLogin->id)->first();
         $courses = Course::where('company_id', $company->id)->get();
         $search = $request->search;
-        
-        
         $courses = Course::where('name', 'like', "%" .$search. "%")->paginate(5);
-       
-        
-
         //dd($courses);
-        return view ('dashboard/company/course', [
-            'userLogin' => $userLogin,
-            'categories' => $categories,
-            'tutors' => $tutors,
-            'courses' => $courses,
-        ]);
+        return view(
+            'dashboard/company/course', [
+                'userLogin' => $userLogin,
+                'categories' => $categories,
+                'tutors' => $tutors,
+                'courses' => $courses
+            ]
+        );
     }
 }
