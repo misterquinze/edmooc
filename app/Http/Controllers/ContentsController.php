@@ -18,23 +18,27 @@ class ContentsController extends Controller
     public function index($contentId)
     {
         $userLogin = Auth::user();
-       
         $contents = Content::findOrFail($contentId);
         $contents = Content::where('id', $contents->id)->get();
         //$topics = Course::findOrFail($topicId)->topics()->get();
-        //dd($contents);
-       
-        return view('dashboard/tutor/content/detail', compact('userLogin', 'contents' ));
+        //dd($contents)
+        return view(
+            'dashboard/tutor/content/detail', compact(
+                'userLogin', 'contents' 
+            )
+        );
     }
 
     public function create($topicId)
     {   
         // dd($topicId);
         $userLogin = Auth::user();
-       
         $topics = Topic::where('id', $topicId)->get();
-        
-        return view('classroom/topic/content/create', compact('userLogin', 'topics'));
+        return view(
+            'classroom/topic/content/create', compact(
+                'userLogin', 'topics'
+            )
+        );
     }
 
     public function store(Request $request, Topic $topics, $topicId)
@@ -43,85 +47,62 @@ class ContentsController extends Controller
         $topics = Topic::findOrFail($topicId);
         $userLogin = Auth::user();
         $tutor = Tutor::where('user_id', $userLogin->id)->first();
-        
         $data = $request->all();
-        
         //dd($data);
-
-        if($data['type'] == 'video'){
-            $contents = Content::create([
+        if ($data['type'] == 'video') {
+            $contents = Content::create(
+                [
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
                 'source' => $data['source']
-                
-            ]);
-        }elseif($data['type'] == 'artikel'){
-            $contents = Content::create([
+                ]
+            );
+        } elseif ($data['type'] == 'artikel') {
+            $contents = Content::create(
+                [
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
                 'source' => $data['source']
-                
-            ]);
-        }else{
-            $contents = Content::create([
+                ]
+            );
+        } else {
+            $contents = Content::create(
+                [
                 'tutor_id' => $tutor->id,
                 'topic_id' => $topics->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'source' => $data['source']
-                
-            ]);
+                'source' => $data['source'] 
+                ]
+            );
         }
-        
         $contents->save();
         $topics = Topic::where('id', $topicId)->first();
         $contentsData = Content::where('topic_id', $topics->id)->get();
-
         if ($contentsData->isEmpty()) {
             \Session::flash('content', 'Dont have content');
-        }else {
-            foreach($contentsData as $content){
+        } else {
+            foreach ($contentsData as $content) {
                 $content = Content::find($content->id);
             }
         }
-
-        return view('classroom/topic/topic', [
-            'userLogin' => $userLogin,
-            'topics' => $topics,
-            'contents' => $contentsData
-        ]);
+        return view(
+            'classroom/topic/topic', 
+            [
+                'userLogin' => $userLogin,
+                'topics' => $topics,
+                'contents' => $contentsData
+            ]
+        );
         // return back();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Content  $content
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Content $content)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Content  $content
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Content $content)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -133,16 +114,15 @@ class ContentsController extends Controller
     {
         $contents = Content::findOrFail($contentId);
         $data = $request->all();
-
         $contents->title = $data['title'];
         $contents->description = $data['title'];
-        if($data['type'] == 'video'){
+        if ($data['type'] == 'video') {
             $contents->type = $data['type'];
             $contents->source = $data['source'];
-        }elseif($data['type'] == 'artikel'){
+        } elseif ($data['type'] == 'artikel') {
             $contents->type = $data['type'];
             $contents->source = $data['source'];
-        }else{
+        } else {
             $contents->type = $data['type'];
             $contents->source = $data['source'];
         }
@@ -150,7 +130,7 @@ class ContentsController extends Controller
         $contents->topic_id = $data['topic'];
         $contents->save();
 
-        return redirect ('clasroom/topic');
+        return redirect('clasroom/topic');
     }
 
     /**
@@ -162,7 +142,6 @@ class ContentsController extends Controller
     public function destroy($contentId)
     {
         $contents = Content::findOrFail($contentId);$contents->delete();
-
         return redirect('classroom/topic');
     }
 }
