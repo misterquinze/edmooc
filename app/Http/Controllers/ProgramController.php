@@ -24,12 +24,13 @@ class ProgramController extends Controller
         $company = Company::where('user_id', $userLogin->id)->first();
         $program = Program::where('company_id', $company->id)->get();
         // $courses = Company::all();
-
-        return view ('dashboard/company/program', [
-            'userLogin' => $userLogin,
-            'company' => $company,
-            'program' => $program,
-        ]);
+        return view(
+            'dashboard/company/program', [
+                'userLogin' => $userLogin,
+                'company' => $company,
+                'program' => $program,
+            ]
+        );
     }
 
     /**
@@ -44,14 +45,15 @@ class ProgramController extends Controller
         $tutors = Tutor::all();
         $program = Program::where('id', $id)->first();
         $accourse = Ac_course::where('program_id', $program->id)->get();
-
-        return view('dashboard/company/program-detail', [
-            'userLogin' => $userLogin, 
-            'categories' => $categories,
-            'tutors' => $tutors,
-            'program' => $program,
-            'accourse'=> $accourse
-        ]);
+        return view(
+            'dashboard/company/program-detail', [
+                'userLogin' => $userLogin, 
+                'categories' => $categories,
+                'tutors' => $tutors,
+                'program' => $program,
+                'accourse'=> $accourse
+            ]
+        );
     }
 
     /**
@@ -64,16 +66,13 @@ class ProgramController extends Controller
         $userLogin = Auth::user();
         $company = Company::where('user_id', $userLogin->id)->first();
         $program = Program::where('company_id', $company->id)->get();
-        //$program = Program::find($id);
-        
-        // dd('hello');
-
-        return view('dashboard/company/program',[
-            'userLogin' => $userLogin,
-            'company' => $company,
-            'program' => $program,
-            //'program' => $program
-        ]);
+        return view(
+            'dashboard/company/program', [
+                'userLogin' => $userLogin,
+                'company' => $company,
+                'program' => $program,
+            ]
+        );
     }
 
     /**
@@ -85,34 +84,20 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $userLogin = Auth::user();
-        $company = Company::where('user_id',$userLogin->id)->first();
-        // dd($userLogin);
-        // dd($company);
+        $company = Company::where('user_id', $userLogin->id)->first();
         $data = $request->all();
-
-        $program = Program::create([
+        $program = Program::create(
+            [
             'company_id' => $company->id,
             'name' => $data['name'],
             'description' => $data['description'],
             'estimate' =>$data['estimate'],
             'degree' => $data['degree'],
-            'requirement' => $data['requirement'],
-            
-        ]);
+            'requirement' => $data['requirement']
+            ]
+        );
         return back();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -125,10 +110,12 @@ class ProgramController extends Controller
         $program = Program::find($id);
         //dd($program);
 
-        return view ('dashboard/company/program-edit', [
-            'userLogin' =>$userLogin,
-            'program' => $program,
-        ]);
+        return view(
+            'dashboard/company/program-edit', [
+                'userLogin' =>$userLogin,
+                'program' => $program,
+            ]
+        );
     }
 
     /**
@@ -142,16 +129,13 @@ class ProgramController extends Controller
     {
         $program = Program::find($id);
         $data = $request->all();
-
         $program->name = $data['name'];
         $program->description = $data['description'];
         $program->degree = $data['degree'];
         $program->degree = $data['estimate'];
         $program->requirement = $data['requirement'];
-
         $program->save();
         return redirect('/dashboard/company/program');
-
     }
 
     /**
@@ -172,7 +156,6 @@ class ProgramController extends Controller
         $program = Course::find($request->id);
         $program->status = $request->status;
         $program->save();
-
         return response()->json(['success'=>'Status change successfully.']);
     }
 
@@ -182,16 +165,14 @@ class ProgramController extends Controller
         $company = Company::where('user_id', $userLogin->id)->first();
         $program = Program::where('company_id', $company->id)->get();
         $search = $request->search;
-        
         $program = Program::where('name', 'like', "%" .$search. "%")->paginate(5);
-       
         //dd($program);
-        return view ('dashboard/company/program', [
-            'userLogin' => $userLogin,
-            'company' => $company,
-            'program' => $program,
-        ]);
+        return view(
+            'dashboard/company/program', [
+                'userLogin' => $userLogin,
+                'company' => $company,
+                'program' => $program,
+            ]
+        );
     }
-
-    
 }
